@@ -1,0 +1,7 @@
+name = Custom match 
+description = "Customize match"
+core = 7.x
+package = Custom
+files[] = custom_match.module
+
+

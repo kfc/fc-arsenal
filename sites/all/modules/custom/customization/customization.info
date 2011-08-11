@@ -1,0 +1,6 @@
+name = Customization module
+core = 7.x
+package = Custom
+files[] = customization.module
+
+
