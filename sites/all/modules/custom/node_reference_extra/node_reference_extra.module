@@ -1,0 +1,43 @@
+<?php
+
+function node_reference_extra_form_alter(&$form, &$form_state, $form_id) {
+  // Add 'Create New' link to node_reference content types
+  if(isset($form['#node_edit_form']) && $form['#node_edit_form'] == TRUE){
+    foreach($form as $key=>$element)
+      if(strpos($key,'field_') === 0){
+        $field_info = field_info_field($key);
+        if($field_info['type'] == 'node_reference'){
+          $types = array();
+          foreach($field_info['settings']['referenceable_types'] as $type)
+            if($type != '0')
+              $types[] = $type;
+          $extra = '';                 
+          if(count($types) == 1) $extra = ' (<a target="_blank" href="/node/add/'.$types[0].'?ref='.$key.'">'.t('Add').'</a>)';
+          if(count($types) > 1) $extra = ' (<a target="_blank" href="/node/add">'.t('Add').'</a>)';
+                        
+          
+          if(isset($form[$key][$form[$key]['#language']][0]['nid']))              
+            $form[$key][$form[$key]['#language']][0]['nid']['#title'] = $form[$key][$form[$key]['#language']][0]['nid']['#title'].$extra;
+          else
+            $form[$key][$form[$key]['#language']]['#title'] = $form[$key][$form[$key]['#language']]['#title'].$extra;
+        }
+      }
+  }
+  if($form_id == 'news_node_form' && $form['nid']['#value'] == NULL){
+    if(isset($_GET['ref'])){                            
+      $res = db_select('field_data_field_voc_related_fields','f')
+              ->condition(db_and()->condition('field_voc_related_fields_value','%'.$_GET['ref'].'%','LIKE')
+                                  ->condition('bundle','news_category')
+                                  ->condition('entity_type','taxonomy_term'))
+              ->fields('f',array('entity_id'))
+              ->execute()
+              ->fetchAssoc();
+      if(isset($res) && isset($res['entity_id']) && (int)$res['entity_id'] > 0){
+        $form['field_news_category'][$form['field_news_category']['#language']]['#default_value'] = array($res['entity_id']);      
+      }
+    }
+  }
+}
+
+  
+?>
