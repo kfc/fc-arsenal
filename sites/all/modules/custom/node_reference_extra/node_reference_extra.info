@@ -1,6 +1,0 @@
-name = Node Reference Extra
-description = Adds link to create node
-package = Custom
-core = 7.x
-dependencies[] = field
-dependencies[] = references

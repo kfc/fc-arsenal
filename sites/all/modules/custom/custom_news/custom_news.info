@@ -1,7 +1,0 @@
-name = Customized News
-description = "Customize news"
-core = 7.x
-package = Custom
-files[] = custom_news.module
-
-

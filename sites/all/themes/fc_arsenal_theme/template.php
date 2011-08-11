@@ -155,4 +155,3 @@ function phptemplate_menu_item_link($item, $link_item) {
     return l($item['title'], $link_item['path'], !empty($item['description']) ? array('title' => $item['description']) : array(), isset($item['query']) ? $item['query'] : NULL);
   }
 }
-
