@@ -70,8 +70,12 @@
 ?>
 </div>
 <div class="right-part">
+  <?php if(isset($node->field_match_arsenal_squad[$node->language]) && isset($node->arsenal_events)):?>
 	<?php print theme('custom_match_match_team_block', array(t('Arsenal'), $node->field_match_arsenal_squad[$node->language], $node->arsenal_events));?>
+  <?endif;?>
+  <?php if(isset($node->field_match_opponent_squad[$node->language][0]) && isset($node->opponent_events)):?> 
 	<?php print theme('custom_match_match_team_block', array($node->field_match_opponent[$node->language][0]['node']->title, $node->field_match_opponent_squad[$node->language][0]['safe_value'], $node->opponent_events));?>
+  <?endif;?>
 </div>
 <div class="cf">&nbsp;</div>
 </div>

@@ -84,7 +84,6 @@ function _get_next_match($current_id){
   if((int)$current_id > 0)
   {
     $current_node = node_load($current_id);
-    
     $next_ids = db_query("
       SELECT sd.entity_id as next_match_id,
             (SELECT sd.entity_id
@@ -155,18 +154,18 @@ function _get_prev_match($current_id){
 }
 
 function custom_match_preprocess_block(&$vars){
-  $block = $vars['block'];
+  /*$block = $vars['block'];       
   if($block->delta == 'matches-next_match' && $block->module == 'views')
-  {
+  {                    
     $next_match_id =  db_query("
       SELECT sd.entity_id     
       FROM {field_data_field_match_start_date} sd
       WHERE sd.field_match_start_date_value > :start_date 
       ORDER BY sd.field_match_start_date_value
       LIMIT 1 
-    ",array(':start_date'=>date('Y-n-d h:i')))->fetchField();
+    ",array(':start_date'=>date('Y-n-d h:i')))->fetchField();   
       $vars['content'] = views_embed_view('matches','next_match',$next_match_id);    
-  }
+  } */
 }
 
 function theme_custom_match_arsenal_logo_match_block(){

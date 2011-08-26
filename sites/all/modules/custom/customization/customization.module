@@ -85,15 +85,15 @@ function theme_customization_content_banner($vars){
   
 }    
 function theme_customization_login_block(){
-  $output = '';
+  $output = '<div class="login-links-wrapper"> ';
   if(user_is_logged_in()){
     global $user;
-    $output .= l($user->name,'user/'.$user->uid).' | '.l(t("Logout"),'/logout');   
+    $output .= l($user->name,'user/'.$user->uid).' | '.l(t("Logout"),'logout');   
   }
   else{
     $output  .= l(t("Login"),'user').' | '.l(t("Register"),'user/register');
   }
-  
+  $output .= '</div>';
   return $output;
 }
 

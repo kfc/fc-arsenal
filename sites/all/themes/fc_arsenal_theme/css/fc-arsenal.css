@@ -1749,4 +1749,20 @@ margin-bottom: 30px;
   color: #FFF;
 }
 
+.login-links-wrapper{
+  color: #FFF;
+  padding-top: 15px;
+  padding-right: 15px;
+}
+
+.login-links-wrapper a, .login-links-wrapper a:visited{
+  color: #FFF;
+  text-decoration: underline;
+}
+
+.login-links-wrapper a:hover{
+  color: #FFF;
+  text-decoration: none;
+}
+
 
