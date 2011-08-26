@@ -1,4 +1,4 @@
-<div class="match-block" rel="block-<?php echo $view->display[$view->current_display]->id;?>" id="match-<?php echo $fields['nid']->raw?>">
+<div class="match-block" rel="block-match" id="match-<?php echo $fields['nid']->raw?>">
   <div class="players">
     <div class="team-block">
       <div class="emblems-line">

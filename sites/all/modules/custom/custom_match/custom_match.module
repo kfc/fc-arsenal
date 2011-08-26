@@ -9,6 +9,14 @@ function custom_match_menu(){
     'page arguments'=>array(1),
     'access callback' => TRUE
   );
+  
+  $items['get_prev_match_ajax/%']= array(
+    'type'=>MENU_CALLBACK,
+    'page callback'=>'_get_prev_match',
+    'page arguments'=>array(1),
+    'access callback' => TRUE
+  );
+  
   return $items;
 }
 
@@ -21,25 +29,80 @@ function custom_match_theme(){
   );
 }
 
+function custom_match_preprocess_node(&$vars){
+  $node = $vars['node'];
+  if($node->type == 'match'){
+    $view = views_get_view('matches');
+    $view->set_display('match_events');
+    $view->set_arguments(array($node->nid));
+    $view->execute('match_events');
+
+    $arsenal_events = array();
+    if(!empty($view->result)){
+      foreach($view->result as $event_row){
+        $_player_nid = $event_row->field_field_match_events[0]['rendered']['entity']['field_collection_item'][$event_row->field_field_match_events[0]['raw']['value']]['field_match_event_player']['#items'][0]['nid'];
+        $event_type = $event_row->field_field_match_events[0]['rendered']['entity']['field_collection_item'][$event_row->field_field_match_events[0]['raw']['value']]['field_match_event_event_type']['#items'][0]['tid'];
+        $event_minute = $event_row->field_field_match_events[0]['rendered']['entity']['field_collection_item'][$event_row->field_field_match_events[0]['raw']['value']]['field_match_event_minute']['#items'][0]['safe_value'];
+        
+        $arsenal_events[$_player_nid][] = array('player'=>node_load($_player_nid), 'event_type'=>taxonomy_term_load($event_type), 'event_minute'=>$event_minute);
+        uasort($arsenal_events[$_player_nid],'_sort_events');
+      }    
+      $vars['node']->arsenal_events  = $arsenal_events;
+  
+      $view = views_get_view('matches');
+      $view->set_display('match_events_opponent');
+      $view->set_arguments(array($node->nid));
+      $view->execute('match_events_opponent');
+
+      $opponent_events = array();
+      $event_types = array();
+      foreach($view->result as $event_row){
+        $_player_name = $event_row->field_field_match_events_opponent[0]['rendered']['entity']['field_collection_item'][$event_row->field_field_match_events_opponent[0]['raw']['value']]['field_match_event_opp_player']['#items'][0]['safe_value'];
+        $event_type = $event_row->field_field_match_events_opponent[0]['rendered']['entity']['field_collection_item'][$event_row->field_field_match_events_opponent[0]['raw']['value']]['field_match_event_opp_event_type']['#items'][0]['tid'];
+        $event_minute = $event_row->field_field_match_events_opponent[0]['rendered']['entity']['field_collection_item'][$event_row->field_field_match_events_opponent[0]['raw']['value']]['field_match_event_opp_minute']['#items'][0]['safe_value'];
+        
+        $opponent_events[$_player_name][] = array('player'=>$_player_name, 'event_type'=>taxonomy_term_load($event_type), 'event_minute'=>$event_minute);
+        uasort($opponent_events[$_player_name],'_sort_events');
+      }
+      
+      $vars['node']->opponent_events = $opponent_events;  
+    
+    }
+  }
+}
+
+function _sort_events($a, $b) 
+{
+    if ($a['event_minute'] == $b['event_minute']) {
+        return 0;
+    }
+    return ((int)$a['event_minute'] < (int)$b['event_minute']) ? -1 : 1;
+}
+
 function _get_next_match($current_id){
   
   if((int)$current_id > 0)
   {
     $current_node = node_load($current_id);
     
-    $next_id = db_query("
-      SELECT sd.entity_id
+    $next_ids = db_query("
+      SELECT sd.entity_id as next_match_id,
+            (SELECT sd.entity_id
+            FROM {field_data_field_match_start_date} sd
+            ORDER BY sd.field_match_start_date_value desc
+            LIMIT 1) as last_match_id
       FROM {field_data_field_match_start_date} sd
       WHERE sd.field_match_start_date_value > :start_date 
       ORDER BY sd.field_match_start_date_value
       LIMIT 1 
-    ",array(':start_date'=>$current_node->field_match_start_date[$current_node->language][0]['value']))->fetchField();
-    if(!empty($next_id) && (int)$next_id > 0){
-      $id = $next_id;
+    ",array(':start_date'=>$current_node->field_match_start_date[$current_node->language][0]['value']))->fetchAssoc();
+    if(!empty($next_ids['next_match_id']) && (int)$next_ids['next_match_id'] > 0){
+      $id = $next_ids['next_match_id'];
+      $last_id = $next_ids['last_match_id'];
       $message = "OK";
     }
     else{
-      $id = $current_id;
+      $id = $last_id = $current_id;
       $message = "LAST_MATCH";
     }
   }
@@ -49,9 +112,61 @@ function _get_next_match($current_id){
   }
   
   $html = views_embed_view('matches','next_match',$id);
-  $data = array('html'=>$html,'id'=>$id,'message'=>$message);  
+  $data = array('html'=>$html,'id'=>$id,'message'=>$message, 'last_match_id' => $last_id);  
   return drupal_json_output($data);
     
+}
+
+function _get_prev_match($current_id){
+  
+  if((int)$current_id > 0)
+  {
+    $current_node = node_load($current_id);
+    
+    $next_ids = db_query("
+      SELECT sd.entity_id as prev_match_id,
+            (SELECT sd.entity_id
+            FROM {field_data_field_match_start_date} sd
+            ORDER BY sd.field_match_start_date_value asc
+            LIMIT 1) as first_match_id
+      FROM {field_data_field_match_start_date} sd
+      WHERE sd.field_match_start_date_value < :start_date 
+      ORDER BY sd.field_match_start_date_value desc
+      LIMIT 1 
+    ",array(':start_date'=>$current_node->field_match_start_date[$current_node->language][0]['value']))->fetchAssoc();
+    if(!empty($next_ids['prev_match_id']) && (int)$next_ids['prev_match_id'] > 0){
+      $id = $next_ids['prev_match_id'];
+      $last_id = $next_ids['first_match_id'];
+      $message = "OK";
+    }
+    else{
+      $id = $current_id;
+      $message = "FIRST_MATCH";
+    }
+  }
+  else{
+    $id = $current_id;
+    $message = "WRONG_PARAMETER";
+  }
+  $html = views_embed_view('matches','next_match',$id);
+  $data = array('html'=>$html,'id'=>$id,'message'=>$message, 'first_match_id'=>$last_id);  
+  return drupal_json_output($data);
+    
+}
+
+function custom_match_preprocess_block(&$vars){
+  $block = $vars['block'];
+  if($block->delta == 'matches-next_match' && $block->module == 'views')
+  {
+    $next_match_id =  db_query("
+      SELECT sd.entity_id     
+      FROM {field_data_field_match_start_date} sd
+      WHERE sd.field_match_start_date_value > :start_date 
+      ORDER BY sd.field_match_start_date_value
+      LIMIT 1 
+    ",array(':start_date'=>date('Y-n-d h:i')))->fetchField();
+      $vars['content'] = views_embed_view('matches','next_match',$next_match_id);    
+  }
 }
 
 function theme_custom_match_arsenal_logo_match_block(){
@@ -64,7 +179,7 @@ function theme_custom_match_arsenal_logo_match_block(){
 
 function custom_match_preprocess_views_view_fields(&$variables){
   $view = $variables['view'];
-  if($view->name == 'matches' && ($view->current_display == 'last_match' || $view->current_display == 'next_match')){
+  if($view->name == 'matches' && $view->current_display == 'next_match'){
     if($view->result[0]->field_field_match_place[0]['raw']['value'] == 'home'){
       $first_team_img = theme('custom_match_arsenal_logo_match_block');
       $first_team_name = t('Arsenal');
@@ -90,9 +205,8 @@ function custom_match_preprocess_views_view_fields(&$variables){
     }
     
     $variables['additional_link'] = '';
-    if($view->current_display == 'next_match'){
+    if(strtotime($view->result[0]->field_data_field_match_start_date_field_match_start_date_val) > time())
       $variables['additional_link'] = l(t('online'),'http://www.liveresult.ru/football/txt/team/arsenal',array('attributes'=>array('target'=>'_blank'),'absolute'=>TRUE));
-    }
   }  
 }
 
@@ -133,7 +247,6 @@ function theme_custom_match_simple_tabs( $vars ) {
 function theme_custom_match_match_teaser($vars=array()){
   $node = array_shift($vars);
   $title = array_shift($vars);
-  //dpm($node);
   $output = '';
   //dd($node);
   $output .= '<div class="match-teaser">';
@@ -163,10 +276,67 @@ function theme_custom_match_match_teaser($vars=array()){
   $result = '';
   if(!empty($node->field_match_result)) 
     $result = $node->field_match_result[$node->language][0]['safe_value'];
-    
+  
+ /* foreach($node->arsenal_events as $player=>$events){
+    foreach($events as $event){
+      if(isset($event['event_type']->field_match_event_type_code['und'][0]['value']) && ($event['event_type']->field_match_event_type_code['und'][0]['value'] == 'goal' || $event['event_type']->field_match_event_type_code['und'][0]['value'] == 'penalty_goal')) {
+        
+        $goals[$event['player']->title][] = $event; //[$event['player']->title][] = $event['event_minute'];
+        $goals_sort[] = $event; //[$event['player']->title][] = $event['event_minute'];
+      }
+    }
+  }
+  
+  uasort($goals_sort,'_sort_events');
+  $arsenal_goals_str = '';
+  foreach($goals_sort as $_goals){
+    if(!isset($goals[$_goals['player']->title]))
+      continue;
+      $arsenal_goals_str .= $_goals['player']->title;
+    foreach($goals[$_goals['player']->title] as $_player_goals){
+     // foreach($_player_goals as $_player_goal){
+     // var_dump($_player_goal);
+        $goals_str.= ', '.$_player_goals['event_minute'];  
+      //}
+    }
+    unset($goals[$_goals['player']->title]);
+    $arsenal_goals_str.= '; ';
+  }
+  
+  foreach($node->opponent_events as $player=>$events){
+    foreach($events as $event){
+      if(isset($event['event_type']->field_match_event_type_code['und'][0]['value']) && ($event['event_type']->field_match_event_type_code['und'][0]['value'] == 'goal' || $event['event_type']->field_match_event_type_code['und'][0]['value'] == 'penalty_goal')) {
+        
+        $goals[$event['player']][] = $event; //[$event['player']->title][] = $event['event_minute'];
+        $goals_sort[] = $event; //[$event['player']->title][] = $event['event_minute'];
+      }
+    }
+  }
+  
+  uasort($goals_sort,'_sort_events');
+  $opponent_goals_str = '';
+  foreach($goals_sort as $_goals){
+    if(!isset($goals[$_goals['player']]))
+      continue;
+      $opponent_goals_str .= $_goals['player']->title;
+    foreach($goals[$_goals['player']] as $_player_goals){
+     // foreach($_player_goals as $_player_goal){
+     // var_dump($_player_goal);
+        $goals_str.= ', '.$_player_goals['event_minute'];  
+      //}
+    }
+    unset($goals[$_goals['player']->title]);
+    $opponent_goals_str.= '; ';
+  }
+  
+   print_r($opponent_goals_str);
+  */
   if($node->field_match_place[$rival_node->language][0]['value'] == 'away'){
     $teaser_left = '<div class="players">'.$rival_block . '<div class="vs">VS</div>' . $arsenal_block . '<div class="cf">&nbsp;</div></div>';
     $teaser_right = '<div class="team-line">'.$rival_node->title.' - '.t('Arsenal').' '.$result.'</div>';
+    
+    
+    
   } else {
     $teaser_left = '<div class="players">'.$arsenal_block . '<div class="vs">VS</div>' . $rival_block . '<div class="cf">&nbsp;</div></div>';
     $teaser_right = '<div class="team-line">'.t('Arsenal').' - '.$rival_node->title.' '.$result.'</div>';
@@ -223,21 +393,6 @@ function theme_custom_match_match_teaser($vars=array()){
     </div>';
   }
   
-  if($node->field_penalty_cards[0]['value']){
-    $additional_info .= '
-    <div class="info">
-      <span class="label">Жёлтые карточки: </span>
-      <span class="value">'.$node->field_penalty_cards[0]['view'].'</span>
-    </div>';
-  }
-  
-  if($node->field_field_red_cards[0]['value']){
-    $additional_info .= '
-    <div class="info">
-      <span class="label">Удаления: </span>
-      <span class="value">'.$node->field_field_red_cards[0]['view'].'</span>
-    </div>';
-  }
   if($node->field_additional_information_0[0]['value']){
     $additional_info .= '
     <div class="info">
@@ -248,12 +403,12 @@ function theme_custom_match_match_teaser($vars=array()){
       */
   //dd($node);
   
-  /*if($node->field_gallery_id[0]['value']){
+  if(!empty($node->field_match_gallery) && $node->field_match_gallery[$node->language][0]['node']){
     $additional_info .= '
     <div class="info">
-      <span class="value">'.l('Галерея' , GALLERY_PAGE.'/'.$node->field_gallery_id[0]['value']).'</span>
+      <span class="value">'.l(t('Gallery') , 'node/'.$node->field_match_gallery[$node->language][0]['node']->nid).'</span>
     </div>';
-  }*/
+  }
   
  
   $output .= '
@@ -279,26 +434,75 @@ function theme_custom_match_match_teaser($vars=array()){
 function theme_custom_match_match_team_block($vars){
   $team_name = array_shift($vars);
   $team_players = array_shift($vars);
+  $match_events = array_shift($vars);
   $team_players_output = '';
+  $i=0;
   
   if(is_array($team_players)){
     foreach($team_players as $player){
       $nids[] = $player['nid'];
     }
     
+    $subs = (array_diff(array_keys($match_events), $nids));
+    foreach($subs as $sub){
+      $nids[] = $sub;
+    }
+    
+    /*foreach($match_events as $_events){
+    array_merge()
+      foreach()
+      
+    print_r($_event['event_type']);*/
+      /*if(isset($_event['event_type']->field_match_event_type_code['und'][0]['value']) && $_event['event_type']->field_match_event_type_icon['und'][0]['value'] == 'sub_in')
+      {        die();
+        $nids[] = $_event['event_player']->nid;  
+      } */
+    //}
+    
     $player_nodes = node_load_multiple($nids);
+    
     foreach($nids as $nid){
+      $i++;
       $lang = $player_nodes[$nid]->language;
-      $team_players_output .= '<div class="squad-player">';
+      $team_players_output .= '<div class="squad-player '.($i%2 == 0 ? 'squad-player-odd' : 'squad-player-even').'" '.($i == 11 ? 'style="border-bottom: 2px solid #D0D0D0; padding-bottom: 10px;"' : '').'>';
       $position_term = taxonomy_term_load($player_nodes[$nid]->field_person_role[$lang][0]['tid']);
-      $team_players_output .= '<div style="width:25px; float: left;">'.$player_nodes[$nid]->field_person_number[$lang][0]['value'].'. </div>'; 
-      $team_players_output .= '<div>'.l($player_nodes[$nid]->title, 'node/'.$nid).' <span style="float: right;">'.$position_term->field_role_short_name[array_shift(array_keys($position_term->field_role_short_name))][0]['safe_value'].'</span></div>'; 
+      //$team_players_output .= '<div style="width:25px; float: left;">'.$player_nodes[$nid]->field_person_number[$lang][0]['value'].'. </div>'; 
+      $team_players_output .= '<div style="float: left;">'.l($player_nodes[$nid]->title, 'node/'.$nid).'</div>';
+      
+      if(isset($match_events[$nid])){   
+        foreach($match_events[$nid] as $event){
+          $event_icon = theme_image(array('path'=>$event['event_type']->field_match_event_type_icon['und'][0]['uri'], 'attributes'=>array('title'=>'('.strtolower($event['event_type']->name).', '.$event['event_minute'].' '.t('min').')', )));
+          $team_players_output .=' <div style="float: left; margin-left: 3px;">'.$event_icon.'</div>';  
+        }
+      }
+      //$team_players_output .=' <span style="float: right;">'.$position_term->field_role_short_name[array_shift(array_keys($position_term->field_role_short_name))][0]['safe_value'].'</span></div>'; 
       //$team_players_output .=  '<div style="float:right">'.theme('image_style', array( 'path' =>  $player_nodes[$nid]->field_person_photo[$lang][0]['uri'], 'style_name' => 'squad_player_thumbnail')).'</div>'; 
-      $team_players_output .= '</div>';
+      $team_players_output .= '<div class="cf" style="padding:0px;"></div></div>';
     }
   }
-  else
-    $team_players_output = $team_players;
+  else{
+    $players_array = explode("\n", trim($team_players));
+    
+    foreach($players_array as $_player) {
+      $i++;
+      $_player = trim($_player);
+      if(empty($_player)) continue;
+      //$f = array_shift($match_events);
+      //var_dump($f[0]['player']);
+    
+      $team_players_output .= '<div class="squad-player '.($i%2 == 0 ? 'squad-player-odd' : 'squad-player-even').'" '.($i == 11 ? 'style="border-bottom: 2px solid #D0D0D0; padding-bottom: 10px;"' : '').' >';
+      $team_players_output .= '<div style="float: left;">'.$_player.'</div>';
+      if(isset($match_events[$_player])){   
+        foreach($match_events[$_player] as $event){ 
+          $event_icon = theme_image(array('path'=>$event['event_type']->field_match_event_type_icon['und'][0]['uri'], 'attributes'=>array('title'=>'('.strtolower($event['event_type']->name).', '.$event['event_minute'].' '.t('min').')', )));
+          $team_players_output .=' <div style="float: left; margin-left: 3px;">'.$event_icon.'</div>';  
+        }
+      }
+      
+      $team_players_output .= '<div class="cf" style="padding:0px;"></div></div>'; 
+    }
+    
+  }
   
   $output = '';
   
@@ -313,6 +517,9 @@ function theme_custom_match_match_team_block($vars){
 
 function custom_match_block_view_alter(&$data, $block){
   if($block->module == 'views' && $block->delta == 'matches-next_match')
-    $data['subject'] = '<a href="#" id="next-match-link">'.$data['subject'] .'</a>';
+  {
+    $img_path = drupal_get_path('theme',variable_get('theme_default','fc_arsenal_theme'));
+    $data['subject'] = '<span class="next-prev-wrapper"><a href="#" id="prev-match-link"> <<</a>&nbsp;</span>'.$data['subject'].'<span class="next-prev-wrapper"><a href="#" id="next-match-link"> >> </a>&nbsp;</span>';
+  }
 }
 ?>

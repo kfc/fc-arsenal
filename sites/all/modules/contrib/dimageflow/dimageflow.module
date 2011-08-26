@@ -1,0 +1,255 @@
+<?php
+// $Id: dimageflow.module,v 1.0 2011/08/02 19:59:43 sas Exp $
+
+/**
+ * @file
+ * Imageflow gallery port on Drupal.
+ */
+define('DIMAGEFLOW_THUMB_IS_NAME', 'medium');
+define('DIMAGEFLOW_GALLERY_PAGE', 'dimageflow');
+/**
+ * Implements hook_help().
+ */
+function dimageflow_help($path, $arg) {
+	switch ($path) {
+		case 'admin/help#dimageflow':
+			$output = '';
+			$output .= '<h3>' . t('About') . '</h3>';
+			$output .= '<p>' . t('Imageflow gallery port on Drupal') . '</p>';
+			return $output;
+	}
+}
+function dimageflow_menu(){
+	$items = array();
+	$items['admin/config/content/dimageflow'] = array(
+    'title' => 'Imageflow gallery',
+    'description' => "Settings for Imageflow gallery.",
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('dimageflow_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'dimageflow.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+	);
+	$items[variable_get('dimageflow_gallery_page', DIMAGEFLOW_GALLERY_PAGE)] = array(
+    'page callback' => 'dimageflow_gallery',
+    'access arguments' => array('access content'),
+    'menu_name' => 'navigation',
+    'type' => MENU_CALLBACK,
+	);
+	return $items;
+}
+
+function _dimageflow_get_settings(){
+	$set = array();
+	$node_types = node_type_get_types();
+	foreach($node_types as $key => $type){
+		if($image_field = variable_get('dimageflow_fields_' . $key, 0)){
+			$set['image_field'][$image_field][] = $key;
+		}
+	}
+	if($taxonomy_field = variable_get('dimageflow_gallery_taxonomy_field', 0)){
+		$set['taxonomy_field'] = $taxonomy_field;
+	}
+
+	if($preview_image_style = variable_get('dimageflow_preview_image_style', DIMAGEFLOW_THUMB_IS_NAME)){
+		$set['preview_image_style'] = $preview_image_style;
+	}
+	return $set;
+}
+
+function _dimageflow_select($set, $mode = 'node', $tid = 0){
+	$image_field_bundles = current($set['image_field']);
+	$image_field_name = key($set['image_field']);
+	$select = db_select('node', 'n');
+	if($mode == 'term'){
+		$select->fields('ttd', array('tid', 'name'));
+	} else {
+		$select->fields('n', array('nid', 'sticky', 'created'));
+	}
+	$select->condition('n.status', 1);
+	$select->orderBy('n.sticky', 'DESC');
+	$select->orderBy('n.created', 'DESC');
+	$select->addTag('node_access');
+
+	$select->innerJoin("field_data_{$image_field_name}", 'fdif', 'fdif.revision_id = n.vid');
+	$select->condition('fdif.bundle', $image_field_bundles, 'IN');
+	if($mode == 'node'){
+		$select->innerJoin("field_data_{$set['taxonomy_field']}", 'fdtf', "fdtf.revision_id = n.vid  AND fdtf.{$set['taxonomy_field']}_tid = :tid", array(':tid' => $tid));
+	} else {
+		$select->innerJoin("field_data_{$set['taxonomy_field']}", 'fdtf', "fdtf.revision_id = n.vid");
+	}
+	if($mode == 'term'){
+		$select->innerJoin('taxonomy_term_data', 'ttd', "ttd.tid = fdtf.{$set['taxonomy_field']}_tid");
+		$select->orderBy('ttd.weight');
+		$select->orderBy('ttd.name');
+		$select->groupBy('ttd.tid');
+		$select->addExpression('COUNT(n.nid)', 'count_nodes');
+		$items = $select->execute()->fetchAll();
+	} else {
+		$items = $select->execute()->fetchCol();
+	}
+	return $items;
+}
+
+/**
+ * library files path
+ */
+function _dimageflow_lib_path() {
+  return 'sites/all/libraries/imageflow';
+}
+
+/**
+ * Menu callback; Generate a gallery.
+ */
+function dimageflow_gallery() {
+	global $language;
+	$set = _dimageflow_get_settings();
+	if(isset($set['taxonomy_field']) && isset($set['image_field']) && isset($set['preview_image_style'])){
+		if(!arg(1)){
+			$terms = _dimageflow_select($set, 'term');
+			if($terms){
+				$term = array_shift($terms);
+			} else {
+				drupal_not_found();
+			}
+		} elseif(is_numeric(arg(1))) {
+			$term = taxonomy_term_load(arg(1));
+		} else {
+			drupal_not_found();
+		}
+		if($term){
+			$nids = _dimageflow_select($set, 'node', $term->tid);
+	  if (!empty($nids)) {
+	  	$libpath = _dimageflow_lib_path();
+	  	
+	  	if(!file_exists( $libpath . '/imageflow.css')){
+	  		drupal_set_message(t("File not found - @file", array('@file' => $libpath . '/imageflow.css')));
+	  	} else {
+	  		drupal_add_css($libpath . '/imageflow.css');
+	  	}
+	  	drupal_add_css(drupal_get_path('module', 'dimageflow') . '/dimageflow.css');
+	  	if(!file_exists($libpath . '/imageflow.packed.js')){
+	  		drupal_set_message(t("File not found - @file", array('@file' => $libpath . '/imageflow.packed.js')));
+	  	} else {
+	  		drupal_add_js( $libpath . '/imageflow.packed.js');
+	  	}
+	  	
+
+	  	$nodes = node_load_multiple($nids);
+	  	$id = 'dimageflow' . time();
+	  	// Add js array of settings.
+	  	$js = array(
+	    'ImageFlowID' => $id,
+	    'reflectPath' => url($libpath, array('absolute' => TRUE)) . '/',
+	  	);
+
+	  	$js['circular'] = variable_get('dimageflow_params_circular', false);	
+	  	$js['imagesheight'] = variable_get('dimageflow_params_imagesheight', 0.67);
+	  	$js['image_focus_m'] = variable_get('dimageflow_params_image_focus_m', 1);
+	  	$js['imagesm'] = variable_get('dimageflow_params_imagesm', 1);
+	  	$js['onclick'] = str_replace("\n", ' ', variable_get('dimageflow_params_onclick', 'document.location = this.url;'));
+	
+	  	drupal_add_js(array('dimageflow' => $js), 'setting');
+	  	drupal_add_js(drupal_get_path('module', 'dimageflow') . '/dimageflow.js');
+	  	 
+	  	$build['#imageflow_id'] =  $id;
+	  	$images = '';
+	  	$image_field_name = key($set['image_field']);
+	  	foreach ($nodes as $node) {
+	    
+	    $field_image = $node->$image_field_name;
+	     
+	    if(isset($field_image[$language->language])){
+	    	$langcode = $language->language;
+	    } else {
+	    	$langcode = key($field_image);
+	    }
+	    foreach($field_image[$langcode] as $item){
+	    $preview_option = array(
+    			'style_name' => $set['preview_image_style'], 
+    			'path' => $item['uri'],
+	    		'title' => $node->title,
+	    		'alt' => $node->title
+	   	);
+	    $preview_tag = theme('image_style', $preview_option);
+	    $expsrc = explode('src="', $preview_tag);
+	    $end_pos = strpos($expsrc[1], '"');
+	    $src = substr($expsrc[1], 0 , $end_pos);
+	    list($width, $height, $type, $image_attributes) = @getimagesize($src);
+	    $search = array(
+			'[image_path]',
+			'[nid]'
+			);
+			$replace = array(
+			file_create_url($item['uri']),
+			$node->nid,
+			);
+			$longdesc_text = variable_get('dimageflow_path_for_image_view', '/node/[nid]');
+			$longdesc = drupal_get_path_alias(str_replace($search, $replace, $longdesc_text));
+			$attributes = str_replace($search, $replace, variable_get('dimageflow_attributes', ''));
+			$sep = (strpos('<img', $preview_tag) + 4);
+			$image_tag =  '<img' . ($attributes ? ' ' . $attributes . ' ' : '') . ' longdesc="' . $longdesc . '" ' . ' width="' . $width . '" '. ' height="' . $height . '" ' . substr($preview_tag, $sep);
+			$images .= (!empty($images) ? "\n" . $image_tag : $image_tag);
+	  	}
+	  	}
+	  	$build['#theme'] = 'dimageflow_gallery';
+	  	$build['#images'] = $images;
+	  	if($images){
+	  		$gallery_list = _dimageflow_select($set, 'term');
+	  		$galleries = array();
+	  		foreach($gallery_list as $gallery){
+	  			$galleries[] = l($gallery->name, variable_get('dimageflow_gallery_page', DIMAGEFLOW_GALLERY_PAGE) . "/{$gallery->tid}") . '<span class="dimageflow-count-nodes">(' . $gallery->count_nodes. ')</span>';
+	  		}
+	  		$build['#galleries'] = theme('item_list', array('items' => $galleries));
+	  	}
+
+	  	drupal_set_title(t("Gallery «@term_name»", array('@term_name' => $term->name)));
+	  }
+	  else {
+	  	drupal_set_title(t('Welcome to @site-name', array('@site-name' => variable_get('site_name', 'Drupal'))), PASS_THROUGH);
+	  	$default_message = '<p>' . t('Gallery not found.') . '</p>';
+	  }
+		} else {
+			drupal_not_found();
+		}
+	} else {
+		$default_message = '<p>' . t("Module adjustment isn't executed.") . '</p>';
+		$default_links = array();
+		if (user_access('administer site configuration')) {
+			$default_links[] = l(t('Imageflow settings'), 'admin/config/content/dimageflow');
+		}
+		if (!empty($default_links)) {
+			$default_message .= theme('item_list', array('items' => $default_links));
+		}
+	}
+	if(isset($default_message)){
+		$build['default_message'] = array(
+	      '#markup' => $default_message,
+	      '#prefix' => '<div id="first-time">',
+	      '#suffix' => '</div>',
+		);
+	}
+	return $build;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function dimageflow_theme() {
+	return array(
+    'dimageflow_gallery' => array(
+      'render element' => 'elements',
+      'template' => 'dimageflow-gallery',
+	),
+	);
+}
+
+/**
+ * Process variables for dimageflow-gallery.tpl.php
+ * @see dimageflow-gallery.tpl.php
+ */
+function template_preprocess_dimageflow_gallery(&$variables) {
+	$variables['images'] = $variables['elements']['#images'];
+	$variables['imageflow_id'] =  $variables['elements']['#imageflow_id'];
+	$variables['galleries'] = isset($variables['elements']['#galleries']) ? $variables['elements']['#galleries'] : '';
+}

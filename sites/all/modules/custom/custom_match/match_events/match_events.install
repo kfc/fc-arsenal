@@ -1,0 +1,66 @@
+<?php
+
+
+/**
+ * Implement hook_schema().
+ */
+function match_events_schema() {
+
+  $schema['match_events_event_types'] = array(
+    'description' => 'Types of match events.',
+    'fields' => array(
+      'tid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique tournament_table item ID.',
+      ),
+      'name' => array(
+        'description' => 'Event type name',
+        'type' => 'text',
+        'not null' => TRUE,
+      )),
+    'primary key' => array('tid'),
+  );
+
+  $schema['match_events_results'] = array(
+    'description' => 'Stores match events',
+    'fields' => array(
+      'eid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique match_events_results item ID.',
+      ),
+      'match' => array(
+        'description' => 'Match ID',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'event_type' => array(
+        'description' => 'Event type ID (table match_events_event_types)',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'player' => array(
+        'description' => 'NodeID of Person',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'minute' => array(
+        'description' => 'Minute of event',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+    ),
+    'indexes' => array(
+      'tournament' => array('match'),
+    ),
+    'foreign keys' => array(
+      'event_type' => array('match_events_event_types' => 'tid'),
+      'player' => array('node' => 'nid'),
+      'match' => array('node' => 'nid'),
+    ),
+    'primary key' => array('eid'),
+  );
+  
+  return $schema;
+}

@@ -1,0 +1,9 @@
+.field-name-field-match-event-player, 
+.field-name-field-match-event-event-type, 
+.field-name-field-match-event-minute,
+.field-name-field-match-event-opp-player, 
+.field-name-field-match-event-opp-event-type, 
+.field-name-field-match-event-opp-minute {
+  float: left;
+  margin-right: 20px;
+}

@@ -1,0 +1,8 @@
+; $Id: dimageflow.info,v 1.0 2011/08/02 19:59:43 sas Exp $
+name = Imageflow gallery port
+description = Imageflow gallery port for Drupal.
+package = Image gallery
+version = VERSION
+core = 7.x
+dependencies[] = image
+dependencies[] = taxonomy

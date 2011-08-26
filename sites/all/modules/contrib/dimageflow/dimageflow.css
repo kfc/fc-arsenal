@@ -1,0 +1,40 @@
+.dimageflow-count-nodes{
+	padding-left:5px;
+}
+.dimageflow-galleries .item-list ul{
+	margin:0 !important;
+	padding:0;
+}
+.dimageflow-galleries .item-list ul li {
+    margin: 0;
+    padding:0 1.3em 0.5em 0;
+    display:inline;
+    list-style:none;
+}
+.dimageflow-galleries{
+    background-color: #F6F6F2;
+    border-color: #F9F9F9;
+    padding:.5em;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px; 
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* Параметры тени */
+    -moz-box-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* Для Firefox */
+    -webkit-box-shadow: 2px 2px 5px	rgba(0,0,0,0.5); /* Для Safari и Chrome */
+    filter: progid:DXImageTransform.Microsoft.shadow(direction=120, color=#000000, strength=5);
+}
+.dimageflow-galleries h2{
+	border-bottom: 1px solid #D6D6D6;
+    font-size: 1.071em;
+    line-height: 1.2;
+    margin: 0 0 0.5em;
+    padding-bottom: 5px;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+.imageflow{
+	padding:.5em 0;	
+	margin-top:2em;
+}
+.imageflow .caption {
+	color: #fff;	
+}

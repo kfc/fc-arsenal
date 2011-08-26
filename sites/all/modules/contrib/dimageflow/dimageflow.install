@@ -1,0 +1,21 @@
+<?php
+// $Id: dimageflow.install,v 1.0 2011/08/02 19:59:43 sas Exp $
+
+/**
+ * @file
+ * Install, update and uninstall functions for the dimageflow module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function dimageflow_uninstall() {
+	$node_types = node_type_get_types();
+	foreach($node_types as $key => $type){
+		variable_del('dimageflow_fields_' . $key);
+	}
+	variable_del('dimageflow_preview_image_style');
+	variable_del('dimageflow_gallery_taxonomy_field');
+	variable_del('dimageflow_path_for_image_view');
+	variable_del('dimageflow_gallery_page');
+}

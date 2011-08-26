@@ -70,8 +70,8 @@
 ?>
 </div>
 <div class="right-part">
-	<?php print theme('custom_match_match_team_block', array(t('Arsenal'), $node->field_match_arsenal_squad[$node->language]));?>
-	<?php print theme('custom_match_match_team_block', array($node->field_match_opponent[$node->language][0]['node']->title, nl2br($node->field_match_opponent_squad[$node->language][0]['safe_value'])));?>
+	<?php print theme('custom_match_match_team_block', array(t('Arsenal'), $node->field_match_arsenal_squad[$node->language], $node->arsenal_events));?>
+	<?php print theme('custom_match_match_team_block', array($node->field_match_opponent[$node->language][0]['node']->title, $node->field_match_opponent_squad[$node->language][0]['safe_value'], $node->opponent_events));?>
 </div>
 <div class="cf">&nbsp;</div>
 </div>

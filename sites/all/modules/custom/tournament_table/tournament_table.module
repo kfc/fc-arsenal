@@ -1,0 +1,156 @@
+<?php
+
+function tournament_table_menu(){
+  $items['admin/content/tournament-table-item'] = array(
+   'title' => t('Tournament matches'),
+   'description' => t('Create tournament matches'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tournament_table_item_add_form'),
+    'access arguments' => array('tournament table edit'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'tournament_table.admin.inc',
+  );
+  
+   $items['admin/content/tournament_table_settings'] = array(
+   'title' => t('Tournament teams'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tournament_table_settings_form'),
+    'access arguments' => array('tournament table edit'),
+    'file' => 'tournament_table.admin.inc',
+  );
+  
+  $items['tournament-table'] = array(
+   'title' => t('Tournament table'),
+    'page callback' => '_get_tournament_table',
+    'access callback'=>TRUE,
+  );
+  
+  $items['tournament-table/%/%'] = array(
+   'title' => t('Tournament table'),
+    'page callback' => '_get_tournament_table',
+    'page arguments' => array('full',1,2),
+    'access callback'=>TRUE,
+  );
+  
+  
+  return $items;
+}
+
+function tournament_table_theme(){
+  return array(
+    'tournament_table_full_table'=>array(
+      'variables'=>array('data'=>NULL),
+      'template' => 'tournament-table-full-table'
+      ),
+    'tournament_table_short_table'=>array(
+      'variables'=>array('data'=>NULL,'indexes'=>NULL),
+      'template' => 'tournament-table-short-table'
+    ),
+  );
+}
+
+function tournament_table_block_info(){
+
+  $blocks['tournament-table-short'] = array(
+    'info' => t('Tournament table'),
+    'title' => t('Tournament table'),
+    'status'=>TRUE,
+    'weight'=>0,
+    'visibility'=>1,
+    'region'=>'left',
+    'pages'=>'<front>',
+    'cache' => -1,
+  );
+  return $blocks;
+}
+
+function tournament_table_block_view($delta){
+  switch($delta){
+    case 'tournament-table-short':
+        $block['content'] = _get_tournament_table('short');
+        return $block;
+        break;
+      }
+}
+
+function _get_tournament_table($type='full', $season_id=null, $tournament_id=null){
+  if($season_id == null)
+    $season_id = variable_get('tournament_table_default_season',null);
+  if($tournament_id == null)
+    $tournament_id = variable_get('tournament_table_default_tournament',null);  
+    
+  $teams = array();  
+  $tournament_teams = variable_get('tournament_table_season_teams',array());
+  foreach($tournament_teams as $_team)
+    if($_team != 0)
+      $teams[] = (int)$_team;  
+  
+  if($tournament_id == null || $season_id == null || count($teams) == 0)
+    return '';
+ 
+    $query = '
+      SELECT n.title as team_name, team_id, sum(points) as total_points,sum(scored) as total_scored, sum(missed) as total_missed,
+      sum(games) as total_games, wins as total_wins, sum(draws) as total_draws, (sum(games)-sum(draws) - wins) as total_loses,
+      (sum(scored) - sum(missed)) as goal_difference
+
+      FROM( 
+
+      SELECT results.home_team as team_id,
+      sum(home_points) as points, sum(home_score) as scored,  sum(away_score) as missed,
+      count(home_team) as games,
+      (SELECT COUNT(*) from {tournament_table_results} where winner = results.home_team) as wins,
+      (SELECT COUNT(*) from {tournament_table_results} where winner = 0 and home_team = results.home_team) as draws
+      from  {tournament_table_results} results 
+      WHERE season=:season_id AND tournament = :tournament_id
+      group by home_team
+
+      UNION
+
+      SELECT results.away_team as team_id,
+      sum(away_points) as points, sum(away_score) as scored,  sum(home_score) as missed,
+      count(away_team) as games,
+      (SELECT COUNT(*) from {tournament_table_results} where winner = results.away_team) as wins,
+      (SELECT COUNT(*) from {tournament_table_results} where winner = 0 and away_team = results.away_team) as draws
+      from {tournament_table_results} results 
+      WHERE season=:season_id AND tournament = :tournament_id
+      group by away_team
+      )
+      t1
+      inner join {node} n on t1.team_id = n.nid
+      WHERE team_id IN ('.implode(',',$teams).')
+      group by team_id
+      order by total_points desc, total_wins desc, goal_difference desc, total_scored desc  
+    ';  
+  $result = db_query($query,array(':season_id' => $season_id, ':tournament_id'=> $tournament_id,':team_ids'=>implode(',',$teams)))
+            ->fetchAllAssoc('team_id');
+  if($type == 'full')
+    return theme('tournament_table_full_table', array('data' =>$result));
+  else{
+    $teams_visible = 10;
+    $teams_total = count($result);
+  
+    $arsenal_index = array_search(variable_get('arsenal_team_id',0),array_keys($result)) + 1; 
+    if($arsenal_index > $teams_visible){
+      if($arsenal_index + $teams_visible/2 > $teams_total){
+        $start_index = $teams_total - $teams_visible;
+        $end_index = $teams_total;
+      }
+      else{
+        $start_index = $arsenal_index - $teams_visible/2;
+        $end_index = $arsenal_index + $teams_visible/2;  
+      }
+      /*$keys = array_keys($result);
+      $new_result = array();
+      for($i=$start_index; $i < $end_index; $i++){
+        $new_result[$keys[$start_index]] = $result[$keys[$start_index]];
+      }
+      $result = $new_result; */
+    }
+    else{
+      $start_index = 1;
+      $end_index = $teams_visible;
+    }
+    return theme('tournament_table_short_table', array('data' =>$result,'indexes'=>array('start'=>$start_index,'end'=>$end_index)));  
+  }
+}
+?>

@@ -169,12 +169,14 @@ function date_popup_element_info() {
 }
 
 function date_popup_date_granularity($element) {
-  $granularity = date_format_order($element['#date_format']);
+  $date_format = isset($element['#date_format']) ? $element['#date_format'] : '';
+  $granularity = date_format_order($date_format);
   return array_intersect($granularity, array('month', 'day', 'year'));
 }
 
 function date_popup_time_granularity($element) {
-  $granularity = date_format_order($element['#date_format']);
+  $date_format = isset($element['#date_format']) ? $element['#date_format'] : '';
+  $granularity = date_format_order($date_format);
   return array_intersect($granularity, array('hour', 'minute', 'second'));
 }
 
@@ -235,7 +237,8 @@ function date_popup_element_process($element, $form_state, $form) {
  * Process the date portion of the element.
  */
 function date_popup_process_date(&$element) {
-  $granularity = date_format_order($element['#date_format']);
+  $date_format = isset($element['#date_format']) ? $element['#date_format'] : '';
+  $granularity = date_format_order($date_format);
   $date_granularity = date_popup_date_granularity($element);
   if (empty($date_granularity)) return array();
 
@@ -300,7 +303,8 @@ function date_popup_process_date(&$element) {
  * Process the time portion of the element.
  */
 function date_popup_process_time(&$element) {
-  $granularity = date_format_order($element['#date_format']);
+  $date_format = isset($element['#date_format']) ? $element['#date_format'] : '';
+  $granularity = date_format_order($date_format);
   $has_time = date_has_time($granularity);
   if (empty($has_time)) return array();
 

@@ -1,0 +1,128 @@
+<?php
+
+
+/**
+ * Implement hook_schema().
+ */
+function tournament_table_schema() {
+  $schema['tournament_table_results'] = array(
+    'description' => 'Stores tournament results.',
+    'fields' => array(
+      'pid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique tournament_table item ID.',
+      ),
+      'tournament' => array(
+        'description' => 'Tournament ID (Taxonomy term ID)',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'season' => array(
+        'description' => 'Season ID (Taxonomy term ID)',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'home_team' => array(
+        'description' => 'NodeID of Team',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'away_team' => array(
+        'description' => 'NodeID of Team',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'home_score' => array(
+        'description' => 'Number of goals scored by home team',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'away_score' => array(
+        'description' => 'Number of goals scored by away team',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+    ),
+    'indexes' => array(
+      'tournament' => array('tournament'),
+      'season' => array('season'),
+    ),
+    'foreign keys' => array(
+      'tournament' => array('taxonomy_term_data' => 'tid'),
+      'season' => array('taxonomy_term_data' => 'tid'),
+      'home_team' => array('node' => 'nid'),
+      'away_team' => array('node' => 'nid'),
+    ),
+    'primary key' => array('pid'),
+  );
+  
+  $schema['tournament_table_teams'] = array(
+    'description' => 'Stores tournament_table items.',
+    'fields' => array(
+      'pid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique tournament_table item ID.',
+      ),
+      'tournament' => array(
+        'description' => 'Tournament ID (Taxonomy term ID)',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'season' => array(
+        'description' => 'Season ID (Taxonomy term ID)',
+        'type' => 'int',
+        'not null' => TRUE,
+      ),
+      'team_id' => array(
+        'description' => 'NodeID of team ',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+    ),
+    'foreign keys' => array(
+      'tournament' => array('taxonomy_term_data' => 'tid'),
+      'season' => array('taxonomy_term_data' => 'tid'),
+      'team_id' => array('node' => 'nid'),
+    ),
+    'primary key' => array('pid'),
+  );
+  
+  return $schema;
+}
+
+function tournament_table_update_7101() {
+
+  $winner = array(
+    'description' => 'Winner of the match',
+    'type' => 'int',
+    'not null' => FALSE,
+  );
+  db_add_field('tournament_table_results','winner',$winner);
+  
+  $home_points = array(
+    'description' => 'Point earned by home team',
+    'type' => 'int',
+    'not null' => FALSE,
+  );
+  db_add_field('tournament_table_results','home_points',$home_points);
+  
+  $away_points = array(
+    'description' => 'Point earned by away team',
+    'type' => 'int',
+    'not null' => FALSE,
+  );
+  db_add_field('tournament_table_results','away_points',$away_points);
+}
+
+function tournament_table_update_7102() {
+   $match_date = array(
+    'type' => 'int',
+    'unsigned' => TRUE,
+    'size' => 'big',
+    'not null' => FALSE,
+  );  
+  db_add_field('tournament_table_results','match_date',$match_date);
+ 
+}

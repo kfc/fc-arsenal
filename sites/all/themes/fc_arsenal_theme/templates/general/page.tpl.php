@@ -28,9 +28,9 @@
 				} else {?>
 				<div id="content">
 					<?php if ($messages): print $messages; endif; ?>
-          <?php if((isset($variables['node']->type) &&  $variables['node']->type != "news") || isset($node) && $node->type != 'news'):?>
+          <?php if((isset($variables['node']->type) &&  $variables['node']->type != "news") || (isset($node) && $node->type != 'news') || (!isset($variables['node']) && !isset($node))):?>
 					  <h2><?php print $title; ?></h2>
-          <?php endif;?>
+          <?php endif;?> 
 					<?php if($tabs) : print '<div class="tabs">'.render($tabs).'</div>'; endif; ?>
 					<?php print render($tabs2); ?>
 					<?php print render($page['help']); ?>
@@ -83,7 +83,7 @@
 				<div class="banner-links"><?php include_once('ireklama.php'); ?></div>
 				<div class="banner-links">
 					<?php
-						if(!$is_front){
+						if(!drupal_is_front_page()){
 							$host = $_SERVER["HTTP_HOST"];
 							$url = $_SERVER["REQUEST_URI"];
 							$content=file_get_contents("http://62.149.23.94/servers2/link_server.php?host=".$host."&uri=".urlencode($url));
@@ -101,7 +101,7 @@
 					</div>
           
 					<div class="counter">
-						<?/*?><noindex>
+						<??><noindex>
 <!-- SpyLOG v2 f:0211 -->
       <script language="javascript">
 u="u633.47.spylog.com";d=document;nv=navigator;na=nv.appName;p=0;j="N";
@@ -146,10 +146,9 @@ border=0 height=31 width=88
 alt="Рейтинг@Mail.ru"/></a></noscript><script language="JavaScript" type="text/javascript"><!--
 if(11<js)d.write('--'+'>')//--></script><!--/COUNTER-->
 
-						</noindex>  <?*/?>
+						</noindex>  <??>
 					</div>
 				</div>
-				<div class="author-info">powered by Alexandr [Lunya] Lunyov</div>
 			</div>
 			<!-- ======================================== EOF: FOOTER ======================================== -->
 		</div>

@@ -37,6 +37,22 @@ function node_reference_extra_form_alter(&$form, &$form_state, $form_id) {
       }
     }
   }
+  
+  if($form_id == 'gallery_node_form' && $form['nid']['#value'] == NULL){
+    if(isset($_GET['ref'])){                            
+      $res = db_select('field_data_field_voc_related_fields','f')
+              ->condition(db_and()->condition('field_voc_related_fields_value','%'.$_GET['ref'].'%','LIKE')
+                                  ->condition('bundle','gallery_type')
+                                  ->condition('entity_type','taxonomy_term'))
+              ->fields('f',array('entity_id'))
+              ->execute()
+              ->fetchAssoc();
+      if(isset($res) && isset($res['entity_id']) && (int)$res['entity_id'] > 0){
+        $form['field_gallery_type'][$form['field_gallery_type']['#language']]['#default_value'] = array($res['entity_id']);      
+      }
+    }
+  }
+  
 }
 
   

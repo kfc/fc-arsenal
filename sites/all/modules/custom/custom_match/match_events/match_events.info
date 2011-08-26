@@ -1,0 +1,7 @@
+name = Match Events 
+description = "Module for entering match events"
+core = 7.x
+package = Custom
+files[] = match_events.module
+
+

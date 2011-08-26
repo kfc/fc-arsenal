@@ -1,0 +1,13 @@
+
+.tournament-table-add-field {
+  float: left;
+  margin-right: 15px;
+  padding: 0px;
+  height: 40px;
+}
+
+.tournament-table-add-separator{
+  float:left;
+  margin-top: 10px;
+  margin-right: 15px;
+}

@@ -224,7 +224,6 @@ function custom_news_menu(){
   $vocabulary = taxonomy_vocabulary_machine_name_load('news_category');
   $terms = taxonomy_get_tree($vocabulary->vid);
   // db_select('')
-  //dpm($terms);
    $items['news'] = array(
     'title' => t('News'),
     'page callback' => 'drupal_goto',
@@ -246,7 +245,6 @@ function custom_news_menu(){
       'access arguments' => array('access content'),
     ); 
   }   */
-  //dpm($items);
   //$items['news/']
   return $items;
 }

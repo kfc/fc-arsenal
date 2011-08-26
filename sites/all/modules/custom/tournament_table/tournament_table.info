@@ -1,0 +1,10 @@
+name = Tournament Table module
+version = 7.x-1.0
+core = 7.x
+package = Custom
+files[] = tournament_table.module
+files[] = tournament_table.admin.inc
+files[] = tournament_table.install
+
+configure = admin/content/tournament_table_settings
+

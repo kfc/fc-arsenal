@@ -1,0 +1,109 @@
+# $Id$
+#
+# Russian translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  dimageflow-gallery.tpl.php: n/a
+#  dimageflow.module,v 1.0 2011/08/02 19:59:43 sas
+#  dimageflow.info,v 1.0 2011/08/02 19:59:43 sas
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2011-08-04 16:29+0300\n"
+"PO-Revision-Date: 2011-08-04 16:36+0200\n"
+"Last-Translator: alex <alexsco74@gmail.com>\n"
+"Language-Team: Russian <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+#: dimageflow-gallery.tpl.php:3
+msgid "Galleries"
+msgstr "Галереи"
+
+#: dimageflow.admin.inc:8
+msgid "[image_path] - path to image."
+msgstr "[image_path] - путь к фото."
+
+#: dimageflow.admin.inc:9
+msgid "[nid] - image node id."
+msgstr "[nid] - id фото материала."
+
+#: dimageflow.admin.inc:34
+msgid "Gallery page"
+msgstr "Страница галереи"
+
+#: dimageflow.admin.inc:41
+msgid "Include for fields."
+msgstr "Включить для полей."
+
+#: dimageflow.admin.inc:47;66
+msgid "None"
+msgstr "Нет"
+
+#: dimageflow.admin.inc:57
+msgid "Thumbnail image style"
+msgstr "Тип картинки для миниатюры"
+
+#: dimageflow.admin.inc:64
+msgid "Vocabulary for gallery title."
+msgstr "Словарь для названия галереи."
+
+#: dimageflow.admin.inc:70
+msgid "Path for image view"
+msgstr "Путь для просмотра фото"
+
+#: dimageflow.admin.inc:72
+msgid "You can use token: !token"
+msgstr "Вы можете использовать переменные: !token"
+
+#: dimageflow.module:17
+msgid "About"
+msgstr "О редакторе"
+
+#: dimageflow.module:18
+msgid "Imageflow gallery port on Drupal"
+msgstr "Imageflow галерея для Drupal"
+
+#: dimageflow.module:182
+msgid "Gallery «@term_name»"
+msgstr "Галерея «@term_name»"
+
+#: dimageflow.module:185
+msgid "Welcome to @site-name"
+msgstr "Добро пожаловать на @site-name"
+
+#: dimageflow.module:186
+msgid "Gallery not found."
+msgstr "Галерея не найдена."
+
+#: dimageflow.module:192
+msgid "Module adjustment isn't executed."
+msgstr "Настройка модуля не выполнена."
+
+#: dimageflow.module:195
+msgid "Imageflow settings"
+msgstr "Настройки Imageflow"
+
+#: dimageflow.module:25
+msgid "Imageflow gallery"
+msgstr "Imageflow галерея"
+
+#: dimageflow.module:26
+msgid "Settings for Imageflow gallery."
+msgstr "Настройки для Imageflow галереи."
+
+#: dimageflow.info:0
+msgid "Imageflow gallery port"
+msgstr "Imageflow gallery порт"
+
+#: dimageflow.info:0
+msgid "Imageflow gallery port for Drupal."
+msgstr "Imageflow галерея для Drupal."
+
+#: dimageflow.info:0
+msgid "Image gallery"
+msgstr "Фотогалерея"
+
