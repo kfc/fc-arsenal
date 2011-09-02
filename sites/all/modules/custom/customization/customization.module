@@ -97,6 +97,12 @@ function theme_customization_login_block(){
   return $output;
 }
 
+function customization_preprocess_page(&$vars){
+  //remove nodes from main page.
+  if(drupal_is_front_page())
+    unset($vars['page']['content']['system_main']);
+}
+
 
 
 ?>

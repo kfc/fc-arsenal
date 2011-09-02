@@ -4,4 +4,6 @@ core = 7.x
 package = Custom
 files[] = custom_news.module
 
+configure = admin/settings/custom_news 
+
 

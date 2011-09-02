@@ -20,7 +20,7 @@
       {
         $.ajax({
          type: "POST",
-         url: "get_next_match_ajax/"+id,
+         url: "/get_next_match_ajax/"+id,
          success: function(data){
            $(block).html(data['html']);
            $(block).attr('id', "match-"+data['id']);
@@ -40,7 +40,7 @@
       {
         $.ajax({
          type: "POST",
-         url: "get_prev_match_ajax/"+id,
+         url: "/get_prev_match_ajax/"+id,
          success: function(data){
            $(block).html(data['html']);
            $(block).attr('id', "match-"+data['id']);

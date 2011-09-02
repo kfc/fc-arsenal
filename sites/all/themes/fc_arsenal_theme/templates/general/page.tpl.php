@@ -48,32 +48,16 @@
         <div id="pre-footer">
           <?php //$block1 = custom_pages_block('view',7);  ?>
           <div class="left-part">
-            <div id="funclub-events-block" class="block">
-              <h3><?php //print $block1['subject']; ?></h3>
-              <div class="content">
-                <?php //print $block1['content']; ?>
-              </div>
-            </div>
+            <?php print views_embed_view('random_article','fanclub_information');  ?>
           </div>
 
           <div class="center-part">
-            <?php //$block2 = views_block('view','random_articles_block');  ?>
-            <div id="hystory-articles-block" class="block">
-              <h3><?php //print $block2['subject']; ?></h3>
-              <div class="content">
-                <?php //print $block2['content']; ?>
-              </div>
-            </div>
+              <?php print views_embed_view('random_article','random_articles_homepage_block');  ?> 
           </div>
           
-          <?php //$block3 = views_block('view','portal_friendship_block');  ?>
+          
           <div class="right-part">
-            <div id="frieds-block" class="block">
-              <h3><?php //print $block3['subject']; ?></h3>
-              <div class="content">
-                <?php //print $block3['content']; ?>
-              </div>
-            </div>
+            <?php print views_embed_view('partner_sites','partner_sites_homepage_block');  ?>
           </div>
           
           <div class="cf">&nbsp;</div>

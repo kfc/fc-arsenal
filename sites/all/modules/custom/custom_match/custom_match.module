@@ -71,6 +71,13 @@ function custom_match_preprocess_node(&$vars){
   }
 }
 
+function custom_match_form_alter(&$form, $form_state, $form_id){
+  if($form_id == 'match_node_form'){
+   dpm($form); 
+  
+  }
+}
+
 function _sort_events($a, $b) 
 {
     if ($a['event_minute'] == $b['event_minute']) {

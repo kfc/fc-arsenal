@@ -1,0 +1,14 @@
+name = Weight
+description = Add weight-based sorting to nodes.
+core = 7.x
+
+files[] = weight_handler_field_sticky.inc
+files[] = weight_handler_sort.inc
+
+
+; Information added by drupal.org packaging script on 2011-08-26
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "weight"
+datestamp = "1314320574"
+

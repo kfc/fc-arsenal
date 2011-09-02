@@ -1,5 +1,4 @@
 <?php
-
 function custom_news_node_view($node, $view_mode, $language){
   //$node = $vars['node'];
   if($node->type == 'news'){
@@ -180,7 +179,6 @@ function custom_news_block_view($delta){
       $rss_url = variable_get('custom_news_apl_news_rss_url','');
       if(!empty($rss_url)){
         $block['subject'] = t('APL News');
-        $rss_url = variable_get('custom_news_apl_news_rss_url','');
         $rss_items_num = variable_get('custom_news_apl_news_rss_items_num',10);
         $block['content'] = theme('custom_news_apl_news_rss', array('data' => _custom_news_get_rss_data($rss_url),'items_num'=>$rss_items_num));
         return $block;
@@ -231,21 +229,13 @@ function custom_news_menu(){
     'access arguments' => array('access content'),
     'type' => MENU_SUGGESTED_ITEM,
   ); 
-   /* $items['news/archive'] = array(
-      'title'=> t('News'),
-      'type' => MENU_NORMAL_ITEM,
-    );*/ 
-  /*foreach($terms as $term){
-    $items['news/'.$term->tid] = array(
-      'title'=> $term->name,
-      'type' => MENU_NORMAL_ITEM,
-      'menu'=>'main-menu',
-      'page callback' => 'show_news_by_category', 
-      'page arguments' => array(1), 
-      'access arguments' => array('access content'),
-    ); 
-  }   */
-  //$items['news/']
+   $items['admin/settings/custom_news'] = array(
+   'title' => t('News settings'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('custom_news_news_settings_form'),
+    'access arguments' => array('administer nodes'),
+    'file' => 'custom_news.admin.inc',
+  );
   return $items;
 }
 ?>

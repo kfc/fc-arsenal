@@ -1,0 +1,6 @@
+name = Gallery Image Picker
+description =  Widget for picking image from existing gallery
+package = Custom
+core = 7.x
+dependencies[] = field
+

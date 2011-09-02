@@ -1,0 +1,120 @@
+<?php
+
+function gallery_image_picker_menu() {
+  
+  $items = array();
+  
+  $items['get_gallery_images/%'] = array(
+    'type'=>MENU_CALLBACK,
+    'page callback'=>'_get_gallery_images',
+    'page arguments'=>array(1),
+    'access arguments' => array('administer content')
+  );
+
+  return $items;
+
+}
+
+function gallery_image_picker_form_alter(&$form, $form_state, $form_id){
+  if($form_id == 'news_node_form'){
+    array_unshift($form['#submit'],'gallery_image_picker_form_submit');
+  }
+} 
+
+function gallery_image_picker_form_submit($form, &$form_state){
+  unset($form_state['values']['field_news_image'][$form_state['values']['language']][0]);
+  $form_state['values']['field_news_image'][$form_state['values']['language']][0]['fid'] = (int)$form_state['values']['fid_hidden']; 
+  $form_state['values']['field_news_image'][$form_state['values']['language']][0]['display'] = 1; 
+}
+
+function gallery_image_picker_field_widget_info(){      
+  return array(
+  'gallery_image_picker_gallerypicker' => array(
+    'label' => t('Gallery Picker'),
+    'field types' => array('image'),
+    'settings'=>array()
+  )); 
+}
+
+function gallery_image_picker_field_widget_settings_form($field, $instance) {
+  $widget = $instance['widget'];
+  $settings = $widget['settings'];
+  
+  if ($widget['type'] == 'gallery_image_picker_gallerypicker') {
+    $voc = taxonomy_vocabulary_machine_name_load('gallery_type');
+    $types = taxonomy_get_tree($voc->vid);
+    foreach($types as $type){
+      $options[$type->tid] = $type->name;
+    }
+  
+    $form['gallery_type'] = array(
+      '#type' => 'select', 
+      '#options' => $options, 
+      '#default_value' => (isset($settings['gallery_type']) ? $settings['gallery_type'] : ''), 
+      '#title' => t('Gallery type'), 
+      '#required' => TRUE,
+    );
+
+  }
+  return $form;
+}
+
+function gallery_image_picker_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  drupal_add_js(drupal_get_path('module','gallery_image_picker').'/misc/gallerypicker.js');  
+  drupal_add_css(drupal_get_path('module','gallery_image_picker').'/misc/styles.css');  
+  $tid = $instance['widget']['settings']['gallery_type'];
+  
+  $galleries[0] = t('Select Gallery');
+  $galleries += db_query('
+    SELECT node.nid AS nid, node.title as title
+      FROM 
+      {node} node
+      WHERE (( (node.status = 1) AND (node.nid IN  (SELECT tn.nid AS nid
+      FROM 
+      {taxonomy_index} tn
+      WHERE ( (tn.tid = :tid) ))) ))
+  ',array(':tid'=>$tid))->fetchAllKeyed();
+  
+  $element+=array(
+    '#type' => 'select',
+    '#attributes' => array('rel'=>'image_gallerypicker','id'=>'gallerypicker_gallery_select_'.$instance['field_id']),
+    '#options' => $galleries,
+   // '#default_value' => $galleries,
+    '#suffix' =>  '<div id="image_gallerypicker_images_wrapper_'.$instance['field_id'].'" class="image-gallerypicker-images-wrapper">'.t('No image selected').'</div><div class="cf"></div>'
+  );
+  
+  $form['fid_hidden']=array(
+    '#type'=>'hidden',
+    '#attributes'=>array('id'=>'image_gallery_picker_selected_value')
+  );
+  if(!empty($items) && !empty($items[0])){
+    $image_gallery_nid = db_query('
+      SELECT node.nid AS nid
+      FROM 
+      {node} node
+      LEFT JOIN {field_data_field_gallery_images} field_data_field_gallery_images ON node.nid = field_data_field_gallery_images.entity_id AND (field_data_field_gallery_images.entity_type = \'node\' AND field_data_field_gallery_images.deleted = 0)
+      WHERE (( (node.status = 1) AND (field_data_field_gallery_images.field_gallery_images_fid = :fid ) ))
+      LIMIT 1 OFFSET 0
+  ',array(':fid'=>$items[0]['fid']))->fetchField();
+                                      
+    $element['#default_value'] = $image_gallery_nid;
+  
+    $form['fid_hidden']['#default_value'] = $items[0]['fid'];  
+  }
+  
+  
+  array_unshift($form['#submit'],'gallery_image_picker_form_submit');
+  return $element;
+}
+
+
+
+function _get_gallery_images($gallery_nid){
+
+  $html = views_embed_view('gallery_image_picker','gallery_images',$gallery_nid);
+ // return $html;
+  return drupal_json_output(array('html'=>$html));
+
+
+}
+?>
