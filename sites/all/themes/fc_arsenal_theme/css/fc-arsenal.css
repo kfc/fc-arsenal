@@ -116,69 +116,6 @@ TABLE TH{
 
 
 
-/* ====================================== BOF: MAIN MENU ====================================== */
-#main_menu{
-  background: #FFFFFF;
-  height: 20px;
-  padding: 0px;
-}
-#main_menu .main-menu{
-  text-align: center;
-  padding: 0px 0px 0px 5px;
-}
-#main_menu .main-menu UL{
-  margin: 0px;
-  padding: 0px;
-}
-#main_menu .main-menu UL LI{
-  display: block;
-  background: #FFFFFF url(../img/main-menu-bg.gif) repeat-x 0 center;
-  text-align: center;
-  float: left;
-  margin: 0px 1px 0px 0px;
-  padding: 1px 0px 1px 0px;
-  width: 96px;
-  border: 1px solid #B7C1CA;
-}
-#main_menu .main-menu UL LI LI{
-  background: #EEEEEE;
-}
-#main_menu .main-menu UL LI A{
-  color: #B9141A;
-  font-weight: bold;
-  text-decoration: none;
-  /*padding: 0px;*/
-}
-#main_menu .main-menu UL LI A.menu-item-none{
-  cursor: default;
-}
-#main_menu .main-menu UL LI LI A{
-  color: #636363;
-  font-weight: normal;
-  text-decoration: none;
-  font-size: 11px;
-  /*padding: 0px;*/
-}
-#main_menu .main-menu UL LI LI A:hover{
-  color: #B9141A;
-}
-#main_menu .main-menu UL LI A:hover{
-  text-decoration: underline;
-}
-/* +++ BOF: NICE MENU LAYOUT +++ */
-#main_menu .nice-menu UL LI{
-  margin: 0px 1px 0px 0px;
-  padding: 1px 0px 1px 0px;
-}
-#main_menu .main-menu UL LI.menuparent UL LI{
-  width: 160px;
-  text-align: left;
-}
-.links .statistics_counter{
-  display: none;
-}
-/* +++ EOF: NICE MENU LAYOUT +++ */
-/* ====================================== EOF: MAIN MENU ====================================== */
 
 
 
@@ -877,31 +814,7 @@ TABLE TH{
   padding: 0px;
   border: 0px;
 }
-.front-page #content #front-page-top-news{
-  background: #B70100;
-}
-.front-page #content #front-page-top-news .news-image{
-  text-align: center;
-  /*border-bottom: 1px solid #CFCFCF;*/
-}
-.front-page #content #front-page-top-news .news-image IMG{
-  width: 500px;
-}
-.front-page #content #front-page-top-news .news-content{
-  background: #B70100 url(../img/top-news-bg.png) no-repeat center bottom;
-  padding: 10px 10px 10px 10px;
-  color: #FFFFFF;
-}
-.front-page #content #front-page-top-news .news-content H2{
-  padding: 5px 5px 5px 5px;
-}
-.front-page #content #front-page-top-news .news-content H2 A{
-  color: #FFFFFF;
-}
-.front-page #content #front-page-top-news .news-content .news-footer{
-  text-align: right;
-  font-size: 10px;
-}
+
 #block-dhtml_menu-212{
   
 }
@@ -1557,8 +1470,8 @@ TABLE TH{
 }
 
 .next-prev-wrapper{
-  display: inline;
-  width: 25px;
+ /* display: inline;
+  width: 25px;*/
 }
 
 .view-display-id-first_squad .view-content, .view-display-id-trainers .view-content{

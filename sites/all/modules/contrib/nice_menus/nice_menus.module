@@ -448,7 +448,7 @@ function theme_nice_menus_build($variables) {
       }
       // If it has children build a nice little tree under it.
       if ((!empty($menu_item['link']['has_children'])) && (!empty($menu_item['below'])) && $depth != 0) {
-        // Keep passing children into the function 'til we get them all.
+        // Keep passing children into the function 'til we get them all. 
         $children = theme('nice_menus_build', array('menu' => $menu_item['below'], 'depth' => $depth, 'trail' => $trail));
         // Set the class to parent only of children are displayed.
         $parent_class = ($children && ($menu_item['link']['depth'] <= $depth || $depth == -1)) ? 'menuparent ' : '';

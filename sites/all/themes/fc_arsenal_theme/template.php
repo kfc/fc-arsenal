@@ -10,149 +10,30 @@ function fc_arsenal_theme_regions() {
   return $regions;
 }
 
-
-function phptemplate_views_view_news_by_type($view, $type, $nodes){
-	
-	if(is_numeric($view->args[0])){
-		$news_type_node = node_load($view->args[0]);
-		$title = $news_type_node->title;
-	} else {
-		$title = 'новости';
-	}
-	
-	$content = theme_views_view($view, $type, $nodes);
-	
-	return theme('fc_content_view', $title, $content);
-}
-
-function phptemplate_views_view_articles($view, $type, $nodes){
-	$content = theme_views_view($view, $type, $nodes);
-	return theme('fc_content_view', 'Статьи', $content);
-}
-
-function phptemplate_views_view_match_prev($view, $type, $nodes){
-	if($type == 'block'){
-		$nid = $nodes[0]->nid;
-		if($nid){
-			$node = node_load($nid); //getting match
-			return theme('match_block', $node);
-		}
-	}
-	
-	return theme_views_view($view, $type, $nodes);
-}
-
-function phptemplate_views_view_match_next($view, $type, $nodes){
-	if($type == 'block'){
-		$nid = $nodes[0]->nid;
-		if($nid){
-			$node = node_load($nid); //getting match
-			return theme('match_block', $node, true);
-		}
-	}
-	
-	return theme_views_view($view, $type, $nodes);
-}
-
-function phptemplate_views_view_gallery_view($view, $type, $nodes){
-	$output = '';
-  
-  $tid = (int)$view->args[0];
-  $subterms = _get_gallery_children_terms($tid);
-  //ed($terms);
-  
-	$output .= $subterms.
-  '<div class="gallery-view-area">';
-	foreach($nodes as $node){
-		$node_image = node_load($node->nid);
-		$output .= '<div class="gallery-image">'.
-		'<div class="image">'.theme('display_image_thickbox', $node_image, IMAGE_THUMBNAIL).'</div>'.
-		'</div>';
-	}
-	if(!count($nodes)){
-		//$output .= 'Тут картинок нет';
-	};
-	$output .= '<div class="cf">&nbsp;</div>';
-	$output .= '</div>';
-	return $output;
-}
-
-function phptemplate_views_view_blog_post_list($view, $type, $nodes){
-	$output = '';
-	
-	$list = array();
-	//dd($nodes);
-	foreach($nodes as $node){
-		$node_blog_post = node_load($node->nid);
-		//dd($node_blog_post);
-		$list[] = l($node_blog_post->title, 'node/'.$node_blog_post->nid).',&nbsp;&nbsp;'.
-		date('d/m/Y H:i',$node_blog_post->created).',&nbsp;&nbsp;'.
-		'читали ('.get_node_reads($node_blog_post->nid).'),&nbsp;&nbsp;'.
-		'комментариев ('.$node_blog_post->comment_count.')';
-	}
-	
-	if(!count($list)) {
-		return 'Тут нет пока статей';
-	} else {
-		$output .= '
-		<ul>
-			<li>'.implode('</li><li>', $list).'</li>
-		</ul>';
-	}
-	
-	return $output;
-}
-
-function phptemplate_views_view_user_blog($view, $type, $nodes){
-	$output = '';
-	$output .= '<div class="view-user-blog">';
-	$output .= '<h2>Статьи блога:</h2>';
-	$list = array();
-	foreach($nodes as $node){
-		$node_blog_post = node_load($node->nid);
-		$list[] = l($node_blog_post->title, 'node/'.$node_blog_post->nid).',&nbsp;&nbsp;'.
-		date('d/m/Y H:i',$node_blog_post->created).',&nbsp;&nbsp;'.
-		'читали ('.get_node_reads($node_blog_post->nid).'),&nbsp;&nbsp;'.
-		'комментариев ('.$node_blog_post->comment_count.')';
-	}
-	
-	if(!count($list)) {
-		return 'Тут нет пока статей';
-	} else {
-		$output .= '
-		<ul>
-			<li>'.implode('</li><li>', $list).'</li>
-		</ul>';
-	}
-	
-	$output .= '</div>';
-	return $output;
-}
-
-function phptemplate_views_view_players_season($view, $type, $nodes){
-	//dd($view);
-	$term = taxonomy_get_term($view->args[0]);
-	//dd($term);
-	//dd($nodes);
-	/*foreach($nodes as $key => $node){
-		$nodes[$key]->node_data_field_gallery_id_0_field_gallery_id_0_value = l('Фотогалерея','gallery/'.$nodes[$key]->node_data_field_gallery_id_0_field_gallery_id_0_value);
-	}*/
-	$content = theme_views_view($view, $type, $nodes);
-	return theme('fc_content_view', 'состав команды образца сезона '.$term->name, $content);
-}
-/*
-function phptemplate_views_view_matches_list($view, $type, $nodes){
-	$content = theme_views_view($view, $type, $nodes);
-	return theme('fc_content_view', 'матчи', $content);
-}*/
-
-function phptemplate_menu_item_link($item, $link_item) {
-  if ($item['path'] == '<none>') {
-    $attributes['title'] = $link['description'];
-    return '<a class="menu-item-none">'. $item['title'] .'</a>';
+function fc_arsenal_theme_nice_menus($variables){
+  $id = $variables['id'];
+  $menu_name = $variables['menu_name'];
+  $mlid = $variables['mlid'];
+  $direction = $variables['direction'];
+  $depth = $variables['depth'];
+  $menu = $variables['menu'];
+  $output = array();
+  if ($menu_tree = theme('nice_menus_tree', array('menu_name' => $menu_name, 'mlid' => $mlid, 'depth' => $depth, 'menu' => $menu))) {
+    if ($menu_tree['content']) {
+      $output['content'] = '<ul class="nice-menu nice-menu-' . $direction . '" id="nice-menu-' . $id . '">
+        <li class="Home"><a href="/">&nbsp;</a></li>
+        ' . $menu_tree['content'] . '
+        <li>
+          '.theme('custom_social_share_vk_link',$variables).'
+          '.theme('custom_social_share_twitter_link',$variables).'
+        </li>
+          <li class="Mail"><a href="mailto:admin@fc-arsenal.com">&nbsp;</a></li>
+        </ul>' . "\n";
+      $output['subject'] = $menu_tree['subject'];
+    }
   }
-  else {
-    return l($item['title'], $link_item['path'], !empty($item['description']) ? array('title' => $item['description']) : array(), isset($item['query']) ? $item['query'] : NULL);
-  }
+  return $output;
 }
+
+
 

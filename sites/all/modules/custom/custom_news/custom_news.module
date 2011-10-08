@@ -103,24 +103,24 @@ function theme_custom_news_apl_news_rss($vars){
   $rss_items_num = $vars['items_num'];
   $output = '
       <div class="view view-qrss-view">
-        <div class="view-content view-content-qrss-view">
-          <div class="item-list">
-            <ul>
-              <li>
-                <div class="view-item view-item-qrss-view">
-                  <div class="view-field view-data-node-data-field-qrssreader-parsed-field-qrssreader-parsed-value">
-                  <div class="item-list">
-                    <ul>
+                <div class="view-content view-content-qrss-view">
+                    <div class="item-list">
+                        <ul>
+                            <li>
+                                <div class="view-item view-item-qrss-view">
+                                    <div class="view-field view-data-node-data-field-qrssreader-parsed-field-qrssreader-parsed-value">
+                                        <div class="item-list">
+                                            <ul>
                       [ITEMS]
                     </ul>
                   </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>';
+            </div>';
   
   
   $items_output = '';
@@ -134,7 +134,9 @@ function theme_custom_news_apl_news_rss($vars){
 function theme_custom_news_important_news($vars){
   $node = $vars['node'];
   if($node != null){
-    $output = '<div class="important-news-wrapper"><h2>'.l($node->title,'node/'.$node->nid).'</h2></div>';
+    $output = '<div class="TopTitle">
+                <div class="InsideTitle">'.l($node->title,'node/'.$node->nid).'</div>
+            </div>';
     return $output;
   }
 }

@@ -161,18 +161,10 @@ function _get_prev_match($current_id){
 }
 
 function custom_match_preprocess_block(&$vars){
-  /*$block = $vars['block'];       
-  if($block->delta == 'matches-next_match' && $block->module == 'views')
-  {                    
-    $next_match_id =  db_query("
-      SELECT sd.entity_id     
-      FROM {field_data_field_match_start_date} sd
-      WHERE sd.field_match_start_date_value > :start_date 
-      ORDER BY sd.field_match_start_date_value
-      LIMIT 1 
-    ",array(':start_date'=>date('Y-n-d h:i')))->fetchField();   
-      $vars['content'] = views_embed_view('matches','next_match',$next_match_id);    
-  } */
+  $block = $vars['block'];       
+  if($block->delta == 'matches-next_match' && $block->module == 'views'){   
+    $block->subject = '<span class="next-prev-wrapper"><a href="#" id="prev-match-link" class="Prev">&nbsp;</a>&nbsp;</span>'.$block->subject.'<span class="next-prev-wrapper"><a href="#" id="next-match-link" class="Next">&nbsp;</a></span>';    
+  } 
 }
 
 function theme_custom_match_arsenal_logo_match_block(){
@@ -212,7 +204,7 @@ function custom_match_preprocess_views_view_fields(&$variables){
     
     $variables['additional_link'] = '';
     if(strtotime($view->result[0]->field_data_field_match_start_date_field_match_start_date_val) > time())
-      $variables['additional_link'] = l(t('online'),'http://www.liveresult.ru/football/txt/team/arsenal',array('attributes'=>array('target'=>'_blank'),'absolute'=>TRUE));
+      $variables['additional_link'] = l(t('Online'),'http://www.liveresult.ru/football/txt/team/arsenal',array('attributes'=>array('target'=>'_blank','class'=>'Online'),'absolute'=>TRUE));
   }  
 }
 
@@ -521,11 +513,11 @@ function theme_custom_match_match_team_block($vars){
   return $output;
 }
 
-function custom_match_block_view_alter(&$data, $block){
+/*function custom_match_block_view_alter(&$data, $block){
   if($block->module == 'views' && $block->delta == 'matches-next_match')
   {
-    $img_path = drupal_get_path('theme',variable_get('theme_default','fc_arsenal_theme'));
-    $data['subject'] = '<span class="next-prev-wrapper"><a href="#" id="prev-match-link"> <<</a>&nbsp;</span>'.$data['subject'].'<span class="next-prev-wrapper"><a href="#" id="next-match-link"> >> </a>&nbsp;</span>';
+    //$img_path = drupal_get_path('theme',variable_get('theme_default','fc_arsenal_theme'));
+    //$data['subject'] = '<span class="next-prev-wrapper"><a href="#" id="prev-match-link" class="Prev">&nbsp;</a>&nbsp;</span>'.$data['subject'].'<span class="next-prev-wrapper"><a href="#" id="next-match-link" class="Next">&nbsp;</a></span>';
   }
-}
+} */
 ?>

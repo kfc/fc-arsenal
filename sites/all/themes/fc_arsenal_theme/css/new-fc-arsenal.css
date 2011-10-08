@@ -1,0 +1,1143 @@
+/* ::::: http://www.fc-arsenal.com/modules/node/node.css ::::: */
+
+     
+
+.block-nice_menus {
+    line-height: normal;
+    z-index: 10;
+}
+
+ul.nice-menu, ul.nice-menu ul {
+    z-index: 5;
+    position: relative;
+}
+
+ul.nice-menu li {
+    position: relative;
+}
+
+ul.nice-menu a {
+    display: block;
+}
+
+ul.nice-menu ul, #header-region ul.nice-menu ul {
+    position: absolute;
+    display: none;
+}
+
+ul.nice-menu ul li {
+    display: block;
+}
+
+ul.nice-menu:after {
+    content: ".";
+    display: block;
+    height: 0pt;
+    clear: both;
+    visibility: hidden;
+}
+
+ul.nice-menu li:hover ul, ul.nice-menu li.menuparent li:hover ul, ul.nice-menu li.menuparent li.menuparent li:hover ul, ul.nice-menu li.menuparent li.menuparent li.menuparent li:hover ul, ul.nice-menu li.over ul, ul.nice-menu li.menuparent li.over ul, ul.nice-menu li.menuparent li.menuparent li.over ul, ul.nice-menu li.menuparent li.menuparent li.menuparent li.over ul, #header-region ul.nice-menu li:hover ul, #header-region ul.nice-menu li.menuparent li:hover ul, #header-region ul.nice-menu li.menuparent li.menuparent li:hover ul, #header-region ul.nice-menu li.over ul, #header-region ul.nice-menu li.menuparent li.over ul, #header-region ul.nice-menu li.menuparent li.menuparent li.over ul {
+    display: block;
+}
+
+ul.nice-menu li.menuparent ul, #header-region ul.nice-menu li.menuparent ul {
+    overflow: visible ! important;
+}
+
+/* ::::: http://www.fc-arsenal.com/sites/all/modules/nice_menus/nice_menus_default.css ::::: */
+
+ul.nice-menu, ul.nice-menu ul {
+    list-style: none outside none;
+    padding: 0pt;
+    margin: 0pt;
+    border-top: 1px solid #cccccc;
+}
+
+ul.nice-menu li {
+    border-right: 1px solid #cccccc;
+    border-width: 0pt 1px 1px;
+    border-style: none solid solid;
+    border-color: #cccccc #cccccc;
+    float: left;
+    background-color: #eeeeee;
+    margin: 0pt;
+    padding-left: 0pt;
+    background-image: none;
+}
+
+ul.nice-menu a {
+    padding: 0.3em 5px;
+}
+
+ul.nice-menu ul, #header-region ul.nice-menu ul {
+    top: 27px;
+    left: 3px;
+    border: 0;
+    margin-right: 0pt;
+}
+
+ul.nice-menu ul li {
+    width: 12.5em;
+}
+
+ul.nice-menu-down {
+    float: left;
+    border: 0pt none;
+    width: 996px;
+    background: url("../img/menuBg.gif") repeat-x 0 0;
+}
+
+ul.nice-menu-down li {
+    border-top: 1px solid #cccccc;
+}
+
+ul.nice-menu-down li li {
+    border-top: 0pt none;
+}
+
+ul.nice-menu-down ul {
+    left: 2px;
+}
+
+ul.nice-menu-down ul li {
+    clear: both;
+}
+
+ul.nice-menu-down .menuparent a {
+    padding-right: 15px;
+    cursor: pointer;
+}
+
+ul.nice-menu-down li.menuparent, #header-region ul.nice-menu-down li.menuparent {
+    background: url('../img/arrow-down.png') no-repeat scroll right center #eeeeee;
+}
+
+ul.nice-menu-down li.menuparent:hover, ul.nice-menu-down li.over, #header-region ul.nice-menu-down li.menuparent:hover, #header-region ul.nice-menu-down li.over {
+    background: url('../img/arrow-down.png') no-repeat scroll right center #cccccc;
+}
+
+/* ::::: http://www.fc-arsenal.com/sites/all/modules/thickbox/thickbox.css ::::: */
+
+/* ::::: http://www.fc-arsenal.com/sites/all/modules/cck/fieldgroup.css ::::: */
+
+/* ::::: http://www.fc-arsenal.com/sites/all/modules/custom/user_profile_fields/user_profile_fields.css ::::: */
+
+/* ::::: http://www.fc-arsenal.com/sites/all/themes/fc_arsenal_theme/fc-arsenal.css ::::: */
+
+BODY {
+    background: url('../img/bg.gif') repeat scroll 0% 0% transparent;
+    font-family: Verdana;
+    font-size: 12px;
+    padding: 3px 0px 0px;
+    margin: 0px;
+    color: #636363;
+}
+
+IMG {
+    border: 0px none;
+}
+
+A {
+    color: #b9141a;
+    text-decoration: none;
+}
+
+A:hover {
+    color: #b9141a;
+    text-decoration: underline;
+}
+
+H2 {
+    color: #b9141a;
+    margin: 10px 0px;
+    padding: 0px;
+    font-size: 14px;
+}
+
+H3 {
+    color: #b9141a;
+    margin: 10px 0px;
+    padding: 0px;
+    font-size: 12px;
+}
+
+TABLE {
+    width: 100%;
+}
+
+TABLE TH {
+    font-family: Tahoma;
+}
+
+#container {
+    width: 1008px;
+    margin: 0px auto;
+}
+
+#top-cap {
+    background: url('../img/header-bg.png') no-repeat scroll 0 0;
+    position: relative;
+    height: 155px;
+    text-align: right;
+}
+
+#top-cap .logo {
+    position: absolute;
+    left: 10px;
+}
+
+#top-cap .logo IMG {
+    width: 130px;
+    height: 150px;
+}
+
+#top-cap .block {
+    padding: 10px 20px 0px 0px;
+    color: #f8d150;
+}
+
+#top-cap .block A {
+    color: #f8d150;
+}
+
+#top-cap .block-custom {
+    font-size: 11px;
+}
+
+#top-cap .block-custom TD.input {
+    padding: 0px 10px 0px 0px;
+}
+
+#top-cap .block-custom INPUT {
+    font-size: 11px;
+}
+
+#top-cap .block-custom INPUT.form-text {
+    border: 1px solid #f8d150;
+    background: none repeat scroll 0% 0% transparent;
+    color: #f8d150;
+    width: 70px;
+}
+
+#top-cap .block-custom INPUT.form-submit {
+    background: none repeat scroll 0% 0% #f8d150;
+    color: #000000;
+    border: 0px none;
+}
+
+#top-cap .block-custom LABEL {
+    display: none;
+}
+
+#top-cap .block-custom TABLE {
+    width: auto;
+}
+
+#top-cap .block-custom TABLE, #top-cap .block-custom TBODY, #top-cap .block-custom TABLE TH, #top-cap .block-custom TABLE TR, #top-cap .block-custom TABLE TD {
+    border: 0px none;
+}
+
+#top-cap .block-custom TABLE.login-block {
+    float: right;
+}
+
+#top-cap .block-custom TABLE.login-block .form-item {
+    margin: 4px 0px;
+}
+
+#top-cap .block-custom TABLE.login-block TD.register, #top-cap .block-custom TABLE.login-block TD.request {
+    text-align: right;
+}
+
+#main_menu {
+    background: url("../img/menuBgTop.gif") no-repeat 2px 0;
+    height: 28px;
+    padding: 2px 2px;
+}
+
+#main_menu .main-menu {
+    text-align: center;
+    padding: 0;
+}
+
+#main_menu .main-menu UL {
+    margin: 0px;
+    padding: 0px;
+}
+
+#main_menu .main-menu UL LI {
+    display: block;
+    background: url("../img/menuSep.gif") no-repeat 0 0;
+    text-align: center;
+    float: left;
+    clear:right;
+    margin: 0;
+    height: 27px;
+    line-height: 24px;
+    padding: 0 13px 0 14px;
+    border: 0;
+    font-size: 14px;
+    vertical-align: middle;
+    text-transform: lowercase;
+}
+#main_menu .main-menu UL LI.first {
+    background: none;
+}
+#main_menu .main-menu UL LI.Home {
+    background: url("../img/homeLink.jpg") no-repeat 0 0 transparent;
+    width: 72px;
+    height: 28px;
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+#main_menu .main-menu UL LI.Home a,
+#main_menu .main-menu UL LI.Home a:hover {
+    display: block;
+    text-decoration: none;
+    width: 42px;
+}
+#main_menu .main-menu UL LI LI {
+    background: none repeat scroll 0% 0% #eeeeee;
+    border: 1px solid #B7C1CA;
+    padding: 0 10px;
+}
+
+#main_menu .main-menu UL LI A {
+    color: #a71a07;
+    font-weight: normal;
+    text-decoration: none;
+    padding: 0;
+    display: inline;
+}
+#main_menu .main-menu UL LI A img
+{
+    vertical-align: middle;
+}
+#main_menu .main-menu UL LI.Mail {
+    background: url("../img/mailLink.jpg") no-repeat right 0 transparent;
+    width: 70px;
+    height: 28px;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    float: right;
+}
+#main_menu .main-menu UL LI.Mail a,
+#main_menu .main-menu UL LI.Mail a:hover {
+    display: block;
+    text-decoration: none;
+    width: 42px;
+    float: right;
+}
+#main_menu .main-menu UL LI A.menu-item-none {
+    cursor: pointer;
+}
+
+#main_menu .main-menu UL LI LI A {
+    color: #636363;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 11px;
+}
+
+#main_menu .main-menu UL LI LI A:hover {
+    color: #b9141a;
+}
+
+#main_menu .main-menu UL LI A:hover {
+    text-decoration: underline;
+}
+
+#main_menu .nice-menu UL LI {
+    margin: 0px 1px 0px 0px;
+    padding: 1px 0px;
+}
+
+#main_menu .main-menu UL LI.menuparent UL LI {
+    width: 160px;
+    text-align: left;
+}  
+
+#main_menu .main-menu UL LI.menuparent UL LI.first {
+    background: none repeat scroll 0 0 #EEEEEE ;
+}  
+
+.links .statistics_counter {
+    display: none;
+}
+
+#main-part {
+    background: none repeat scroll 0% 0% #ffffff;
+}
+
+#content {
+    padding: 10px 20px 20px;
+    min-height: 300px;
+}
+
+.block-teasers {
+}
+
+.block-teasers .notice-block-teaser {
+    padding: 0px 0px 5px;
+    font-size: 10px;
+    margin: 0px 0px 5px;
+    border-bottom: 1px solid #a0a0a0;
+}
+
+.block-teasers .notice-block-teaser H3 {
+    margin: 0px;
+}
+
+.block-teasers .notice-block-teaser H3 A {
+    color: #40ac1e;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.block-teasers .footer {
+    font-size: 10px;
+}
+
+.block .footer {
+    font-size: 10px;
+}
+
+.blog-block-teaser {
+    padding: 1px 0px 10px;
+    margin: 0px 0px 10px;
+    border-bottom: 1px solid #efefef;
+}
+
+.blog-block-teaser .blog-name {
+    color: #a0a0a0;
+    margin-bottom: 3px;
+}
+
+.blog-block-teaser .blog-name .name {
+    color: #b9141a;
+    font-weight: bold;
+}
+
+.blog-block-teaser H3 {
+    margin: 0px;
+}
+
+.blog-block-teaser H3 A {
+    color: #40ac1e;
+    font-size: 11px;
+}
+
+.blog-block-teaser .info {
+    text-align: right;
+    font-size: 10px;
+}
+
+.front-page {
+    padding: 10px 0px 0px;
+}
+
+.front-page #left-menu, .front-page #content, .front-page #right-menu {
+    float: left;
+}
+
+.front-page #content {
+    width: 500px ! important;
+    margin: 0px 10px;
+    padding: 0px;
+}
+
+.front-page #content #block-custom_pages-0 {
+    background: none repeat scroll 0% 0% transparent;
+    margin-bottom: 10px;
+    padding: 0px ! important;
+}
+
+.front-page #content #block-custom_pages-0 .content {
+    padding: 0px;
+    border: 0px none;
+}
+
+.front-page #content #front-page-top-news {
+    background: #f7f5f5;
+    border: 1px solid #cfcfcf;
+}
+
+.front-page #content #front-page-top-news .news-image {
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 1px solid #cfcfcf;
+}
+
+.front-page #content #front-page-top-news .news-image IMG {
+    width: 500px;
+}
+
+.front-page #content #front-page-top-news .news-content {
+    padding: 5px 10px;
+    color: #636363;
+}
+
+.front-page #content #front-page-top-news .news-content H2 {
+   color: #e9131b;
+    margin: 0 0 10px 0;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.front-page #content #front-page-top-news .news-content H2 A {
+    color: #e9131b;
+}
+
+.front-page #content #front-page-top-news .news-content .news-footer {
+    text-align: right;
+    font-size: 10px;
+    color: #e9131b;
+}
+
+#block-custom_pages-2 TABLE TH, #block-custom_pages-2 TABLE TD {
+    font-size: 10px;
+}
+
+#block-views-qrss_view_inoprosport_ru .content {
+    margin-top: -10px;
+    border-right: 1px solid #cccccc;
+    border-width: 0px 1px 1px;
+    border-style: none solid solid;
+    border-color: #cccccc #cccccc;
+    padding: 10px 0px;
+    background: #f7f5f5;
+}
+
+#block-views-qrss_view_inoprosport_ru .item-list LI {
+    list-style: none outside none;
+    margin: 0px;
+}
+
+#block-views-qrss_view_inoprosport_ru .item-list LI UL LI {
+    margin: 0pt 0pt 0.25em 1.5em;
+    padding: 0pt;
+    list-style: disc outside none;
+}
+
+#latest-news-block {
+    background: url('../img/block-header3.gif') no-repeat scroll 0% 0% transparent;
+    margin-top: 15px;
+}
+
+#latest-news-block H2 {
+    background: url('../img/block-header3.gif') no-repeat scroll right -26px transparent;
+    margin: 0px;
+    padding: 5px 0px 0px 10px;
+    color: #fff;
+    font-family: Verdana;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+#latest-news-block .news-block-content {
+    border-right: 1px solid #cccccc;
+    border-width: 0px 1px 1px;
+    border-style: none solid solid;
+    border-color:  #cccccc #cccccc;
+    margin-top: 5px;
+    padding: 10px;
+    background: #f7f5f5;
+}
+
+#latest-news-block .news-block-content .teaser-content {
+    font-size: 10px;
+}
+
+.front-page #left-menu {
+    width: 200px;
+    margin: 0px 0px 0px 10px;
+}
+
+#block-views-match_prev {
+}
+
+#block-views-match_prev .content, #block-views-match_next .content {
+    background: url('../img/block-bg1.png') repeat-x scroll 0px bottom #ffffff;
+    padding: 10px 0px 0px;
+}
+
+#block-views-match_next .online-link {
+    padding: 3px 0px;
+    text-align: center;
+}
+
+#block-views-match_next .online-link A {
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.match-block .players .team-block, .match-block .players .vs {
+    float: left;
+}
+
+.match-block .players .team-block {
+    width: 80px;
+    padding: 0px 2px 5px;
+}
+
+.match-block .players .vs {
+    padding: 20px 0px 0px;
+}
+
+.match-block .emblems-line {
+    text-align: center;
+}
+
+.match-block .team-names-line {
+    text-align: center;
+    font-weight: bold;
+    color: #b9141a;
+}
+
+.match-block .score {
+    text-align: center;
+    font-weight: bold;
+    color: #b9141a;
+}
+
+.match-block .tournament-type {
+    text-align: center;
+    margin: 3px 5px;
+    padding: 2px 0px;
+    border-width: 1px 0px;
+    font-size: 10px;
+    color: #000;
+    border-style: solid none;
+    border-color: #cccccc;
+}
+.match-block .players
+{
+    text-align: center;
+    font-weight: bold;
+    color: #b9141a;
+}
+.match-block .date {
+    text-align: center;
+    font-size: 10px;
+    color: #000;
+    padding: 2px 0px;
+}
+
+.match-block .footer {
+    text-align: center;
+    border-top: 1px solid #cccccc;
+    margin: 3px 0px 0px;
+    padding: 1px 0px 3px;
+}
+
+.match-block .footer A {
+    color: #40ac1e;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.front-page #right-menu {
+    width: 250px;
+    margin: 0px 5px 0px 0px;
+}
+
+.front-page .side-menu .block {
+    padding: 0px;
+    background: url('../img/block-header3.gif') no-repeat scroll 0% 0% transparent;
+    margin-bottom: 10px;
+}
+
+.front-page .side-menu .block H2 {
+    font-family: Verdana;
+    margin: 0;
+    background: url('../img/block-header3.gif') no-repeat scroll right -26px transparent;
+    color: #ffffff;
+    text-align: center;
+    padding: 5px 0 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+    position: relative;
+}
+.front-page .side-menu .block H2.WithLink {
+    padding: 5px 20px 5px;
+}
+.front-page .side-menu .block H2 a.Next,
+.front-page .side-menu .block H2 a.Next:hover
+{
+    color: #fff;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    overflow: hidden;
+    background: url("../img/arrowNext.gif") no-repeat 0 0;
+    top: 7px;
+    right: 10px;
+    text-decoration: none;
+}
+.front-page .side-menu .block H2 a.Prev,
+.front-page .side-menu .block H2 a.Prev:hover
+{
+    color: #fff;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    overflow: hidden;
+    background: url("../img/arrowPrev.gif") no-repeat 0 0;
+    top: 7px;
+    left: 10px;
+    text-decoration: none;
+}
+.front-page .side-menu .block .content {
+    border-right: 1px solid #cccccc;
+    border-width: 0 1px 1px;
+    border-style: none solid solid;
+    border-color:#cccccc #cccccc;
+    margin-top: 0;
+    padding: 0 8px 8px;
+    background: #f7f5f5;
+}
+ .front-page .side-menu .block .content .view-qrss-view
+ {
+     /*background: #fff;*/
+     padding: 5px;
+ }
+.front-page .side-menu .view-content H2 {
+    background: none repeat scroll 0% 0% transparent;
+}
+
+.front-page .side-menu .view-content .submitted {
+    display: none;
+}
+
+.front-page .side-menu .block-custom_pages .promotion-block {
+    text-align: center;
+}
+
+.front-page .side-menu .block-custom_pages .promotion-block IMG {
+    max-width: 220px;
+}
+
+#block-views-poll_view .content {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#block-views-poll_view .content .content {
+    padding: 0px;
+}
+
+#block-views-poll_view .content .content .poll .form-radios LABEL.option, #block-views-poll_view .content .content .poll .text, #block-views-poll_view .content .content .poll .percent, #block-views-poll_view .content .content .poll .total, #block-views-poll_view .content .comment_forbidden {
+    font-size: 10px;
+}
+
+#block-custom_pages-5 {
+    background: none repeat scroll 0% 0% transparent;
+}
+
+#block-custom_pages-5 H2 {
+    display: none;
+}
+
+#block-custom_pages-5 .content {
+    border: 1px solid #cccccc;
+}
+
+#block-block-1 {
+    background: none repeat scroll 0% 0% transparent;
+}
+
+#block-block-1 .content {
+    border: 0px none;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+#block-block-1 BR {
+    display: none;
+}
+
+#block-custom-2 {
+}
+
+#block-custom-2 H2 {
+    display: none;
+}
+
+#block-custom-2 .content {
+    padding: 0px;
+    border: 0px none;
+}
+
+#block-views-banner_block, #block-views-banner_block2, #block-views-banner_block2_2 {
+    background: none repeat scroll 0% 0% transparent;
+}
+
+#block-views-banner_block .content, #block-views-banner_block2 .content, #block-views-banner_block2_2 .content {
+    text-align: center;
+    border: 0px none;
+    padding: 0px;
+    margin: 0px;
+}
+
+#block-block-1 {
+}
+
+#block-block-1 .content {
+    padding: 0px;
+    background: url('../img/block-header5.gif') no-repeat scroll 0px 0px transparent;
+}
+
+#block-block-1 .content H3 {
+    background: url('../img/block-header5.gif') no-repeat scroll right -50px transparent;
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: center;
+}
+
+#block-block-1 .content .sportsru {
+    background: none repeat scroll 0% 0% transparent;
+}
+
+#block-block-1 .content .sportsru DIV {
+    border: 0px none;
+}
+
+#block-block-1 .content .sportsru #mgp-inner {
+    border-right: 1px solid #cccccc;
+    border-width: 0px 1px 1px;
+    border-style: none solid solid;
+    border-color:  #cccccc #cccccc;
+    background: #f7f5f5;
+    padding: 5px;
+}
+
+#block-custom-news-apl-news {
+}
+
+#block-custom-news-apl-news UL {
+    padding: 0px;
+}
+
+#block-custom-news-apl-news UL LI {
+    margin: 0px 0px 5px;
+    list-style: none outside none;
+    font-size: 10px;
+}
+
+
+.teaser-node-news {
+    position: relative;
+    border-bottom: 1px solid #cfcfcf;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+}
+
+.teaser-node-news .news-image, .teaser-node-news .news-body {
+    float: left;
+}
+
+.teaser-node-news .news-image {
+    margin: 0px 10px 0px 0px;
+    width: 100px;
+    text-align: center;
+}
+
+.teaser-node-news .news-body {
+    width: 360px;
+}
+
+.teaser-node-news .news-body H3 {
+    margin: 0px 0px 5px;
+    padding: 0px;
+}
+
+.teaser-node-news .news-footer {
+    text-align: right;
+    font-size: 10px;
+    color: #888888;
+    margin-top: 15px;
+}
+
+#footer {
+    background: none repeat scroll 0% 0% #ffffff;
+    padding: 10px 5px 20px;
+    min-height: 50px;
+    text-align: center;
+    font-size: 10px;
+}
+
+#footer .hr1 {
+    padding: 0px 0px 10px;
+}
+
+#footer .banner-links {
+    padding: 5px 0px;
+}
+
+#footer .rights {
+    padding: 5px 0px;
+}
+
+#footer .counter {
+    padding: 5px 0px;
+}
+
+#footer .author-info {
+    font-size: 10px;
+    margin-top: 10px;
+}
+
+#pre-footer {
+    padding: 0px 30px;
+}
+
+#pre-footer .block .content {
+    text-align: left;
+}
+
+#pre-footer .left-part {
+    float: left;
+    width: 300px;
+}
+
+#pre-footer .center-part {
+    float: left;
+    width: 350px;
+}
+
+#pre-footer .right-part {
+    float: right;
+    width: 250px;
+}
+
+#container1.border-l {
+    background: url('../img/pageBottom.jpg') no-repeat  0 bottom;
+    padding: 0px 0px 19px 0;
+}
+
+#container1 .border-r {
+    background: url('../img/pageBg.gif') repeat-y 0 0;
+    padding: 0px 4px 0px 4px;
+}
+
+#bottom-cap {
+    background: url('../img/caps.png') repeat-x scroll 0px -54px transparent;
+    height: 18px;
+    position: relative;
+}
+
+#bottom-cap .border-l {
+    width: 18px;
+    height: 18px;
+    background: url('../img/caps.png') no-repeat scroll 0px -18px transparent;
+    position: absolute;
+    left: 0px;
+}
+
+#bottom-cap .border-r {
+    width: 18px;
+    height: 18px;
+    background: url('../img/caps.png') no-repeat scroll -18px -18px transparent;
+    position: absolute;
+    right: 0px;
+}
+
+.hr1 {
+    background: url('../img/hr1.gif') repeat-x scroll 0% 0% transparent;
+    height: 7px;
+    line-height: 7px;
+    font-size: 1px;
+}
+
+.cf {
+    clear: both;
+    font-size: 1px;
+    line-height: 1px;
+    height: 1px;
+}
+
+/* ::::: http://www.sports.ru/css/informer.css ::::: */
+
+.sportsru {
+    background-color: rgb(223, 223, 223);
+}
+
+.sportsru * {
+    font-family: Tahoma, sans-serif;
+    padding: 0pt;
+    margin: 0pt;
+    font-size: 11px;
+}
+
+.sportsru a {
+    font-family: Tahoma, sans-serif;
+}
+
+.sportsru a:hover {
+    text-decoration: none;
+}
+
+.sportsru h3 {
+    font-size: 12px;
+    font-weight: bold;
+    font-style: normal;
+    padding: 5px 0pt 5px 12px;
+    color: #ffffff;
+    background-color: rgb(186, 46, 10);
+}
+
+.sportsru p {
+    margin: 7px 0pt;
+}
+
+.sportsru #mgp-inner {
+    padding: 10px;
+}
+
+.sportsru .mgp-option {
+    margin-left: 10px;
+}
+
+.sports_1232967021 {
+    border: 1px solid rgb(186, 46, 10);
+}
+.LoginLinks
+{
+    display: block;
+    list-style: none;
+}
+.LoginLinks li
+{
+    display: inline;
+    font-size: 14px;
+}
+.front-page .side-menu .block .BottomContent
+{
+    background: url("../img/blockBottomBg.gif") no-repeat 0 bottom;
+    padding-left: 5px;
+    border: none;
+}
+.front-page .side-menu .block .BottomContent .InsideBottom
+{
+    padding: 5px 5px 5px 0;
+    background: url("../img/blockBottomBg.gif") no-repeat right bottom;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    color: #039200;
+}
+.front-page .side-menu .block .BottomContent a.Online
+{
+    color: #003a92;
+}
+.front-page .side-menu .block .BottomContent a.Green
+{
+    color: #039200;
+}
+.TournamentTable
+{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-collapse: collapse;
+}
+.TournamentTable tr
+{
+    background: #f7f5f5;
+}
+.TournamentTable tr .LargeCell
+{
+    width: 128px;
+}
+.TournamentTable tr th
+{
+    padding: 1px 2px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: normal;
+    color: #444242;
+    border: 1px solid #cfcfcf;
+}
+.TournamentTable tr td
+{
+    padding: 1px 2px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: normal;
+    color: #000;
+    border: 1px solid #cfcfcf;
+}
+.TournamentTable tr td.LargeCell
+{
+    text-align: left;
+}
+ tr.Grey
+{
+    background: #e7e6e6;
+} 
+
+.TournamentTable .arsenal-row td.team_name {color: #B9141A !important; font-weight: bold;}
+
+.front-page .side-menu .block .Content01
+{
+    background:#f7f5f5;
+    border: 1px solid #cfcfcf;
+    padding: 0 1px;
+}
+.front-page .side-menu .block .Video,
+.front-page .side-menu .block .Photo
+{
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+.front-page .side-menu .block h5
+{
+    margin: 0 0 2px;
+    font-size: 12px;
+    padding: 0 4px;
+}
+.front-page .side-menu .block .Date
+{
+    margin: 0 0 3px;
+    font-size: 10px;
+    padding: 0 4px;
+    color: #676666;
+}
+.AddBlock
+{
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.TopTitle
+{
+    background: url("../img/topTitleB.gif") no-repeat 0 bottom;
+    padding-bottom: 3px;
+    margin-bottom: 15px;
+}
+.TopTitle .InsideTitle
+{
+    background: url("../img/topTitleT.gif") no-repeat 0 0;
+    padding: 5px 8px 2px;
+    font-size: 12px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.TopTitle .InsideTitle a
+{
+    color: #fff;
+}   
+
+.video-category-wrapper {
+  font-size: 11px;
+  font-style: italic;
+  color: #636363;
+}

@@ -1,4 +1,4 @@
-<div id="latest-news-block">
+<div id="latest-news-block" class="block">
 <h2><?php echo t('Latest News');?></h2>
 <div class="news-block-content">
   <?php

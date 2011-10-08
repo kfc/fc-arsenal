@@ -76,12 +76,12 @@
 					?>
 				</div>
 				<div class="site-footer">
-					<div class="footer-region"><?php //print $footer_message; ?></div>
+					<div class="footer-region"><?php print render($page['footer']); ?></div>
 					<div class="rights">
-            <?php print l(t('Новости партнеров'), 'http://www.fc-arsenal.com/lastnews'); ?>
-						<!--ARSSC - The Official Arsenal Russian Speaking Supporters Club (c) 2006.<br>
-						Использование материалов сайта без согласования с администрацией запрещено!<br>
-						По всем вопросам обращаться к <a href="mailto:admin@fc-arsenal.com">администрации</a>.-->
+            <?php print l(t('Partners news'), 'lastnews'); ?>
+            &nbsp;|&nbsp;
+            <?php print l(t('Partners articles'), 'stati-partnerov'); ?>
+            
 					</div>
           
 					<div class="counter">
@@ -136,10 +136,5 @@ if(11<js)d.write('--'+'>')//--></script><!--/COUNTER-->
 			</div>
 			<!-- ======================================== EOF: FOOTER ======================================== -->
 		</div>
-	</div>
-	
-	<div id="bottom-cap">
-		<div class="border-l">&nbsp;</div>
-		<div class="border-r">&nbsp;</div>
 	</div>
 </div>
