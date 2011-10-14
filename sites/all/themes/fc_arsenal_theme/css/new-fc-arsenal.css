@@ -285,7 +285,7 @@ TABLE TH {
     background: none;
 }
 #main_menu .main-menu UL LI.Home {
-    background: url("../img/homeLink.jpg") no-repeat 0 0 transparent;
+    background: url("../img/homeLink.gif") no-repeat 0 0 transparent;
     width: 72px;
     height: 28px;
     border: 0;
@@ -316,7 +316,7 @@ TABLE TH {
     vertical-align: middle;
 }
 #main_menu .main-menu UL LI.Mail {
-    background: url("../img/mailLink.jpg") no-repeat right 0 transparent;
+    background: url("../img/mailLink.gif") no-repeat right 0 transparent;
     width: 70px;
     height: 28px;
     border: 0;
@@ -823,9 +823,13 @@ TABLE TH {
 }
 
 #block-custom-news-apl-news UL LI {
-    margin: 0px 0px 5px;
+    margin: 0px 0px 3px;
     list-style: none outside none;
     font-size: 10px;
+}
+
+#block-custom-news-apl-news .content{
+  padding: 0px;
 }
 
 
@@ -1141,3 +1145,71 @@ TABLE TH {
   font-style: italic;
   color: #636363;
 }
+
+.image_gallery_title_link{
+  text-align: center;
+  width: 200px;
+}
+
+div.wallpaper-thumb-wrapper{
+  margin-bottom: 3px;
+}
+
+.views-field-field-wallpaper-image img {
+  vertical-align: middle;
+}
+
+.node-audio {
+ width: 295px;
+  border: 1px solid #D0D0D0;
+  height: 60px;
+  position: relative;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.audio-download{
+  margin-top:5px;
+}
+
+.audio-download img{
+  vertical-align: bottom;
+}
+
+.node-audio-title {
+  font-weight: bold;
+  margin-bottom: 3px;  
+}
+
+
+.book-item {
+  width: 260px;
+  border: 1px solid #D0D0D0;
+  height: 115px;
+  position: relative;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.book-cover {
+  width: 80px;
+  text-align: left;
+  float:left;
+}
+
+.book-info {
+  width: 160px;
+  margin-left: 10px;
+  text-align: left;
+  float:left;
+}
+
+.book-info .info{
+  height: 85px;
+  overflow:hidden;
+}
+
+.book-info .download-link img{ 
+  vertical-align: bottom;
+}
+

@@ -243,10 +243,10 @@ Lightbox = {
     });
     if (Lightbox.enableVideo) {
       $("a[rel^='lightvideo']:not(.lightbox-processed), area[rel^='lightvideo']:not(.lightbox-processed)", context).addClass('lightbox-processed').click(function(e) {
-        if (Lightbox.disableCloseClick) {
+        if (Lightbox.disableCloseClick) { 
           $('#lightbox').unbind('click');
           $('#lightbox').click(function() { Lightbox.end('forceClose'); } );
-        }
+        }  
         Lightbox.start(this, false, false, true, false);
         if (e.preventDefault) { e.preventDefault(); }
         return false;

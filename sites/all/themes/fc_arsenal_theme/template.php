@@ -36,4 +36,22 @@ function fc_arsenal_theme_nice_menus($variables){
 }
 
 
+/**@file
+ * Theme function for 'embedded' audio.
+ */
+function fc_arsenal_theme_audiofield_formatter_audiofield_embedded($variables) {
+  global $user;
+  $file = $variables['file'];
+  $node = $variables['node'];
+  if (!$file) {
+    return '';
+  }
+  $audiofile=file_create_url($file->uri);
+  $info = pathinfo($audiofile);
+  $op = $info['extension'];
+  $output = audiofield_get_player($audiofile, $op);
+  
+  $output .= '<div class="audio-download">'.l(theme('image',array('path'=>drupal_get_path('theme','fc_arsenal_theme').'/img/download-icon-small.png','width'=>'16px')).' '.t('Download file').' "'.$node->title.'"' , 'file_download/'.$file->fid,array('html'=>TRUE, 'attributes'=>array('title'=>t('Download file').' "'.$node->title.'"'))) . '</div>';
 
+  return $output;
+}

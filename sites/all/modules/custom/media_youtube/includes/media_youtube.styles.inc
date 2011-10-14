@@ -94,7 +94,7 @@ function media_youtube_styles_styles() {
               'name' => 'youtube_full',
               'effects' => array(
                 array('label' => t('Autoplay'), 'name' => 'autoplay', 'data' => array('autoplay' => 0)),
-                array('label' => t('Resize'), 'name' => 'resize', 'data' => array('width' => 640, 'height' => 480)),
+                array('label' => t('Resize'), 'name' => 'resize', 'data' => array('width' => 800, 'height' => 600)),
                 array('label' => t('Full screen'), 'name' => 'fullscreen', 'data' => array('fullscreen' => 1)),
               ),
             ),

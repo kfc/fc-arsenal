@@ -1,5 +1,35 @@
 <?php
 
+function customization_menu(){
+  $items = array();
+  
+  $items['play_video/%']=array(
+    'type'=>MENU_CALLBACK,
+    'page callback' => '_play_video',
+    'page arguments' =>array(1),
+    'access callback' => TRUE
+    
+  );
+  
+  $items['wallpaper_download/%']=array(
+    'type'=>MENU_CALLBACK,
+    'page callback' => '_file_download',
+    'page arguments' =>array(1),
+    'access callback' => TRUE
+    
+  );
+  
+  $items['file_download/%']=array(
+    'type'=>MENU_CALLBACK,
+    'page callback' => '_file_download',
+    'page arguments' =>array(1),
+    'access callback' => TRUE
+    
+  );
+  
+  return $items;
+}
+
 function customization_block_info(){
   $blocks['customization_login_block'] = array(
     'info' => t('Login links'),
@@ -105,6 +135,50 @@ function customization_preprocess_page(&$vars){
   //remove nodes from main page.
   if(drupal_is_front_page())
     unset($vars['page']['content']['system_main']);
+}
+
+function _play_video($nid){
+  $node = node_load($nid);
+  node_build_content($node, 'full', 'ru');
+  die(render($node->content));
+}
+
+function _file_download($fid = null){
+  if(empty($fid) && (int)$fid <=0) return;
+
+  $file = file_load($fid);     
+  $path_parts = explode('://',$file->uri);  
+  $uri = $file->uri;
+  if (file_exists($uri)) {
+    // Let other modules provide headers and controls access to the file.
+    // module_invoke_all() uses array_merge_recursive() which merges header
+    // values into a new array. To avoid that and allow modules to override
+    // headers instead, use array_merge() to merge the returned arrays.
+    $headers = array();
+    foreach (module_implements('file_download') as $module) {
+      $function = $module . '_file_download';
+      $result = $function($uri);
+      if ($result == -1) {
+        return drupal_access_denied();
+      }
+      if (isset($result) && is_array($result)) {
+        $headers = array_merge($headers, $result);
+      }
+    }
+    if(isset($headers['Content-Disposition'])){
+      if(strpos($headers['Content-Disposition'],'inline')!==false)
+        $headers['Content-Disposition'] = str_replace('inline','attachment',$headers['Content-Disposition']); 
+      else
+       $headers['Content-Disposition'] = 'attachment; '.$headers['Content-Disposition'];   
+    }
+    else
+       $headers['Content-Disposition'] = 'attachment; filename="'.$path_parts[1].'"';
+    
+    if (count($headers)) {
+      file_transfer($uri, $headers);
+    }
+  }
+  return;
 }
 
 
