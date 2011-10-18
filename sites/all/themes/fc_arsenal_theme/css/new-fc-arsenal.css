@@ -1213,3 +1213,83 @@ div.wallpaper-thumb-wrapper{
   vertical-align: bottom;
 }
 
+.right-part{
+  text-align: justify;
+}
+
+.right-part .post-info{
+  float: right;
+  display: block;
+}
+
+
+.right-part .post-info .date{
+  float: right;
+  display: block; 
+  clear: both;
+}
+
+
+.right-part .post-info .author{
+  float: right;
+  display: block; 
+  clear: both;
+}
+
+
+.right-part .post-info .source{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.right-part .post-info .label{
+  font-weight: bold;
+}
+
+.biography-list-column{
+  padding-bottom: 10px;
+  width: 150px;
+  vertical-align: top;
+}
+
+.biography-list-column:hover{
+  background-color: #F1F1F1;
+  outline: 1px solid #D1D1D1;
+}
+
+.view-partner-sites ul li{
+  list-style: none;
+  margin: 10px;
+}
+
+.view-partner-sites .partner-site-description{
+  margin-left: 25px;
+  float: left;
+  display: inline;  
+  vertical-align: top;
+}
+
+.view-partner-sites .partner-site-description p { 
+  margin: 0px;
+  padding: 0px;
+  
+ }
+
+.view-partner-sites .partner-split-line{
+  border: 1px dotted #A1A1A1;
+}
+
+.view-partner-sites .partner-title-wrapper{
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 7px;
+}
+
+.view-partner-sites .partner-banner-wrapper{
+  float: left;
+  display: inline;
+  width: 210px;
+}
+
+
+
