@@ -6,7 +6,7 @@
             <h2><?php print $title?></h2>
             <div class="news-body"><?php print render($content['body'])?></div>
             <div class="news-tags"><?php print render($content['custom_social_share'])?> &nbsp; 
-            <?php if($content['field_news_tags']):?>
+            <?php if(isset($content['field_news_tags'])):?>
               <img src="/<?php echo drupal_get_path('theme','fc_arsenal_theme');?>/img/icons/tag16.png">
               <?php echo render($content['field_news_tags']);?>
             <?php endif;?>

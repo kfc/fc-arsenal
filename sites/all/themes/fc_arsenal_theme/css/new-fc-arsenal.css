@@ -279,7 +279,7 @@ TABLE TH {
     border: 0;
     font-size: 14px;
     vertical-align: middle;
-    text-transform: lowercase;
+    /*text-transform: lowercase;*/
 }
 #main_menu .main-menu UL LI.first {
     background: none;

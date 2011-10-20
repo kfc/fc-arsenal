@@ -22,9 +22,17 @@ function gallery_image_picker_form_alter(&$form, $form_state, $form_id){
 } 
 
 function gallery_image_picker_form_submit($form, &$form_state){
-  unset($form_state['values']['field_news_image'][$form_state['values']['language']][0]);
-  $form_state['values']['field_news_image'][$form_state['values']['language']][0]['fid'] = (int)$form_state['values']['fid_hidden']; 
-  $form_state['values']['field_news_image'][$form_state['values']['language']][0]['display'] = 1; 
+  if(!empty($form_state['values']['nid'])){
+    unset($form_state['values']['field_news_image'][$form_state['values']['language']][0]);
+    $form_state['values']['field_news_image'][$form_state['values']['language']][0]['fid'] = (int)$form_state['values']['fid_hidden']; 
+    $form_state['values']['field_news_image'][$form_state['values']['language']][0]['display'] = 1; 
+  }
+  else{
+    unset($form_state['values']['field_news_image']['und'][0]);
+    $form_state['values']['field_news_image']['und'][0]['fid'] = (int)$form_state['values']['fid_hidden']; 
+    $form_state['values']['field_news_image']['und'][0]['display'] = 1;  
+  }
+  
 }
 
 function gallery_image_picker_field_widget_info(){      
