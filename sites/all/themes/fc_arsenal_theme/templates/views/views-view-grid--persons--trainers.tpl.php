@@ -26,7 +26,7 @@
  
 ?>
 <?php if (!empty($title)) : ?>
-  <h3><?php print $title; ?></h3>
+  <h3><?php print mb_convert_case($title, MB_CASE_TITLE, 'UTF-8'); ?></h3>
 <?php endif; ?>
 
 <table class="<?php print $class; ?>"<?php print $attributes; ?>>

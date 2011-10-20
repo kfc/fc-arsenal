@@ -11,7 +11,8 @@
   foreach($view->result as $res){
     $tids[]  = $res->field_data_field_person_role_field_person_role_tid;
   }
-  $terms = taxonomy_term_load_multiple($tids);      
+  $terms = taxonomy_term_load_multiple($tids);     
+ 
   if(is_integer($title) && in_array($title, $tids)){
     $plural = array_shift(array_shift($terms[$title]->field_role_plural_name));
     $title = $plural['safe_value'];
@@ -20,7 +21,7 @@
     $title = '';
 ?>
 <?php if (!empty($title)) : ?>
-  <h3><?php print $title; ?></h3>
+  <h3><?php print mb_convert_case($title, MB_CASE_TITLE, 'UTF-8'); ?></h3>
 <?php endif; ?>
 
 <table class="<?php print $class; ?>"<?php print $attributes; ?>>
