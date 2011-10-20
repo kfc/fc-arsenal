@@ -18,10 +18,10 @@
     $title = $plural['safe_value'];
   }
   else
-    $title = '';
+    $title = '';         
 ?>
-<?php if (!empty($title)) : ?>
-  <h3><?php print mb_convert_case($title, MB_CASE_TITLE, 'UTF-8'); ?></h3>
+<?php if (!empty($title)) : // ?>
+  <h3><?php print mb_strtoupper(substr($title,0,2), 'UTF-8').mb_strtolower(substr($title,2), 'UTF-8'); ?></h3>
 <?php endif; ?>
 
 <table class="<?php print $class; ?>"<?php print $attributes; ?>>
