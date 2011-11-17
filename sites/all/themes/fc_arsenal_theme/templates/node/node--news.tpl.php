@@ -16,7 +16,7 @@
               <?php if($content['field_news_source']):?>
                 <span class="news-source"><?php echo t('Source')?>: <span class="info-value"><?php print render($content['field_news_source'])?></span></span>,
               <?php endif;?>
-              <span class="reads"><?php echo t('Reads count')?> (<?php echo $comment_count;?>)</span><br>
+              <span class="reads"><?php echo t('Reads count')?> (<?php echo $read_count;?>)</span><br>
               <span class="comments"><?php echo t('Comments count')?> (<?php echo $comment_count;?>)</span><br>
               <span class="news-author"><?php echo t('Author')?>: <span class="info-value"><?php echo $author;?></span></span>
             </div>

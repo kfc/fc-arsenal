@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the conten types feature.
+ */
+
+include_once('conten_types.features.inc');

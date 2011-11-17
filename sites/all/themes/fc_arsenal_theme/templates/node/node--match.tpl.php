@@ -12,6 +12,14 @@
 	$tab_index = 0;
 	 //dpm($node);
    
+  
+  //post before the match
+  if(!empty($node->field_match_additional_info) && $node->field_match_additional_info[$node->language][0]['safe_value']){
+    
+    $tabs_list[$tab_index] = '<div class="text">'.t('Match information').'</div>';
+    $content_tmp = $node->field_match_additional_info[$node->language][0]['safe_value'];
+    $tabs_content[$tab_index++] = $content_tmp;
+  }
    
 	//post before the match
 	if(!empty($node->field_match_before_match) && $node->field_match_before_match[$node->language][0]['nid']){

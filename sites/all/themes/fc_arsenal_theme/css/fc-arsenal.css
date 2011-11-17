@@ -667,6 +667,9 @@ TABLE TH{
   color: #40AC1E;
   font-weight: bold;
 }
+.player-box-info p{
+  margin:0px;
+}
 .player-page .right-part H2{
   
 }

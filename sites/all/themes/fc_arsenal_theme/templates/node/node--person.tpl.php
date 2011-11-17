@@ -18,7 +18,12 @@
 			<div class="box-content">
 				<div class="photo"><?php print $image; ?></div>
 			<?php if(!empty($node->field_person_role)) { ?>
-				<div class="position"><span class="label"><?php echo t('Player position')?>:</span> <?php print $node->field_person_role[$node->language][0]['taxonomy_term']->name; ?></div>
+				<div class="position"><span class="label"><?php echo t('Player position')?>:</span> <?php print $node->field_person_role[$node->language][0]['taxonomy_term']->name; ?>
+        <?php if(!empty($node->field_person_role_description)) { ?>
+        <br />
+        <?php echo $node->field_person_role_description[$node->language][0]['safe_value']?>
+        <?php } ?>
+        </div>
 			<?php } ?>
 			
 			<?php if(!empty($node->field_person_birthday)) { ?>

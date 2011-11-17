@@ -1,0 +1,20 @@
+msgid ""
+msgstr ""
+
+msgid "Arsenal squad"
+msgstr "Состав Арсенала"
+
+msgid "Opponent squad"
+msgstr "Состав сопреника"
+
+msgid "Goal scorers"
+msgstr "Авторы голов"
+
+msgid "Yellow cards"
+msgstr "Жёлтые карточки"
+
+msgid "Red cards"
+msgstr "Красные карточки"
+
+msgid "Match video"
+msgstr "Видеообзор матча"

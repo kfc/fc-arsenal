@@ -1,0 +1,52 @@
+<?
+function customization_schema() {
+  $schema['node_mapping'] = array(
+    // example (partial) specification for table "node"
+    'description' => 'Table for mapping old nids with new', 
+    'fields' => array(
+      'old_nid' => array(
+        'description' => 'nid from old database', 
+        'type' => 'int', 
+        'unsigned' => TRUE, 
+        'not null' => TRUE,
+      ), 
+      'new_nid' => array(
+        'description' => 'New nid', 
+        'type' => 'int', 
+        'unsigned' => TRUE, 
+        'not null' => TRUE, 
+      ), 
+       'type' => array(
+        'description' => 'Type of entity', 
+        'type' => 'varchar', 
+        'length' => '128', 
+        'not null' => TRUE, 
+        'default' => '', 
+      ), 
+    ), 
+    'indexes' => array(
+      'old_nid' => array('old_nid'), 
+      'new_nid' => array('new_nid'),
+    ), 
+    'unique keys' => array(
+      'old_new' => array('old_nid', 'new_nid','type'), 
+    ), 
+    'foreign keys' => array(
+      'nid' => array(
+        'table' => 'node', 
+        'columns' => array('new_nid' => 'nid'),
+      ), 
+    ), 
+  );
+  return $schema;
+}
+
+function customization_update_7001(){
+  drupal_uninstall_schema('customization');
+  drupal_install_schema('customization');
+  
+  $modules = array('node_export');
+  module_enable($modules);
+  
+  return 'Installed mapping table';
+}

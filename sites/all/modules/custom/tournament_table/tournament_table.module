@@ -84,7 +84,6 @@ function _get_tournament_table($type='full', $season_id=null, $tournament_id=nul
   foreach($tournament_teams as $_team)
     if($_team != 0)
       $teams[] = (int)$_team;  
-  
   if($tournament_id == null || $season_id == null || count($teams) == 0)
     return '';
  
@@ -114,12 +113,21 @@ function _get_tournament_table($type='full', $season_id=null, $tournament_id=nul
       from {tournament_table_results} results 
       WHERE season=:season_id AND tournament = :tournament_id
       group by away_team
+      
+      UNION
+
+      SELECT nid,0,0,0,0,0,0
+      from node where type=\'team\' and 
+      nid NOT in (select distinct home_team from tournament_table_results WHERE season=:season_id AND tournament = :tournament_id 
+            UNION select distinct away_team from tournament_table_results WHERE season=:season_id AND tournament = :tournament_id) 
+            and nid in ('.implode(',',$teams).')
+      
       )
       t1
       inner join {node} n on t1.team_id = n.nid
       WHERE team_id IN ('.implode(',',$teams).')
       group by team_id
-      order by total_points desc, total_wins desc, goal_difference desc, total_scored desc  
+      order by total_points desc, total_wins desc, goal_difference desc, total_scored desc, team_name asc  
     ';  
   $result = db_query($query,array(':season_id' => $season_id, ':tournament_id'=> $tournament_id,':team_ids'=>implode(',',$teams)))
             ->fetchAllAssoc('team_id');
@@ -128,7 +136,6 @@ function _get_tournament_table($type='full', $season_id=null, $tournament_id=nul
   else{
     $teams_visible = 10;
     $teams_total = count($result);
-  
     $arsenal_index = array_search(variable_get('arsenal_team_id',0),array_keys($result)) + 1; 
     if($arsenal_index > $teams_visible){
       if($arsenal_index + $teams_visible/2 > $teams_total){
@@ -139,6 +146,7 @@ function _get_tournament_table($type='full', $season_id=null, $tournament_id=nul
         $start_index = $arsenal_index - $teams_visible/2;
         $end_index = $arsenal_index + $teams_visible/2;  
       }
+      
       /*$keys = array_keys($result);
       $new_result = array();
       for($i=$start_index; $i < $end_index; $i++){
