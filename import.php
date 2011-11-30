@@ -8,8 +8,8 @@ echo '<pre>';
   //$import_data = array('players','teams','files','matches','news','tags','galleries');
  
   //$import_order = array('tags','files','news_galleries','news','stadium','referee','teams','match','node_url_aliases');
-  $import_order = array('analytics','legends','bio', 'audio', 'books');
-  //$import_order = array('books');
+  //$import_order = array('analytics','legends','bio', 'audio', 'books');
+  $import_order = array('users');
   $selected = (isset($_GET['import']) ? $_GET['import'] : ''); 
   if($selected == 'all'){
     foreach($import_order as $_item){
@@ -2600,7 +2600,54 @@ echo '<pre>';
         
       break;
     
-   
+      case 'users':
+        db_set_active('old');
+        
+        $users = db_query("SELECT u.mail, u.pass 
+          FROM users u
+          WHERE uid > 1
+        ");
+        foreach($users as $_user){
+            $passwords[$_user->mail] = $_user->pass;
+         /* db_update('users')
+              ->fields(array('pass' => $_user->pass))
+              ->condition('mail', $_user->mail)
+              ->execute();
+              $user_passwords[$_user->mail] = $_user->pass; */
+        } 
+        db_set_active('default');
+        require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
+
+        // Lower than DRUPAL_HASH_COUNT to make the update run at a reasonable speed.
+        $hash_count_log2 = 11;
+
+        //  Hash again all current hashed passwords.
+        $has_rows = FALSE;
+
+        // Update this many users
+        $count = 1000;
+
+        $result = db_query("SELECT mail FROM {users} WHERE uid > 1 ORDER BY uid");
+        //$result = db_query("SELECT mail FROM {users} WHERE uid > 1 AND mail like '%@1.ru' ORDER BY uid");
+        foreach ($result as $account) {
+          $has_rows = TRUE;
+          $new_hash = user_hash_password($passwords[$account->mail], $hash_count_log2);
+          //$new_hash = user_hash_password($passwords[str_replace('@1.ru','@1',$account->mail)], $hash_count_log2);
+          if ($new_hash) {
+            // Indicate an updated password.
+            $new_hash  = 'U' . $new_hash;
+            db_update('users')
+              ->fields(array('pass' => $new_hash))
+              ->condition('mail', $account->mail)
+              ->execute();
+          }
+        }  
+          
+          
+        print_r($user_passwords);
+        die();
+        db_set_active('default'); 
+        break;
        
       
       default:
