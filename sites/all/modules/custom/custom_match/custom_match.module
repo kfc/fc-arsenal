@@ -193,7 +193,7 @@ function custom_match_preprocess_views_view_fields(&$variables){
     $month_names_genitive = variable_get('month_names_genitive',array());
     $match_timestamp = strtotime($view->result[0]->field_field_match_start_date[0]['raw']['value']);
     $month = date('m',$match_timestamp);
-    $variables['match']['start_date'] =  format_date($match_timestamp,'custom','l, j ').(isset($month_names_genitive[$month]) ? $month_names_genitive[$month]  : date('F',$match_timestamp)).date(' h:i',$match_timestamp);
+    $variables['match']['start_date'] =  format_date($match_timestamp+ date('Z'),'custom','l, j ').(isset($month_names_genitive[$month]) ? $month_names_genitive[$month]  : date('F',$match_timestamp+ date('Z'))).date(' H:i',$match_timestamp+ date('Z'));
     
     $variables['match']['score'] = '';
     if(!empty($variables['fields']['field_match_result'])){
@@ -406,7 +406,6 @@ function theme_custom_match_match_teaser($vars=array()){
     </div>';
   }
   
- 
   $output .= '
 <div class="teaser-content">
   <div class="teaser-left-part">
@@ -415,7 +414,7 @@ function theme_custom_match_match_teaser($vars=array()){
   <div class="teaser-right-part">
     '.$teaser_right.'
     <div class="tournament">'.$node->field_match_tournament[$node->language][0]['taxonomy_term']->name.'</div>
-    <div class="date">'.format_date(strtotime($node->field_match_start_date[$node->language][0]['value']),'short') .'</div>
+    <div class="date">'.format_date(strtotime($node->field_match_start_date[$node->language][0]['value']) + date('Z'),'short') .'</div>
   </div>
   <div class="cf">&nbsp;</div>
   <div class="additional-info">'.$additional_info.'</div>

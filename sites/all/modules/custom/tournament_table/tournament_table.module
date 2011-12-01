@@ -127,7 +127,7 @@ function _get_tournament_table($type='full', $season_id=null, $tournament_id=nul
       inner join {node} n on t1.team_id = n.nid
       WHERE team_id IN ('.implode(',',$teams).')
       group by team_id
-      order by total_points desc, total_wins desc, goal_difference desc, total_scored desc, team_name asc  
+      order by total_points desc,  goal_difference desc, total_scored desc, total_wins desc, team_name asc  
     ';  
   $result = db_query($query,array(':season_id' => $season_id, ':tournament_id'=> $tournament_id,':team_ids'=>implode(',',$teams)))
             ->fetchAllAssoc('team_id');
