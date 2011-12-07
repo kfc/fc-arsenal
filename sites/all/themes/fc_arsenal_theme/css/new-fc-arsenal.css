@@ -854,6 +854,10 @@ TABLE TH {
     width: 360px;
 }
 
+.news-body-wide{
+    width: 100%;
+} 
+
 .teaser-node-news .news-body H3 {
     margin: 0px 0px 5px;
     padding: 0px;

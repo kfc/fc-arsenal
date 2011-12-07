@@ -13,7 +13,7 @@
         <div class="emblems-line">
           <?php echo $variables['match']['teams']['second']['img'];?>
         </div>
-        <div class="team-names-line"><?php echo $variables['match']['teams']['second']['name'];?></div>
+        <div class="team-names-line"><?php echo mb_wordwrap($variables['match']['teams']['second']['name'], 10, '<br />',1);?></div>
       </div>
       <div class="cf">&nbsp;</div>
     </div>            
