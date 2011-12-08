@@ -467,7 +467,7 @@ function theme_custom_match_match_team_block($vars){
       if(isset($match_events[$nid])){   
         foreach($match_events[$nid] as $event){
           $event_icon = theme_image(array('path'=>$event['event_type']->field_match_event_type_icon['und'][0]['uri'], 'attributes'=>array('title'=>'('.strtolower($event['event_type']->name).', '.$event['event_minute'].' '.t('min').')', )));
-          $team_players_output .=' <div style="float: left; margin-left: 3px;">'.$event_icon.'</div>';  
+          $team_players_output .=' <div style="float: left; margin-left: 3px;">'.$event_icon.' <span style="font-size: 10px;">'.$event['event_minute'].'\'</span></div>';  
         }
       }
       //$team_players_output .=' <span style="float: right;">'.$position_term->field_role_short_name[array_shift(array_keys($position_term->field_role_short_name))][0]['safe_value'].'</span></div>'; 
@@ -490,7 +490,7 @@ function theme_custom_match_match_team_block($vars){
       if(isset($match_events[$_player])){   
         foreach($match_events[$_player] as $event){ 
           $event_icon = theme_image(array('path'=>$event['event_type']->field_match_event_type_icon['und'][0]['uri'], 'attributes'=>array('title'=>'('.strtolower($event['event_type']->name).', '.$event['event_minute'].' '.t('min').')', )));
-          $team_players_output .=' <div style="float: left; margin-left: 3px;">'.$event_icon.'</div>';  
+          $team_players_output .=' <div style="float: left; margin-left: 3px;">'.$event_icon.' <span style="font-size: 10px;">'.$event['event_minute'].'\'</span></div>';  
         }
       }
       

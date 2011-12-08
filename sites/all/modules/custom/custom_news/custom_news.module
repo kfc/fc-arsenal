@@ -228,7 +228,6 @@ function custom_news_block_view($delta){
 
 }
 
-
 function _custom_news_get_rss_data($rss_url){
   drupal_load('module','feeds');
   feeds_include_library('common_syndication_parser.inc','common_syndication_parser');

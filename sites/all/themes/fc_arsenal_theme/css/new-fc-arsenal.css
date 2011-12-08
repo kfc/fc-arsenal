@@ -792,10 +792,15 @@ TABLE TH {
 }
 
 #block-block-1 .content H3 {
+    font-family: Verdana;
+    margin: 0;
     background: url('../img/block-header5.gif') no-repeat scroll right -50px transparent;
-    padding-left: 5px;
-    padding-right: 5px;
+    color: #ffffff;
     text-align: center;
+    padding: 5px 0 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+    position: relative;
 }
 
 #block-block-1 .content .sportsru {
@@ -999,7 +1004,7 @@ TABLE TH {
 }
 
 .sportsru p {
-    margin: 7px 0pt;
+    margin: 0 0 3px;
 }
 
 .sportsru #mgp-inner {
@@ -1007,7 +1012,7 @@ TABLE TH {
 }
 
 .sportsru .mgp-option {
-    margin-left: 10px;
+    /*margin-left: 10px;*/
 }
 
 .sports_1232967021 {
@@ -1262,8 +1267,9 @@ div.wallpaper-thumb-wrapper{
 }
 
 .view-partner-sites ul li{
-  list-style: none;
-  margin: 10px;
+  /*list-style: none;
+  margin: 10px;*/
+  width: 100%;
 }
 
 .view-partner-sites .partner-site-description{
@@ -1292,7 +1298,19 @@ div.wallpaper-thumb-wrapper{
 .view-partner-sites .partner-banner-wrapper{
   float: left;
   display: inline;
-  width: 210px;
+  float:left;
+  padding-top:2px;
+  /*width: 210px;*/
+}
+
+.view-partner-sites .partner-banner-image{
+  float: right;
+  display:inline;
+  margin-left: 30px;
+}
+
+#pre-footer div.right-part{
+  text-align: center !important;
 }
 
 

@@ -117,6 +117,12 @@ function tournament_table_item_add_form($form, &$form_state){
       '#value' => t('Save'), 
       '#prefix' => '<div style="height:15px;">&nbsp;</div>',
     );
+    
+    
+  $form['previous_results'] = array(
+      '#type' => 'markup',
+      '#markup' => '<div style="margin-top: 20px;"><h4 style="display: inline;">'.(isset($_GET['show_all_prev']) && $_GET['show_all_prev'] =='yes' ?  t('All previously entered results') : '30 '.t('previously entered results')  )  .'</h4> <span>('.l(  (isset($_GET['show_all_prev']) && $_GET['show_all_prev'] =='yes' ?  t('Show 30 first') : t('Show All')),$_GET['q'],array('query'=> (isset($_GET['show_all_prev']) && $_GET['show_all_prev'] =='yes' ? array() :  array('show_all_prev'=>'yes')))).')</span></div>'._get_previous_results(), 
+    );  
   
   $form['#submit'][] = 'tournament_table_item_add_form_submit';
   return $form;                
@@ -203,6 +209,43 @@ function tournament_table_settings_form($form, &$form_state){
     
     return system_settings_form($form);
 
+}
+
+function _get_previous_results(){
+  $results_query = db_select('tournament_table_results','res');
+  $results_query->join('node','n','n.nid = res.home_team');
+  $results_query->join('node','n1','n1.nid = res.away_team');
+  $results_query->fields('res');
+  $results_query->addField('n','title','home_team_name');
+  $results_query->addField('n1','title','away_team_name');
+  $results_query->condition('tournament',variable_get('tournament_table_default_tournament'))
+    ->condition('season',variable_get('tournament_table_default_season'))
+    ->orderBy('res.match_date','desc');
+  
+  if(!isset($_GET['show_all_prev']) || $_GET['show_all_prev']!= 'yes')
+    $results_query->range(0,30);   
+    
+  $results = $results_query->execute()->fetchAllAssoc('pid');
+  
+  $header = array(
+    'match'=>t('Match'),
+    'result'=>t('Result'),
+    'date'=>t('Date'),
+  );
+  $rows = array();
+  foreach($results as $result){
+    $rows[] = array(
+      'match'=>$result->home_team_name.' - '.$result->away_team_name,
+      'result'=>$result->home_score.' : '.$result->away_score,
+      'date'=> date('m/d/Y', $result->match_date)
+    );
+  }
+  $table = array(
+    '#theme'=>'table',
+    '#header'=>$header,
+    '#rows'=>$rows
+  );
+  return render($table);
 }
 
 ?>
