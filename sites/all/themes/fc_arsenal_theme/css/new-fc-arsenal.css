@@ -1267,8 +1267,8 @@ div.wallpaper-thumb-wrapper{
 }
 
 .view-partner-sites ul li{
-  /*list-style: none;
-  margin: 10px;*/
+  list-style: none;
+  /*margin: 10px;*/
   width: 100%;
 }
 
