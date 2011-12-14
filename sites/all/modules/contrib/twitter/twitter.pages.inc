@@ -52,7 +52,6 @@ function twitter_admin_form($form, &$form_state) {
  */
 function twitter_user_settings($account) {
   module_load_include('inc', 'twitter');
-
   $output = array();
   if (!empty($account->twitter_accounts)) {
     $output['list_form'] = drupal_get_form('twitter_account_list_form', $account->twitter_accounts);
@@ -269,7 +268,7 @@ function twitter_account_form($form, $form_state, $account = NULL) {
   }
 
   $form['uid'] = array(
-    '#type' => 'value',
+    '#type' => 'hidden',
     '#value' => $account->uid,
   );
 
@@ -295,7 +294,6 @@ function twitter_account_form($form, $form_state, $account = NULL) {
     '#type' => 'submit',
     '#value' => t('Add account'),
   );
-
   return $form;
 }
 

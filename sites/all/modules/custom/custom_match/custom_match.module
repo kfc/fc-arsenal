@@ -73,6 +73,8 @@ function custom_match_preprocess_node(&$vars){
 
 function custom_match_form_alter(&$form, $form_state, $form_id){
   if($form_id == 'match_node_form'){
+    drupal_add_js(drupal_get_path('module', 'custom_match') . '/misc/arsenal_squad.js');
+    drupal_add_css(drupal_get_path('module', 'custom_match') . '/misc/styles.css');
   }
 }
 

@@ -7,3 +7,18 @@
   float: left;
   margin-right: 20px;
 }
+
+.field-name-field-match-arsenal-squad{
+  width: 50%;
+  float: left;
+
+}
+
+.field-name-field-match-arsenal-squad-subs{
+  width: 50%;
+  float: left;
+}
+
+.field-name-field-match-opponent-squad{
+  clear: both;
+}

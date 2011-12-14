@@ -34,7 +34,7 @@ function custom_news_theme(){
 function custom_news_node_view($node, $view_mode, $language){
   //$node = $vars['node'];
   if($node->type == 'news'){
-    $node->content['news_block'] = views_embed_view('news','block_1');
+    $node->content['news_block'] = views_embed_view('news','block_3');
     if(!empty($node->field_news_tags)){
       $node->content['field_news_tags'] = taxonomy_field_formatter_view('node',$node,'field_news_tags',null,'',$node->field_news_tags[$node->language],array('type'=>'taxonomy_term_reference_link'));
       foreach($node->content['field_news_tags'] as $index=>$item) {
@@ -70,7 +70,7 @@ function custom_news_comment_view($comment, $view_mode, $langcode){
 
 function custom_news_preprocess_views_view_unformatted(&$vars){
   $view = $vars['view'];
-  if($view->name =='news' && $view->current_display=='block_1'){
+  if($view->name =='news' && ($view->current_display=='block_1' || $view->current_display=='block_3')){
     $vars['news_teaser_count'] = variable_get('news_teaser_count',5);
     $vars['total_rows'] = count($vars['view']->result);
     
@@ -238,6 +238,17 @@ function _custom_news_get_rss_data($rss_url){
     return $rss_data;
   }
   else return null;
+}
+
+function custom_news_views_query_alter(&$view, &$query) {
+  if($view->name == 'news' && $view->current_display == 'block_3'){
+    if(!drupal_is_front_page())
+      $query->where[0]['conditions'][] = array(
+        'field' => 'node.nid',
+        'operator' => '<>',
+        'value' => arg(1),
+      );
+  }
 }
 
 //function custom_news_menu_alter(&$items){dpm($items);}
