@@ -6,3 +6,11 @@
   </div>
 </div>
 <?php endif;?>
+<script>
+  jQuery(document).ready(function(){
+    jQuery("#block-views-image-gallery-latest-gallery h2").html(jQuery("#block-views-image-gallery-latest-gallery h2").html()+' ('+jQuery('#block-views-image-gallery-latest-gallery div.Photo a.lightbox-processed').length+')');
+  
+  //  alert(jQuery('#block-views-image-gallery-latest-gallery a.lightbox-processed').length);  
+  
+  });
+</script>

@@ -251,6 +251,21 @@ function custom_news_views_query_alter(&$view, &$query) {
   }
 }
 
-//function custom_news_menu_alter(&$items){dpm($items);}
+function custom_news_form_alter(&$form, &$form_state, $form_id){
+  global $user;
+  if($form_id == 'news_node_form' && in_array('Блоггер',$user->roles)){
+    $vocab = taxonomy_vocabulary_machine_name_load('news_category');
+    if(empty($vocab)) return;
+    $term = db_select('taxonomy_term_data', 'td')
+      ->fields('td', array('tid', 'name'))
+      ->condition('name', 'Запись в блоге')
+      ->condition('vid', $vocab->vid)
+      ->execute()
+      ->fetchObject();
+    if(!empty($term)){
+      $form['field_news_category'][$form['field_news_category']['#language']]['#options'] = array($term->tid=>$term->name);
+    }  
+  }
+}
 
 ?>

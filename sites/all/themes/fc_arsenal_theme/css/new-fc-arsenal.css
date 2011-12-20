@@ -510,6 +510,7 @@ TABLE TH {
     border-color: #cccccc #cccccc;
     padding: 10px 0px;
     background: #f7f5f5;
+    font-size: 11px;
 }
 
 #block-views-qrss_view_inoprosport_ru .item-list LI {
@@ -520,7 +521,7 @@ TABLE TH {
 #block-views-qrss_view_inoprosport_ru .item-list LI UL LI {
     margin: 0pt 0pt 0.25em 1.5em;
     padding: 0pt;
-    list-style: disc outside none;
+    list-style: none outside none;
 }
 
 #latest-news-block {
@@ -550,6 +551,18 @@ TABLE TH {
 
 #latest-news-block .news-block-content .teaser-content {
     font-size: 10px;
+}
+
+#latest-news-block .news-block-content ul{
+  margin: 0pt 0pt 0.25em 1.5em;
+  padding: 0pt;
+  list-style: none outside none;
+}
+
+#latest-news-block .news-block-content .item-list .time-created .field-content{
+  color: #888888;
+    font-size: 10px;
+    text-align: right;
 }
 
 .front-page #left-menu {
@@ -872,7 +885,7 @@ TABLE TH {
     text-align: right;
     font-size: 10px;
     color: #888888;
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
 #footer {

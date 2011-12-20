@@ -195,6 +195,7 @@ function custom_social_share_theme(){
   return array(
     'custom_social_share_vk_link'=>array('variables'=>NULL),
     'custom_social_share_twitter_link'=>array('variables'=>NULL),
+    'custom_social_share_facebook_link'=>array('variables'=>NULL),
   
   );
 
@@ -206,4 +207,8 @@ function theme_custom_social_share_vk_link($variables){
 
 function theme_custom_social_share_twitter_link($variables){
   return theme_link(array('path'=>'http://twitter.com/intent/tweet?url='.urlencode('http://fc-arsenal.com').'&text='.urlencode(variable_get('site_name','')),'text'=>theme_image(array('path'=>drupal_get_path('theme',variable_get('theme_default','fc_arsenal_theme')).'/img/twitter.gif','attributes'=>array())), 'options'=>array('html'=>true,'attributes'=>array('target'=>'_blank'))));
+}
+
+function theme_custom_social_share_facebook_link($variables){
+  return theme_link(array('path'=>'http://facebook.com/arssc.moscow','text'=>theme_image(array('path'=>drupal_get_path('theme',variable_get('theme_default','fc_arsenal_theme')).'/img/facebook-icon.png','attributes'=>array())), 'options'=>array('html'=>true,'attributes'=>array('target'=>'_blank'))));
 }

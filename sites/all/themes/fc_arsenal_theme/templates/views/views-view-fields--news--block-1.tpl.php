@@ -5,7 +5,6 @@
   </div>
   <div class="news-body">
     <h3><?php echo $fields['title']->content;?></h3>
-    <div class="teaser-content"><?php echo $fields['body']->content;?></div>
   </div>
   <div class="cf">&nbsp;</div>
   <div class="news-footer">

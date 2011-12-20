@@ -12,11 +12,12 @@
     <?php else:
       if($index == $variables['news_teaser_count']):
     ?>
-    <div class="item-list">
+    <div class="item-list">                                           
       <ul>
      <?endif;?> 
-     
-     <li><?php echo l($view->result[$index]->node_title, drupal_get_path_alias('node/'.$view->result[$index]->nid));?></li> 
+     <li>
+     <span class="time-created"><span class="field-content"><?php echo  date('d/m/Y', $view->result[$index]->node_created);?></span></span>
+     <?php echo l($view->result[$index]->node_title, drupal_get_path_alias('node/'.$view->result[$index]->nid));?></li> 
      
      <?php if($index == $variables['total_rows']-1):?>
     </ul>
@@ -52,3 +53,6 @@
     </div>
   </div>
 <?php endif;?>
+<div style="text-align: right; margin-top: 5px;">
+  <a href="/news-all/date"><?php echo t('All news')?></a>
+</div>

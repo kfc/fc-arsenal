@@ -23,9 +23,10 @@ function fc_arsenal_theme_nice_menus($variables){
       $output['content'] = '<ul class="nice-menu nice-menu-' . $direction . '" id="nice-menu-' . $id . '">
         <li class="Home"><a href="/">&nbsp;</a></li>
         ' . $menu_tree['content'] . '
-        <li>
+        <li style="padding-right: 5px;">
           '.theme('custom_social_share_vk_link',$variables).'
           '.theme('custom_social_share_twitter_link',$variables).'
+          '.theme('custom_social_share_facebook_link',$variables).'
         </li>
           <li class="Mail"><a href="mailto:admin@fc-arsenal.com">&nbsp;</a></li>
         </ul>' . "\n";
