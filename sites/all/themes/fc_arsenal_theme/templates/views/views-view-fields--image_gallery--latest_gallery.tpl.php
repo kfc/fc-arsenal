@@ -21,3 +21,11 @@ else
 <div class="BottomContent">
     <div class="InsideBottom"><a href="/gallery" class="Green"><?php echo t('All photo');?></a></div>
 </div>
+<script>
+  jQuery(document).ready(function(){
+    jQuery("div.Content01 h5 a").html(jQuery("div.Content01 h5 a").html()+' ('+jQuery('div.Content01 div.Photo a.lightbox-processed').length+')');
+  
+  //  alert(jQuery('#block-views-image-gallery-latest-gallery a.lightbox-processed').length);  
+  
+  });
+</script>
