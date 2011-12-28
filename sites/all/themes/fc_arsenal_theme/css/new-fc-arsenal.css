@@ -1327,8 +1327,36 @@ div.wallpaper-thumb-wrapper{
 }
 
 .historical_fact{
-  border: 1px solid #CFCFCF;
-  padding: 5px;
-}  
+  /*border: 1px solid #CFCFCF;*/
+  margin-top: 20px;
+  padding: 10px 20px 0 0;
+  
+  color: #F8D150;
+  color: #FFFFFF;
+}
+
+.historical_fact a{
+  color: #F8D150;
+  text-decoration: underline;  
+}
+
+.historical_fact a:hover  {
+  color: #F8D150;
+  text-decoration: none;  
+}
+
+.view-id-historical_facts .views-field-field-historical-fact-date {
+  width: 100px;
+  float: left;
+}
+
+.view-id-historical_facts .views-field-title{
+  float: left;
+
+}
+
+.view-id-historical_facts .views-row{
+  margin-bottom: 4px;
+} 
 
 

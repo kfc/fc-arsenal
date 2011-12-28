@@ -55,8 +55,7 @@ function customization_block_info(){
     'status'=>TRUE,
     'weight'=>0,
     'visibility'=>1,
-    'region'=> 'content',
-    'pages'=> '<front>',
+    'region'=> 'header',
     'cache' => -1,
   );
   
@@ -256,8 +255,26 @@ function _customization_login_submit(){
 
 function theme_historical_fact_block($vars){
   if(isset($vars['node_title']) && isset($vars['nid']))
-    return '<div class="historical_fact">'.t('At this day').': '.l($vars['node_title'], 'node/'.$vars['nid']).'</div>';
-  
+    return '<div class="historical_fact">'.t('At this day').': '.l($vars['node_title'], 'historical-facts').'</div>';
+}
+
+function customization_views_query_alter(&$view, &$query){
+  if($view->name == 'historical_facts'){
+    $query->orderby[0] = array(
+        'field'=>'DATE_FORMAT(adddate(from_unixtime(0), interval field_data_field_historical_fact_date.field_historical_fact_date_value second),\'%m\')',
+        'direction'=>'asc',
+    );
+    
+    $query->orderby[1] = array(
+        'field'=>'DATE_FORMAT(adddate(from_unixtime(0), interval field_data_field_historical_fact_date.field_historical_fact_date_value second),\'%d\')',
+        'direction'=>'asc',
+    );
+    
+    $query->orderby[2] = array(
+        'field'=>'DATE_FORMAT(adddate(from_unixtime(0), interval field_data_field_historical_fact_date.field_historical_fact_date_value second),\'%Y\')',
+        'direction'=>'asc',
+    );
+  }
 }
 
 ?>

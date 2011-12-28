@@ -1,0 +1,14 @@
+
+name = GoAway
+description = Allows ban/redirects of anon users based on IP address
+package = Other
+core = 7.x
+files[] = goaway.module
+files[] = goaway.install
+
+; Information added by drupal.org packaging script on 2011-06-14
+version = "7.x-1.2"
+core = "7.x"
+project = "goaway"
+datestamp = "1308040323"
+
