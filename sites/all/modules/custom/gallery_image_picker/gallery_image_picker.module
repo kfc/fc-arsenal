@@ -52,11 +52,12 @@ function gallery_image_picker_field_widget_settings_form($field, $instance) {
     $voc = taxonomy_vocabulary_machine_name_load('gallery_type');
     $types = taxonomy_get_tree($voc->vid);
     foreach($types as $type){
-      $options[$type->tid] = $type->name;
+      $options[$type->tid] = str_pad('',$type->depth,'-').' '.$type->name;
     }
   
     $form['gallery_type'] = array(
-      '#type' => 'select', 
+      '#type' => 'select',
+      '#multiple' => TRUE, 
       '#options' => $options, 
       '#default_value' => (isset($settings['gallery_type']) ? $settings['gallery_type'] : ''), 
       '#title' => t('Gallery type'), 
@@ -70,18 +71,38 @@ function gallery_image_picker_field_widget_settings_form($field, $instance) {
 function gallery_image_picker_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
   drupal_add_js(drupal_get_path('module','gallery_image_picker').'/misc/gallerypicker.js');  
   drupal_add_css(drupal_get_path('module','gallery_image_picker').'/misc/styles.css');  
-  $tid = $instance['widget']['settings']['gallery_type'];
+  $tids = $instance['widget']['settings']['gallery_type'];
   
+  $voc = taxonomy_vocabulary_machine_name_load('gallery_type');
+
+  if(!is_array($tids))
+    $tids = array($tids);
+  
+   foreach($tids as $_tid){
+    $children = taxonomy_get_children($_tid, $voc->vid);
+    foreach($children as $_child)
+      if(!in_array($_child->tid, $tids))
+        $tids[] = $_child->tid;
+   } 
   $galleries[0] = t('Select Gallery');
-  $galleries += db_query('
-    SELECT node.nid AS nid, node.title as title
+  $photo_galleries = db_query('
+    SELECT node.nid AS nid, node.title as title,ti.tid, ttd.weight, ttd.name
       FROM 
       {node} node
+      inner join {taxonomy_index} ti on (ti.nid = node.nid and ti.tid in (:tids))
+      inner join {taxonomy_term_data} ttd on ti.tid = ttd.tid
       WHERE (( (node.status = 1) AND (node.nid IN  (SELECT tn.nid AS nid
       FROM 
       {taxonomy_index} tn
-      WHERE ( (tn.tid = :tid) ))) ))
-  ',array(':tid'=>$tid))->fetchAllKeyed();
+      WHERE ( (tn.tid in (:tids)) ))) ))
+      ORDER BY ttd.tid, ttd.weight, node.title asc
+  ',array(':tids'=>$tids))->fetchAllAssoc('nid');
+  
+  $opts = array();
+  foreach($photo_galleries as $_gal){
+    $opts[$_gal->name][$_gal->nid] = $_gal->title;      
+  }
+  $galleries += $opts; 
   
   $element+=array(
     '#type' => 'select',

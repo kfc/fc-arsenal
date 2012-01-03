@@ -178,17 +178,17 @@ function theme_custom_match_arsenal_logo_match_block(){
 function custom_match_preprocess_views_view_fields(&$variables){
   $view = $variables['view'];
   if($view->name == 'matches' && $view->current_display == 'next_match'){
-    if($view->result[0]->field_field_match_place[0]['raw']['value'] == 'home'){
+    if($view->result[0]->field_field_match_place[0]['raw']['value'] == 'away'){
+      $first_team_img = render($variables['fields']['field_team_logo']->content); 
+      $first_team_name = render($variables['fields']['field_match_opponent']->content); 
+      $second_team_img = theme('custom_match_arsenal_logo_match_block');
+      $second_team_name = t('Arsenal');
+    }
+    else{
       $first_team_img = theme('custom_match_arsenal_logo_match_block');
       $first_team_name = t('Arsenal');
       $second_team_img = render($variables['fields']['field_team_logo']->content); 
       $second_team_name = render($variables['fields']['field_match_opponent']->content); 
-    }
-    else{
-      $first_team_img = render($variables['fields']['field_team_logo']->content); 
-      $first_team_name = render($variables['fields']['field_match_opponent']->content); 
-      $second_team_img = theme('custom_match_arsenal_logo_match_block');
-      $second_team_name = t('Arsenal');  
     }
     $variables['match']['teams']['first'] = array('img'=>$first_team_img, 'name'=>$first_team_name);
     $variables['match']['teams']['second'] = array('img'=>$second_team_img, 'name'=>$second_team_name);
