@@ -11,6 +11,25 @@ function tournament_table_menu(){
     'file' => 'tournament_table.admin.inc',
   );
   
+  $items['admin/content/tournament-table-item/edit'] = array(
+   'title' => t('Tournament matches'),
+   'description' => t('Edit tournament match'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tournament_table_item_edit_form'),
+    'access arguments' => array('tournament table edit'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'tournament_table.admin.inc',
+  );
+  /*
+  $items['admin/content/tournament-table-item/delete/%'] = array(
+   'title' => t('Tournament matches'),
+    'page callback' => '_tournament_item_delete',
+    'page arguments' => array(4),
+    'access arguments' => array('tournament table edit'),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'tournament_table.admin.inc',
+  );  */
+  
    $items['admin/content/tournament_table_settings'] = array(
    'title' => t('Tournament teams'),
     'page callback' => 'drupal_get_form',

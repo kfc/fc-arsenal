@@ -27,6 +27,13 @@ function customization_menu(){
     
   );
   
+  $items['node/add/edit_galleries']=array(
+    'title' => t('Edit galleries'),
+    'page callback' => '_customization_edit_galleries',
+    'access callback' => 'node_access',
+    'access arguments' => array('create', 'gallery'),
+  );
+  
   return $items;
 }
 
@@ -120,7 +127,7 @@ function customization_block_view($delta){
         
     case 'historical_fact':
       $res = db_query("
-        SELECT node.title AS node_title, node.nid AS nid
+        SELECT node.title AS node_title, node.nid AS nid, field_historical_fact_date_value as fact_date
         FROM 
         {node} node
         LEFT JOIN {field_data_field_historical_fact_date} field_data_field_historical_fact_date ON node.nid = field_data_field_historical_fact_date.entity_id AND (field_data_field_historical_fact_date.entity_type = 'node' AND field_data_field_historical_fact_date.deleted = 0)
@@ -254,8 +261,9 @@ function _customization_login_submit(){
 }
 
 function theme_historical_fact_block($vars){
-  if(isset($vars['node_title']) && isset($vars['nid']))
-    return '<div class="historical_fact">'.t('At this day').': '.l($vars['node_title'], 'historical-facts').'</div>';
+  if(isset($vars['node_title']) && isset($vars['nid']) && isset($vars['fact_date'])){
+    return '<div class="historical_fact">'.date('d.m.Y',$vars['fact_date']).' '.l($vars['node_title'], 'historical-facts').'</div>';
+  }
 }
 
 function customization_views_query_alter(&$view, &$query){
@@ -275,6 +283,11 @@ function customization_views_query_alter(&$view, &$query){
         'direction'=>'asc',
     );
   }
+}
+
+function _customization_edit_galleries(){
+  $_SESSION['node_overview_filter'] = array(array('type','gallery'));
+  drupal_goto('admin/content');
 }
 
 ?>

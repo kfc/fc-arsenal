@@ -205,6 +205,14 @@ function custom_match_preprocess_views_view_fields(&$variables){
     $variables['additional_link'] = '';
     if(strtotime($view->result[0]->field_data_field_match_start_date_field_match_start_date_val) > time())
       $variables['additional_link'] = l(t('Online'),'http://www.liveresult.ru/football/txt/team/arsenal',array('attributes'=>array('target'=>'_blank','class'=>'Online'),'absolute'=>TRUE));
+    
+    
+    $livetv_arsenal_matches = _custom_match_get_livetv_arsenal_matches();  
+    foreach($livetv_arsenal_matches as $_livetv_match){
+      if(date('d/m/Y',$match_timestamp) == date('d/m/Y', $_livetv_match['timestamp']))
+        $variables['additional_link'] .= ' | '.l('LiveTV',$_livetv_match['url'],array('external'=>TRUE,'attributes'=>array('target'=>'_blank')));  
+      
+    }
   }  
 }
 
@@ -512,6 +520,24 @@ function theme_custom_match_match_team_block($vars){
   return $output;
 }
 
+
+function _custom_match_get_livetv_arsenal_matches(){
+
+  $last_sync = variable_get('livetv_last_sync_date',0);
+  $arsenal_matches = variable_get('livetv_arsenal_matches',null);
+  if(empty($last_sync) || ((time() - $last_sync) > 60*60*24*1) || $arsenal_matches == null){
+    $rss_data = _custom_news_get_rss_data('http://img.livetv.ru/rss/upcoming_ru.xml'); 
+    $arsenal_matches = array();
+    foreach($rss_data['items'] as $_item){
+      if(strpos($_item['guid'],'arsenal') !== false && strpos($_item['title'],iconv('CP1251','UTF-8','Арсенал Л')) !== false ){
+        $arsenal_matches[$_item['timestamp']] = $_item;
+      }
+    }
+    variable_set('livetv_last_sync_date',time());
+    variable_set('livetv_arsenal_matches',$arsenal_matches);
+  }
+  return $arsenal_matches;
+}
 /*function custom_match_block_view_alter(&$data, $block){
   if($block->module == 'views' && $block->delta == 'matches-next_match')
   {

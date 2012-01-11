@@ -166,6 +166,187 @@ function tournament_table_item_add_form_submit($form, &$form_state){
 }
 
 
+function tournament_table_item_edit_form($form, &$form_state){
+
+  $pid = arg(4);
+  if(empty($pid))
+    drupal_goto('admin/content/tournament-table-item');
+
+  
+  $result = db_select('tournament_table_results','r')->fields('r')->condition('pid',$pid)->execute()->fetchAssoc();  
+  if(empty($result))
+    drupal_goto('admin/content/tournament-table-item');
+        
+  drupal_add_css(drupal_get_path('module', 'tournament_table').'/css/styles.css');
+  
+  $tournaments = array();
+  $tournaments_terms = taxonomy_get_tree(taxonomy_vocabulary_machine_name_load('tournament')->vid);
+  foreach($tournaments_terms as $tournament_term)
+    $tournaments[$tournament_term->tid] = $tournament_term->name; 
+  
+  $default_tournament = variable_get('tournament_table_default_tournament','');  
+    
+  $form['tournament'] = array(
+      '#type' => 'select', 
+      '#options' => $tournaments, 
+      '#default_value'=>$default_tournament,
+      '#title' => t('Tournament'), 
+      '#required' => true,
+    );
+  
+  if(!empty($default_tournament))
+    $form['tournament']['#disabled'] = true;
+    
+  $seasons = array();  
+  $season_terms = taxonomy_get_tree(taxonomy_vocabulary_machine_name_load('season')->vid);
+  foreach($season_terms as $season_term)
+    $seasons[$season_term->tid] = $season_term->name;
+ 
+  $default_season = variable_get('tournament_table_default_season','');   
+    
+  $form['season'] = array(
+      '#type' => 'select', 
+      '#options' => $seasons,
+      '#default_value'=>$default_season,
+      '#title' => t('Season'), 
+      '#required' => true,
+    );  
+  
+   if(!empty($default_season))
+    $form['season']['#disabled'] = true;
+  
+  $form['delimiter'] = array(
+      '#markup' => '<div><strong>'.t('Select teams and fill match results in. Home team is the first. Also set match date').'</strong></div>', 
+    );
+  
+ /* $teams_res =  db_select('node','n')
+            ->fields('n',array('nid','title'))
+            ->condition('type','team')
+            ->orderBy('title')
+            ->execute()
+            ->fetchAllKeyed();
+  $teams = array('0'=>t('Select'));
+  foreach($teams_res as $_id=>$_val)
+    $teams[$_id] = $_val;
+  */
+  $tournament_teams = variable_get('tournament_table_season_teams',array());
+  $teams_res =  db_select('node','n')
+            ->fields('n',array('nid','title'))
+            ->condition(db_and()->condition('nid',array($tournament_teams),'IN')->condition('type','team'))
+            ->orderBy('title')
+            ->execute()
+            ->fetchAllKeyed();
+  $teams = array('0'=>t('Select team...'));
+  foreach($teams_res as $_id=>$_val)
+    $teams[$_id] = $_val;
+    
+      
+    for($i=0; $i<floor(count($teams)/2); $i++){
+  
+    $form['home_team'] = array(
+      '#type' => 'select', 
+      '#required' => false,
+      '#options' => $teams, 
+      '#default_value' => $result['home_team'],
+      '#prefix' => '<div class="tournament-table-add-field">',
+      '#suffix' => '</div>'
+      
+    );
+    
+    $form['home_score'] = array(
+      '#type' => 'textfield', 
+      '#required' => false,
+      '#size' => 3,
+       '#default_value' => $result['home_score'], 
+      '#prefix' => '<div class="tournament-table-add-field">',
+      '#suffix' => '</div><div class="tournament-table-add-separator">&nbsp;-&nbsp;</div>'
+    );
+    
+    $form['away_score'] = array(
+      '#type' => 'textfield', 
+      '#required' => false,
+      '#size' => 3,
+      '#default_value' => $result['away_score'],
+      '#prefix' => '<div class="tournament-table-add-field">',
+      '#suffix' => '</div>'
+    );
+    
+    
+    
+    $form['away_team'] = array(
+      '#type' => 'select', 
+      '#required' => false,
+      '#options' => $teams,
+      '#default_value' => $result['away_team'], 
+      '#prefix' => '<div class="tournament-table-add-field">',
+      '#suffix' => '</div><div class="tournament-table-add-separator" style="margin-right: 0px;margin-left: 30px;">'.t('Match date').':</div>'
+    );
+    
+    $form['match_date'] = array(
+      '#type' => 'date', 
+      '#required' => true,
+      //'#date_format' => 'm-d-Y',date
+      '#default_value' => array('month'=>format_date($result['match_date'],'custom','n'), 'day'=>format_date($result['match_date'],'custom','j'), 'year'=>format_date($result['match_date'],'custom','Y')),
+      '#prefix' => '<div class="tournament-table-add-field" style="margin-left:15px;">',
+      '#suffix' => '</div><div style="clear:both"></div>'
+    );
+    
+  }
+  $form['submit'] = array(
+      '#type' => 'submit', 
+      '#value' => t('Save'), 
+      '#prefix' => '<div style="height:15px;">&nbsp;</div>',
+    );
+    
+  $form['cancel'] = array(
+      '#type' => 'button', 
+      '#value' => t('Cancel'), 
+      '#attributes' => array('onclick'=>"window.location.href='/admin/content/tournament-table-item'; return false;"),
+    );  
+    
+  
+  $form['#submit'][] = 'tournament_table_item_edit_form_submit';
+  return $form;                
+  
+}
+
+function tournament_table_item_edit_form_submit($form, &$form_state){
+  $pid = arg(4);
+  if(empty($pid))
+    drupal_goto('admin/content/tournament-table-item');
+
+  
+  if((int)$form_state['values']['home_team']!=0 && (int)$form_state['values']['away_team']!=0
+    && (int)$form_state['values']['home_team'] != (int)$form_state['values']['away_team']
+    && strlen($form_state['values']['home_score'])>0 && strlen($form_state['values']['away_score'])>0
+    && (int)($form_state['values']['home_score'])>=0 && (int)($form_state['values']['away_score'])>=0){
+    
+    
+    $winner = ((int)($form_state['values']['home_score']) > (int)($form_state['values']['away_score']) ? (int)$form_state['values']['home_team'] : ((int)($form_state['values']['home_score']) < (int)($form_state['values']['away_score']) ? (int)$form_state['values']['away_team'] : 0 ));
+    
+    db_update('tournament_table_results')
+              ->fields(array(
+                  'tournament'=>$form_state['values']['tournament'],
+                  'season'=>$form_state['values']['season'],
+                  'home_team'=>(int)$form_state['values']['home_team'],
+                  'away_team'=>(int)$form_state['values']['away_team'],
+                  'home_score'=>(int)($form_state['values']['home_score']),
+                  'away_score'=>(int)($form_state['values']['away_score']),
+                  'winner'=>$winner,
+                  'home_points'=>($winner == 0 ? 1 : ($winner == (int)$form_state['values']['home_team'] ? 3 : 0)),
+                  'away_points'=>($winner == 0 ? 1 : ($winner == (int)$form_state['values']['away_team'] ? 3 : 0)),
+                  'match_date'=>strtotime($form_state['values']['match_date']['month'].'/'.$form_state['values']['match_date']['day'].'/'.$form_state['values']['match_date']['year']),
+              ))
+              ->condition('pid',$pid)
+              ->execute();
+  
+  
+  }
+  drupal_set_message(t('Information successfully saved.'));
+  drupal_goto('admin/content/tournament-table-item');
+}
+
+
 function tournament_table_settings_form($form, &$form_state){
 
   $tournaments = array();
@@ -231,13 +412,15 @@ function _get_previous_results(){
     'match'=>t('Match'),
     'result'=>t('Result'),
     'date'=>t('Date'),
+    'edit_delete'=>'',
   );
   $rows = array();
   foreach($results as $result){
     $rows[] = array(
       'match'=>$result->home_team_name.' - '.$result->away_team_name,
       'result'=>$result->home_score.' : '.$result->away_score,
-      'date'=> date('m/d/Y', $result->match_date)
+      'date'=> date('d/m/Y', $result->match_date),
+      'edit_delete'=> l(t('edit'),'admin/content/tournament-table-item/edit/'.$result->pid).'&nbsp;&nbsp;&nbsp;'.l(t('delete'),'admin/content/tournament-table-item/delete/'.$result->pid),
     );
   }
   $table = array(
@@ -246,6 +429,18 @@ function _get_previous_results(){
     '#rows'=>$rows
   );
   return render($table);
+}
+
+function _tournament_item_delete($pid) {
+  if(empty($pid))
+    drupal_goto('admin/content/tournament-table-item');
+  
+  db_delete('tournament_table_results')->condition('pid',$pid)->execute();
+  drupal_set_message(t('The match was deleted.'));
+  drupal_goto('admin/content/tournament-table-item');
+    
+  return $pid;
+  
 }
 
 ?>
