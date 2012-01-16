@@ -75,6 +75,11 @@
 	
   if(!empty($tabs_list))
 	  print theme('custom_match_simple_tabs',array($tabs_list, $tabs_content)); 
+ 
+  if(isset($connected_news)){
+    echo $connected_news;
+  }  
+    
 ?>
 </div>
 <div class="right-part">

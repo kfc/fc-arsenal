@@ -240,7 +240,7 @@ function mb_wordwrap($string, $width=75, $break="\n", $cut = false) {
     return join(' ',$words);
   }
 
-function customization_form_alter(&$form, &$form_state, $form_id){
+function customization_form_alter(&$form, &$form_state, $form_id){ 
   if($form_id == 'user_login' || $form_id == 'user_login_block'){
     $form['#submit'][] = '_customization_login_submit';
   }

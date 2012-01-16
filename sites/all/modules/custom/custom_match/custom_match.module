@@ -67,6 +67,11 @@ function custom_match_preprocess_node(&$vars){
       
       $vars['node']->opponent_events = $opponent_events;  
     
+      $news_view = views_get_view('news');
+      $news_view->set_display('match_news');
+      $news_view->set_arguments(array(arg(1)));
+      $vars['connected_news'] = $news_view->render('match_news');
+      //$vars['connected_news'] = views_embed_view('news','match_news');
     }
   }
 }
