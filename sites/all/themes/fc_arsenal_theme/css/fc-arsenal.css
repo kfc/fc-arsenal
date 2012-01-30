@@ -1,128 +1,4 @@
-BODY{
-  background: url(../img/bg.gif);
-  font-family: Verdana;
-  font-size: 12px;
-  padding: 3px 0px 0px 0px;
-  margin: 0px;
-  color: #636363;
-}
 
-IMG{
-	border: 0px;
-}
-
-A{
-  color: #B9141A;
-  text-decoration: none;
-}
-A:hover{
-  color: #B9141A;
-  text-decoration: underline;
-}
-H2{
-  color: #B9141A;
-  margin: 10px 0px 10px 0px;
-  padding: 0px;
-  font-size: 14px;
-}
-H3{
-  color: #B9141A;
-  margin: 10px 0px 10px 0px;
-  padding: 0px;
-  font-size: 12px;
-}
-FIELDSET{
-  border: 1px solid #CCC;
-}
-TABLE{
-  width: 100%;
-}
-TABLE TH{
-  font-family: Tahoma;
-}
-#container{
-	width: 1008px;
-	margin: 0px auto;
-}
-/* ====================================== BOF: HEADER ====================================== */
-#top-cap{
-  background: url(../img/header-bg.jpg) no-repeat -1px 0;
-  position: relative;
-  height: 157px;
-  padding: 0px auto;
-  text-align: right;
-}
-#top-cap .logo{
-  position: absolute;
-  left: 10px;
-}
-#top-cap .logo IMG{
-  width: 130px;
-  height: 150px;
-  /*border: 1px solid #CCC;*/
-}
-#top-cap .block{
-  padding: 10px 20px 0px 0px;
-  color: #F8D150;
-  
-}
-#top-cap .block A{
-  color: #F8D150;
-}
-#top-cap .block-custom{
-  font-size: 11px;
-}
-#top-cap .block-custom TD.input{
-  padding: 0px 10px 0px 0px;
-}
-#top-cap .block-custom INPUT{
-  font-size: 11px;
-}
-#top-cap .block-custom INPUT.form-text{
-  border: 1px solid #F8D150;
-  background: none;
-  color: #F8D150;
-  width: 70px;
-}
-#top-cap .block-custom INPUT.form-submit{
-  background: #F8D150;
-  color: #000;
-  border: 0px;
-}
-#top-cap .block-custom LABEL{
-  display: none;
-}
-#top-cap .block-custom TABLE{
-  width: auto;
-}
-#top-cap .block-custom TABLE,
-#top-cap .block-custom TBODY,
-#top-cap .block-custom TABLE TH,
-#top-cap .block-custom TABLE TR,
-#top-cap .block-custom TABLE TD{
-  border: 0px;
-}
-#top-cap .block-custom TABLE.login-block{
-  float: right;
-}
-#top-cap .block-custom TABLE.login-block .form-item{
-  margin: 4px 0px 4px 0px;
-}
-#top-cap .block-custom TABLE.login-block TD.register,
-#top-cap .block-custom TABLE.login-block TD.request{
-  text-align: right;
-}
-/* ====================================== EOF: HEADER ====================================== */
-
-
-
-
-
-
-/* ====================================== BOF: MAIN PART ====================================== */
-#main-part{
-  background: #FFFFFF;
-}
 #main-part .messages{
   padding: 10px 10px 10px 10px;
 }
@@ -131,13 +7,6 @@ TABLE TH{
   background: #B7ECBD;
 }
 /* ------------ BOF: CONTENT ------------ */
-#content{
-  padding: 10px 20px 20px 20px;
-  min-height: 300px;
-}
-*html #content{
-  height: 300px;
-}
 #content TABLE{
   width: 100%;
 }
@@ -793,19 +662,6 @@ TABLE TH{
 
 
 /* ------------ BOF: HOME PAGE ------------ */
-.front-page{
-  padding: 10px 0px 0px 0px;
-}
-.front-page #left,
-.front-page #content,
-.front-page #right{
-  float: left;
-}
-.front-page #content{
-  width: 500px !important;
-  margin: 0px 10px 0px 10px;
-  padding: 0px 0px 0px 0px;
-}
 
 /* BOF: top news block {FRONT PAGE} */
 .front-page #content #block-custom_pages-0{
@@ -933,16 +789,6 @@ TABLE TH{
 
 
 /* BOF: news list teser view */
-#latest-news-block{
-  background: url(../img/block-header2.gif) no-repeat;
-  margin-top: 15px;
-}
-#latest-news-block H2{
-  font-family: Tahoma;
-  background: url(../img/block-header2.gif) no-repeat right -26px;
-  margin: 0px;
-  padding: 5px 0px 0px 10px;
-}
 #latest-news-block .news-block-content {
   border: 1px solid #CCCCCC;
   border-top: 0px;
@@ -1038,27 +884,6 @@ TABLE TH{
   width: 250px;
   margin: 0px 5px 0px 0px;
 }
-.front-page .side-menu .block{
-  padding: 0px;
-  background: url(../img/block-header3.gif) no-repeat;
-  margin-bottom: 10px;
-}
-.front-page .side-menu .block H2{
-  font-family: Tahoma;
-  margin: 0px;
-  background: url(../img/block-header3.gif) no-repeat right -26px;
-  color: #FFFFFF;
-  text-align: center;
-  padding: 5px 0px 0px 0px;
-  text-transform: uppercase;
-  font-size: 13px;
-}
-.front-page .side-menu .block .content{
-  border: 1px solid #CCCCCC;
-  border-top: 0px;
-  margin-top: 5px;
-  padding: 10px 10px 10px 10px;
-}
 #block-views-portal_friendship_block UL{
   margin: 0px;
   padding: 0px;
@@ -1074,9 +899,6 @@ TABLE TH{
 }
 .front-page .side-menu .view-content H2{
   background: none;
-}
-.front-page .side-menu .view-content .content{
-  border: 0px;
 }
 .front-page .side-menu .view-content .submitted{
   display: none;
@@ -1122,17 +944,6 @@ TABLE TH{
 #block-custom_pages-5 .content{
   border: 1px solid #CCCCCC;
 }
-#block-block-1{
-	background: none;
-}
-#block-block-1 .content{
-	border: 0px;
-	padding-top: 0px;
-	padding-bottom: 0px;
-}
-#block-block-1 BR{
-  display: none;
-}
 #block-custom-2{
 	
 }
@@ -1160,45 +971,6 @@ TABLE TH{
   margin: 0px;
 }
 /* BOF: STYLING BANNER BLOCK */
-
-/* BOF: SPORTS.RU banner */
-#block-block-1{
-  
-}
-#block-block-1 .content{
-  padding: 0px;
-  background: url(../img/block-header5.gif) no-repeat 0px 0px;
-}
-#block-block-1 .content H3{
-  background: url(../img/block-header5.gif) no-repeat right -50px;
-  padding-left: 5px;
-  padding-right: 5px;
-  text-align: center;
-}
-#block-block-1 .content .sportsru{
-  background: none;
-}
-#block-block-1 .content .sportsru DIV{
-  border: 0px;
-}
-#block-block-1 .content .sportsru #mgp-inner{
-  border: 1px solid #CCCCCC;
-  border-top: 0px;
-  background: #FFFFFF;
-}
-/* EOF: SPORTS.RU banner */
-
-.block-custom-news{
-  
-}
-.block-custom-news UL{
-  padding: 0px !important;
-}
-.block-custom-news UL LI{
-  margin: 0px 0px 3px 0px;
-  list-style: none;
-  font-size: 10px;
-}
 
 /* ------------ EOF: HOME PAGE ------------ */
 
@@ -1334,53 +1106,6 @@ TABLE TH{
 
 
 
-/* ====================================== BOF: FOOTER ====================================== */
-#footer{
-  background: #FFFFFF;
-  padding: 10px 5px 20px 5px;
-  min-height: 50px;
-  text-align: center;
-  font-size: 10px;
-}
-#footer .hr1{
-  padding: 0px 0px 10px 0px;
-}
-*html #footer{
-  height: 50px;
-}
-#footer .banner-links{
-  padding: 5px 0px 5px 0px;
-}
-#footer .rights{
-  padding: 5px 0px 5px 0px;
-}
-#footer .counter{
-  padding: 5px 0px 5px 0px;
-}
-#footer .author-info{
-	font-size: 10px;
-	margin-top: 10px;
-}
-#pre-footer{
-  padding: 0px 30px 0px 30px;
-}
-#pre-footer .block .content{
-  text-align: left;
-  
-}
-#pre-footer .left-part{
-  float: left;
-  width: 300px;
-}
-#pre-footer .center-part{
-  float: left;
-  width: 350px;
-}
-#pre-footer .right-part{
-  float: right;
-  width: 250px;
-}
-/* ====================================== EOF: FOOTER ====================================== */
 
 
 

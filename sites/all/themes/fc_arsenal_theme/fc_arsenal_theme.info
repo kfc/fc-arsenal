@@ -13,7 +13,7 @@ regions[left] = Left sidebar
 regions[right] = Right sidebar
 regions[content] = Content
 regions[footer] = Footer
-regions[main_menu] = Main Menu Links
+regions[sub_header] = Sub Header
 regions[news_block] = News Block
 
 
