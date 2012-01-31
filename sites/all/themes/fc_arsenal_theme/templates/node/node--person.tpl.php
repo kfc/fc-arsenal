@@ -56,6 +56,14 @@
 		  <h2><?php echo t('Biography')?></h2>
 		  <?php print $node->field_person_biography[$node->language][0]['safe_value']; ?>
     <?php endif;?>
+    
+    <?php if(!empty($stat_html)):?>
+      <div style="margin-top: 10px;">
+      <h3><?php echo t('Season stats')?></h3>
+      <?php print $stat_html; ?>
+      </div>
+    <?php endif;?>
+    
 	</div>
 	<div class="cf">&nbsp;</div>
 </div>

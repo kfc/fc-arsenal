@@ -4,11 +4,128 @@ function match_events_form_alter(&$form, $form_state, $form_id){
   if($form_id == 'match_node_form'){
     drupal_add_css(drupal_get_path('module', 'custom_match').'/misc/styles.css');
   } 
-
 }
 
-function match_events_views_pre_execute(&$view){
+function match_events_preprocess_node(&$vars){
+ // dpm($vars);
+ 
+  if($vars['node']->type == 'person'){
+    $stat_html = '';
+    $player_matches  = match_events_get_player_matches($vars['nid']);
+    if(!empty($player_matches)){
+      $vocab = taxonomy_vocabulary_machine_name_load('match_event_type');
+      $terms = taxonomy_get_tree($vocab->vid,0, 1);
+      $tids = array();
+      foreach($terms as $term)  
+        $tids[] = $term->tid;
+      $events = taxonomy_term_load_multiple($tids);
+      $summary = array();
+      foreach($events as $_event){
+        $summary[$_event->tid] = 0;
+      }
+      
+      $header = array(
+        'match_date' =>'',
+        'match' => '',
+        'result' =>'' ,
+        'events' => '',
+      );
+      foreach($player_matches as $_match){
+        $rows[$_match['nid']] = array(
+          'match_date' => $_match['match_date'],
+          'match' => l($_match['title'], 'node/'.$_match['nid']),
+          'result' => l($_match['result'], 'node/'.$_match['nid']),
+        );
+        $rows[$_match['nid']]['events'] = '';
+       
+        foreach($_match['events'] as $_evt){
+          $_event = key($_evt);
+          $summary[$_event]++;
+            
+          $_minute = $_evt[$_event];
+          $rows[$_match['nid']]['events'] .= theme_image(array('path'=>$events[$_event]->field_match_event_type_icon['und'][0]['uri'], 'attributes'=>array('title'=>'('.strtolower($events[$_event]->name).', '.$_minute.' '.t('min').')', ))).' '.$_minute."' ";
+        }
+      }
+      $table['table'] = array(
+          '#theme'=>'table',
+          '#header'=>$header,
+          '#rows'=>$rows);
+      
+      //$penalty_goals = $summary[match_events_get_event_id_by_code('penalty_goal', $events)];    
+      $table['summary'] = array(
+        '#markup' => 
+          '<b>'.t('Total goals').'</b>: '.$summary[match_events_get_event_id_by_code('goal', $events)].' ('.t('penalty goals').': '.$summary[match_events_get_event_id_by_code('penalty_goal', $events)].')<br />'.
+          '<b>'.t('Games played').'</b>: '.count($player_matches).' (starting: '.(count($player_matches) - $summary[match_events_get_event_id_by_code('sub_in', $events)]).')<br />'
+        );    
+          
+      $stat_html = render($table);
+    }
+    $vars['stat_html'] = $stat_html;
+  }
   
+  
+  //dpm($events);
+}
+
+function match_events_get_player_matches($player_nid){
+
+
+  $player_matches = db_query("
+    
+    SELECT * FROM
+    ((SELECT squad.entity_id as nid, node.title,  match_date.`field_match_start_date_value`, result.`field_match_result_value` 
+    FROM `field_data_field_match_arsenal_squad` squad
+    INNER JOIN `node` node on node.nid = squad.entity_id
+    INNER JOIN `field_data_field_match_season` season on season.entity_id = squad.entity_id
+    INNER JOIN `field_data_field_match_start_date` match_date on match_date.entity_id = squad.entity_id
+    INNER JOIN `field_data_field_match_result` result on result.entity_id = squad.entity_id
+    WHERE field_match_arsenal_squad_nid = :player_nid AND field_match_season_tid = :season)
+    
+    UNION
+    
+    (SELECT squad.entity_id as nid, node.title,  match_date.`field_match_start_date_value`, result.`field_match_result_value` 
+    FROM `field_data_field_match_arsenal_squad_subs` squad
+    INNER JOIN `node` node on node.nid = squad.entity_id
+    INNER JOIN `field_data_field_match_season` season on season.entity_id = squad.entity_id
+    INNER JOIN `field_data_field_match_start_date` match_date on match_date.entity_id = squad.entity_id
+    INNER JOIN `field_data_field_match_result` result on result.entity_id = squad.entity_id
+    WHERE field_match_arsenal_squad_subs_nid = :player_nid AND field_match_season_tid = :season)) t
+    
+    ORDER BY field_match_start_date_value
+  ",array(':player_nid'=>$player_nid, ':season'=>variable_get('tournament_table_default_season',0)))->fetchAllAssoc('nid');
+
+  foreach($player_matches as $_match){
+    $matches[$_match->nid]['nid'] = $_match->nid;
+    $matches[$_match->nid]['title'] = $_match->title;
+    $matches[$_match->nid]['match_date'] = date('d.m.Y', strtotime($_match->field_match_start_date_value));
+    $matches[$_match->nid]['result'] = $_match->field_match_result_value;
+    $matches[$_match->nid]['events'] = array(); 
+  }
+  
+  $player_events = db_query("
+    SELECT node.nid AS nid, node.title, evt_minute.`field_match_event_minute_value`, evt_type.`field_match_event_event_type_tid`
+    FROM 
+    node node
+    LEFT JOIN field_data_field_match_events field_data_field_match_events ON node.nid = field_data_field_match_events.entity_id AND (field_data_field_match_events.entity_type = 'node' AND field_data_field_match_events.deleted = 0)
+    LEFT JOIN `field_data_field_match_event_player` pl on pl.`entity_id` = field_data_field_match_events.field_match_events_value
+    LEFT JOIN `field_data_field_match_event_minute` evt_minute on evt_minute.`entity_id` = field_data_field_match_events.field_match_events_value
+    LEFT JOIN `field_data_field_match_event_event_type` evt_type on evt_type.`entity_id` = field_data_field_match_events.field_match_events_value
+    WHERE (( (node.status = '1') AND (node.type = 'match') AND pl.`field_match_event_player_nid` = :player_nid AND nid IN (:nids)))
+    ORDER BY  field_match_event_minute_value ASC
+  ",array(':player_nid'=>$player_nid,':nids'=> array_keys($matches)));
+  
+  foreach($player_events as $event){
+    $matches[$event->nid]['events'][] = array($event->field_match_event_event_type_tid => $event->field_match_event_minute_value);
+  }
+  return $matches;
+}
+
+function match_events_get_event_id_by_code($code, $events){
+  foreach($events as $event){
+    if(isset($event->field_match_event_type_code) && isset($event->field_match_event_type_code['und']['0']['safe_value']) && $event->field_match_event_type_code['und']['0']['safe_value'] == $code)
+      return $event->tid;
+  }
+  return false;
 }
 
 
