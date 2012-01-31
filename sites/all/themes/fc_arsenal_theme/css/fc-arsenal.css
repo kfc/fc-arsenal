@@ -697,7 +697,9 @@
 #block-custom_pages-2 TABLE TD{
   font-size: 10px;
 }
-#block-views-qrss_view_inoprosport_ru {padding-top: 10px;}
+
+
+/*#block-views-qrss_view_inoprosport_ru {padding-top: 10px;}
 #block-views-qrss_view_inoprosport_ru .content{
 	margin-top: -10px;
 	border: 1px solid #CCC;
@@ -712,7 +714,7 @@
 	margin: 0 0 0.25em 1.5em;
 	padding: 0;
 	list-style: disc;
-}
+}*/
 /* EOF: top news block {FRONT PAGE} */
 
 
@@ -789,7 +791,7 @@
 
 
 /* BOF: news list teser view */
-#latest-news-block .news-block-content {
+/*#latest-news-block .news-block-content {
   border: 1px solid #CCCCCC;
   border-top: 0px;
   margin-top: 5px;
@@ -797,7 +799,7 @@
 }
 #latest-news-block .news-block-content .teaser-content{
   font-size: 10px;
-}
+}*/
 /* EOF: news list teser view */
 
 
@@ -975,7 +977,7 @@
 /* ------------ EOF: HOME PAGE ------------ */
 
 /* BOF: TEASER NEWS */
-.teaser-node-news{
+/*.teaser-node-news{
   position: relative;
   border-bottom: 1px solid #636363;
   margin-bottom: 15px;
@@ -1002,7 +1004,7 @@
   font-size: 10px;
   color: #888888;
   margin-top: 15px;
-}
+}*/
 /* EOF: TEASER NEWS */
 
 
@@ -1157,8 +1159,8 @@
 }
 
 .block ul {
-    margin: 0;
-    padding: 0 0 0.25em 1em;
+	/*margin: 0;
+	padding: 0 0 0.25em 1em;*/
 }
 
 .views-exposed-form .views-exposed-widget .form-submit {margin-top: -2px;}

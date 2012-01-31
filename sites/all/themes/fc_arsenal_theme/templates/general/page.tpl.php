@@ -10,7 +10,6 @@
 	<!-- BOF: SUB-HEADER -->
 	<div id="sub-header">
 		<?php print render($page['sub_header']); ?>
-		<div class="cf">&nbsp;</div>
 	</div>
 	<!-- EOF: SUB-HEADER -->
 	
@@ -56,6 +55,7 @@
 			<div class="right-part col">
 				<?php print views_embed_view('partner_sites','partner_sites_homepage_block');  ?>
 			</div>
+			<div class="cf">&nbsp;</div>
 		</div><!-- /pre-footer -->
 		<?php } ?>
 

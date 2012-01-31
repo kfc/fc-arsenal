@@ -20,16 +20,16 @@ function fc_arsenal_theme_nice_menus($variables){
   $output = array();
   if ($menu_tree = theme('nice_menus_tree', array('menu_name' => $menu_name, 'mlid' => $mlid, 'depth' => $depth, 'menu' => $menu))) {
     if ($menu_tree['content']) {
-      $output['content'] = '<ul class="nice-menu nice-menu-' . $direction . '" id="nice-menu-' . $id . '">
-        <li class="Home"><a href="/">&nbsp;</a></li>
-        ' . $menu_tree['content'] . '
+      $output['content'] = '<div id="main_menu"><ul class="nice-menu nice-menu-' . $direction . '" id="nice-menu-' . $id . '">' .
+        /*<li class="Home"><a href="/">&nbsp;</a></li>
+        ' . */$menu_tree['content'] . /*'
         <li style="padding-right: 5px;">
           '.theme('custom_social_share_vk_link',$variables).'
           '.theme('custom_social_share_twitter_link',$variables).'
           '.theme('custom_social_share_facebook_link',$variables).'
         </li>
-          <li class="Mail"><a href="mailto:admin@fc-arsenal.com">&nbsp;</a></li>
-        </ul>' . "\n";
+          <li class="Mail"><a href="mailto:admin@fc-arsenal.com">&nbsp;</a></li>*/
+        '</ul></div>' . "\n";
       $output['subject'] = $menu_tree['subject'];
     }
   }
