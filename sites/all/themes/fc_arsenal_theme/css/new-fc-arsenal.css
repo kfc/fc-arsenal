@@ -71,6 +71,21 @@ TABLE {
 	}
 
 
+/* ====================================== BOF: GLOBAL ====================================== */
+
+.item-list ul,
+.item-list ul li {
+	margin: 0;
+	}
+
+
+.qrss-date {
+	color: #7b7b7b;
+	font-size: 10px;
+	}
+
+/* ====================================== EOF: GLOBAL ====================================== */
+
 
 #container {
 	width: 1000px;
@@ -578,48 +593,40 @@ block-teasers .notice-block-teaser H3 A {
 	}
 
 
-#block-views-qrss_view_inoprosport_ru .content {
-	margin-top: -10px;
-	border-right: 1px solid #cccccc;
-	border-width: 0px 1px 1px;
-	border-style: none solid solid;
-	border-color: #cccccc #cccccc;
-	padding: 10px 0px;
-	background: #f7f5f5;
-	font-size: 11px;
+#block-views-qrss_view_inoprosport_ru {
+	margin: 5px 0 0;
+	padding: 10px 20px;
+	background: #fff;
 	}
 #block-views-qrss_view_inoprosport_ru .item-list LI {
-	list-style: none outside none;
-	margin: 0px;
+	margin: 0 0 15px;
 	}
-#block-views-qrss_view_inoprosport_ru .item-list LI UL LI {
-	margin: 0pt 0pt 0.25em 1.5em;
-	padding: 0pt;
-	list-style: none outside none;
+#block-views-qrss_view_inoprosport_ru .item-list LI:last-child {
+	margin: 0;
 	}
 
 
-#latest-news-block {
-	/*background: url('../img/block-header3.gif') no-repeat scroll 0% 0% transparent;
-	margin-top: 15px;*/
-	}
+/*#latest-news-block {
+	background: url('../img/block-header3.gif') no-repeat scroll 0% 0% transparent;
+	margin-top: 15px;
+	}*/
 #latest-news-block H2 {
 	background: #fff;
-	margin: 0px;
-	padding: 5px 0px 0px 20px;
+	padding: 14px 0 14px 20px;
 	color: #000;
 	font-size: 26px;
 	}
-#latest-news-block .news-block-content {
-	border-right: 1px solid #cccccc;
-	border-width: 0px 1px 1px;
-	border-style: none solid solid;
-	border-color:  #cccccc #cccccc;
-	margin-top: 5px;
-	padding: 10px;
-	background: #f7f5f5;
+#latest-news-block .news-block-content .views-row {
+	border-right: 1px solid #fff;
+	border-left: 1px solid #fff;
+	padding: 10px 20px;
+	background: -webkit-linear-gradient(top, #f1f1f1, #fff);
+	background: -moz-linear-gradient(top, #f1f1f1, #fff);
+	background: -ms-linear-gradient(top, #f1f1f1, #fff);
+	background: -o-linear-gradient(top, #f1f1f1, #fff);
+	background: linear-gradient(top, #f1f1f1, #fff);
 	}
-#latest-news-block .news-block-content .teaser-content {
+/*#latest-news-block .news-block-content .teaser-content {
 	font-size: 10px;
 	}
 #latest-news-block .news-block-content ul {
@@ -631,12 +638,61 @@ block-teasers .notice-block-teaser H3 A {
 	color: #888888;
 	font-size: 10px;
 	text-align: right;
-	}
+	}*/
 
+
+.teaser-node-news .news-image {
+	margin: 0 0 10px;
+	}
+.teaser-node-news .news-body {
+	/*float: left;
+	width: 360px;*/
+	}
+.teaser-node-news .news-body H3,
+.teaser-node-news .news-body H3 A {
+	color: #cb0000;
+	}
+.teaser-node-news .news-body H3 {
+	font-size: 17px;
+	margin: 0 0 6px;
+	}
+.teaser-node-news .news-footer {
+	font-size: 10px;
+	color: #7b7b7b;
+	margin: 6px 0 0;
+	}
 
 .front-page #left {
 	margin: 0 5px 0 0;
 	width: 240px;
+	}
+
+
+#latest-news-block .news-block-content .item-list {
+	background: #fff;
+	margin: 5px 0 0;
+	padding: 10px 20px;
+	}
+#latest-news-block .news-block-content .item-list ul {
+	padding: 0 0 0 60px;
+	position: relative;
+	}
+#latest-news-block .news-block-content .item-list ul li {
+	border-bottom: 1px dotted #000;
+	margin: 0 0 8px;
+	padding: 0 0 8px;
+	}
+#latest-news-block .news-block-content .item-list ul li:last-child {
+	border-bottom: none;
+	margin: 0;
+	padding: 0;
+	}
+#latest-news-block .news-block-content .item-list .time-created {
+	color: #7b7b7b;
+	font-size: 10px;
+	position: absolute;
+	top: 2px;
+	left: 0;
 	}
 
 
@@ -796,9 +852,6 @@ block-teasers .notice-block-teaser H3 A {
 	color: #039200;
 	}*/
 .front-page .side-menu .block .Content01 {
-	background:#f7f5f5;
-	border: 1px solid #cfcfcf;
-	padding: 0 1px;
 	}
 .front-page .side-menu .block .Video,
 .front-page .side-menu .block .Photo {
@@ -962,42 +1015,6 @@ block-teasers .notice-block-teaser H3 A {
 #block-custom-news-apl-news UL LI:last-child {
 	margin: 0;
 	}
-#block-custom-news-apl-news .qrss-date {
-	color: #7b7b7b;
-	font-size: 10px;
-	}
-
-
-.teaser-node-news {
-	position: relative;
-	border-bottom: 1px solid #cfcfcf;
-	margin-bottom: 15px;
-	padding-bottom: 5px;
-	}
-.teaser-node-news .news-image,
-.teaser-node-news .news-body {
-	float: left;
-	}
-.teaser-node-news .news-image {
-	margin: 0px 10px 0px 0px;
-	width: 100px;
-	text-align: center;
-	}
-.teaser-node-news .news-body {
-	width: 360px;
-	}
-
-
-.teaser-node-news .news-body H3 {
-	margin: 0px 0px 5px;
-	padding: 0px;
-	}
-.teaser-node-news .news-footer {
-	text-align: right;
-	font-size: 10px;
-	color: #888888;
-	margin-top: 5px;
-	}
 
 
 .news-body-wide {
@@ -1154,48 +1171,39 @@ margin-left: 10px;
 	}*/
 
 
-.TournamentTable {
-	width: 100%;
-	margin: 0;
-	padding: 0;
-	border: 0;
-	border-collapse: collapse;
+#block-tournament-table-tournament-table-short .more {
+	padding: 10px 20px;
 	}
-.TournamentTable tr {
-	background: #f7f5f5;
-	}
-.TournamentTable tr .LargeCell {
-	width: 128px;
-	}
-.TournamentTable tr th {
-	padding: 1px 2px;
+
+.TournamentTable th,
+.TournamentTable td {
+	border-bottom: 1px solid #e3e3e3;
+	padding: 4px;
 	text-align: center;
-	font-size: 12px;
-	font-weight: normal;
-	color: #444242;
-	border: 1px solid #cfcfcf;
+	vertical-align: middle;
 	}
-.TournamentTable tr td {
-	padding: 1px 2px;
-	text-align: center;
-	font-size: 11px;
-	font-weight: normal;
-	color: #000;
-	border: 1px solid #cfcfcf;
+.TournamentTable th:last-child,
+.TournamentTable td:last-child {
+	background: #f2f2f2;
 	}
-.TournamentTable tr td.LargeCell {
+.TournamentTable th.LargeCell {
+	font-size: 10px;
 	text-align: left;
 	}
-
-
-tr.Grey {
-	background: #e7e6e6;
+.TournamentTable td.team_name {
+	text-align: left;
 	}
-
-
-.TournamentTable .arsenal-row td.team_name {
-	color: #B9141A !important;
-	font-weight: bold;
+.TournamentTable .LargeCell {
+	width: auto;
+	}
+.TournamentTable .arsenal-row td {
+	background: -webkit-linear-gradient(top, #40444e, #020202);
+	background: -moz-linear-gradient(top, #40444e, #020202);
+	background: -ms-linear-gradient(top, #40444e, #020202);
+	background: -o-linear-gradient(top, #40444e, #020202);
+	background: linear-gradient(top, #40444e, #020202);
+	border: none;
+	color: #fff;
 	}
 
 
