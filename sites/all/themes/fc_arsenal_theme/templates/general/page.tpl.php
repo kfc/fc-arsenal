@@ -24,7 +24,7 @@
 		<section id="content">
 			<?php if ($messages): print $messages; endif; ?>
 			<?php if((isset($variables['node']->type) &&  $variables['node']->type != "news") || (isset($node) && $node->type != 'news') || (!isset($variables['node']) && !isset($node))):?>
-				<h2><?php print $title; ?></h2>
+				<h1><?php print $title; ?></h1>
 			<?php endif;?> 
 			<?php if($tabs) : print '<div class="tabs">'.render($tabs).'</div>'; endif; ?>
 			<?php print render($tabs2); ?>

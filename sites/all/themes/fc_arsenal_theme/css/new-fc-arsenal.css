@@ -60,7 +60,7 @@ H3 {
 	margin: 10px 0px;
 	font-size: 12px;
 	}*/
-h2, h3 {
+h1, h2, h3 {
 	font-weight: normal;
 	}
 FIELDSET{
@@ -473,7 +473,21 @@ ul.nice-menu-down li.over {
 
 
 #content {
+	background: #fff;
+	min-height: 650px;
 	padding: 20px;
+	}
+#content h1 {
+	color: #000;
+	border-bottom: 1px solid #e3e3e3;
+	font-size: 26px;
+	margin: 0 0 18px;
+	padding: 0 0 8px;
+	}
+#block-system-main h3 {
+	color: #353535!important;
+	font-size: 17px;
+	margin: 14px 0 4px 0;
 	}
 
 
@@ -540,6 +554,7 @@ block-teasers .notice-block-teaser H3 A {
 
 
 .front-page #content {
+	background: none;
 	padding: 0;
 	width: 500px;
 	}
