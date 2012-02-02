@@ -1,0 +1,41 @@
+.view-display-id-seasons_archive .item-list li{
+  margin: 0 0 10px 0px;
+}
+
+.archive-matches-wrapper{
+  margin-top: 10px;
+}
+.archive-matches-wrapper table tr td{
+  padding: 3px;
+}
+
+.archive-match-events {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #A1A1A1;
+  
+}
+
+.bio-row-wrapper{
+  clear: both;
+  height: 125px;
+  vertical-align: top;
+  
+}
+
+.bio-row-wrapper .bio-image{
+  width: 100px;
+  float: left;
+  
+}
+
+.bio-row-wrapper .bio-info h3{
+  margin-top: 0px !important;
+}
+
+.bio-row-wrapper .bio-info{
+  width: 400px;
+  float: left;
+  text-align: left;
+  
+}

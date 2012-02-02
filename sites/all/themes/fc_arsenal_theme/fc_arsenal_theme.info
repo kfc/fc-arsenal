@@ -6,6 +6,7 @@ version = VERSION
 core = 7.x
 
 stylesheets[all][] = css/fc-arsenal.css
+stylesheets[all][] = css/dev.css
 scripts[] = js/custom.js
 
 regions[header] = Header
