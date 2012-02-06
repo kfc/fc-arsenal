@@ -21,6 +21,11 @@
 		elseif(arg(0) == 'chatrooms' && arg(1) == 'chat' && is_numeric(arg(2))){
 			include('chatroom-chat.tpl.php'); 
 		} else {?>
+		<?php if($page['left']): ?>
+		<aside id="left" class="side-menu">
+      <?php print render($page['left']); ?>
+    </aside>
+    <?php endif; ?>
 		<section id="content">
 			<?php if ($messages): print $messages; endif; ?>
 			<?php if((isset($variables['node']->type) &&  $variables['node']->type != "news") || (isset($node) && $node->type != 'news') || (!isset($variables['node']) && !isset($node))):?>

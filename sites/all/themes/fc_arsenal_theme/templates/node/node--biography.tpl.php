@@ -1,5 +1,5 @@
 <div class="player-page">
-  <div class="left-part">
+
     <div class="player-box-info">
       <h2><?php print $title; ?></h2>
       <div class="box-content">
@@ -20,8 +20,6 @@
       
       </div>
     </div>
-  </div>
-  <div class="right-part">
     <h2>Биография</h2>
     <?php print render($content); ?>
     
@@ -33,6 +31,5 @@
         <div class="date"><?php print date('d/m/Y',$created); ?></div>
       </div>
     
-  </div>
   <div class="cf">&nbsp;</div>
 </div>

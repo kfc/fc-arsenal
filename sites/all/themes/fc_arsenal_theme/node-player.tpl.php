@@ -8,7 +8,7 @@
 	}
 ?>
 <div class="player-page">
-	<div class="left-part">
+
 		<div class="player-box-info">
 			<h2><?php print $node->field_number_in_team[0]['value'].'.&nbsp;'.$node->title; ?></h2>
 			<div class="box-content">
@@ -41,10 +41,10 @@
 			<?php } ?>
 			</div>
 		</div>
-	</div>
-	<div class="right-part">
+
+
 		<h2>Биография</h2>
 		<?php print $node->field_biography[0]['view']; ?>
-	</div>
+
 	<div class="cf">&nbsp;</div>
 </div>

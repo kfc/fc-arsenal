@@ -1,21 +1,21 @@
 <div class="front-page">
 <?php if ($messages): print $messages; endif; ?>
 <!-- BOF: LEFT MENU -->
-	<div id="left" class="side-menu">
+	<aside id="left" class="side-menu">
 	<?php print render($page['left']); ?>
-	</div>
+	</aside>
 <!-- EOF: LEFT MENU -->
 
 <!-- BOF: FRONT-CONTENT -->
-	<div id="content">
+	<section id="content">
 	<?php print render($page['content']); ?>
-	</div>
+	</section>
 <!-- EOF: FRONT-CONTENT -->
 
 <!-- BOF: RIGHT MENU -->
-	<div id="right" class="side-menu">
+	<aside id="right" class="side-menu">
 	<?php print render($page['right']); ?>
-	</div>
+	</aside>
 <!-- EOF: RIGHT MENU -->
 <div class="cf">&nbsp;</div>
 </div>

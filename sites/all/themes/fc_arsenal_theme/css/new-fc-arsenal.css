@@ -1,7 +1,7 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+/* http://meyerweb.com/eric/tools/css/reset/
+ v2.0 | 20110126
+ License: none (public domain)
+ */
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 	margin: 0;
@@ -9,66 +9,65 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	border: 0;
 	font-size: 100%;
 	vertical-align: baseline;
-	}
+}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 	display: block;
-	}
-body {
-	line-height: 1;
-	}
+}
+/*body {
+ line-height: 1;
+ }*/
 ol, ul {
 	list-style: none;
-	}
+}
 blockquote, q {
 	quotes: none;
-	}
+}
 blockquote:before, blockquote:after,
 q:before, q:after {
 	content: '';
 	content: none;
-	}
+}
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
-	}
-
+}
 
 
 BODY {
 	background: #202227 url(../img/main_bg.jpg) no-repeat center top;
 	font-family: Arial;
 	font-size: 13px;
-	color: #636363;
+	color: #353535;
 	min-width: 1600px;
-	}
+}
 A {
 	color: #353535;
 	text-decoration: none;
-	}
+}
 A:hover {
 	color: #cb0000;
 	text-decoration: underline;
-	}
+}
 /*H2 {
-	color: #b9141a;
-	margin: 10px 0px;
-	font-size: 14px;
-	}
-H3 {
-	color: #b9141a;
-	margin: 10px 0px;
-	font-size: 12px;
-	}*/
+ color: #b9141a;
+ margin: 10px 0px;
+ font-size: 14px;
+ }
+ H3 {
+ color: #b9141a;
+ margin: 10px 0px;
+ font-size: 12px;
+ }*/
 h1, h2, h3 {
 	font-weight: normal;
-	}
-FIELDSET{
-  border: 1px solid #CCC;
-	}
+}
+FIELDSET {
+	border: 1px solid #CCC;
+}
 TABLE {
 	width: 100%;
-	}
+}
 
 
 /* ====================================== BOF: GLOBAL ====================================== */
@@ -76,13 +75,12 @@ TABLE {
 .item-list ul,
 .item-list ul li {
 	margin: 0;
-	}
-
+}
 
 .qrss-date {
 	color: #7b7b7b;
 	font-size: 10px;
-	}
+}
 
 /* ====================================== EOF: GLOBAL ====================================== */
 
@@ -90,7 +88,8 @@ TABLE {
 #container {
 	width: 1000px;
 	margin: 0px auto;
-	}
+}
+
 
 /* ====================================== BOF: HEADER ====================================== */
 
@@ -98,64 +97,63 @@ TABLE {
 	background: none /*url('../img/header-bg.png') no-repeat scroll 0 0*/;
 	position: relative;
 	height: 163px;
-	}
-
+}
 #header .logo {
 	position: absolute;
 	top: 47px;
 	left: 0;
-	}
-
+}
 /*#top-cap .block {
-	padding: 10px 20px 0px 0px;
-	color: #f8d150;
-	}
-#top-cap .block A {
-	color: #f8d150;
-	}
-#top-cap .block-custom {
-	font-size: 11px;
-	}
-#top-cap .block-custom TD.input {
-	padding: 0px 10px 0px 0px;
-	}
-#top-cap .block-custom INPUT {
-	font-size: 11px;
-	}
-#top-cap .block-custom INPUT.form-text {
-	border: 1px solid #f8d150;
-	background: none repeat scroll 0% 0% transparent;
-	color: #f8d150;
-	width: 70px;
-	}
-#top-cap .block-custom INPUT.form-submit {
-	background: none repeat scroll 0% 0% #f8d150;
-	color: #000000;
-	border: 0px none;
-	}
-#top-cap .block-custom LABEL {
-	display: none;
-	}
-#top-cap .block-custom TABLE {
-	width: auto;
-	}
-#top-cap .block-custom TABLE,
-#top-cap .block-custom TBODY,
-#top-cap .block-custom TABLE TH,
-#top-cap .block-custom TABLE TR,
-#top-cap .block-custom TABLE TD {
-	border: 0px none;
-	}
-#top-cap .block-custom TABLE.login-block {
-	float: right;
-	}
-#top-cap .block-custom TABLE.login-block .form-item {
-	margin: 4px 0px;
-	}
-#top-cap .block-custom TABLE.login-block TD.register,
-#top-cap .block-custom TABLE.login-block TD.request {
-	text-align: right;
-	}*/
+ padding: 10px 20px 0px 0px;
+ color: #f8d150;
+ }
+ #top-cap .block A {
+ color: #f8d150;
+ }
+ #top-cap .block-custom {
+ font-size: 11px;
+ }
+ #top-cap .block-custom TD.input {
+ padding: 0px 10px 0px 0px;
+ }
+ #top-cap .block-custom INPUT {
+ font-size: 11px;
+ }
+ #top-cap .block-custom INPUT.form-text {
+ border: 1px solid #f8d150;
+ background: none repeat scroll 0% 0% transparent;
+ color: #f8d150;
+ width: 70px;
+ }
+ #top-cap .block-custom INPUT.form-submit {
+ background: none repeat scroll 0% 0% #f8d150;
+ color: #000000;
+ border: 0px none;
+ }
+ #top-cap .block-custom LABEL {
+ display: none;
+ }
+ #top-cap .block-custom TABLE {
+ width: auto;
+ }
+ #top-cap .block-custom TABLE,
+ #top-cap .block-custom TBODY,
+ #top-cap .block-custom TABLE TH,
+ #top-cap .block-custom TABLE TR,
+ #top-cap .block-custom TABLE TD {
+ border: 0px none;
+ }
+ #top-cap .block-custom TABLE.login-block {
+ float: right;
+ }
+ #top-cap .block-custom TABLE.login-block .form-item {
+ margin: 4px 0px;
+ }
+ #top-cap .block-custom TABLE.login-block TD.register,
+ #top-cap .block-custom TABLE.login-block TD.request {
+ text-align: right;
+ }*/
+
 
 .historical_fact {
 	background: -webkit-linear-gradient(top, #d60000, #820000);
@@ -168,14 +166,14 @@ TABLE {
 	height: 36px;
 	line-height: 36px;
 	padding: 0 0 0 20px;
-	}
+}
 .historical_fact a {
 	color: #fff;
 	text-decoration: none;
-	}
+}
 .historical_fact a:hover {
 	text-decoration: underline;
-	}
+}
 
 
 #block-customization-customization-login-block {
@@ -187,22 +185,22 @@ TABLE {
 	border-top: 1px solid #9098b0;
 	border-right: 1px solid #9098b0;
 	border-radius: 0 0 3px 0;
-	height: 36px;
+	height: 35px;
 	position: absolute;
 	top: 0;
 	right: 0;
-	}
+}
 #block-customization-customization-login-block ul {
 	padding: 10px 0 0 0;
-	}
+}
 #block-customization-customization-login-block li {
 	color: #000;
 	float: left;
-	}
+}
 #block-customization-customization-login-block a {
 	color: #fff;
 	margin: 0 10px;
-	}
+}
 
 /* ====================================== EOF: HEADER ====================================== */
 
@@ -212,34 +210,34 @@ TABLE {
 #sub-header {
 	background: #e3e3e3;
 	border-bottom: 1px solid #c8c8c8;
-	}
+}
 
 
 ul.nice-menu,
 ul.nice-menu ul {
 	z-index: 5;
 	position: relative;
-	}
+}
 ul.nice-menu:after {
 	content: ".";
 	display: block;
 	height: 0pt;
 	clear: both;
 	visibility: hidden;
-	}
+}
 ul.nice-menu li {
 	position: relative;
-	}
+}
 ul.nice-menu a {
 	display: block;
-	}
+}
 ul.nice-menu ul {
 	position: absolute;
 	display: none;
-	}
+}
 ul.nice-menu ul li {
 	display: block;
-	}
+}
 ul.nice-menu li:hover ul,
 ul.nice-menu li.menuparent li:hover ul,
 ul.nice-menu li.menuparent li.menuparent li:hover ul,
@@ -249,61 +247,62 @@ ul.nice-menu li.menuparent li.over ul,
 ul.nice-menu li.menuparent li.menuparent li.over ul,
 ul.nice-menu li.menuparent li.menuparent li.menuparent li.over ul {
 	display: block;
-	}
+}
 ul.nice-menu li.menuparent ul {
 	overflow: visible;
-	}
+}
+
 
 /* ::::: http://www.fc-arsenal.com/sites/all/modules/nice_menus/nice_menus_default.css ::::: */
 ul.nice-menu,
 ul.nice-menu ul {
 	border: none;
-	}
+}
 ul.nice-menu li {
 	border: 0 none;
 	float: left;
 	margin: 0;
 	padding: 0;
 	background: none;
-	}
+}
 ul.nice-menu a {
 	padding: 0;
-	}
+}
 ul.nice-menu ul {
 	top: 30px;
 	left: 0px;
 	margin: 0;
-	}
+}
 ul.nice-menu ul li {
 	width: auto;
-	}
+}
 ul.nice-menu-down {
 	float: none;
 	border: 0 none;
 	width: auto;
-	background: none/*url("../img/menuBg.gif") repeat-x 0 0*/;
-	}
+	background: none /*url("../img/menuBg.gif") repeat-x 0 0*/;
+}
 ul.nice-menu-down li,
 ul.nice-menu-down li li {
 	border: 0 none;
-	}
+}
 ul.nice-menu-down ul {
 	left: 0;
-	}
+}
 ul.nice-menu-down ul li {
 	float: none;
-	}
+}
 ul.nice-menu-down .menuparent a {
 	padding: 0;
 	cursor: pointer;
-	}
+}
 ul.nice-menu-down li.menuparent {
-	background: none/*url('../img/arrow-down.png') no-repeat scroll right center #eeeeee*/;
-	}
+	background: none /*url('../img/arrow-down.png') no-repeat scroll right center #eeeeee*/;
+}
 ul.nice-menu-down li.menuparent:hover,
 ul.nice-menu-down li.over {
-	background: none/*url('../img/arrow-down.png') no-repeat scroll right center #cccccc*/;
-	}
+	background: none /*url('../img/arrow-down.png') no-repeat scroll right center #cccccc*/;
+}
 
 
 #main_menu {
@@ -317,79 +316,94 @@ ul.nice-menu-down li.over {
 	border-bottom: 0 none;
 	height: 35px;
 	padding: 5px 0 0 0;
-	}
+}
 #main_menu UL LI {
 	display: block;
 	font-size: 14px;
 	height: 33px;
 	margin: 0 0 0 12px;
 	padding: 2px 0 0 0;
-	}
+}
 #main_menu UL LI.first {
 	margin: 0 0 0 4px;
-	}
-#main_menu .nice-menu-down>.menuparent:hover {
+}
+#main_menu .nice-menu-down > .menuparent:hover {
 	background: #a61315;
-	border-top: 2px solid rgba(255,255,255,
-.85);
+	border-top: 2px solid rgba(255,255,255, .85);
 	border-radius: 3px 3px 0 0;
 	padding: 0;
-	}
+}
+#main_menu .nice-menu-down > .active-trail {
+	background: -webkit-linear-gradient(top, #9d9d9d, #e3e3e3);
+	background: -moz-linear-gradient(top, #9d9d9d, #e3e3e3);
+	background: -ms-linear-gradient(top, #9d9d9d, #e3e3e3);
+	background: -o-linear-gradient(top, #9d9d9d, #e3e3e3);
+	background: linear-gradient(top, #9d9d9d, #e3e3e3);
+	border-top: 2px solid rgba(255,255,255, .85);
+	border-radius: 3px 3px 0 0;
+	padding: 0;
+}
+#main_menu .nice-menu-down > .active-trail > a {
+	color: #000;
+}
+#main_menu .nice-menu-down > .active-trail:hover > a {
+	color: #fff;
+}
 #main_menu UL LI A {
 	color: #fff;
 	padding: 4px 18px 8px 18px;
-	}
+}
 #main_menu UL LI A:hover {
 	color: #fff;
 	text-decoration: none;
-	}
+}
 /*#main_menu UL LI.first {
-	background: none;
-	}
-#main_menu UL LI.Home {
-	background: url("../img/homeLink.gif") no-repeat 0 0 transparent;
-	width: 72px;
-	height: 28px;
-	border: 0;
-	padding: 0;
-	margin: 0;
-	}
-#main_menu UL LI.Home a,
-#main_menu UL LI.Home a:hover {
-	display: block;
-	text-decoration: none;
-	width: 42px;
-	}
-#main_menu UL LI.Mail {
-	background: url("../img/mailLink.gif") no-repeat right 0 transparent;
-	width: 70px;
-	height: 28px;
-	border: 0;
-	padding: 0;
-	margin: 0;
-	float: right;
-	}
-#main_menu UL LI.Mail a,
-#main_menu UL LI.Mail a:hover {
-	display: block;
-	text-decoration: none;
-	width: 42px;
-	float: right;
-	}*/
+ background: none;
+ }
+ #main_menu UL LI.Home {
+ background: url("../img/homeLink.gif") no-repeat 0 0 transparent;
+ width: 72px;
+ height: 28px;
+ border: 0;
+ padding: 0;
+ margin: 0;
+ }
+ #main_menu UL LI.Home a,
+ #main_menu UL LI.Home a:hover {
+ display: block;
+ text-decoration: none;
+ width: 42px;
+ }
+ #main_menu UL LI.Mail {
+ background: url("../img/mailLink.gif") no-repeat right 0 transparent;
+ width: 70px;
+ height: 28px;
+ border: 0;
+ padding: 0;
+ margin: 0;
+ float: right;
+ }
+ #main_menu UL LI.Mail a,
+ #main_menu UL LI.Mail a:hover {
+ display: block;
+ text-decoration: none;
+ width: 42px;
+ float: right;
+ }*/
 #main_menu UL LI A.menu-item-none {
 	cursor: pointer;
-	}
+}
 /*#main_menu UL LI.menuparent UL LI {
-	width: 160px;
-	}
-#main_menu UL LI.menuparent UL LI.first {
-	background: none repeat scroll 0 0 #EEEEEE;
-	}*/
+ width: 160px;
+ }
+ #main_menu UL LI.menuparent UL LI.first {
+ background: none repeat scroll 0 0 #EEEEEE;
+ }*/
 #main_menu UL UL {
 	background: #a61315;
 	border-radius: 0 3px 3px 3px;
 	padding: 3px 0;
-	}
+}
 #main_menu UL UL LI {
 	background: none;
 	border-top: 1px solid #ba171a;
@@ -399,17 +413,17 @@ ul.nice-menu-down li.over {
 	margin: 0;
 	padding: 0;
 	white-space: nowrap;
-	}
+}
 #main_menu UL UL LI.first {
 	border-top: none;
 	margin: 0;
-	}
+}
 #main_menu UL UL LI.last {
 	border-bottom: none;
-	}
+}
 #main_menu UL UL LI A {
 	padding: 4px 20px;
-	}
+}
 #main_menu UL UL LI A:hover {
 	background: -webkit-linear-gradient(top, #ba171a, #8b0d0f);
 	background: -moz-linear-gradient(top, #ba171a, #8b0d0f);
@@ -417,31 +431,31 @@ ul.nice-menu-down li.over {
 	background: -o-linear-gradient(top, #ba171a, #8b0d0f);
 	background: linear-gradient(top, #ba171a, #8b0d0f);
 	text-decoration: underline;
-	}
+}
 #main_menu UL UL UL {
 	top: -3px;
 	left: 100%;
-	}
+}
 
 
 #block-search-form {
 	margin: 0;
 	padding: 7px 20px 7px 0;
-	}
+}
 #block-search-form:after {
 	content: ".";
 	display: block;
 	height: 0pt;
 	clear: both;
 	visibility: hidden;
-	}
+}
 #block-search-form form {
 	float: right;
-	}
+}
 #block-search-form .form-item,
 #block-search-form .form-actions {
 	margin: 0;
-	}
+}
 #block-search-form .form-text {
 	border: 1px solid #a5a5a5;
 	border-radius: 2px;
@@ -449,7 +463,7 @@ ul.nice-menu-down li.over {
 	padding: 0 0 0 8px;
 	vertical-align: top;
 	width: 180px;
-	}
+}
 #block-search-form .form-submit {
 	background: #ee3636;
 	border: 1px solid #930707;
@@ -459,7 +473,8 @@ ul.nice-menu-down li.over {
 	height: 24px;
 	vertical-align: top;
 	width: 66px;
-	}
+}
+
 /* ====================================== EOF: SUB-HEADER ====================================== */
 
 
@@ -469,31 +484,34 @@ ul.nice-menu-down li.over {
 	background: #e3e3e3;
 	border-top: 1px solid #fff;
 	padding: 5px;
-	}
+}
 
 
 #content {
 	background: #fff;
-	min-height: 650px;
+	min-height: 500px;
 	padding: 20px;
-	}
+}
 #content h1 {
 	color: #000;
 	border-bottom: 1px solid #e3e3e3;
 	font-size: 26px;
 	margin: 0 0 18px;
 	padding: 0 0 8px;
-	}
-#block-system-main h3 {
-	color: #353535!important;
+}
+#content h3 {
+	color: #353535 !important;
 	font-size: 17px;
 	margin: 14px 0 4px 0;
-	}
+}
+#content ul {
+	margin: 0 0 1em;
+}
 
 
 .links .statistics_counter {
 	display: none;
-	}
+}
 
 
 .block-teasers .notice-block-teaser {
@@ -501,73 +519,77 @@ ul.nice-menu-down li.over {
 	font-size: 10px;
 	margin: 0px 0px 5px;
 	border-bottom: 1px solid #a0a0a0;
-	}
+}
 .block-teasers .notice-block-teaser H3 {
 	margin: 0px;
-	}
+}
 block-teasers .notice-block-teaser H3 A {
 	color: #40ac1e;
 	font-weight: bold;
 	font-size: 10px;
-	}
+}
 .block-teasers .footer {
 	font-size: 10px;
-	}
-
-
-.block .footer {
-	font-size: 10px;
-	}
+}
 
 
 .blog-block-teaser {
 	padding: 1px 0px 10px;
 	margin: 0px 0px 10px;
 	border-bottom: 1px solid #efefef;
-	}
+}
 .blog-block-teaser .blog-name {
 	color: #a0a0a0;
 	margin-bottom: 3px;
-	}
+}
 .blog-block-teaser .blog-name .name {
 	color: #b9141a;
 	font-weight: bold;
-	}
+}
 .blog-block-teaser H3 {
 	margin: 0px;
-	}
+}
 .blog-block-teaser H3 A {
 	color: #40ac1e;
 	font-size: 11px;
-	}
+}
 .blog-block-teaser .info {
 	text-align: right;
 	font-size: 10px;
-	}
+}
 
 
 .front-page #left,
 .front-page #content,
 .front-page #right {
 	float: left;
-	}
+}
 
+.front-page #left {
+	margin: 0 5px 0 0;
+	width: 240px;
+}
 
 .front-page #content {
 	background: none;
 	padding: 0;
 	width: 500px;
-	}
+}
+
+.front-page #right {
+	width: 240px;
+	margin: 0 0 0 5px;
+}
 
 
 #front-page-top-news {
 	margin: 0 0 5px 0;
-	}
+}
 #front-page-top-news .news-image {
 	text-align: center;
 	width: 100%;
 	overflow: hidden;
-	}
+}
 #front-page-top-news .news-content {
 	background: -webkit-linear-gradient(top, #353740, #131518);
 	background: -moz-linear-gradient(top, #353740, #131518);
@@ -576,61 +598,83 @@ block-teasers .notice-block-teaser H3 A {
 	background: linear-gradient(top, #353740, #131518);
 	padding: 16px 20px 10px 20px;
 	color: #fff;
-	}
+}
 #front-page-top-news .news-content H2 {
 	color: #fff;
 	margin: 0 0 10px 0;
 	font-size: 26px;
-	}
+}
 #front-page-top-news .news-content H2 A {
 	color: #fff;
-	}
+}
 #front-page-top-news .news-footer {
 	font-size: 10px;
 	color: #8d8d8d;
-	}
+}
 
 
-.front-page #content #block-custom_pages-0 {
+.front-page #block-custom_pages-0 {
 	background: none repeat scroll 0% 0% transparent;
 	margin-bottom: 10px;
 	padding: 0px ! important;
-	}
-.front-page #content #block-custom_pages-0 .content {
+}
+.front-page #block-custom_pages-0 .content {
 	padding: 0px;
 	border: 0px none;
-	}
+}
 
 
 #block-custom_pages-2 TABLE TH,
 #block-custom_pages-2 TABLE TD {
 	font-size: 10px;
-	}
+}
 
 
 #block-views-qrss_view_inoprosport_ru {
 	margin: 5px 0 0;
 	padding: 10px 20px;
 	background: #fff;
-	}
+}
 #block-views-qrss_view_inoprosport_ru .item-list LI {
 	margin: 0 0 15px;
-	}
+}
 #block-views-qrss_view_inoprosport_ru .item-list LI:last-child {
 	margin: 0;
-	}
+}
+
+
+.teaser-node-news .news-image {
+	margin: 0 0 10px;
+}
+.teaser-node-news .news-body {
+	/*float: left;
+	 width: 360px;*/
+}
+.teaser-node-news .news-body H3,
+.teaser-node-news .news-body H3 A {
+	color: #cb0000;
+}
+.teaser-node-news .news-body H3 {
+	font-size: 17px;
+	margin: 0 0 6px;
+}
+.teaser-node-news .news-footer {
+	font-size: 10px;
+	color: #7b7b7b;
+	margin: 6px 0 0;
+}
 
 
 /*#latest-news-block {
-	background: url('../img/block-header3.gif') no-repeat scroll 0% 0% transparent;
-	margin-top: 15px;
-	}*/
+ background: url('../img/block-header3.gif') no-repeat scroll 0% 0% transparent;
+ margin-top: 15px;
+ }*/
 #latest-news-block H2 {
 	background: #fff;
 	padding: 14px 0 14px 20px;
 	color: #000;
 	font-size: 26px;
-	}
+}
 #latest-news-block .news-block-content .views-row {
 	border-right: 1px solid #fff;
 	border-left: 1px solid #fff;
@@ -640,117 +684,90 @@ block-teasers .notice-block-teaser H3 A {
 	background: -ms-linear-gradient(top, #f1f1f1, #fff);
 	background: -o-linear-gradient(top, #f1f1f1, #fff);
 	background: linear-gradient(top, #f1f1f1, #fff);
-	}
+}
 /*#latest-news-block .news-block-content .teaser-content {
-	font-size: 10px;
-	}
-#latest-news-block .news-block-content ul {
-	margin: 0pt 0pt 0.25em 1.5em;
-	padding: 0pt;
-	list-style: none outside none;
-	}
-#latest-news-block .news-block-content .item-list .time-created .field-content {
-	color: #888888;
-	font-size: 10px;
-	text-align: right;
-	}*/
-
-
-.teaser-node-news .news-image {
-	margin: 0 0 10px;
-	}
-.teaser-node-news .news-body {
-	/*float: left;
-	width: 360px;*/
-	}
-.teaser-node-news .news-body H3,
-.teaser-node-news .news-body H3 A {
-	color: #cb0000;
-	}
-.teaser-node-news .news-body H3 {
-	font-size: 17px;
-	margin: 0 0 6px;
-	}
-.teaser-node-news .news-footer {
-	font-size: 10px;
-	color: #7b7b7b;
-	margin: 6px 0 0;
-	}
-
-.front-page #left {
-	margin: 0 5px 0 0;
-	width: 240px;
-	}
-
-
+ font-size: 10px;
+ }
+ #latest-news-block .news-block-content ul {
+ margin: 0pt 0pt 0.25em 1.5em;
+ padding: 0pt;
+ list-style: none outside none;
+ }
+ #latest-news-block .news-block-content .item-list .time-created .field-content {
+ color: #888888;
+ font-size: 10px;
+ text-align: right;
+ }*/
 #latest-news-block .news-block-content .item-list {
 	background: #fff;
 	margin: 5px 0 0;
 	padding: 10px 20px;
-	}
+}
 #latest-news-block .news-block-content .item-list ul {
 	padding: 0 0 0 60px;
 	position: relative;
-	}
+}
 #latest-news-block .news-block-content .item-list ul li {
 	border-bottom: 1px dotted #000;
 	margin: 0 0 8px;
 	padding: 0 0 8px;
-	}
+}
 #latest-news-block .news-block-content .item-list ul li:last-child {
 	border-bottom: none;
 	margin: 0;
 	padding: 0;
-	}
+}
 #latest-news-block .news-block-content .item-list .time-created {
 	color: #7b7b7b;
 	font-size: 10px;
+	margin: 2px 0 0;
 	position: absolute;
-	top: 2px;
 	left: 0;
-	}
+}
 
 
 #block-views-match_prev {
-	}
-#block-views-match_prev .content,
-#block-views-match_next .content {
+}
+#block-views-match_prev .content, #block-views-match_next .content {
 	background: url('../img/block-bg1.png') repeat-x scroll 0px bottom #ffffff;
 	padding: 10px 0px 0px;
-	}
+}
 #block-views-match_next .online-link {
 	padding: 3px 0px;
 	text-align: center;
-	}
+}
 #block-views-match_next .online-link A {
 	font-weight: bold;
 	font-size: 11px;
-	}
+}
 
 
-#block-views-matches-next-match .match-block .players .team-block {
+#block-views-matches-next-match {
+	display: none;
+}
+#block-views-matches-next-match .players .team-block {
 	float: left;
 	width: 80px;
 	padding: 0px 2px 5px;
-	}
-#block-views-matches-next-match .match-block .players .vs {
+}
+#block-views-matches-next-match .players .vs {
 	float: left;
 	padding: 20px 0px 0px;
-	}
-#block-views-matches-next-match .match-block .emblems-line {
+}
+#block-views-matches-next-match .emblems-line {
 	text-align: center;
-	}
-#block-views-matches-next-match .match-block .team-names-line {
-	text-align: center;
-	font-weight: bold;
-	color: #b9141a;
-	}
-#block-views-matches-next-match .match-block .score {
+}
+#block-views-matches-next-match .team-names-line {
 	text-align: center;
 	font-weight: bold;
 	color: #b9141a;
-	}
-#block-views-matches-next-match .match-block .tournament-type {
+}
+#block-views-matches-next-match .score {
+	text-align: center;
+	font-weight: bold;
+	color: #b9141a;
+}
+#block-views-matches-next-match .tournament-type {
 	text-align: center;
 	margin: 3px 5px;
 	padding: 2px 0px;
@@ -759,44 +776,38 @@ block-teasers .notice-block-teaser H3 A {
 	color: #000;
 	border-style: solid none;
 	border-color: #cccccc;
-	}
-#block-views-matches-next-match .match-block .players {
+}
+#block-views-matches-next-match .players {
 	text-align: center;
 	font-weight: bold;
 	color: #b9141a;
-	}
-#block-views-matches-next-match .match-block .date {
+}
+#block-views-matches-next-match .date {
 	text-align: center;
 	font-size: 10px;
 	color: #000;
 	padding: 2px 0px;
-	}
-#block-views-matches-next-match .match-block .footer {
+}
+#block-views-matches-next-match .footer {
 	text-align: center;
 	border-top: 1px solid #cccccc;
 	margin: 3px 0px 0px;
 	padding: 1px 0px 3px;
-	}
-#block-views-matches-next-match .match-block .footer A {
+}
+#block-views-matches-next-match .footer A {
 	color: #40ac1e;
 	font-size: 11px;
 	font-weight: bold;
-	}
-
-
-.front-page #right {
-	width: 240px;
-	margin: 0 0 0 5px;
-	}
+}
 
 
 .front-page .side-menu .block {
 	background: #fff;
 	margin: 0 0 5px 0;
-	}
+}
 .front-page .side-menu .block:last-child {
 	margin: 0;
-	}
+}
 .front-page .side-menu .block H2 {
 	background: -webkit-linear-gradient(top, #d70000, #820000);
 	background: -moz-linear-gradient(top, #d70000, #820000);
@@ -808,10 +819,10 @@ block-teasers .notice-block-teaser H3 A {
 	padding: 8px 0 8px 20px;
 	font-size: 15px;
 	position: relative;
-	}
+}
 .front-page .side-menu .block H2.WithLink {
 	padding: 5px 20px 5px;
-	}
+}
 .front-page .side-menu .block H2 a.Next {
 	color: #fff;
 	position: absolute;
@@ -822,7 +833,7 @@ block-teasers .notice-block-teaser H3 A {
 	top: 7px;
 	right: 10px;
 	text-decoration: none;
-	}
+}
 .front-page .side-menu .block H2 a.Prev {
 	color: #fff;
 	position: absolute;
@@ -833,108 +844,106 @@ block-teasers .notice-block-teaser H3 A {
 	top: 7px;
 	left: 10px;
 	text-decoration: none;
-	}
+}
 .front-page .side-menu .block ul {
 	margin: 0;
 	padding: 0;
-	}
+}
 .front-page .side-menu .block .content {
 	/*padding: 0 8px 8px;
-	background: #f7f5f5;*/
+	 background: #f7f5f5;*/
 	padding: 15px 20px;
-	}
+}
 .front-page .side-menu .block .content .view-qrss-view {
 	/*background: #fff;
-	padding: 5px;*/
-	}
+	 padding: 5px;*/
+}
 .front-page .side-menu .block .BottomContent {
 	/*background: url("../img/blockBottomBg.gif") no-repeat 0 bottom;
-	padding-left: 5px;
-	border: none;*/
-	}
+	 padding-left: 5px;
+	 border: none;*/
+}
 /*.front-page .side-menu .block .BottomContent .InsideBottom {
-	padding: 5px 5px 5px 0;
-	background: url("../img/blockBottomBg.gif") no-repeat right bottom;
-	font-size: 12px;
-	font-weight: bold;
-	text-align: center;
-	color: #039200;
-	}
-.front-page .side-menu .block .BottomContent a.Online {
-	color: #003a92;
-	}
-.front-page .side-menu .block .BottomContent a.Green {
-	color: #039200;
-	}*/
+ padding: 5px 5px 5px 0;
+ background: url("../img/blockBottomBg.gif") no-repeat right bottom;
+ font-size: 12px;
+ font-weight: bold;
+ text-align: center;
+ color: #039200;
+ }
+ .front-page .side-menu .block .BottomContent a.Online {
+ color: #003a92;
+ }
+ .front-page .side-menu .block .BottomContent a.Green {
+ color: #039200;
+ }*/
 .front-page .side-menu .block .Content01 {
-	}
-.front-page .side-menu .block .Video,
-.front-page .side-menu .block .Photo {
+}
+.front-page .side-menu .block .Video, .front-page .side-menu .block .Photo {
 	width: 100%;
 	overflow: hidden;
 	margin-bottom: 5px;
-	}
+}
 .front-page .side-menu .block h5 {
 	margin: 0 0 2px;
 	font-size: 12px;
 	padding: 0 4px;
-	}
+}
 .front-page .side-menu .block .Date {
 	margin: 0 0 3px;
 	font-size: 10px;
 	padding: 0 4px;
 	color: #676666;
-	}
+}
 
 
 .front-page .side-menu .view-content H2 {
 	background: none repeat scroll 0% 0% transparent;
-	}
+}
 .front-page .side-menu .view-content .submitted {
 	display: none;
-	}
-
-
+}
 .front-page .side-menu .block-custom_pages .promotion-block {
 	text-align: center;
-	}
+}
 .front-page .side-menu .block-custom_pages .promotion-block IMG {
 	max-width: 220px;
-	}
+}
 
 
 #block-views-poll_view .content {
 	padding-top: 0px;
 	padding-bottom: 0px;
-	}
+}
 #block-views-poll_view .content .content {
 	padding: 0px;
-	}
+}
 #block-views-poll_view .content .content .poll .form-radios LABEL.option,
 #block-views-poll_view .content .content .poll .text,
 #block-views-poll_view .content .content .poll .percent,
 #block-views-poll_view .content .content .poll .total,
 #block-views-poll_view .content .comment_forbidden {
 	font-size: 10px;
-	}
+}
 
 
 #block-custom_pages-5 {
 	background: none repeat scroll 0% 0% transparent;
-	}
+}
 #block-custom_pages-5 H2 {
 	display: none;
-	}
+}
 #block-custom_pages-5 .content {
 	border: 1px solid #cccccc;
-	}
+}
+
 
 #block-block-1 {
 	background: #fff;
-	}
+}
 #block-block-1 div {
 	border: none;
-	}
+}
 #block-block-1 H3 {
 	background: -webkit-linear-gradient(top, #d70000, #820000);
 	background: -moz-linear-gradient(top, #d70000, #820000);
@@ -946,74 +955,74 @@ block-teasers .notice-block-teaser H3 A {
 	padding: 8px 0 8px 20px;
 	font-size: 15px;
 	position: relative;
-	}
+}
 #block-block-1 #mgp-inner {
 	padding: 15px 20px;
-	}
+}
 #block-block-1 .mgp-option {
 	margin: 0 0 15px 0;
-	}
+}
 #block-block-1 .mgp-option:last-child {
 	margin: 0;
-	}
+}
 #block-block-1 .date {
 	color: #7b7b7b;
 	font-size: 10px;
-	}
+}
 /*#block-block-1 {
-	background: none repeat scroll 0% 0% transparent;
-	}
-#block-block-1 BR {
-	display: none;
-	}
-#block-block-1 .content {
-	border: 0px none;
-	padding: 0px;
-	background: url('../img/block-header5.gif') no-repeat scroll 0px 0px transparent;
-	}
-#block-block-1 .content H3 {
-	font-family: Verdana;
-	margin: 0;
-	background: url('../img/block-header5.gif') no-repeat scroll right -50px transparent;
-	color: #ffffff;
-	text-align: center;
-	padding: 5px 0 5px;
-	font-size: 12px;
-	text-transform: uppercase;
-	position: relative;
-	}
-#block-block-1 .content .sportsru {
-	background: none repeat scroll 0% 0% transparent;
-	}
-#block-block-1 .content .sportsru DIV {
-	border: 0px none;
-	}
-#block-block-1 .content .sportsru #mgp-inner {
-	border-right: 1px solid #cccccc;
-	border-width: 0px 1px 1px;
-	border-style: none solid solid;
-	border-color:  #cccccc #cccccc;
-	background: #f7f5f5;
-	padding: 5px;
-	}*/
+ background: none repeat scroll 0% 0% transparent;
+ }
+ #block-block-1 BR {
+ display: none;
+ }
+ #block-block-1 .content {
+ border: 0px none;
+ padding: 0px;
+ background: url('../img/block-header5.gif') no-repeat scroll 0px 0px transparent;
+ }
+ #block-block-1 .content H3 {
+ font-family: Verdana;
+ margin: 0;
+ background: url('../img/block-header5.gif') no-repeat scroll right -50px transparent;
+ color: #ffffff;
+ text-align: center;
+ padding: 5px 0 5px;
+ font-size: 12px;
+ text-transform: uppercase;
+ position: relative;
+ }
+ #block-block-1 .content .sportsru {
+ background: none repeat scroll 0% 0% transparent;
+ }
+ #block-block-1 .content .sportsru DIV {
+ border: 0px none;
+ }
+ #block-block-1 .content .sportsru #mgp-inner {
+ border-right: 1px solid #cccccc;
+ border-width: 0px 1px 1px;
+ border-style: none solid solid;
+ border-color:  #cccccc #cccccc;
+ background: #f7f5f5;
+ padding: 5px;
+ }*/
 
 
 #block-custom-2 {
-	}
+}
 #block-custom-2 H2 {
 	display: none;
-	}
+}
 #block-custom-2 .content {
 	padding: 0px;
 	border: 0px none;
-	}
+}
 
 
 #block-views-banner_block,
 #block-views-banner_block2,
 #block-views-banner_block2_2 {
 	background: none repeat scroll 0% 0% transparent;
-	}
+}
 #block-views-banner_block .content,
 #block-views-banner_block2 .content,
 #block-views-banner_block2_2 .content {
@@ -1021,20 +1030,20 @@ block-teasers .notice-block-teaser H3 A {
 	border: 0px none;
 	padding: 0px;
 	margin: 0px;
-	}
+}
 
 
 #block-custom-news-apl-news UL LI {
 	margin: 0 0 15px 0;
-	}
+}
 #block-custom-news-apl-news UL LI:last-child {
 	margin: 0;
-	}
+}
 
 
 .news-body-wide {
 	width: 100%;
-	}
+}
 
 /* ====================================== EOF: MAIN PART ====================================== */
 
@@ -1046,7 +1055,7 @@ block-teasers .notice-block-teaser H3 A {
 	padding: 0 0 50px 0;
 	text-align: center;
 	font-size: 11px;
-	}
+}
 
 
 #pre-footer {
@@ -1056,80 +1065,76 @@ block-teasers .notice-block-teaser H3 A {
 	background: -o-linear-gradient(top, #30333b, #101113);
 	background: linear-gradient(top, #30333b, #101113);
 	text-align: left;
-	}
+}
 #pre-footer h3 {
 	color: #fff;
 	font-size: 15px;
 	margin: 0 0 10px 0;
-	}
+}
 #pre-footer ul {
 	padding: 0;
-	}
+}
 #pre-footer ul li {
 	background: url(../img/marker_2.gif) no-repeat left 2px;
 	margin: 0 0 6px 0;
 	padding: 0 0 0 10px;
-	}
+}
 #pre-footer ul a {
 	color: #a3a7b2;
-	}
-
-
+}
 #pre-footer .col {
 	background: url(../img/pre_footer_separator.png) repeat-y left top;
 	float: left;
 	min-height: 220px;
 	width: 252px;
-	}
-
+}
 
 #pre-footer .footer-logo {
 	background: none;
 	position: relative;
 	width: 244px;
-	}
+}
 #pre-footer .footer-logo a {
 	height: 54px;
 	margin: -27px 0 0 0;
 	position: absolute;
 	top: 50%;
 	left: 30px;
-	}
-
+}
 
 #pre-footer .view-content {
 	padding: 28px 20px;
-	}
+}
 
 
 #footer #block-block-3 {
 	border-bottom: 2px solid #393c43;
 	padding: 26px 130px;
-	}
+}
 #footer #block-block-3 a {
 	color: #fff;
 	text-decoration: underline;
-	}
+}
 
 
 #footer .banner-links {
 	padding: 5px 0px;
-	}
+}
 
 
 #footer .partners {
 	color: #fff;
 	padding: 14px 0;
-	}
+}
 #footer .partners a {
 	color: #fff;
 	text-decoration: underline;
-	}
+}
 
 
 #footer .counter {
 	padding: 14px 0;
-	}
+}
 
 /* ====================================== EOF: FOOTER ====================================== */
 
@@ -1139,56 +1144,58 @@ block-teasers .notice-block-teaser H3 A {
 	height: 7px;
 	line-height: 7px;
 	font-size: 1px;
-	}
+}
+
 
 .cf {
 	clear: both;
 	font-size: 1px;
 	line-height: 1px;
 	height: 1px;
-	}
+}
 
 
 /* ::::: http://www.sports.ru/css/informer.css ::::: */
 /*
-.sportsru {
-	background-color: rgb(223, 223, 223);
-	}
-.sportsru * {
-	padding: 0pt;
-	margin: 0pt;
-	font-size: 11px;
-	}
-.sportsru a {
-	}
-.sportsru a:hover {
-	text-decoration: none;
-	}
-.sportsru h3 {
-	font-size: 12px;
-	font-weight: bold;
-	font-style: normal;
-	padding: 5px 0pt 5px 12px;
-	color: #ffffff;
-	background-color: rgb(186, 46, 10);
-	}
-.sportsru p {
-	margin: 0 0 3px;
-	}
-.sportsru #mgp-inner {
-	padding: 10px;
-	}
-.sportsru .mgp-option {
-margin-left: 10px;
-}
-.sports_1232967021 {
-	border: 1px solid rgb(186, 46, 10);
-	}*/
+ .sportsru {
+ background-color: rgb(223, 223, 223);
+ }
+ .sportsru * {
+ padding: 0pt;
+ margin: 0pt;
+ font-size: 11px;
+ }
+ .sportsru a {
+ }
+ .sportsru a:hover {
+ text-decoration: none;
+ }
+ .sportsru h3 {
+ font-size: 12px;
+ font-weight: bold;
+ font-style: normal;
+ padding: 5px 0pt 5px 12px;
+ color: #ffffff;
+ background-color: rgb(186, 46, 10);
+ }
+ .sportsru p {
+ margin: 0 0 3px;
+ }
+ .sportsru #mgp-inner {
+ padding: 10px;
+ }
+ .sportsru .mgp-option {
+ margin-left: 10px;
+ }
+ .sports_1232967021 {
+ border: 1px solid rgb(186, 46, 10);
+ }*/
 
 
 #block-tournament-table-tournament-table-short .more {
 	padding: 10px 20px;
-	}
+}
+
 
 .TournamentTable th,
 .TournamentTable td {
@@ -1196,21 +1203,21 @@ margin-left: 10px;
 	padding: 4px;
 	text-align: center;
 	vertical-align: middle;
-	}
+}
 .TournamentTable th:last-child,
 .TournamentTable td:last-child {
 	background: #f2f2f2;
-	}
+}
 .TournamentTable th.LargeCell {
 	font-size: 10px;
 	text-align: left;
-	}
+}
 .TournamentTable td.team_name {
 	text-align: left;
-	}
+}
 .TournamentTable .LargeCell {
 	width: auto;
-	}
+}
 .TournamentTable .arsenal-row td {
 	background: -webkit-linear-gradient(top, #40444e, #020202);
 	background: -moz-linear-gradient(top, #40444e, #020202);
@@ -1219,7 +1226,7 @@ margin-left: 10px;
 	background: linear-gradient(top, #40444e, #020202);
 	border: none;
 	color: #fff;
-	}
+}
 
 
 .AddBlock {
@@ -1227,14 +1234,14 @@ margin-left: 10px;
 	overflow: hidden;
 	margin-bottom: 20px;
 	text-align: center;
-	}
+}
 
 
 .TopTitle {
 	background: url("../img/topTitleB.gif") no-repeat 0 bottom;
 	padding-bottom: 3px;
 	margin-bottom: 15px;
-	}
+}
 .TopTitle .InsideTitle {
 	background: url("../img/topTitleT.gif") no-repeat 0 0;
 	padding: 5px 8px 2px;
@@ -1242,33 +1249,33 @@ margin-left: 10px;
 	color: #fff;
 	text-transform: uppercase;
 	font-weight: bold;
-	}
+}
 .TopTitle .InsideTitle a {
 	color: #fff;
-	}
+}
 
 
 .video-category-wrapper {
 	font-size: 11px;
 	font-style: italic;
 	color: #636363;
-	}
+}
 
 
 .image_gallery_title_link {
 	text-align: center;
 	width: 200px;
-	}
+}
 
 
 div.wallpaper-thumb-wrapper {
 	margin-bottom: 3px;
-	}
+}
 
 
 .views-field-field-wallpaper-image img {
 	vertical-align: middle;
-	}
+}
 
 
 .node-audio {
@@ -1278,21 +1285,21 @@ div.wallpaper-thumb-wrapper {
 	position: relative;
 	padding: 5px;
 	margin-bottom: 10px;
-	}
+}
 
 
 .audio-download {
-	margin-top:5px;
-	}
+	margin-top: 5px;
+}
 .audio-download img {
 	vertical-align: bottom;
-	}
+}
 
 
 .node-audio-title {
 	font-weight: bold;
 	margin-bottom: 3px;
-	}
+}
 
 
 .book-item {
@@ -1302,126 +1309,274 @@ div.wallpaper-thumb-wrapper {
 	position: relative;
 	padding: 5px;
 	margin-bottom: 10px;
-	}
+}
 
 
 .book-cover {
 	width: 80px;
 	text-align: left;
-	float:left;
-	}
+	float: left;
+}
 
 
 .book-info {
 	width: 160px;
 	margin-left: 10px;
 	text-align: left;
-	float:left;
-	}
+	float: left;
+}
 .book-info .info {
 	height: 85px;
-	overflow:hidden;
-	}
+	overflow: hidden;
+}
 .book-info .download-link img {
 	vertical-align: bottom;
-	}
+}
 
 
 .right-part {
 	text-align: justify;
-	}
+}
 .right-part .post-info {
 	float: right;
 	display: block;
-	}
+}
 .right-part .post-info .date {
 	float: right;
 	display: block;
 	clear: both;
-	}
+}
 .right-part .post-info .author {
 	float: right;
 	display: block;
 	clear: both;
-	}
+}
 .right-part .post-info .source {
 	margin-top: 10px;
 	margin-bottom: 10px;
-	}
+}
 .right-part .post-info .label {
 	font-weight: bold;
-	}
+}
 
 
 .biography-list-column {
 	padding-bottom: 10px;
 	width: 150px;
 	vertical-align: top;
-	}
+}
 .biography-list-column:hover {
 	background-color: #F1F1F1;
 	outline: 1px solid #D1D1D1;
-	}
-
-
+}
 .view-partner-sites ul li {
 	list-style: none;
 	/*margin: 10px;*/
-  width: 100%;
-	}
+	width: 100%;
+}
+
+
 .view-partner-sites .partner-site-description {
 	margin-left: 25px;
 	float: left;
 	display: inline;
 	vertical-align: top;
-	}
+}
 .view-partner-sites .partner-site-description p {
 	margin: 0px;
 	padding: 0px;
-	}
+}
 .view-partner-sites .partner-split-line {
 	border: 1px dotted #A1A1A1;
-	}
+}
 .view-partner-sites .partner-title-wrapper {
 	font-weight: bold;
 	font-size: 14px;
 	margin-bottom: 7px;
-	}
+}
 .view-partner-sites .partner-banner-wrapper {
 	float: left;
 	display: inline;
-	float:left;
-	padding-top:2px;/*width: 210px;*/
+	float: left;
+	padding-top: 2px;/*width: 210px;*/
 }
 .view-partner-sites .partner-banner-image {
 	float: right;
-	display:inline;
+	display: inline;
 	margin-left: 30px;
-	}
-
-
+}
 .view-id-historical_facts .views-field-field-historical-fact-date {
 	width: 100px;
 	float: left;
-	}
+}
 .view-id-historical_facts .views-field-title {
 	float: left;
-	}
+}
 .view-id-historical_facts .views-row {
 	margin-bottom: 4px;
-	}
-
+}
 
 /* ::::: http://www.fc-arsenal.com/modules/node/node.css ::::: */
 
-
 /* ::::: http://www.fc-arsenal.com/sites/all/modules/thickbox/thickbox.css ::::: */
-
 
 /* ::::: http://www.fc-arsenal.com/sites/all/modules/cck/fieldgroup.css ::::: */
 
-
 /* ::::: http://www.fc-arsenal.com/sites/all/modules/custom/user_profile_fields/user_profile_fields.css ::::: */
 
-
 /* ::::: http://www.fc-arsenal.com/sites/all/themes/fc_arsenal_theme/fc-arsenal.css ::::: */
+
+/* ====================================== BOF: PAGES ====================================== */
+
+/* BOF: PLAYER INFO PAGE */
+.player-page .player-box-info {
+	float: right;
+	width: 202px;
+	margin: 0 0 0 15px;
+}
+/*.player-page .player-box-info H2{
+ margin: 0px;
+ padding: 5px 0px 3px 10px;
+ color: #FFFFFF;
+ height: 31px;
+ font-weight: bold;
+ background: url(../img/block-header4.gif) no-repeat right -39px;
+ text-align: center;
+ }*/
+
+.player-page .player-box-info .photo {
+	overflow: hidden;
+	width: 202px;
+}
+.player-page .player-box-info .photo IMG {
+	height: auto;
+	margin: 0 -9px -10px -8px;
+	vertical-align: top;
+	width: 219px;
+}
+
+.player-page .player-box-info .box-content {
+	background: #f1f1f1;
+	border: 1px solid #e0e0e0;
+	padding: 6px 10px 16px 20px;
+}
+.player-page .player-box-info .box-content div {
+	margin: 10px 0 0;
+}
+.player-page .player-box-info .box-content .label {
+	font-weight: bold;
+}
+
+.player-page .player-box-info .birth-place {
+	margin: 0 !important;
+}
+
+.player-page .player-info p {
+	margin: 0 0 1em;
+}
+.player-page .player-info p strong {
+	font-size: 17px;
+}
+
+.player-page .season-stats {
+	clear: both;
+}
+.player-page .season-stats h3 {
+	font-weight: bold;
+}
+.player-page .season-stats table {
+	margin: 0 0 1em;
+}
+
+/* EOF: PLAYER INFO PAGE */
+
+
+/* BOF: TOURNAMENT TABLE */
+
+.tournament-table tr.even,
+.tournament-table tr.odd {
+  background: #fff;    
+}
+.tournament-table tr:hover td {
+	background: #f6f6f6;
+}
+.tournament-table tr:hover td:last-child {
+	background: #eaeaea;
+	}
+.tournament-table th,
+.tournament-table td {
+	border: 1px solid #e3e3e3;
+	text-align: center; 
+}
+.tournament-table th{
+	background: -webkit-linear-gradient(top, #fff, #e3e3e3);
+	background: -moz-linear-gradient(top, #fff, #e3e3e3);
+	background: -ms-linear-gradient(top, #fff, #e3e3e3);
+	background: -o-linear-gradient(top, #fff, #e3e3e3);
+	background: linear-gradient(top, #fff, #e3e3e3);
+	padding: 6px;
+}
+.tournament-table td {
+	padding: 2px 6px;
+}
+.tournament-table td:last-child {
+	background: #f2f2f2;
+}
+
+.tournament-table td a {
+	text-decoration: underline;
+}
+.tournament-table td a:hover {
+	text-decoration: none;
+}
+
+.tournament-table .team_name {
+	padding-left: 8px;
+	text-align: left;
+	width: 100%;
+}
+
+.tournament-table-arsenal-row td {
+	background: -webkit-linear-gradient(top, #484c58, #020202)!important;
+	background: -moz-linear-gradient(top, #484c58, #020202)!important;
+	background: -ms-linear-gradient(top, #484c58, #020202)!important;
+	background: -o-linear-gradient(top, #484c58, #020202)!important;
+	background: linear-gradient(top, #484c58, #020202)!important;
+	color: #FFF;
+}
+/*.tournament-table-arsenal-row td a{
+  color: #FFF;
+  text-decoration: underline;
+}
+.tournament-table-arsenal-row td a:hover{
+  text-decoration: none;
+  color: #FFF;
+}*/
+
+/*.block-tournament-table .content{
+  padding: 0px !important;
+  font-size: 10px;
+}
+
+.tournament-table-short td{
+  border-top: 1px solid #ECECEC; 
+  border-bottom: 1px solid #ECECEC; 
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.tournament-table-short-head {
+  border-bottom: 2px solid #A3A3A3;
+}
+.tournament-table-short-head td{
+  font-weight: bold;
+  text-align: center;
+}
+
+.tournament-table-short-link-wrapper{
+  padding:3px;
+}*/
+
+/* EOF: TOURNAMENT TABLE */
+
+/* ====================================== EOF: PAGES ====================================== */

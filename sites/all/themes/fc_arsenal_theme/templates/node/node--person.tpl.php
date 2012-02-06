@@ -8,15 +8,16 @@
 	}
 ?>
 <div class="player-page">
-	<div class="left-part">
+
 		<div class="player-box-info">
-			<h2>
+			<!--h2>
       <?php if(!empty($node->field_person_number)): ?>
         <?php print $node->field_person_number[$node->language][0]['value'].'.&nbsp;';?>
       <?php endif;?>
-      <?php echo $node->title; ?></h2>
+      <?php echo $node->title; ?>
+      </h2-->
+      <div class="photo"><?php print $image; ?></div>
 			<div class="box-content">
-				<div class="photo"><?php print $image; ?></div>
 			<?php if(!empty($node->field_person_role)) { ?>
 				<div class="position"><span class="label"><?php echo t('Player position')?>:</span> <?php print $node->field_person_role[$node->language][0]['taxonomy_term']->name; ?>
         <?php if(!empty($node->field_person_role_description)) { ?>
@@ -50,20 +51,18 @@
 			<?php } ?>
 			</div>
 		</div>
-	</div>
-	<div class="right-part">
+
     <?php if(!empty($node->field_person_biography)):?>
-		  <h2><?php echo t('Biography')?></h2>
-		  <?php print $node->field_person_biography[$node->language][0]['safe_value']; ?>
+		  <!--h2><?php echo t('Biography')?></h2-->
+		  <div class="player-info"><?php print $node->field_person_biography[$node->language][0]['safe_value']; ?></div>
     <?php endif;?>
     
     <?php if(!empty($stat_html)):?>
-      <div style="margin-top: 10px;">
+      <div class="season-stats">
       <h3><?php echo t('Season stats')?></h3>
       <?php print $stat_html; ?>
       </div>
     <?php endif;?>
-    
-	</div>
+
 	<div class="cf">&nbsp;</div>
 </div>

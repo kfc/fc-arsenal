@@ -8,7 +8,7 @@
 	}
 ?>
 <div class="player-page">
-	<div class="left-part">
+
 		<div class="player-box-info">
 			<h2><?php print $node->title; ?></h2>
 			<div class="box-content">
@@ -27,8 +27,6 @@
 			
 			</div>
 		</div>
-	</div>
-	<div class="right-part">
 		<h2>Биография</h2>
 		<?php print $node->field_biography_0[0]['view']; ?>
 		<?php if($node->field_author_and_source[0]['value']) { ?>
@@ -38,6 +36,6 @@
 				<div class="source"><span class="label">Источник:</span> <?php print $node->field_author_and_source[0]['value']; ?></div>
 			</div>
 		<?php } ?>
-	</div>
+
 	<div class="cf">&nbsp;</div>
 </div>
