@@ -39,3 +39,7 @@
   text-align: left;
   
 }
+
+.node-audio{
+  height: 100px !important;
+}
