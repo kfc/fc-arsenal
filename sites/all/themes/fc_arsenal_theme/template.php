@@ -56,3 +56,9 @@ function fc_arsenal_theme_audiofield_formatter_audiofield_embedded($variables) {
 
   return $output;
 }
+
+function fc_arsenal_theme_menu_breadcrumb_alter(&$active_trail, &$item){
+  array_push($active_trail, $active_trail[count($active_trail)-1]);
+} 
+
+

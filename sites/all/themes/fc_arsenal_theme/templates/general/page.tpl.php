@@ -12,6 +12,16 @@
 		<?php print render($page['sub_header']); ?>
 	</div>
 	<!-- EOF: SUB-HEADER -->
+  
+  <div class="breadcrumb-wrapper">
+    <div class="breadcrumb-links">
+      <?php print $breadcrumb; ?>
+    </div>
+    <div id="breadcrumbs">
+      <?php print render($page['breadcrumbs']); ?>
+    </div>
+  </div>
+  
 	
 	<!-- BOF: MAIN-PART -->
 	<div id="main-part">
@@ -21,7 +31,8 @@
 		elseif(arg(0) == 'chatrooms' && arg(1) == 'chat' && is_numeric(arg(2))){
 			include('chatroom-chat.tpl.php'); 
 		} else {?>
-		<?php if($page['left']): ?>
+		<?php
+     if($page['left']): ?>
 		<aside id="left" class="side-menu">
       <?php print render($page['left']); ?>
     </aside>

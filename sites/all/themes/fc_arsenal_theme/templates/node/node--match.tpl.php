@@ -4,6 +4,22 @@
 	//print $node->title;
 ?>
 <div class="left-part">
+  <div class="match-centre-left-team">
+    <?php if($node->field_match_place[$node->language][0] == 'away'):?>
+      <?php if(isset($node->field_match_opponent_squad[$node->language][0]) && isset($node->opponent_events)):?> 
+      <?php print theme('custom_match_match_team_block', array($node->field_match_opponent[$node->language][0]['node']->title, $node->field_match_opponent_squad[$node->language][0]['safe_value'], $node->opponent_events));?>
+      <?endif;?>
+    <?php else:?>
+      <?php if(isset($node->field_match_arsenal_squad[$node->language]) && isset($node->arsenal_events)):                                 
+      if(isset($node->field_match_arsenal_squad_subs[$node->language]))
+        $arsenal_squad = array_merge($node->field_match_arsenal_squad[$node->language], $node->field_match_arsenal_squad_subs[$node->language]);
+      else 
+        $arsenal_squad = $node->field_match_arsenal_squad[$node->language];  
+    ?>
+      <?php print theme('custom_match_match_team_block', array(t('Arsenal'),  $arsenal_squad, $node->arsenal_events));?>
+      <?endif;?>
+    <?endif;?>
+  </div>   
 <?php
 
 	$tabs_list = array();
@@ -83,17 +99,23 @@
 ?>
 </div>
 <div class="right-part">
-  <?php if(isset($node->field_match_arsenal_squad[$node->language]) && isset($node->arsenal_events)):                                 
-    if(isset($node->field_match_arsenal_squad_subs[$node->language]))
-      $arsenal_squad = array_merge($node->field_match_arsenal_squad[$node->language], $node->field_match_arsenal_squad_subs[$node->language]);
-    else 
-      $arsenal_squad = $node->field_match_arsenal_squad[$node->language];  
-  ?>
-	<?php print theme('custom_match_match_team_block', array(t('Arsenal'),  $arsenal_squad, $node->arsenal_events));?>
-  <?endif;?>
-  <?php if(isset($node->field_match_opponent_squad[$node->language][0]) && isset($node->opponent_events)):?> 
-	<?php print theme('custom_match_match_team_block', array($node->field_match_opponent[$node->language][0]['node']->title, $node->field_match_opponent_squad[$node->language][0]['safe_value'], $node->opponent_events));?>
-  <?endif;?>
+  <div class="match-centre-right-team">
+    <?php if($node->field_match_place[$node->language][0] != 'away'):?>
+      <?php if(isset($node->field_match_opponent_squad[$node->language][0]) && isset($node->opponent_events)):?> 
+      <?php print theme('custom_match_match_team_block', array($node->field_match_opponent[$node->language][0]['node']->title, $node->field_match_opponent_squad[$node->language][0]['safe_value'], $node->opponent_events));?>
+      <?endif;?>
+    <?php else:?>
+      <?php if(isset($node->field_match_arsenal_squad[$node->language]) && isset($node->arsenal_events)):                                 
+      if(isset($node->field_match_arsenal_squad_subs[$node->language]))
+        $arsenal_squad = array_merge($node->field_match_arsenal_squad[$node->language], $node->field_match_arsenal_squad_subs[$node->language]);
+      else 
+        $arsenal_squad = $node->field_match_arsenal_squad[$node->language];  
+    ?>
+      <?php print theme('custom_match_match_team_block', array(t('Arsenal'),  $arsenal_squad, $node->arsenal_events));?>
+      <?endif;?>
+    <?endif;?>
+  </div>
+ 
 </div>
 <div class="cf">&nbsp;</div>
 </div>

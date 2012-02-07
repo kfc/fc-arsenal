@@ -16,7 +16,7 @@
       <ul>
      <?endif;?> 
      <li>
-     <span class="time-created"><span class="field-content"><?php echo  date('d/m/Y', $view->result[$index]->node_created);?></span></span>
+     <span class="time-created"><span class="field-content"><?php echo  date('d.m.Y', $view->result[$index]->node_created);?></span></span>
      <?php echo l($view->result[$index]->node_title, drupal_get_path_alias('node/'.$view->result[$index]->nid));?></li> 
      
      <?php if($index == $variables['total_rows']-1):?>

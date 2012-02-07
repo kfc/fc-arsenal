@@ -15,6 +15,7 @@ regions[right] = Right sidebar
 regions[content] = Content
 regions[footer] = Footer
 regions[sub_header] = Sub Header
+regions[breadcrumbs] = Breadcrumbs
 regions[news_block] = News Block
 
 

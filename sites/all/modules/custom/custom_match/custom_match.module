@@ -585,6 +585,16 @@ function _custom_match_get_livetv_arsenal_matches(){
   }
   return $arsenal_matches;
 }
+
+function custom_match_views_post_render(&$view, &$output) {
+  if($view->name == 'matches' && $view->current_display == 'calendar'){
+   
+    //dpm($view); 
+  }
+    
+
+}
+
 /*function custom_match_block_view_alter(&$data, $block){
   if($block->module == 'views' && $block->delta == 'matches-next_match')
   {

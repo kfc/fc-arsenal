@@ -21,6 +21,14 @@ function custom_news_menu(){
   return $items;
 }
 
+function custom_news_permission() {
+  return array(
+    'view news stats' => array(
+      'title' => t('View news stats'), 
+    ),
+  );
+}
+
 
 function custom_news_theme(){
   return array(
@@ -113,8 +121,8 @@ function theme_custom_news_rss_item($item){
   global $language;
   
   $output = '<li><div class="qrss-item">';
-  $output .= '<span class="qrss-date">'.format_date($item['timestamp'], 'custom_news_rss_item', '', date_default_timezone(TRUE), $language->language).'</span> ';
   $output .= l($item['title'],$item['url'],array('attributes'=>array('target'=>'_blank','rel'=>'nofollow')));
+  $output .= '<br /><span class="qrss-date">'.format_date($item['timestamp'], 'custom_news_rss_item', '', date_default_timezone(TRUE), $language->language).'</span> ';
   $output .= '</div></li>';
   
   return $output;
