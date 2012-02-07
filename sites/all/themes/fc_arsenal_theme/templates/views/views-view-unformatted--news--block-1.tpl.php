@@ -53,6 +53,6 @@
     </div>
   </div>
 <?php endif;?>
-<div style="text-align: right; margin-top: 5px;">
+<div class="all-news">
   <a href="/news-all/date"><?php echo t('All news')?></a>
 </div>

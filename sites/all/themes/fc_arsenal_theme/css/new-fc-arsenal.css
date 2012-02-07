@@ -333,7 +333,8 @@ ul.nice-menu-down li.over {
 	border-radius: 3px 3px 0 0;
 	padding: 0;
 }
-#main_menu .nice-menu-down > .active-trail {
+#main_menu .nice-menu-down > .active-trail,
+.front #main_menu .nice-menu-down > .first {
 	background: -webkit-linear-gradient(top, #9d9d9d, #e3e3e3);
 	background: -moz-linear-gradient(top, #9d9d9d, #e3e3e3);
 	background: -ms-linear-gradient(top, #9d9d9d, #e3e3e3);
@@ -343,10 +344,12 @@ ul.nice-menu-down li.over {
 	border-radius: 3px 3px 0 0;
 	padding: 0;
 }
-#main_menu .nice-menu-down > .active-trail > a {
+#main_menu .nice-menu-down > .active-trail > a,
+.front #main_menu .nice-menu-down > .first > a {
 	color: #000;
 }
-#main_menu .nice-menu-down > .active-trail:hover > a {
+#main_menu .nice-menu-down > .active-trail:hover > a,
+.front #main_menu .nice-menu-down > .first:hover > a {
 	color: #fff;
 }
 #main_menu UL LI A {
@@ -895,6 +898,10 @@ block-teasers .notice-block-teaser H3 A {
 	padding: 0 4px;
 	color: #676666;
 }
+.front-page .side-menu .block .more-link {
+	padding: 10px 20px;
+	text-align: left;
+}
 
 
 .front-page .side-menu .view-content H2 {
@@ -908,6 +915,18 @@ block-teasers .notice-block-teaser H3 A {
 }
 .front-page .side-menu .block-custom_pages .promotion-block IMG {
 	max-width: 220px;
+}
+
+.front-page .all-news {
+	background: -webkit-linear-gradient(top, #f4f4f4, #dbdbdb);
+	background: -moz-linear-gradient(top, #f4f4f4, #dbdbdb);
+	background: -ms-linear-gradient(top, #f4f4f4, #dbdbdb);
+	background: -o-linear-gradient(top, #f4f4f4, #dbdbdb);
+	background: linear-gradient(top, #f4f4f4, #dbdbdb);
+	border: 1px solid #fff;
+	border-top: none;
+	margin: 5px 0 0;
+	padding: 8px 0 8px 20px;
 }
 
 
@@ -961,13 +980,17 @@ block-teasers .notice-block-teaser H3 A {
 }
 #block-block-1 .mgp-option {
 	margin: 0 0 15px 0;
+	padding: 0 0 14px;
+	position: relative;
 }
 #block-block-1 .mgp-option:last-child {
 	margin: 0;
 }
 #block-block-1 .date {
+	bottom: 0;
 	color: #7b7b7b;
 	font-size: 10px;
+	position: absolute;
 }
 /*#block-block-1 {
  background: none repeat scroll 0% 0% transparent;
@@ -1033,11 +1056,17 @@ block-teasers .notice-block-teaser H3 A {
 }
 
 
-#block-custom-news-apl-news UL LI {
+#block-custom-news-apl-news .view-item-qrss-view UL LI {
 	margin: 0 0 15px 0;
+	padding: 0 0 14px;
+	position: relative;
 }
-#block-custom-news-apl-news UL LI:last-child {
+#block-custom-news-apl-news .view-item-qrss-view UL LI:last-child {
 	margin: 0;
+}
+#block-custom-news-apl-news .view-item-qrss-view .qrss-date {
+	bottom: 0;
+	position: absolute;
 }
 
 
@@ -1075,7 +1104,7 @@ block-teasers .notice-block-teaser H3 A {
 	padding: 0;
 }
 #pre-footer ul li {
-	background: url(../img/marker_2.gif) no-repeat left 2px;
+	background: url(../img/marker_2.gif) no-repeat left 4px;
 	margin: 0 0 6px 0;
 	padding: 0 0 0 10px;
 }
@@ -1085,7 +1114,7 @@ block-teasers .notice-block-teaser H3 A {
 #pre-footer .col {
 	background: url(../img/pre_footer_separator.png) repeat-y left top;
 	float: left;
-	min-height: 220px;
+	min-height: 250px;
 	width: 252px;
 }
 
@@ -1190,11 +1219,6 @@ block-teasers .notice-block-teaser H3 A {
  .sports_1232967021 {
  border: 1px solid rgb(186, 46, 10);
  }*/
-
-
-#block-tournament-table-tournament-table-short .more {
-	padding: 10px 20px;
-}
 
 
 .TournamentTable th,
