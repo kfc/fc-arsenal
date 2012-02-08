@@ -8,11 +8,19 @@ function gallery_image_picker_menu() {
     'type'=>MENU_CALLBACK,
     'page callback'=>'_get_gallery_images',
     'page arguments'=>array(1),
-    'access arguments' => array('administer content')
+    'access arguments' => array('select image from gallery')
   );
 
   return $items;
 
+}
+
+function gallery_image_picker_permission() {
+  return array(
+    'select image from gallery' => array(
+      'title' => t('Select image from gallery'), 
+    ),
+  );
 }
 
 function gallery_image_picker_form_alter(&$form, $form_state, $form_id){

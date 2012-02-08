@@ -62,3 +62,22 @@ function fc_arsenal_theme_menu_breadcrumb_alter(&$active_trail, &$item){
 } 
 
 
+/**
+ * Returns HTML for a breadcrumb trail.
+ *
+ * @param $variables
+ *   An associative array containing:
+ *   - breadcrumb: An array containing the breadcrumb links.
+ */
+function fc_arsenal_theme_breadcrumb($variables) {
+  $breadcrumb = $variables['breadcrumb'];
+
+  if (!empty($breadcrumb)) {
+    // Provide a navigational heading to give context for breadcrumb links to
+    // screen-reader users. Make the heading invisible with .element-invisible.
+    $output = '<h2 class="element-invisible">' . t('You are here') . '</h2>';
+
+    $output .= '<div class="breadcrumb">' . implode('<span class="separator"></span>', $breadcrumb) . '</div>';
+    return $output;
+  }
+}

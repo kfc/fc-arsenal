@@ -344,11 +344,13 @@ function nice_menus_build_page_trail($page_menu) {
  * @return
  *   An HTML string of properly nested Nice menu lists.
  */
-function theme_nice_menus_tree($variables) {
+function theme_nice_menus_tree($variables) { 
   $menu_name = $variables['menu_name'];
   $mlid = $variables['mlid'];
   $depth = $variables['depth'];
   $menu = $variables['menu'];
+  $parent_depth = 0;
+  
   // Load the full menu array.
   $menu = isset($menu) ? $menu : menu_tree_all_data($menu_name);
   if (isset($menu)) {
@@ -387,12 +389,12 @@ function theme_nice_menus_tree($variables) {
   else {
     // Get the title from the DB since we don't have it in the $menu.
     $result = db_query("SELECT title FROM {menu_custom} WHERE menu_name = :menu_name", array(':menu_name' => $menu_name))->fetchField();
-    $title = check_plain($result);
+    $title = check_plain($result);  
   }
 
   $output['content'] = '';
   $output['subject'] = $title;
-
+        
   if ($menu) {
     // Set the total menu depth counting from this parent if we need it.
     $depth =  ($depth > 0) ? ($parent_depth + $depth) : $depth;

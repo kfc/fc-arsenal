@@ -9,8 +9,8 @@
   </div>
   <div class="cf">&nbsp;</div>
   <div class="news-footer">
-    <span class="time-created"><?php echo $fields['created']->content;?></span>, 
+    <span class="time-created"><?php echo $fields['created']->content;?></span><?php if(user_access('view news stats')):?>, 
     <span class="reads"><?php echo t('Reads count').' ('.(int)$fields['totalcount']->raw.')'?></span>,
-    <span class="comments"><?php echo t('Comments count').' ('.$fields['comment_count']->content.')'?></span>
+    <span class="comments"><?php echo t('Comments count').' ('.$fields['comment_count']->content.')'?></span><?php endif;?>
   </div>
 </div>

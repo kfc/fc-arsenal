@@ -36,9 +36,11 @@
 			include('chatroom-chat.tpl.php'); 
 		} else {?>
 		<?php
-     if($page['left']): ?>
+     if($secondary_menu || $page['left']):
+      ?>
 		<aside id="left" class="side-menu">
-      <?php print render($page['left']); ?>
+      <?php if($secondary_menu) echo theme('links__system_secondary_menu',array('links'=>$secondary_menu));?>
+      <?php if($page['left']) print render($page['left']); ?>
     </aside>
     <?php endif; ?>
 		<section id="content">

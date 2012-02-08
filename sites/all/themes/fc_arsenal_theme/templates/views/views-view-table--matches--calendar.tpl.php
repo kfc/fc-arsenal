@@ -23,7 +23,10 @@
   <?php endif; ?>
   <thead>
     <tr>
-      <?php foreach ($header as $field => $label): ?>
+      <?php foreach ($header as $field => $label):
+        if(in_array($field, array('field_match_place','field_match_result','field_match_opponent','field_match_season')))
+            continue;
+       ?>
         <th <?php if ($header_classes[$field]) { print 'class="'. $header_classes[$field] . '" '; } ?>>
           <?php print $label; ?>
         </th>
