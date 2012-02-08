@@ -6,5 +6,5 @@
 	<div class="date"><?php echo $fields['created']->content ?></div>
 </div>
 <div class="more-link">
-	<a href="/video" class="Green"><?php echo t('All video');?></a>
+	<a href="/video" class="button"><?php echo t('All video');?></a>
 </div>

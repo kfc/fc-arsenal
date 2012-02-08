@@ -23,7 +23,7 @@
             }
             endforeach;?>
         </table>
-        <div class="more-link"><?php echo l(t('Show full table'),'tournament-table'/*,array('attributes'=>array('class'=>'Green'))*/);?></div>
+        <div class="more-link"><?php echo l(t('Show full table'),'tournament-table',array('attributes'=>array('class'=>'button')));?></div>
 
  <?/* <table class="tournament-table-short">
 <tbody>

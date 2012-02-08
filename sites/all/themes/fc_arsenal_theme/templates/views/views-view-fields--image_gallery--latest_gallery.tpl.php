@@ -15,7 +15,7 @@ else
 	<div class="date"><?php echo $fields['created']->content ?></div>
 </div>
 <div class="more-link">
-	<a href="/gallery"><?php echo t('All photo');?></a>
+	<a href="/gallery" class="button"><?php echo t('All photo');?></a>
 </div>
 <script>
 	jQuery(document).ready(function() {

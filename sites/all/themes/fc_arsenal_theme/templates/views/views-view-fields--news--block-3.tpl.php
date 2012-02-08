@@ -1,5 +1,4 @@
 <div class="teaser-node-news">
-  <div class="cf">&nbsp;</div>      
   <div class="news-image">
     <?php echo $fields['field_news_image']->content;?>
   </div>

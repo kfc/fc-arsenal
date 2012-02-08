@@ -54,5 +54,5 @@
   </div>
 <?php endif;?>
 <div class="all-news">
-  <a href="/news-all/date"><?php echo t('All news')?></a>
+  <a href="/news-all/date" class="button"><?php echo t('All news')?></a>
 </div>

@@ -30,35 +30,7 @@
 	border-top: 0px;
 	padding: 5px 10px 10px 10px;
 }
-/* BOF: fc-content style */
-.fc-content-view {
-	margin: 10px 0px 20px 0px;
-	padding: 0px;
-	background: url(../img/block-header3.gif) no-repeat 0 0;
-}
-.fc-content-view H2 {
-	font-family: Tahoma;
-	margin: 0px;
-	padding: 3px 0px 5px 10px;
-	color: #FFFFFF;
-	font-weight: bold;
-	background: url(../img/block-header3.gif) no-repeat right -26px;
-}
-.fc-content-view .fc-content {
-	padding: 10px 10px 10px 10px;
-	border: 1px solid #CCCCCC;
-	border-top: 0px;
-}
-.fc-content-view .fc-content .teaser-node-news {
-	width: auto;
-}
-.fc-content-view .fc-content .teaser-node-news .news-body {
-	width: auto;
-}
-.view-content-news-by-type .teaser-node-news .news-body, .view-content-news-by-date .teaser-node-news .news-body {
-	width: 700px !important;
-}
-/* EOF: fc-content style */
+
 
 /* BOF: ---- MATCHES ---- */
 #node-match {
@@ -1188,9 +1160,6 @@
 }
 .view-display-id-first_squad .views-view-grid, .view-display-id-trainers .views-view-grid {
 	margin-bottom: 30px;
-}
-.view-display-id-calendar table td {
-	padding: 2px;
 }
 .login-links-wrapper {
 	color: #FFF;

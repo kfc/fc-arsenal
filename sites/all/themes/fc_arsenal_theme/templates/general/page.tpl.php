@@ -10,18 +10,22 @@
 	<!-- BOF: SUB-HEADER -->
 	<div id="sub-header">
 		<?php print render($page['sub_header']); ?>
+		
+		<div class="breadcrumb-wrapper">
+      <div class="breadcrumb-links">
+        <?php if($is_front) {
+          print '<span>Сайт представительства официального фан-клуба лондонского Арсенала</span>';
+        } else {
+          print $breadcrumb; 
+        } ?>
+      </div>
+      <div id="breadcrumbs">
+        <?php print render($page['breadcrumbs']); ?>
+      </div>
+    </div>
+		
 	</div>
 	<!-- EOF: SUB-HEADER -->
-  
-  <div class="breadcrumb-wrapper">
-    <div class="breadcrumb-links">
-      <?php print $breadcrumb; ?>
-    </div>
-    <div id="breadcrumbs">
-      <?php print render($page['breadcrumbs']); ?>
-    </div>
-  </div>
-  
 	
 	<!-- BOF: MAIN-PART -->
 	<div id="main-part">

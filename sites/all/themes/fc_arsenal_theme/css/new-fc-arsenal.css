@@ -77,6 +77,7 @@ TABLE {
 	margin: 0;
 }
 
+.date,
 .qrss-date {
 	color: #7b7b7b;
 	font-size: 10px;
@@ -478,6 +479,22 @@ ul.nice-menu-down li.over {
 	width: 66px;
 }
 
+
+.breadcrumb-links {
+	padding: 14px 0 10px 14px;
+}
+.breadcrumb-links h2 {
+	display: none;
+}
+
+.breadcrumb-links .breadcrumb {
+	color: #cb0000;
+	padding: 0;
+}
+.breadcrumb-links .breadcrumb span {
+	color: #353535;
+}
+
 /* ====================================== EOF: SUB-HEADER ====================================== */
 
 
@@ -507,9 +524,9 @@ ul.nice-menu-down li.over {
 	font-size: 17px;
 	margin: 14px 0 4px 0;
 }
-#content ul {
+/*#content ul {
 	margin: 0 0 1em;
-}
+}*/
 
 
 .links .statistics_counter {
@@ -658,8 +675,7 @@ block-teasers .notice-block-teaser H3 A {
 	color: #cb0000;
 }
 .teaser-node-news .news-body H3 {
-	font-size: 17px;
-	margin: 0 0 6px;
+	margin: 0 0 6px!important;
 }
 .teaser-node-news .news-footer {
 	font-size: 10px;
@@ -723,7 +739,7 @@ block-teasers .notice-block-teaser H3 A {
 #latest-news-block .news-block-content .item-list .time-created {
 	color: #7b7b7b;
 	font-size: 10px;
-	margin: 2px 0 0;
+	margin: 1px 0 0;
 	position: absolute;
 	left: 0;
 }
@@ -817,7 +833,6 @@ block-teasers .notice-block-teaser H3 A {
 	background: -ms-linear-gradient(top, #d70000, #820000);
 	background: -o-linear-gradient(top, #d70000, #820000);
 	background: linear-gradient(top, #d70000, #820000);
-	margin: 0;
 	color: #ffffff;
 	padding: 8px 0 8px 20px;
 	font-size: 15px;
@@ -880,29 +895,60 @@ block-teasers .notice-block-teaser H3 A {
  .front-page .side-menu .block .BottomContent a.Green {
  color: #039200;
  }*/
-.front-page .side-menu .block .Content01 {
+/*.front-page .side-menu .block .Content01 {
 }
 .front-page .side-menu .block .Video, .front-page .side-menu .block .Photo {
 	width: 100%;
 	overflow: hidden;
 	margin-bottom: 5px;
-}
+}*/
 .front-page .side-menu .block h5 {
-	margin: 0 0 2px;
-	font-size: 12px;
-	padding: 0 4px;
+	font-weight: normal;
 }
-.front-page .side-menu .block .Date {
+/*.front-page .side-menu .block .Date {
 	margin: 0 0 3px;
 	font-size: 10px;
 	padding: 0 4px;
 	color: #676666;
-}
-.front-page .side-menu .block .more-link {
-	padding: 10px 20px;
+}*/
+.side-menu .block .more-link {
+	border-top: 1px solid #e3e3e3;
+	margin: -5px 20px 0;
+	padding: 10px 0;
 	text-align: left;
 }
 
+
+.button {
+	background: url(../img/button_bg.png) repeat-x left -24px; 
+	color: #fff;
+	display: inline-block;
+	height: 24px;
+	line-height: 22px;
+	padding: 0 12px;
+	position: relative;
+}
+.button:hover {
+	color: #fff;
+}
+.button:before,
+.button:after {
+	background: url(../img/button_bg.png) no-repeat;
+	content: ' ';
+	display: block;
+	height: 24px;
+	position: absolute;
+	top: 0;
+	width: 15px;
+}
+.button:before {
+	background-position: left 0;
+	left: -3px;
+}
+.button:after {
+	background-position: left -48px;
+	right: -13px;
+}
 
 .front-page .side-menu .view-content H2 {
 	background: none repeat scroll 0% 0% transparent;
@@ -917,6 +963,7 @@ block-teasers .notice-block-teaser H3 A {
 	max-width: 220px;
 }
 
+
 .front-page .all-news {
 	background: -webkit-linear-gradient(top, #f4f4f4, #dbdbdb);
 	background: -moz-linear-gradient(top, #f4f4f4, #dbdbdb);
@@ -927,6 +974,25 @@ block-teasers .notice-block-teaser H3 A {
 	border-top: none;
 	margin: 5px 0 0;
 	padding: 8px 0 8px 20px;
+}
+
+
+#block-tournament-table-tournament-table-short .more-link {
+	border: 0 none;
+	margin: 0;
+	padding: 10px 20px;
+}
+
+
+#block-views-image-gallery-latest-gallery .photo,
+#block-views-video-latest-video .video {
+	overflow: hidden;
+	margin: 0 0 14px;
+	width: 100%;
+}
+
+#block-views-image-gallery-latest-gallery .photo {
+	vertical-align: top;
 }
 
 
@@ -1451,6 +1517,125 @@ div.wallpaper-thumb-wrapper {
 /* ::::: http://www.fc-arsenal.com/sites/all/themes/fc_arsenal_theme/fc-arsenal.css ::::: */
 
 /* ====================================== BOF: PAGES ====================================== */
+
+/* BOF: fc-content style */
+.fc-content-view {
+	margin: 0 0 1em;
+}
+/*.fc-content-view H2 {
+	font-family: Tahoma;
+	margin: 0px;
+	padding: 3px 0px 5px 10px;
+	color: #FFFFFF;
+	font-weight: bold;
+	background: url(../img/block-header3.gif) no-repeat right -26px;
+}
+.fc-content-view .fc-content {
+	padding: 10px 10px 10px 10px;
+	border: 1px solid #CCCCCC;
+	border-top: 0px;
+}
+.fc-content-view .fc-content .teaser-node-news {
+	width: auto;
+}
+.fc-content-view .fc-content .teaser-node-news .news-body {
+	width: auto;
+}
+.view-content-news-by-type .teaser-node-news .news-body, .view-content-news-by-date .teaser-node-news .news-body {
+	width: 700px !important;
+}*/
+/* EOF: fc-content style */
+
+
+.view-display-id-calendar caption {
+	background: -webkit-linear-gradient(top, #d70000, #820000);
+	background: -moz-linear-gradient(top, #d70000, #820000);
+	background: -ms-linear-gradient(top, #d70000, #820000);
+	background: -o-linear-gradient(top, #d70000, #820000);
+	background: linear-gradient(top, #d70000, #820000);
+	color: #ffffff;
+	padding: 8px 0 8px 20px;
+	font-size: 15px;
+	text-align: left;
+}
+.view-display-id-calendar tr {
+	background: none;
+	border: 0 none;
+	padding: 0;
+}
+.view-display-id-calendar tr:hover {
+	background: #f6f6f6;
+}
+.view-display-id-calendar tr:hover td a {
+	text-decoration: underline;
+}
+.view-display-id-calendar th,
+.view-display-id-calendar td {
+	border: 1px solid #e3e3e3;
+	text-align: left;
+	vertical-align: middle;
+}
+.view-display-id-calendar th {
+	background: -webkit-linear-gradient(top, #fff, #f1f1f1);
+	background: -moz-linear-gradient(top, #fff, #f1f1f1);
+	background: -ms-linear-gradient(top, #fff, #f1f1f1);
+	background: -o-linear-gradient(top, #fff, #f1f1f1);
+	background: linear-gradient(top, #fff, #f1f1f1);
+	padding: 8px;
+}
+.view-display-id-calendar td {
+	line-height: 22px;
+	padding: 0 8px;
+}
+
+.view-display-id-calendar .views-field-nid {
+	text-align: center;
+}
+.view-display-id-calendar .views-field-nid span {
+	display: inline-block;
+}
+
+.view-display-id-calendar .views-field-field-match-start-date {
+	background: none;
+	color: #7b7b7b;
+	font-size: 10px;
+}
+
+.view-display-id-calendar .home_team,
+.view-display-id-calendar .away_team {
+	width: 200px;
+}
+.view-display-id-calendar .home_team {
+	text-align: right;
+}
+.view-display-id-calendar .away_team {
+	text-align: left;
+}
+
+.view-display-id-calendar .result {
+	margin: 0 8px;
+	width: 38px;
+}
+.view-display-id-calendar .result_win {
+	background: -webkit-linear-gradient(top, #7db640, #457923);
+	background: -moz-linear-gradient(top, #7db640, #457923);
+	background: -ms-linear-gradient(top, #7db640, #457923);
+	background: -o-linear-gradient(top, #7db640, #457923);
+	background: linear-gradient(top, #7db640, #457923);
+	color: #fff;
+}
+.view-display-id-calendar .result_lost {
+	background: -webkit-linear-gradient(top, #cd0000, #a40000);
+	background: -moz-linear-gradient(top, #cd0000, #a40000);
+	background: -ms-linear-gradient(top, #cd0000, #a40000);
+	background: -o-linear-gradient(top, #cd0000, #a40000);
+	background: linear-gradient(top, #cd0000, #a40000);
+	color: #fff;
+}
+.view-display-id-calendar .result_draw {
+	background: #f4f4f4;
+	color: #353535;
+}
 
 /* BOF: PLAYER INFO PAGE */
 .player-page .player-box-info {
