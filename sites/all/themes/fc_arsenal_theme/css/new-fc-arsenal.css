@@ -488,11 +488,17 @@ ul.nice-menu-down li.over {
 }
 
 .breadcrumb-links .breadcrumb {
+	
 	color: #cb0000;
 	padding: 0;
 }
-.breadcrumb-links .breadcrumb span {
-	color: #353535;
+.breadcrumb-links .breadcrumb .separator {
+	background: url(../img/marker_1.gif) no-repeat left top;
+	display: inline-block;
+	height: 7px;
+	margin: 0 7px;
+	vertical-align: middle;
+	width: 8px;
 }
 
 /* ====================================== EOF: SUB-HEADER ====================================== */
@@ -506,10 +512,25 @@ ul.nice-menu-down li.over {
 	padding: 5px;
 }
 
+#left,
+#right {
+	float: left;
+	width: 240px;
+}
+
+#left {
+	padding: 0 5px 0 0;
+}
+
+#right {
+	padding: 0 0 0 5px;
+}
+
 
 #content {
 	background: #fff;
 	min-height: 500px;
+	overflow: hidden;
 	padding: 20px;
 }
 #content h1 {
@@ -529,6 +550,14 @@ ul.nice-menu-down li.over {
 }*/
 
 
+.front-page #content {
+	background: none;
+	float: left;
+	padding: 0;
+	width: 500px;
+}
+
+
 .links .statistics_counter {
 	display: none;
 }
@@ -543,7 +572,7 @@ ul.nice-menu-down li.over {
 .block-teasers .notice-block-teaser H3 {
 	margin: 0px;
 }
-block-teasers .notice-block-teaser H3 A {
+.block-teasers .notice-block-teaser H3 A {
 	color: #40ac1e;
 	font-weight: bold;
 	font-size: 10px;
@@ -576,29 +605,6 @@ block-teasers .notice-block-teaser H3 A {
 .blog-block-teaser .info {
 	text-align: right;
 	font-size: 10px;
-}
-
-
-.front-page #left,
-.front-page #content,
-.front-page #right {
-	float: left;
-}
-
-.front-page #left {
-	margin: 0 5px 0 0;
-	width: 240px;
-}
-
-.front-page #content {
-	background: none;
-	padding: 0;
-	width: 500px;
-}
-
-.front-page #right {
-	width: 240px;
-	margin: 0 0 0 5px;
 }
 
 
@@ -747,7 +753,8 @@ block-teasers .notice-block-teaser H3 A {
 
 #block-views-match_prev {
 }
-#block-views-match_prev .content, #block-views-match_next .content {
+#block-views-match_prev .content,
+#block-views-match_next .content {
 	background: url('../img/block-bg1.png') repeat-x scroll 0px bottom #ffffff;
 	padding: 10px 0px 0px;
 }
@@ -930,6 +937,7 @@ block-teasers .notice-block-teaser H3 A {
 }
 .button:hover {
 	color: #fff;
+	text-decoration: none;
 }
 .button:before,
 .button:after {
@@ -961,6 +969,40 @@ block-teasers .notice-block-teaser H3 A {
 }
 .front-page .side-menu .block-custom_pages .promotion-block IMG {
 	max-width: 220px;
+}
+
+
+.side-menu .links {
+	border: 1px solid #fff;
+}
+.side-menu .links li {
+	background: -webkit-linear-gradient(top, #ececec, #cccccc);
+	background: -moz-linear-gradient(top, #ececec, #cccccc);
+	background: -ms-linear-gradient(top, #ececec, #cccccc);
+	background: -o-linear-gradient(top, #ececec, #cccccc);
+	background: linear-gradient(top, #ececec, #cccccc);
+	font-size: 14px;
+	margin: 1px 0 0 0;
+}
+.side-menu .links li:first-child {
+	margin: 0;
+}
+.side-menu .links a {
+	background: url(../img/marker_3.gif) no-repeat 8px 12px;
+	display: block;
+	padding: 8px 0 8px 24px;
+}
+.side-menu .links li.active {
+	background: #fff;
+	font-weight: bold;
+	margin: 0 -6px 0 0;
+	position: relative;
+}
+.side-menu .links li.active a {
+	background-image: url(../img/marker_4.gif);
+}
+.side-menu .links li.active a:hover {
+	text-decoration: none;	
 }
 
 
@@ -1586,16 +1628,19 @@ div.wallpaper-thumb-wrapper {
 .view-display-id-calendar td {
 	line-height: 22px;
 	padding: 0 8px;
+	white-space: nowrap;
 }
 
 .view-display-id-calendar .views-field-nid {
+	padding: 0;
 	text-align: center;
+	width: 100%;
 }
 .view-display-id-calendar .views-field-nid span {
 	display: inline-block;
 }
 
-.view-display-id-calendar .views-field-field-match-start-date {
+.view-display-id-calendar td.views-field-field-match-start-date {
 	background: none;
 	color: #7b7b7b;
 	font-size: 10px;
@@ -1603,7 +1648,7 @@ div.wallpaper-thumb-wrapper {
 
 .view-display-id-calendar .home_team,
 .view-display-id-calendar .away_team {
-	width: 200px;
+	width: 130px;
 }
 .view-display-id-calendar .home_team {
 	text-align: right;

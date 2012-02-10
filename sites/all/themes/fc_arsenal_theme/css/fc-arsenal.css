@@ -546,10 +546,6 @@
 /* EOF: news list teser view */
 
 /* BOF: home page sidebae menus */
-.front-page #left {
-	width: 200px;
-	margin: 0px 0px 0px 10px;
-}
 /*bof: prev. match */
 #block-views-matches-last-match {
 	font-size: 10px;
@@ -621,10 +617,6 @@
 }
 /*eof: prev. match */
 
-.front-page #right {
-	width: 250px;
-	margin: 0px 5px 0px 0px;
-}
 #block-views-portal_friendship_block UL {
 	margin: 0px;
 	padding: 0px;
