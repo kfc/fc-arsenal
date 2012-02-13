@@ -114,9 +114,5 @@
   }  
     
 ?>
-
-  
- 
-
-<div class="cf">&nbsp;</div>
+  <div class="cf">&nbsp;</div>
 </div>

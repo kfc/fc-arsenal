@@ -478,60 +478,6 @@
 }
 /* EOF: CHATROOM CHAT PAGE */
 
-/* BOF: read news page */
-.node-news-item {
-
-}
-.node-news-item .left-part {
-	width: 502px;
-	margin-right: 10px;
-	float: left;
-}
-.node-news-item .right-part {
-	width: 440px;
-	float: right;
-}
-.node-news-item #latest-news-block {
-	margin-top: 0px
-}
-.node-news-item .teaser-node-news .news-body {
-	width: 300px;
-}
-#read-news-item {
-	border: 1px solid #CCCCCC;
-	background: #FFFFFF url(../img/block-bg1.png) repeat-x 0px bottom;
-	padding: 0px;
-}
-#read-news-item .news-image {
-	text-align: center;
-}
-#read-news-item .news-content {
-	padding: 0px 5px 5px 5px;
-}
-#read-news-item .news-content .news-tags {
-	padding: 10px 0px 5px 0px;
-	font-size: 10px;
-	font-weight: bold;
-}
-#read-news-item .news-content IMG {
-	vertical-align: middle;
-}
-#read-news-item .news-content .news-footer {
-	text-align: right;
-}
-#read-news-item .news-content .news-footer .news-date {
-	font-size: 10px;
-	font-weight: bold;
-	color: #038710;
-}
-#read-news-item .news-content .news-footer .news-source, #read-news-item .news-content .news-footer .news-author {
-	color: #888888;
-}
-#read-news-item .news-content .news-footer .info-value {
-	color: #000000;
-	font-weight: bold;
-}
-/* EOF: read news page */
 
 /* BOF: news list teser view */
 /*#latest-news-block .news-block-content {

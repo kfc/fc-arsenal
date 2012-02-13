@@ -11,18 +11,18 @@
 	<div id="sub-header">
 		<?php print render($page['sub_header']); ?>
 		
-		<div class="breadcrumb-wrapper">
-      <div class="breadcrumb-links">
-        <?php if($is_front) {
-          print '<span>Сайт представительства официального фан-клуба лондонского Арсенала</span>';
-        } else {
-          print $breadcrumb; 
-        } ?>
-      </div>
-      <div id="breadcrumbs">
-        <?php print render($page['breadcrumbs']); ?>
-      </div>
+    <div class="breadcrumb-links">
+      <?php if($is_front) {
+        print '<span>Сайт представительства официального фан-клуба лондонского Арсенала</span>';
+      } else {
+        print $breadcrumb; 
+      } ?>
     </div>
+    <?php /*
+    <div id="breadcrumbs">
+      <?php print render($page['breadcrumbs']); ?>
+    </div>
+    */ ?>
 		
 	</div>
 	<!-- EOF: SUB-HEADER -->
