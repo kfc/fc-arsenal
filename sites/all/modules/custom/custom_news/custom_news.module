@@ -7,10 +7,17 @@ function custom_news_menu(){
    $items['news'] = array(
     'title' => t('News'),
     'page callback' => 'drupal_goto',
-    'page arguments' => array('news-all/date'),
+    'page arguments' => array('news/all'),
     'access arguments' => array('access content'),
-    'type' => MENU_SUGGESTED_ITEM,
   ); 
+
+   $items['news-all/date'] = array(
+    'title' => t('News'),
+    'page callback' => 'drupal_goto',
+    'page arguments' => array('news/all'),
+    'access arguments' => array('access content'),
+  ); 
+
    $items['admin/config/custom_news'] = array(
    'title' => t('News settings'),
     'page callback' => 'drupal_get_form',
