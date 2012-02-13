@@ -160,6 +160,15 @@ function custom_social_share_block_info() {
       'weight'     => 0,
     );
   }
+  
+  $blocks['social_share_links'] = array(
+      'info'       => t('Social Share Links'),
+      'visibility' => 1,
+      'status'     =>TRUE,
+      'region'     => 'header',
+      'weight'     => 0,
+    );
+    
   return $blocks;
 }
 
@@ -167,9 +176,20 @@ function custom_social_share_block_info() {
  * Implements hook_block_view().
  */
 function custom_social_share_block_view($delta = '') {
+
   // This example comes from node.module. Note that you can also return a
   // renderable array rather than rendered HTML for 'content'.
   $block = array();
+  
+  if($delta == 'social_share_links'){
+    $block['content'] = '<ul class="header-social-links">';
+    $block['content'] .= '<li class="header-social-link-item header-vk-link">'.theme('custom_social_share_vk_link').'</li>';  
+    $block['content'] .= '<li class="header-social-link-item header-twitter-link">'.theme('custom_social_share_twitter_link').'</li>';  
+    $block['content'] .= '<li class="header-social-link-item header-fb-link">'.theme('custom_social_share_facebook_link').'</li>';  
+    $block['content'] .= '<li class="header-social-link-item header-mail-link">'.theme('custom_social_share_email_link').'</li>';  
+    $block['content'] .= '</ul>'; 
+  }
+  
   if (user_access('access content') && variable_get('custom_social_share_block', 0)) {
     $block['subject'] = t('Social Share');
       $sites = variable_get('custom_social_share_sites', array());
@@ -196,6 +216,7 @@ function custom_social_share_theme(){
     'custom_social_share_vk_link'=>array('variables'=>NULL),
     'custom_social_share_twitter_link'=>array('variables'=>NULL),
     'custom_social_share_facebook_link'=>array('variables'=>NULL),
+    'custom_social_share_email_link'=>array('variables'=>NULL),
   
   );
 
@@ -211,4 +232,8 @@ function theme_custom_social_share_twitter_link($variables){
 
 function theme_custom_social_share_facebook_link($variables){
   return theme_link(array('path'=>'http://facebook.com/arssc.moscow','text'=>theme_image(array('path'=>drupal_get_path('theme',variable_get('theme_default','fc_arsenal_theme')).'/img/facebook-icon.png','attributes'=>array())), 'options'=>array('html'=>true,'attributes'=>array('target'=>'_blank'))));
+}
+
+function theme_custom_social_share_email_link($variables){
+  return theme_link(array('path'=>'mailto:admin@fc-arsenal.com','text'=>theme_image(array('path'=>drupal_get_path('theme',variable_get('theme_default','fc_arsenal_theme')).'/img/mailLink.gif','attributes'=>array())), 'options'=>array('html'=>true,'attributes'=>array())));
 }

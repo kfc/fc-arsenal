@@ -155,10 +155,10 @@ function theme_customization_login_block(){
             <ul class="LoginLinks">';
   if(user_is_logged_in()){
     global $user;
-    $output .= '<li>'.l($user->name,'user/'.$user->uid).'</li><li> | </li><li>'.l(t("Logout"),'user/logout').'</li>';   
+    $output .= '<li>'.l($user->name,'user/'.$user->uid).'</li><li></li><li>'.l(t("Logout"),'user/logout').'</li>';   
   }
   else{
-    $output  .= '<li>'.l(t("Login"),'user').'</li><li> | </li><li>'.l(t("Register"),'user/register').'</li>';
+    $output  .= '<li>'.l(t("Login"),'user').'</li><li></li><li>'.l(t("Register"),'user/register').'</li>';
   }
   $output .= '</ul>
         </div>
