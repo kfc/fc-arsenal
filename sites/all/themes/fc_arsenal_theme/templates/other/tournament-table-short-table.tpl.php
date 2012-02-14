@@ -11,7 +11,7 @@
               $i++;
               if($i >= $indexes['start'] && $i <= $indexes['end']){
               ?>
-              <tr<?php /*print ($i%2 == 0? '' :'Grey');*/?><?php echo ($entry->team_id == variable_get('arsenal_team_id',0) ?' class="arsenal-row"' : ''); ?>">
+              <tr<?php /*print ($i%2 == 0? '' :'Grey');*/?><?php echo ($entry->team_id == variable_get('arsenal_team_id',0) ?' class="arsenal-row"' : ''); ?>>
                 <td><?php echo $i;?></td>
                 <td class="team_name">
                 <?php echo $entry->team_name;?>
@@ -26,7 +26,6 @@
         <div class="more-link"><?php echo l(t('Show full table'),'tournament-table',array('attributes'=>array('class'=>'button')));?></div>
 
  <?/* <table class="tournament-table-short">
-<tbody>
 <tr class="tournament-table-short-head">
   <td style=""></td>
     <td style="text-align: left; padding-left:5px;"><?php echo t('Team')?></td>
@@ -49,7 +48,6 @@
 <?php 
 }
 endforeach;?>
-</tbody>
 </table>
 <div class="tournament-table-short-link-wrapper">
 <?php echo l(t('Show full table').'...','tournament-table');?>

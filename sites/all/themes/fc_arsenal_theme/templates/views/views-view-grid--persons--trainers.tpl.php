@@ -29,18 +29,16 @@
   <h3><?php print mb_strtoupper(substr($title,0,2), 'UTF-8').mb_strtolower(substr($title,2), 'UTF-8'); ?></h3>
 <?php endif; ?>
 
-<table class="<?php print $class; ?>"<?php print $attributes; ?>>
-  <tbody>
+<div class="<?php print $class; ?>"<?php print $attributes; ?>>
     <?php foreach ($rows as $row_number => $columns): ?>
-      <tr class="<?php print $row_classes[$row_number]; ?>">
+      <!--div class="<?php print $row_classes[$row_number]; ?>"-->
         <?php foreach ($columns as $column_number => $item):
           $align = ($column_number == 0 ? 'left' : ($column_number == count($columns)-1 ? 'right' : 'center'));
          ?>
-          <td class="<?php print $column_classes[$row_number][$column_number]; ?>" align="<?php echo $align;?>">
+          <!--div class="<?php print $column_classes[$row_number][$column_number]; ?>"-->
             <?php print $item; ?>
-          </td>
+          <!--/div-->
         <?php endforeach; ?>
-      </tr>
+      <!--/div-->
     <?php endforeach; ?>
-  </tbody>
-</table>
+</div>

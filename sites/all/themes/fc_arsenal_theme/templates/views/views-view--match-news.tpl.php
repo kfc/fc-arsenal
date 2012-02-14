@@ -1,4 +1,2 @@
-<h3 style="color: #636363;"><?php echo t('Match News')?>:</h3>
-<div style="margin-left: 10px;">
+<h3><?php echo t('Match News')?>:</h3>
 <?php echo $rows;?>
-</div>

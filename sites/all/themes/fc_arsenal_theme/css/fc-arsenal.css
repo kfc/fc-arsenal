@@ -496,7 +496,7 @@
 #block-views-matches-last-match {
 	font-size: 10px;
 }
-#block-views-matches-prev-match .content, #block-views-matches-next-match .content {
+/*#block-views-matches-prev-match .content, #block-views-matches-next-match .content {
 	background: #FFFFFF url(../img/block-bg1.png) repeat-x 0px bottom;
 	padding: 10px 0px 0px 0px;
 }
@@ -504,9 +504,9 @@
 	text-align: center;
 }
 #block-views-matches-next-match .online-link {
-	/* padding: 3px 0px 3px 0px;
+	padding: 3px 0px 3px 0px;
 	 text-align: center;
-	 float:left;        */
+	 float:left;
 }
 #block-views-matches-next-match .online-link A {
 	font-weight: bold;
@@ -560,7 +560,7 @@
 	color: #40AC1E;
 	font-size: 11px;
 	font-weight: bold;
-}
+}*/
 /*eof: prev. match */
 
 #block-views-portal_friendship_block UL {
@@ -850,7 +850,7 @@
 	/*margin-bottom: 6px;
 	 margin: 10px 10px 6px 10px;*/
 }
-.squad-player div {
+/*.squad-player div {
 	padding: 3px 3px 3px 6px;
 }
 .squad-player-odd {
@@ -858,11 +858,7 @@
 }
 .squad-player-even {
 	background-color: #F5F5F5;
-}
-.next-prev-wrapper {
-	/* display: inline;
-	 width: 25px;*/
-}
+}*/
 .view-display-id-first_squad .view-content, .view-display-id-trainers .view-content {
 	/*text-align: center;*/
 	width: 100%;
@@ -882,7 +878,7 @@
 	width: 33%;
 }
 .squad-player-wrapper {
-	width: 95%;
+	/*width: 95%;
 	height: 70px;
 	background-color: #F2F2F2;
 	border: 1px solid #CCCCCC;
@@ -890,9 +886,9 @@
 	vertical-align: middle;
 	border-collapse: collapse;
 	display: block;
-	position: relative;
+	position: relative;*/
 }
-.squad-player-wrapper a:hover {
+/*.squad-player-wrapper a:hover {
 	text-decoration: none;
 }
 .squad-player-wrapper:hover {
@@ -917,19 +913,19 @@
 }
 .squad-player-number a {
 	color: #FFF;
-}
+}*/
 .squad-player-name-holder {
-	float: left;
+	/*float: left;
 	height: 48px;
 	width: 100%;
 	position: absolute;
 	text-align: left;
 	padding-top: 20px;
-	vertical-align: middle;
+	vertical-align: middle;*/
 	/*padding-left: 150px;*/
-	left: 0px;
+	/*left: 0px;*/
 }
-.squad-player-first-name {
+/*.squad-player-first-name {
 	color: #000 !important;
 	font-size: 11px;
 	margin-left: 110px;
@@ -947,8 +943,8 @@
 }
 .squad-trainer-last-name {
 	margin-left: 70px;
-}
-.view-display-id-first_squad h3, .view-display-id-trainers h3 {
+}*/
+/*.view-display-id-first_squad h3, .view-display-id-trainers h3 {
 
 	background-color: #F2F2F2;
 	font-size: 14px;
@@ -958,7 +954,7 @@
 }
 .view-display-id-first_squad .views-view-grid, .view-display-id-trainers .views-view-grid {
 	margin-bottom: 30px;
-}
+}*/
 .login-links-wrapper {
 	color: #FFF;
 	padding-top: 15px;

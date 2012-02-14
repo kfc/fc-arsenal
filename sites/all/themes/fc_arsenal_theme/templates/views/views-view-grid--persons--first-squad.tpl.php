@@ -29,7 +29,7 @@ if (is_integer($title) && in_array($title, $tids)) {
 		<?php foreach ($columns as $column_number => $item):
 $align = ($column_number == 0 ? 'left' : ($column_number == count($columns)-1 ? 'right' : 'center'));
 		?>
-		<div class="<?php print $column_classes[$row_number][$column_number];?>" align="<?php echo $align;?>"><?php print $item;?></div>
+		<div class="<?php print $column_classes[$row_number][$column_number];?>"><?php print $item;?></div>
 		<?php endforeach;?>
 	</div>
 	<?php endforeach;?>

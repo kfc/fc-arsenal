@@ -3,7 +3,7 @@
 	//dd($node);
 	//print $node->title;
 ?>
-  <div class="match-centre-left-team">
+  <div class="match-center-left-team">
     <?php if($node->field_match_place[$node->language][0] == 'away'):?>
       <?php if(isset($node->field_match_opponent_squad[$node->language][0]) && isset($node->opponent_events)):?> 
       <?php print theme('custom_match_match_team_block', array($node->field_match_opponent[$node->language][0]['node']->title, $node->field_match_opponent_squad[$node->language][0]['safe_value'], $node->opponent_events));?>
@@ -20,7 +20,7 @@
     <?endif;?>
   </div>
   
-  <div class="match-centre-right-team">
+  <div class="match-center-right-team">
     <?php if($node->field_match_place[$node->language][0] != 'away'):?>
       <?php if(isset($node->field_match_opponent_squad[$node->language][0]) && isset($node->opponent_events)):?> 
       <?php print theme('custom_match_match_team_block', array($node->field_match_opponent[$node->language][0]['node']->title, $node->field_match_opponent_squad[$node->language][0]['safe_value'], $node->opponent_events));?>
