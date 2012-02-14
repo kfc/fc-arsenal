@@ -158,7 +158,7 @@ function theme_customization_login_block(){
     $output .= '<li>'.l($user->name,'user/'.$user->uid).'</li><li></li><li>'.l(t("Logout"),'user/logout').'</li>';   
   }
   else{
-    $output  .= '<li>'.l(t("Login"),'user').'</li><li></li><li>'.l(t("Register"),'user/register').'</li>';
+    $output  .= '<li>'.l(t("Login"),'user').'</li><li></li><li>'.l(t("register"),'user/register').'</li>';
   }
   $output .= '</ul>
         </div>
@@ -254,6 +254,10 @@ function customization_form_alter(&$form, &$form_state, $form_id){
       $form['field_gallery_images']['und'][$i] = $new_item;  
     }
   }
+}                    
+
+function customization_form_node_form_alter(&$form, $form_state) { 
+  drupal_add_js(drupal_get_path('module','customization').'/customization.js');
 }
 
 function _customization_login_submit(){

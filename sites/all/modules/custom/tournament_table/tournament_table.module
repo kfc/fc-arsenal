@@ -9,7 +9,7 @@ function tournament_table_menu(){
     'access arguments' => array('tournament table edit'),
     'type' => MENU_LOCAL_TASK,
     'file' => 'tournament_table.admin.inc',
-  );
+  ); 
   
   $items['admin/content/tournament-table-item/edit'] = array(
    'title' => t('Tournament matches'),
@@ -38,12 +38,12 @@ function tournament_table_menu(){
     'file' => 'tournament_table.admin.inc',
   );
   
-  $items['tournament-table'] = array(
+  /*$items['tournament-table'] = array(
    'title' => t('Tournament table'),
     'page callback' => '_get_tournament_table',
     'access callback'=>TRUE,
     'type'=>MENU_SUGGESTED_ITEM
-  );
+  );*/
   
   $items['tournament-table/%/%'] = array(
    'title' => t('Tournament table'),
@@ -60,7 +60,7 @@ function tournament_table_menu(){
 function tournament_table_theme(){
   return array(
     'tournament_table_full_table'=>array(
-      'variables'=>array('data'=>NULL),
+      'variables'=>array('data'=>NULL,'tournament'=>NULL,'season'=>NULL),
       'template' => 'tournament-table-full-table'
       ),
     'tournament_table_short_table'=>array(
@@ -82,6 +82,15 @@ function tournament_table_block_info(){
     'pages'=>'<front>',
     'cache' => -1,
   );
+  
+  $blocks['tournament-table-full'] = array(
+    'info' => t('Full Tournament table'),
+    'status'=>TRUE,
+    'weight'=>0,
+    'region'=>'-1',
+    'cache' => -1,
+  );
+  
   return $blocks;
 }
 
@@ -91,7 +100,14 @@ function tournament_table_block_view($delta){
         $block['content'] = _get_tournament_table('short');
         return $block;
         break;
-      }
+    case 'tournament-table-full':
+        $block['content'] = _get_tournament_table('full');
+        $season_id = variable_get('tournament_table_default_season',null);
+        $tournament_id = variable_get('tournament_table_default_tournament',null);
+        return $block;
+        break;
+      }  
+      
 }
 
 function _get_tournament_table($type='full', $season_id=null, $tournament_id=null){
@@ -152,8 +168,11 @@ function _get_tournament_table($type='full', $season_id=null, $tournament_id=nul
     ';  
   $result = db_query($query,array(':season_id' => $season_id, ':tournament_id'=> $tournament_id,':team_ids'=>implode(',',$teams)))
             ->fetchAllAssoc('team_id');
+            
+  $season = taxonomy_term_load($season_id);
+  $tournament = taxonomy_term_load($tournament_id);
   if($type == 'full')
-    return theme('tournament_table_full_table', array('data' =>$result));
+    return theme('tournament_table_full_table', array('data' =>$result,'tournament'=>$tournament,'season'=>$season));
   else{
     $teams_visible = 10;
     $teams_total = count($result);

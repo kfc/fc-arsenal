@@ -1,6 +1,6 @@
 <div class="fc-content">
 	<table class="tournament-table">
-    <caption>Премьер-лига 2011/12</caption>
+    <caption><?php echo $tournament->name.' '.$season->name?></caption>
 	  <tr>
 			<th><?php echo t('Position');?></th>
 			<th class="team_name"><?php echo t('Team');?></th>

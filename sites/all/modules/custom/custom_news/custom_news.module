@@ -268,9 +268,9 @@ function custom_news_views_query_alter(&$view, &$query) {
 
 function custom_news_form_alter(&$form, &$form_state, $form_id){
   global $user;
+  $vocab = taxonomy_vocabulary_machine_name_load('news_category');
+  if(empty($vocab)) return;
   if($form_id == 'news_node_form' && in_array('Блоггер',$user->roles)){
-    $vocab = taxonomy_vocabulary_machine_name_load('news_category');
-    if(empty($vocab)) return;
     $term = db_select('taxonomy_term_data', 'td')
       ->fields('td', array('tid', 'name'))
       ->condition('name', 'Запись в блоге')
@@ -279,7 +279,20 @@ function custom_news_form_alter(&$form, &$form_state, $form_id){
       ->fetchObject();
     if(!empty($term)){
       $form['field_news_category'][$form['field_news_category']['#language']]['#options'] = array($term->tid=>$term->name);
+    }
+  }
+  elseif($form_id == 'news_node_form'){
+     //Remove certain news type
+    $term = db_select('taxonomy_term_data', 'td')
+      ->fields('td', array('tid', 'name'))
+      ->condition('name', 'Послематчевые комментарии')
+      ->condition('vid', $vocab->vid)
+      ->execute()
+      ->fetchObject();
+    if(!empty($term)){
+      unset($form['field_news_category'][$form['field_news_category']['#language']]['#options'][$term->tid]);
     }  
+     
   }
 }
 

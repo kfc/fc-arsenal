@@ -70,5 +70,12 @@
         }
       }
     };
+  
+  $('#news-node-form').children('#edit-menu-parent option')[0].each(function(){
+    console.log($(this));
+  
+  });  
+    
+    
   });
 })(jQuery);
