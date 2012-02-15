@@ -25,12 +25,12 @@ if (is_integer($title) && in_array($title, $tids)) {
 
 <div class="<?php print $class;?>"<?php print $attributes;?>>
 	<?php foreach ($rows as $row_number => $columns):?>
-	<div class="<?php print $row_classes[$row_number];?>">
+	<!--div class="<?php print $row_classes[$row_number];?>"-->
 		<?php foreach ($columns as $column_number => $item):
 $align = ($column_number == 0 ? 'left' : ($column_number == count($columns)-1 ? 'right' : 'center'));
 		?>
-		<div class="<?php print $column_classes[$row_number][$column_number];?>"><?php print $item;?></div>
+		<!--div class="<?php print $column_classes[$row_number][$column_number];?>"--><?php print $item;?><!--/div-->
 		<?php endforeach;?>
-	</div>
+	<!--/div-->
 	<?php endforeach;?>
 </div>
