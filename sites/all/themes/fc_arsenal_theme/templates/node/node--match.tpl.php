@@ -1,8 +1,10 @@
 <div id="node-match">
-<?php
-	//dd($node);
-	//print $node->title;
-?>
+  <div class="match-page-nav-links">
+    <?php
+      print $prev_match_link;
+      print $next_match_link;
+    ?>  
+  </div>
   <div class="match-center-left-team">
     <?php if($node->field_match_place[$node->language][0] == 'away'):?>
       <?php if(isset($node->field_match_opponent_squad[$node->language][0]) && isset($node->opponent_events)):?> 

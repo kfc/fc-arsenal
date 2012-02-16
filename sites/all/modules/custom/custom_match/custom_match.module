@@ -66,13 +66,20 @@ function custom_match_preprocess_node(&$vars){
       }
       
       $vars['node']->opponent_events = $opponent_events;  
-    
-      $news_view = views_get_view('news');
-      $news_view->set_display('match_news');
-      $news_view->set_arguments(array(arg(1)));
-      $vars['connected_news'] = $news_view->render('match_news');
       //$vars['connected_news'] = views_embed_view('news','match_news');
     }
+    $news_view = views_get_view('news');
+    $news_view->set_display('match_news');
+    $news_view->set_arguments(array(arg(1)));
+    $vars['connected_news'] = $news_view->render('match_news');
+    $vars['next_match_link'] = '';
+    $vars['prev_match_link'] = '';
+    $next_match_nid = _get_next_match_nid($node->nid);
+    if(!empty($next_match_nid))
+      $vars['next_match_link'] = l(t('Next match'),'node/'.$next_match_nid,array('attributes'=>array('id'=>'match-page-next-match-link')));
+    $prev_match_link = _get_prev_match_nid($node->nid);
+    if(!empty($prev_match_link))
+      $vars['prev_match_link'] = l(t('Previous match'),'node/'.$prev_match_link,array('attributes'=>array('id'=>'match-page-prev-match-link')));  
   }
   if($node->type == 'matches_archive'){
     drupal_add_js(drupal_get_path('module', 'custom_match') . '/misc/archive_matches.js'); 
@@ -132,6 +139,31 @@ function _sort_events($a, $b)
     return ((int)$a['event_minute'] < (int)$b['event_minute']) ? -1 : 1;
 }
 
+function _get_next_match_nid($current_id){
+  
+  if((int)$current_id > 0)
+  {
+    $current_node = node_load($current_id);
+    $next_ids = db_query("
+      SELECT sd.entity_id as next_match_id,
+            (SELECT sd.entity_id
+            FROM {field_data_field_match_start_date} sd
+            ORDER BY sd.field_match_start_date_value desc
+            LIMIT 1) as last_match_id
+      FROM {field_data_field_match_start_date} sd
+      WHERE sd.field_match_start_date_value > :start_date 
+      ORDER BY sd.field_match_start_date_value
+      LIMIT 1 
+    ",array(':start_date'=>$current_node->field_match_start_date[$current_node->language][0]['value']))->fetchAssoc();
+    if(!empty($next_ids['next_match_id']) && (int)$next_ids['next_match_id'] > 0){
+      return $next_ids['next_match_id'];
+    }
+    else{
+      return null;
+    }
+  }   
+}
+
 function _get_next_match($current_id){
   
   if((int)$current_id > 0)
@@ -168,6 +200,35 @@ function _get_next_match($current_id){
   return drupal_json_output($data);
     
 }
+
+
+function _get_prev_match_nid($current_id){
+  
+  if((int)$current_id > 0)
+  {
+    $current_node = node_load($current_id);
+    
+    $next_ids = db_query("
+      SELECT sd.entity_id as prev_match_id,
+            (SELECT sd.entity_id
+            FROM {field_data_field_match_start_date} sd
+            ORDER BY sd.field_match_start_date_value asc
+            LIMIT 1) as first_match_id
+      FROM {field_data_field_match_start_date} sd
+      WHERE sd.field_match_start_date_value < :start_date 
+      ORDER BY sd.field_match_start_date_value desc
+      LIMIT 1 
+    ",array(':start_date'=>$current_node->field_match_start_date[$current_node->language][0]['value']))->fetchAssoc();
+    if(!empty($next_ids['prev_match_id']) && (int)$next_ids['prev_match_id'] > 0){
+      return $next_ids['prev_match_id'];
+    }
+    else{
+      return null;
+    }
+  }
+}
+
+
 
 function _get_prev_match($current_id){
   
