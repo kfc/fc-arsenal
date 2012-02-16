@@ -621,6 +621,11 @@ ul.nice-menu-down li.over {
 	bottom: 12px;
 	left: 25px;
 }
+.breadcrumb-links .breadcrumb-front {
+	background: url(../img/marker_1.gif) no-repeat left 4px;
+	margin: 0 0 0 -10px;
+	padding: 0 0 0 15px;
+}
 .breadcrumb-links .breadcrumb {
 	color: #cb0000;
 	padding: 0;
@@ -665,6 +670,7 @@ ul.nice-menu-down li.over {
 	min-height: 500px;
 	overflow: hidden;
 	padding: 20px;
+	position: relative;
 }
 #content h1 {
 	color: #000;
@@ -1587,9 +1593,6 @@ div.wallpaper-thumb-wrapper {
 }
 
 
-.right-part {
-	text-align: justify;
-}
 .right-part .post-info {
 	float: right;
 	display: block;
@@ -1646,6 +1649,20 @@ div.wallpaper-thumb-wrapper {
 	margin-bottom: 4px;
 }
 
+
+.page-user #content > h1 {
+	display: none;
+}
+
+
+.page-gallery .fc-content-view,
+.page-video .fc-content-view {
+	position: absolute;
+	right: 20px;
+	top: 28px;
+}
+
+
 /* ::::: http://www.fc-arsenal.com/modules/node/node.css ::::: */
 
 /* ::::: http://www.fc-arsenal.com/sites/all/modules/thickbox/thickbox.css ::::: */
@@ -1688,6 +1705,15 @@ div.wallpaper-thumb-wrapper {
 }
 
 /* EOF: fc-content style */
+
+.page-calendar .fc-content-view {
+	font-size: 14px;
+	margin: 0;
+	position: absolute;
+	right: 16px;
+	top: 30px;
+}
+
 
 .view-display-id-calendar {
 	line-height: 1em;
@@ -1824,6 +1850,10 @@ div.wallpaper-thumb-wrapper {
 
 /* BOF: NEWS PAGE */
 
+.node-news-item .right-part {
+	display: none;
+}
+
 .node-news-item .news-image {
 	margin: 0 -20px 20px -20px;
 	overflow: hidden;
@@ -1849,11 +1879,7 @@ div.wallpaper-thumb-wrapper {
 	vertical-align: middle;
 }
 
-.node-news-item .right-part {
-	display: none;
-	width: 440px;
-	float: right;
-}/*
+/*
 .node-news-item #latest-news-block {
 	margin-top: 0px
 }
@@ -2230,9 +2256,19 @@ div.wallpaper-thumb-wrapper {
 /* EOF: GALLERY */
 
 
+/* BOF: VIDEO */
+
+.video-item {
+	padding: 0 40px 30px 0;
+}
+
+/* EOF: VIDEO */
+
+
 /* BOF: AUDIO */
 
 .node-audio {
+	height: auto!important;
 	padding: 0 40px 30px 0;
 }
 
@@ -2356,10 +2392,20 @@ div.wallpaper-thumb-wrapper {
 
 /* BOF: LOGIN */
 
+.login-title {
+	font-size: 26px;
+	line-height: 1;
+	margin: 0 auto 12px auto;
+	text-align: center;
+	width: 346px;
+}
+
+
 #user-login {
 	border-top: 1px solid #e3e3e3;
 	padding: 20px 0 0;
 	margin: 0 auto;
+	position: relative;
 	width: 346px;
 }
 
@@ -2385,6 +2431,14 @@ div.wallpaper-thumb-wrapper {
 	display: none;
 }
 
+#user-login .forgot-pass a {
+	color: #cb0000;
+	position: absolute;
+	right: 0;
+	top: -50px;
+	text-decoration: underline;
+}
+
 #user-login .form-item-name {
 	padding: 0 0 10px; 
 }
@@ -2400,6 +2454,14 @@ div.wallpaper-thumb-wrapper {
 
 
 /* BOF: REGISTER */
+
+.registration-title {
+	font-size: 26px;
+	line-height: 1;
+	margin: 0 auto 12px auto;
+	text-align: center;
+}
+
 
 #user-register-form {
 	border-top: 1px solid #e3e3e3;

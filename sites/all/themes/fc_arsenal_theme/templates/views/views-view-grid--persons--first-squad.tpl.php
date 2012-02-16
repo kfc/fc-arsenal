@@ -12,7 +12,8 @@ foreach ($view->result as $res) {
   $tids[] = $res -> field_data_field_person_role_field_person_role_tid;
 }
 $terms = taxonomy_term_load_multiple($tids);
-
+$code = array_shift(array_shift($terms[$title]->field_role_code));
+$code = $code['safe_value'];
 if (is_integer($title) && in_array($title, $tids)) {
   $plural = array_shift(array_shift($terms[$title] -> field_role_plural_name));
   $title = $plural['safe_value'];
@@ -23,7 +24,7 @@ if (is_integer($title) && in_array($title, $tids)) {
 <h3><?php print mb_strtoupper(substr($title, 0, 2), 'UTF-8') . mb_strtolower(substr($title, 2), 'UTF-8');?></h3>
 <?php endif;?>
 
-<div class="<?php print $class;?>"<?php print $attributes;?>>
+<div class="<?php print $class;?> <?php echo 'player-position-'.$code;?>"<?php print $attributes;?>>
 	<?php foreach ($rows as $row_number => $columns):?>
 	<!--div class="<?php print $row_classes[$row_number];?>"-->
 		<?php foreach ($columns as $column_number => $item):

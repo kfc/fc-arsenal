@@ -13,7 +13,7 @@
 		
     <div class="breadcrumb-links">
       <?php if($is_front) {
-        print '<span>Сайт представительства официального фан-клуба лондонского Арсенала</span>';
+        print '<span class="breadcrumb-front">Сайт представительства официального фан-клуба лондонского Арсенала</span>';
       } else {
         print $breadcrumb; 
       } ?>
