@@ -20,18 +20,13 @@ if (is_integer($title) && in_array($title, $tids)) {
 } else
   $title = '';
 ?>
+<div class="players <?php echo 'player-position-'.$code;?>">
 <?php if (!empty($title)) : ?>
 <h3><?php print mb_strtoupper(substr($title, 0, 2), 'UTF-8') . mb_strtolower(substr($title, 2), 'UTF-8');?></h3>
 <?php endif;?>
-
-<div class="<?php print $class;?> <?php echo 'player-position-'.$code;?>"<?php print $attributes;?>>
-	<?php foreach ($rows as $row_number => $columns):?>
-	<!--div class="<?php print $row_classes[$row_number];?>"-->
-		<?php foreach ($columns as $column_number => $item):
-$align = ($column_number == 0 ? 'left' : ($column_number == count($columns)-1 ? 'right' : 'center'));
-		?>
-		<!--div class="<?php print $column_classes[$row_number][$column_number];?>"--><?php print $item;?><!--/div-->
-		<?php endforeach;?>
-	<!--/div-->
-	<?php endforeach;?>
+<?php foreach ($rows as $row_number => $columns):?>
+  <?php foreach ($columns as $column_number => $item):?>
+    <?php print $item;?>
+  <?php endforeach;?>
+<?php endforeach;?>
 </div>

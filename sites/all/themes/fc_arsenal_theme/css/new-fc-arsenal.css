@@ -39,7 +39,7 @@ BODY {
 	font-family: Arial;
 	font-size: 13px;
 	color: #353535;
-	min-width: 1600px;
+	min-width: 1000px;
 }
 A {
 	color: #353535;
@@ -115,7 +115,7 @@ TABLE {
 	background: -o-linear-gradient(top, #e72929, #8d0909);
 	background: linear-gradient(top, #e72929, #8d0909);
 	border: 1px solid #ce1c1c;
-	border-radius: 4px;
+	border-radius: 3px;
 	box-shadow: inset 0 0 5px rgba(255,255,255,0.5);
 	color: #fff;
 	display: inline-block;
@@ -213,8 +213,8 @@ TABLE {
 
 
 #container {
-	width: 1000px;
 	margin: 0px auto;
+	width: 1000px;
 }
 
 
@@ -224,6 +224,9 @@ TABLE {
 	background: none /*url('../img/header-bg.png') no-repeat scroll 0 0*/;
 	position: relative;
 	height: 163px;
+}
+#header .block-margin {
+	margin: 0;
 }
 #header .logo {
 	position: absolute;
@@ -282,7 +285,7 @@ TABLE {
  }*/
 
 
-#block-customization-historical-fact {
+.region-header {
 	background: #820000;
 	background: -webkit-linear-gradient(top, #d60000, #820000);
 	background: -moz-linear-gradient(top, #d60000, #820000);
@@ -292,6 +295,18 @@ TABLE {
 	border-radius: 0 0 3px 3px;
 	color: #fff;	
 	padding: 0 0 0 20px;
+}
+.region-header:after {
+	content: ".";
+	display: block;
+	height: 0pt;
+	clear: both;
+	visibility: hidden;
+}
+
+
+#block-customization-historical-fact {
+	float: left;
 }
 #block-customization-historical-fact a {
 	color: #fff;
@@ -304,7 +319,8 @@ TABLE {
 
 
 #block-customization-customization-login-block {
-	background: #000;
+	background: url(../img/header_block_bg.png) no-repeat right -72px;
+	/*background: #000;
 	background: -webkit-linear-gradient(top, #4a4e5a, #000);
 	background: -moz-linear-gradient(top, #4a4e5a, #000);
 	background: -ms-linear-gradient(top, #4a4e5a, #000);
@@ -312,11 +328,13 @@ TABLE {
 	background: linear-gradient(top, #4a4e5a, #000);
 	border-top: 1px solid #9098b0;
 	border-right: 1px solid #9098b0;
-	border-radius: 0 0 3px 0;
-	height: 35px;
-	position: absolute;
-	top: 0;
-	right: 0;
+	border-radius: 0 0 3px 0;*/
+	float: right;
+	padding: 0 10px 0 0;
+}
+#block-customization-customization-login-block .content {
+	background: url(../img/header_block_bg.png) repeat-x left -36px;
+	height: 36px;
 }
 #block-customization-customization-login-block ul {
 	padding: 10px 0 0 0;
@@ -331,11 +349,50 @@ TABLE {
 
 
 #block-custom-social-share-social-share-links {
+	background: url(../img/header_block_bg.png) no-repeat left top;
+	float: right;
+	padding: 0 0 0 30px;
+}
+#block-custom-social-share-social-share-links .content {
+	background: url(../img/header_block_bg.png) repeat-x left -36px;
+	height: 36px;
+}
+#block-custom-social-share-social-share-links li {
+	float: left;
+	padding: 7px 8px 0 0;
+}
+#block-custom-social-share-social-share-links li a {
+	background-image: url(../img/socials.png);
+	background-repeat: no-repeat;
+	display: block;
+	height: 20px;
+	width: 20px;
+}
+#block-custom-social-share-social-share-links li img {
 	display: none;
+}
+
+#block-custom-social-share-social-share-links .header-mail-link a {
+	background-position: left 0px;
+}
+
+#block-custom-social-share-social-share-links .header-fb-link a {
+	background-position: left -20px;
+}
+
+#block-custom-social-share-social-share-links .header-vk-link a {
+	background-position: left -40px;
+}
+
+#block-custom-social-share-social-share-links .header-twitter-link a {
+	background-position: left -60px;
 }
 
 /* ====================================== EOF: HEADER ====================================== */
 
+.main-shadow {
+	box-shadow: 0 10px 10px #000;
+}
 
 /* ====================================== BOF: SUB-HEADER ====================================== */
 
@@ -461,11 +518,22 @@ ul.nice-menu-down li.over {
 #main_menu UL LI.first {
 	margin: 0 0 0 4px;
 }
+#main_menu .nice-menu-down > li:hover {
+	background: #a61315;
+	border-top: 2px solid rgba(255,255,255, .85);
+	border-radius: 3px;
+	padding: 0;
+	height: auto;
+}
+#main_menu .nice-menu-down > li:hover a {
+	padding-bottom: 6px;
+}
 #main_menu .nice-menu-down > .menuparent:hover {
 	background: #a61315;
 	border-top: 2px solid rgba(255,255,255, .85);
 	border-radius: 3px 3px 0 0;
 	padding: 0;
+	height: 33px;
 }
 #main_menu .nice-menu-down > .active-trail,
 .front #main_menu .nice-menu-down > .first {
@@ -478,6 +546,9 @@ ul.nice-menu-down li.over {
 	border-top: 2px solid rgba(255,255,255, .85);
 	border-radius: 3px 3px 0 0;
 	padding: 0;
+}
+.front #main_menu .nice-menu-down > .first:hover {
+	height: 33px;
 }
 #main_menu .nice-menu-down > .active-trail > a,
 .front #main_menu .nice-menu-down > .first > a {
@@ -618,7 +689,7 @@ ul.nice-menu-down li.over {
 .breadcrumb-links {
 	/*padding: 14px 0 10px 14px;*/
 	position: absolute;
-	bottom: 12px;
+	bottom: 10px;
 	left: 25px;
 }
 .breadcrumb-links .breadcrumb-front {
@@ -667,7 +738,7 @@ ul.nice-menu-down li.over {
 
 #content {
 	background: #fff;
-	min-height: 500px;
+	/*min-height: 500px;*/
 	overflow: hidden;
 	padding: 20px;
 	position: relative;
@@ -1728,6 +1799,7 @@ div.wallpaper-thumb-wrapper {
 	color: #ffffff;
 	padding: 8px 0 8px 20px;
 	font-size: 15px;
+	line-height: 1em;
 	text-align: left;
 }
 .view-display-id-calendar tr {
@@ -1850,33 +1922,83 @@ div.wallpaper-thumb-wrapper {
 
 /* BOF: NEWS PAGE */
 
-.node-news-item .right-part {
-	display: none;
+.node-type-news #content {
+	background: none;
+	padding: 0;
+}
+.node-type-news #content h1 {
+	border: none;
+	padding: 0;
 }
 
-.node-news-item .news-image {
+
+
+.node-news-item .left-part {
+	background: #fff;
+	float: left;
+	padding: 20px;
+	width: 460px;
+}
+
+#read-news-item .news-image {
 	margin: 0 -20px 20px -20px;
 	overflow: hidden;
 }
-.node-news-item .news-image img {
+#read-news-item .news-image img {
 	min-width: 100%;
 	vertical-align: top;
 }
 
-.node-news-item .news-body p {
+#read-news-item .news-body p {
 	margin: 0 0 1em;
 }
 
-.node-news-item .news-footer {
+#read-news-item .news-footer {
 	border-top: 1px solid #e3e3e3;
 	padding: 12px 0 0; 
 }
-
-.node-news-item .news-footer .news-date {
+#read-news-item .news-footer .news-date {
 	padding: 4px 0 0;
 }
-.node-news-item .news-footer .news-date img {
+#read-news-item .news-footer .news-date img {
 	vertical-align: middle;
+}
+
+
+.node-news-item .right-part {
+	background: #fff;
+	float: right;
+	width: 240px;
+}
+
+
+.node-news-item #latest-news-block H2 {
+	background: #820000;
+	background: -webkit-linear-gradient(top, #d70000, #820000);
+	background: -moz-linear-gradient(top, #d70000, #820000);
+	background: -ms-linear-gradient(top, #d70000, #820000);
+	background: -o-linear-gradient(top, #d70000, #820000);
+	background: linear-gradient(top, #d70000, #820000);
+	color: #ffffff;
+	font-size: 15px;
+	line-height: 1;
+	padding: 8px 0 8px 20px;
+}
+
+.node-news-item #latest-news-block .news-block-content {
+	padding: 10px 0;
+}
+
+.node-news-item #latest-news-block .views-row {
+	border: none;
+}
+
+.node-news-item #latest-news-block .teaser-node-news {
+	background: none;
+}
+
+.node-news-item #latest-news-block .item-list {
+	display: none;
 }
 
 /*
@@ -1977,12 +2099,44 @@ div.wallpaper-thumb-wrapper {
 
 .player-page .season-stats {
 	clear: both;
+	padding: 1em 0 0;
 }
 .player-page .season-stats h3 {
 	font-weight: bold;
 }
 .player-page .season-stats table {
 	margin: 0 0 1em;
+}
+.player-page .season-stats tr {
+  background: none;    
+}
+.player-page .season-stats tr:hover td {
+	background: #f6f6f6;
+}
+.player-page .season-stats h3 {
+	background: #820000;
+	background: -webkit-linear-gradient(top, #d70000, #820000);
+	background: -moz-linear-gradient(top, #d70000, #820000);
+	background: -ms-linear-gradient(top, #d70000, #820000);
+	background: -o-linear-gradient(top, #d70000, #820000);
+	background: linear-gradient(top, #d70000, #820000);
+	color: #ffffff;
+	font-size: 15px;
+	font-weight: normal;
+	line-height: 1em;
+	margin: 0;
+	padding: 8px 0 8px 20px;
+}
+.player-page .season-stats td {
+	border: 1px solid #e3e3e3;
+	text-align: center; 
+	padding: 2px 6px;
+}
+.player-page .season-stats td a {
+	text-decoration: none;
+}
+.player-page .season-stats td a:hover {
+	text-decoration: underline;
 }
 
 /* EOF: PLAYER INFO PAGE */
@@ -2009,6 +2163,7 @@ div.wallpaper-thumb-wrapper {
 	color: #ffffff;
 	padding: 8px 0 8px 20px;
 	font-size: 15px;
+	line-height: 1em;
 	text-align: left;
 }
 .tournament-table th,
@@ -2099,10 +2254,34 @@ div.wallpaper-thumb-wrapper {
 	display: none;
 }
 
+#node-match .match-page-nav-links {
+	height: 12px;
+	position: relative;
+}
+
+#node-match #match-page-prev-match-link,
+#node-match #match-page-next-match-link {
+	background: url(../img/prev_next_bg.png) no-repeat;
+	height: 25px;
+	line-height: 25px;
+	position: absolute;
+	top: 1px;
+}
+#node-match #match-page-prev-match-link {
+	background-position: left top;
+	left: 1px;
+	padding: 0 0 0 30px;
+}
+#node-match #match-page-next-match-link {
+	background-position: right bottom;
+	right: 1px;
+	padding: 0 30px 0 0;
+}
+
 
 #node-match .match-center-left-team,
 #node-match .match-center-right-team {
-	padding: 134px 0 0;
+	padding: 122px 0 0;
 	width: 240px;
 }
 #node-match .match-center-left-team {
@@ -2150,25 +2329,12 @@ div.wallpaper-thumb-wrapper {
 /* BOF: PLAYERS & TRAINERS */
 
 .view-id-persons h3 {
-	background: url(../img/person_h3_bg.jpg) no-repeat left bottom;
-	border-left: 1px solid #e3e3e3;
-	border-right: 1px solid #e3e3e3;
+	background: url(../img/person_h3_bg.png) no-repeat left top;
 	color: #fff;
 	font-size: 17px;
 	height: 32px;
 	line-height: 28px;
-	margin: 0;
-	text-align: center;
-}
-.view-id-persons h3:first-child {
-	background-position: left top;
-}
-
-.view-id-persons .views-view-grid {
-	border: 1px solid #e3e3e3;
-	border-top: 0 none;
-	margin: 0 0 20px;
-	padding: 0 18px 24px 18px;
+	margin: 0 -18px;
 	text-align: center;
 }
 
@@ -2222,7 +2388,31 @@ div.wallpaper-thumb-wrapper {
 	text-transform: uppercase;
 }
 
-.view-id-persons .squad-player-number {
+
+.players,
+.trainers {
+	margin: 0 0 20px;
+	padding: 0 18px 24px 18px;
+	text-align: center;
+}
+
+
+.trainers {
+	border: 1px solid #e3e3e3;
+	border-top: 0 none;
+}
+
+.trainers-supply h3 {
+  background-position: left bottom;
+}
+
+
+.players {
+  background-position: left 3px;
+  background-repeat: no-repeat;
+}
+
+.players .squad-player-number {
 	background: url(../img/player_number_bg.png) no-repeat left top;
 	color: #fff;
 	font-size: 17px;
@@ -2237,7 +2427,31 @@ div.wallpaper-thumb-wrapper {
 	width: 20px;
 }
 
-/* EOF: TRAINERS */
+.player-position-goalkeeper {
+  background-image: url(../img/goalkeeper_bg.jpg);
+  /*height: 175px;*/
+}
+
+.player-position-defender {
+  background-image: url(../img/defender_bg.jpg);
+  /*height: 295px;*/
+}
+
+.player-position-midfielder {
+  background-image: url(../img/midfielder_bg.jpg);
+  /*height: 414px;*/
+}
+
+.player-position-forward {
+  background-image: url(../img/forward_bg.jpg);
+  /*height: 295px;*/
+}
+
+.player-position-loaned {
+  background: #e3e3e3;
+}
+
+/* EOF: PLAYERS & TRAINERS */
 
 
 /* BOF: GALLERY */
@@ -2268,7 +2482,6 @@ div.wallpaper-thumb-wrapper {
 /* BOF: AUDIO */
 
 .node-audio {
-	height: auto!important;
 	padding: 0 40px 30px 0;
 }
 
@@ -2297,6 +2510,9 @@ div.wallpaper-thumb-wrapper {
 .book-item .book-cover {
 	float: left;
 	width: 80px;
+}
+.book-item .book-cover img {
+	vertical-align: top;
 }
 
 .book-item .book-info {

@@ -7,6 +7,8 @@
 	</header>
 	<!-- EOF: HEADER -->
 	
+	<div class="main-shadow">
+	
 	<!-- BOF: SUB-HEADER -->
 	<div id="sub-header">
 		<?php print render($page['sub_header']); ?>
@@ -56,6 +58,8 @@
 		<?php } ?>
 	</div>
 	<!-- EOF: MAIN-PART -->
+	
+	</div>
 	
 	<!-- BOF: FOOTER -->
 	<footer id="footer">
@@ -152,5 +156,4 @@ if(11<js)d.write('--'+'>')//--></script><!--/COUNTER-->
 		</div><!-- /site-footer -->
 	</footer>
 	<!-- EOF: FOOTER -->
-
 </div>
