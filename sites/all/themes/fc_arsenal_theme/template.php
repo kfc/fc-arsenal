@@ -86,7 +86,7 @@ function fc_arsenal_theme_breadcrumb($variables) {
 function fc_arsenal_theme_form_alter(&$form, &$form_state, $form_id) {
  if($form_id == 'user_login'){
   $form['forgot'] = array(
-    '#markup'=>'<div class="form-item"><label>&nbsp;</label>'.l(t('forgot your password').'?','user/password').'</div>'
+    '#markup'=>'<div class="form-item forgot-password"><label>&nbsp;</label>'.l(t('forgot your password').'?','user/password').'</div>'
   );
   
   $form['#prefix'] = '<div class="login-title">'.t('Enter').'</div>';

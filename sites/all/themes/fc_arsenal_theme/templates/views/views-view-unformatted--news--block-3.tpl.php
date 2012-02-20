@@ -1,5 +1,5 @@
 <div id="latest-news-block" class="block">
-<h2><?php echo t('Latest News');?></h2>
+<h2><?php echo t('Other News');?></h2>
 <div class="news-block-content">
   <?php
    $index = 0;

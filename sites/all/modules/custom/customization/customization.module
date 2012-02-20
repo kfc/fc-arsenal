@@ -170,6 +170,14 @@ function customization_preprocess_page(&$vars){
   //remove nodes from main page.
   if(drupal_is_front_page())
     unset($vars['page']['content']['system_main']);
+  if(isset($vars['node'])){
+    $node = $vars['node'];  
+    if($node->type == 'person') {
+    if(!empty($node->field_person_number) && !empty($node->field_person_number[$node->language][0]['value']))
+      $vars['title'] = $node->field_person_number[$node->language][0]['value'].'. '.$node->title;
+      $vars['node']->title = $node->field_person_number[$node->language][0]['value'].'. '.$node->title;
+    }
+  }
 }
 
 function _play_video($nid){
@@ -292,6 +300,19 @@ function customization_views_query_alter(&$view, &$query){
 function _customization_edit_galleries(){
   $_SESSION['node_overview_filter'] = array(array('type','gallery'));
   drupal_goto('admin/content');
+}
+
+function customization_preprocess_node(&$vars){
+  $node = $vars['node'];
+  
+  if($node->type == 'person'){
+    /*if(!empty($node->field_person_number) && !empty($node->field_person_number[$node->language][0]['value']))
+      $vars['title'] = $node->field_person_number[$node->language][0]['value'].'. '.$vars['title'];
+      $vars['node']->title = $node->field_person_number[$node->language][0]['value'].'. '. $vars['node']->title;
+      drupal_set_title($node->field_person_number[$node->language][0]['value'].'. '. $vars['node']->title);  */
+  }
+  
+  
 }
 
 ?>

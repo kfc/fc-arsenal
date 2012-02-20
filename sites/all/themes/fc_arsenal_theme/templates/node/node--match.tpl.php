@@ -106,7 +106,7 @@
     $tabs_content[$tab_index++] = $content_tmp;
   }
 	
-	print theme('custom_match_match_teaser', array($node,''));
+  print theme('custom_match_match_teaser', array($node,''));
 	
   if(!empty($tabs_list))
 	  print theme('custom_match_simple_tabs',array($tabs_list, $tabs_content)); 

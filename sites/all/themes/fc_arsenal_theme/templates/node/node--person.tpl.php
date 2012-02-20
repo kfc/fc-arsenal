@@ -11,9 +11,6 @@
 
 		<div class="player-box-info">
 			<!--h2>
-      <?php if(!empty($node->field_person_number)): ?>
-        <?php print $node->field_person_number[$node->language][0]['value'].'.&nbsp;';?>
-      <?php endif;?>
       <?php echo $node->title; ?>
       </h2-->
       <div class="photo"><?php print $image; ?></div>

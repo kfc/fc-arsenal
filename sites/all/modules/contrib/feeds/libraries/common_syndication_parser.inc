@@ -19,13 +19,13 @@
  *  stdClass The structured datas extracted from the feed.
  */
 function common_syndication_parser_parse($string) {
-  if (!defined('LIBXML_VERSION') || (version_compare(phpversion(), '5.1.0', '<'))) {
+  if (!defined('LIBXML_VERSION') || (version_compare(phpversion(), '5.1.0', '<'))) {   
     @ $xml = simplexml_load_string($string, NULL);
   }
-  else {
+  else {              
     @ $xml = simplexml_load_string($string, NULL, LIBXML_NOERROR | LIBXML_NOWARNING | LIBXML_NOCDATA);
   }
-
+ 
   // Got a malformed XML.
   if ($xml === FALSE || is_null($xml)) {
     return FALSE;

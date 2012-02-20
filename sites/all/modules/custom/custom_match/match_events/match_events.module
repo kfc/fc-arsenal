@@ -1,5 +1,27 @@
 <?php
 
+function match_events_block_info(){
+  $blocks['players_stats'] = array(
+    'info' => t('Players Stats'),
+    'status'=>TRUE,
+    'visibility'=>1,
+    'region'=>-1,
+  );
+  
+  return $blocks;
+  
+}
+
+function match_events_block_view($delta){
+  switch($delta){
+    case 'players_stats':
+      $block['content'] = season_stats();
+      return $block;
+      break;
+  }
+
+}
+
 function match_events_form_alter(&$form, $form_state, $form_id){
   if($form_id == 'match_node_form'){
     drupal_add_css(drupal_get_path('module', 'custom_match').'/misc/styles.css');
@@ -33,7 +55,7 @@ function match_events_preprocess_node(&$vars){
       foreach($player_matches as $_match){
         $rows[$_match['nid']] = array(
           'match_date' => $_match['match_date'],
-          'match' => l($_match['title'], 'node/'.$_match['nid']),
+          'match' => array('data'=>l($_match['title'], 'node/'.$_match['nid']),'class'=>'team_name'),
           'result' => l($_match['result'], 'node/'.$_match['nid']),
         );
         $rows[$_match['nid']]['events'] = '';
@@ -67,7 +89,7 @@ function match_events_preprocess_node(&$vars){
   //dpm($events);
 }
 
-function match_events_get_player_matches($player_nid){
+function match_events_get_player_matches($player_nid=null){
 
 
   $player_matches = db_query("
@@ -79,7 +101,9 @@ function match_events_get_player_matches($player_nid){
     INNER JOIN `field_data_field_match_season` season on season.entity_id = squad.entity_id
     INNER JOIN `field_data_field_match_start_date` match_date on match_date.entity_id = squad.entity_id
     INNER JOIN `field_data_field_match_result` result on result.entity_id = squad.entity_id
-    WHERE field_match_arsenal_squad_nid = :player_nid AND field_match_season_tid = :season)
+    WHERE
+    ".(!empty($player_nid) ? 'field_match_arsenal_squad_nid = :player_nid AND ' : '')." 
+    field_match_season_tid = :season)
     
     UNION
     
@@ -89,7 +113,9 @@ function match_events_get_player_matches($player_nid){
     INNER JOIN `field_data_field_match_season` season on season.entity_id = squad.entity_id
     INNER JOIN `field_data_field_match_start_date` match_date on match_date.entity_id = squad.entity_id
     INNER JOIN `field_data_field_match_result` result on result.entity_id = squad.entity_id
-    WHERE field_match_arsenal_squad_subs_nid = :player_nid AND field_match_season_tid = :season)) t
+    WHERE 
+    ".(!empty($player_nid) ? 'field_match_arsenal_squad_subs_nid = :player_nid AND ' : '')."
+    field_match_season_tid = :season)) t
     
     ORDER BY field_match_start_date_value
   ",array(':player_nid'=>$player_nid, ':season'=>variable_get('tournament_table_default_season',0)))->fetchAllAssoc('nid');
@@ -126,6 +152,12 @@ function match_events_get_event_id_by_code($code, $events){
       return $event->tid;
   }
   return false;
+}
+
+
+function season_stats(){
+  $matches = match_events_get_player_matches();
+  dpm($matches);
 }
 
 
