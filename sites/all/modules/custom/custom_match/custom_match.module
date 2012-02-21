@@ -597,7 +597,7 @@ function theme_custom_match_match_team_block($vars){
     foreach($nids as $nid){
       $i++;
       $lang = $player_nodes[$nid]->language;
-      $team_players_output .= '<div class="squad-player '.($i%2 == 0 ? 'squad-player-odd' : 'squad-player-even').'" '.($i == 11 ? 'style="border-bottom: 2px solid #D0D0D0; padding-bottom: 10px;"' : '').'>';
+      $team_players_output .= '<div class="squad-player '.($i%2 == 0 ? 'squad-player-odd' : 'squad-player-even').'">';
       $position_term = taxonomy_term_load($player_nodes[$nid]->field_person_role[$lang][0]['tid']);
       //$team_players_output .= '<div style="width:25px; float: left;">'.$player_nodes[$nid]->field_person_number[$lang][0]['value'].'. </div>'; 
       $team_players_output .= '<div style="float: left;" '.($i > 11 ? 'class="squad-player-subs"' : '').'>'.l($player_nodes[$nid]->title, 'node/'.$nid).'</div>';
@@ -611,6 +611,9 @@ function theme_custom_match_match_team_block($vars){
       //$team_players_output .=' <span style="float: right;">'.$position_term->field_role_short_name[array_shift(array_keys($position_term->field_role_short_name))][0]['safe_value'].'</span></div>'; 
       //$team_players_output .=  '<div style="float:right">'.theme('image_style', array( 'path' =>  $player_nodes[$nid]->field_person_photo[$lang][0]['uri'], 'style_name' => 'squad_player_thumbnail')).'</div>'; 
       $team_players_output .= '<div class="cf" style="padding:0px;"></div></div>';
+      if($i == 11){
+        $team_players_output .= '<div class="squad-player squad-subs">'.t('Substitutes').'</div>';
+      }
     }
   }
   else{
@@ -622,8 +625,7 @@ function theme_custom_match_match_team_block($vars){
       if(empty($_player)) continue;
       //$f = array_shift($match_events);
       //var_dump($f[0]['player']);
-    
-      $team_players_output .= '<div class="squad-player '.($i%2 == 0 ? 'squad-player-odd' : 'squad-player-even').'" '.($i == 11 ? 'style="border-bottom: 2px solid #D0D0D0; padding-bottom: 10px;"' : '').' >';
+      $team_players_output .= '<div class="squad-player '.($i%2 == 0 ? 'squad-player-odd' : 'squad-player-even').'">';
       $team_players_output .= '<div style="float: left;" '.($i > 11 ? 'class="squad-player-subs"' : '').'>'.$_player.'</div>';
       if(isset($match_events[$_player])){   
         foreach($match_events[$_player] as $event){ 
@@ -633,6 +635,9 @@ function theme_custom_match_match_team_block($vars){
       }
       
       $team_players_output .= '<div class="cf" style="padding:0px;"></div></div>'; 
+      if($i == 11){
+        $team_players_output .= '<div class="squad-player squad-subs">'.t('Substitutes').'</div>';
+      }
     }
     
   }
