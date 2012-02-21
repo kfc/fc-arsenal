@@ -3,7 +3,7 @@
     <?php echo $fields['field_news_image']->content;?>
   </div>
   <div class="news-body">
-    <h3><?php //echo $fields['title']->content;?></h3>
+    <h3><?php echo $fields['title']->content;?></h3>
     <div class="teaser-content"><?php echo $fields['body']->content;?></div>
   </div>
   <div class="cf">&nbsp;</div>
