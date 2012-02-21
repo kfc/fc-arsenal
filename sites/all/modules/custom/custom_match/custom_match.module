@@ -725,7 +725,6 @@ function theme_custom_match_match_goals($vars){
         }
         if($type['value'] == 'own_goal')
           $og_tid = $term->tid;  
-        }
       }
     }
   }
