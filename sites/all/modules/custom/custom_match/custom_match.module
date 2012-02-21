@@ -688,6 +688,8 @@ function theme_custom_match_match_goals($vars){
   $node = array_shift($vars);
   $goals_team = array_shift($vars);
   
+  
+  
   if($goals_team == 'arsenal'){
     $field = 'arsenal_events';
     $opp_field = 'opponent_events';
@@ -697,26 +699,52 @@ function theme_custom_match_match_goals($vars){
     $opp_field = 'arsenal_events';
   }
   
+  static $tids = array();
+  static $penalty_tid = 0;
+  static $og_tid = 0;
+  
+  if(empty($tids)){
+    $vocab = taxonomy_vocabulary_machine_name_load('match_event_type');
+    $terms = taxonomy_get_tree($vocab->vid);
+    foreach($terms as $term)
+      $tids[] = $term->tid;
+    $terms = taxonomy_term_load_multiple($tids);
+    $tids = array();
+    foreach($terms as $term){
+      if(!empty($term->field_match_event_type_code)){
+        $type = array_shift(array_shift($term->field_match_event_type_code));
+        if($type['value'] == 'goal' || $type['value'] == 'penalty_goal' || $type['value'] == 'own_goal'){
+          $tids[$term->tid] = $term->tid; 
+          if($type['value'] == 'penalty_goal')
+            $penalty_tid = $term->tid;
+          if($type['value'] == 'own_goal')
+            $og_tid = $term->tid;  
+        }
+      }
+    }
+  }
   $team_goals = array();
   $team_goals_html = '';
-  static $tids = array();
-  if(isset($node->{$field}) || $node->{$opp_field}){
+ 
+  if(isset($node->{$field}) || isset($node->{$opp_field})){
     foreach($node->{$field} as $player){ 
       foreach($player as $event){
-        if(!empty($tids) || !empty($event['event_type']->field_match_event_type_code)){
-          if(!empty($event['event_type']->field_match_event_type_code)){
-            $type = array_shift(array_shift($event['event_type']->field_match_event_type_code));
-            if($type['value'] == 'goal' || $type['value'] == 'penalty_goal')
-              $tids[$event['event_type']->tid] = $event['event_type']->tid;
-          }
-          if(!empty($tids) && in_array($event['event_type']->tid,$tids)){   
-            $team_goals[$event['event_minute']] = ($goals_team == 'arsenal' ?  $event['player']->title : $event['player']); 
-          }
+        if(!empty($tids) && in_array($event['event_type']->tid,$tids)){   
+          $team_goals[$event['event_minute']] = ($event['event_type']->tid == $penalty_tid ? '('.t('pen.').')' : '').($goals_team == 'arsenal' ?  $event['player']->title : $event['player']); 
         }
       }
     } 
-    static $og_tid = 0;
+    
     foreach($node->{$opp_field} as $player){ 
+      foreach($player as $event){
+        if($event['event_type']->tid == $og_tid){   
+          $team_goals[$event['event_minute']] = ' ('.t('o.g.').') '. ($goals_team == 'arsenal' ?  $event['player'] : $event['player']->title); 
+        }
+      }
+    }
+    
+    
+    /*foreach($node->{$opp_field} as $player){ 
       foreach($player as $event){
         if(!empty($og_tid) || !empty($event['event_type']->field_match_event_type_code)){
           if(!empty($event['event_type']->field_match_event_type_code)){
@@ -729,7 +757,7 @@ function theme_custom_match_match_goals($vars){
           }
         }
       }
-    }      
+    }  */    
     ksort($team_goals);
     foreach($team_goals as $min=>$player){
       $team_goals_html .= $min."' ".$player.'<br />';  
