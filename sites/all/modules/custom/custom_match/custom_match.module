@@ -718,12 +718,13 @@ function theme_custom_match_match_goals($vars){
     foreach($terms as $term){
       if(!empty($term->field_match_event_type_code)){
         $type = array_shift(array_shift($term->field_match_event_type_code));
-        if($type['value'] == 'goal' || $type['value'] == 'penalty_goal' || $type['value'] == 'own_goal'){
+        if($type['value'] == 'goal' || $type['value'] == 'penalty_goal'){
           $tids[$term->tid] = $term->tid; 
           if($type['value'] == 'penalty_goal')
             $penalty_tid = $term->tid;
-          if($type['value'] == 'own_goal')
-            $og_tid = $term->tid;  
+        }
+        if($type['value'] == 'own_goal')
+          $og_tid = $term->tid;  
         }
       }
     }
