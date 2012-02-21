@@ -466,12 +466,12 @@ function theme_custom_match_match_teaser($vars=array()){
     <div class="team-line">
       <div class="match-centre-team">
         <div class="match-centre-team-name">'.t('Arsenal').'</div>
-        <div class="match-centre-goals">'.theme('custom_match_match_goals',array($node,'opponent')).'</div>
+        <div class="match-centre-goals">'.theme('custom_match_match_goals',array($node,'arsenal')).'</div>
       </div>
       <div class="match-centre-match-result">'.$result.'</div> '.'
       <div class="match-centre-team">
         <div class="match-centre-team-name">'.$rival_node->title.'</div>
-        <div="match-centre-goals">'.theme('custom_match_match_goals',array($node,'arsenal')).'</div>
+        <div="match-centre-goals">'.theme('custom_match_match_goals',array($node,'opponent')).'</div>
       </div>
     </div>';
   }
@@ -600,7 +600,7 @@ function theme_custom_match_match_team_block($vars){
       $team_players_output .= '<div class="squad-player '.($i%2 == 0 ? 'squad-player-odd' : 'squad-player-even').'" '.($i == 11 ? 'style="border-bottom: 2px solid #D0D0D0; padding-bottom: 10px;"' : '').'>';
       $position_term = taxonomy_term_load($player_nodes[$nid]->field_person_role[$lang][0]['tid']);
       //$team_players_output .= '<div style="width:25px; float: left;">'.$player_nodes[$nid]->field_person_number[$lang][0]['value'].'. </div>'; 
-      $team_players_output .= '<div style="float: left;">'.l($player_nodes[$nid]->title, 'node/'.$nid).'</div>';
+      $team_players_output .= '<div style="float: left;" '.($i > 11 ? 'class="squad-player-subs"' : '').'>'.l($player_nodes[$nid]->title, 'node/'.$nid).'</div>';
       
       if(isset($match_events[$nid])){   
         foreach($match_events[$nid] as $event){
@@ -624,7 +624,7 @@ function theme_custom_match_match_team_block($vars){
       //var_dump($f[0]['player']);
     
       $team_players_output .= '<div class="squad-player '.($i%2 == 0 ? 'squad-player-odd' : 'squad-player-even').'" '.($i == 11 ? 'style="border-bottom: 2px solid #D0D0D0; padding-bottom: 10px;"' : '').' >';
-      $team_players_output .= '<div style="float: left;">'.$_player.'</div>';
+      $team_players_output .= '<div style="float: left;" '.($i > 11 ? 'class="squad-player-subs"' : '').'>'.$_player.'</div>';
       if(isset($match_events[$_player])){   
         foreach($match_events[$_player] as $event){ 
           $event_icon = theme_image(array('path'=>$event['event_type']->field_match_event_type_icon['und'][0]['uri'], 'attributes'=>array('title'=>'('.strtolower($event['event_type']->name).', '.$event['event_minute'].' '.t('min').')', )));
@@ -715,15 +715,16 @@ function theme_custom_match_match_goals($vars){
         }
       }
     } 
+    static $og_tid = 0;
     foreach($node->{$opp_field} as $player){ 
       foreach($player as $event){
-        if(!empty($tids) || !empty($event['event_type']->field_match_event_type_code)){
+        if(!empty($og_tid) || !empty($event['event_type']->field_match_event_type_code)){
           if(!empty($event['event_type']->field_match_event_type_code)){
             $type = array_shift(array_shift($event['event_type']->field_match_event_type_code));
             if($type['value'] == 'own_goal')
-              $tids[$event['event_type']->tid] = $event['event_type']->tid;
+              $og_tid = $event['event_type']->tid;
           }
-          if(!empty($tids) && in_array($event['event_type']->tid,$tids)){   
+          if(!empty($og_tid) && $event['event_type']->tid == $og_tid){   
             $team_goals[$event['event_minute']] = ' ('.t('o.g.').') '. ($goals_team == 'arsenal' ?  $event['player'] : $event['player']->title); 
           }
         }
