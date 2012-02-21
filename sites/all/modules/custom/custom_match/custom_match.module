@@ -724,7 +724,7 @@ function theme_custom_match_match_goals($vars){
               $tids[$event['event_type']->tid] = $event['event_type']->tid;
           }
           if(!empty($tids) && in_array($event['event_type']->tid,$tids)){   
-            $team_goals[$event['event_minute']] = ' ('.t('o.g.').') '. ($goals_team == 'arsenal' ?  $event['player']->title : $event['player']); 
+            $team_goals[$event['event_minute']] = ' ('.t('o.g.').') '. ($goals_team == 'arsenal' ?  $event['player'] : $event['player']->title); 
           }
         }
       }
