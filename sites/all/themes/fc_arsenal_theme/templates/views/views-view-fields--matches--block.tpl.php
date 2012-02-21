@@ -14,9 +14,6 @@
 	<div class="tournament-type"><?php echo render($fields['field_match_tournament'] -> content);?></div>
 	<div class="match-date"><?php echo $variables['match']['start_date'];?></div>
 	<div class="match-links">
-  	<?php echo render($fields['nid'] -> content);?>
-  	<?php if($variables['additional_link']):?>
-  	<?php echo $variables['additional_link'];?>
-  	<?endif;?>
+  	<?php echo render($fields['nid'] -> content);?><?php if($variables['additional_link']):?><?php echo $variables['additional_link'];?><?endif;?>
   </div>
 </div>
