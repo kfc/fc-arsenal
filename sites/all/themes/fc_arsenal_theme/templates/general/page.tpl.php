@@ -7,7 +7,7 @@
 	</header>
 	<!-- EOF: HEADER -->
 	
-	<div class="main-shadow">
+	<div class="wrapper">
 	
 	<!-- BOF: SUB-HEADER -->
 	<div id="sub-header">
@@ -20,11 +20,6 @@
         print $breadcrumb; 
       } ?>
     </div>
-    <?php /*
-    <div id="breadcrumbs">
-      <?php print render($page['breadcrumbs']); ?>
-    </div>
-    */ ?>
 		
 	</div>
 	<!-- EOF: SUB-HEADER -->

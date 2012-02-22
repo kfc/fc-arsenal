@@ -1,14 +1,15 @@
-#main-part .messages {
-	padding: 10px 10px 10px 10px;
-}
 #main-part .status {
 	border: 2px solid #208B2C;
 	background: #B7ECBD;
 }
+
 /* ------------ BOF: CONTENT ------------ */
+
 #content LI.active {
 	border: 0px;
 }
+
+
 .table-block {
 	margin: 0px 0px 40px 0px;
 }
@@ -32,13 +33,8 @@
 }
 
 
-
-
 /* BOF: ---- GALLERY AREA ---- */
 
-.gallery-view-area {
-
-}
 .gallery-view-area .gallery-image {
 	float: left;
 	width: 140px;
@@ -58,12 +54,12 @@
 .gallery-view-area .gallery-image .image A:hover IMG {
 	border: 2px solid #AAAAAA;
 }
+
 /* EOF: ---- GALLERY AREA ---- */
 
-/* BOF: ---- NOTICES BLOCK ---- */
-.block-teasers {
 
-}
+/* BOF: ---- NOTICES BLOCK ---- */
+
 .block-teasers .notice-block-teaser {
 	padding: 0px 0px 5px 0px;
 	font-size: 10px;
@@ -81,13 +77,17 @@
 .block-teasers .footer {
 	font-size: 10px;
 }
+
 /* EOF: ---- NOTICES BLOCK ---- */
+
 .block .footer {
 	font-size: 10px;
 }
+
 /* BOF: ---- BLOG ---- */
 
 /* bof: all bloggers page */
+
 .blog-box {
 	background: url(../img/block-header3.gif) no-repeat 0 0;
 	margin-bottom: 10px;
@@ -120,7 +120,6 @@
 }
 .blog-box .blog-right-part {
 	float: left;
-	/*border: 1px solid #888888;*/
 	width: 730px;
 }
 .blog-box .blog-content .label {
@@ -189,9 +188,6 @@
 /* eof: bloggers index page */
 
 /* bof: blog posts page */
-.blog-post-page {
-
-}
 .blog-post-page .left-part {
 	float: left;
 	width: 680px;
@@ -278,12 +274,11 @@
 	text-align: right;
 	font-size: 10px;
 }
+
 /* eof: user blog block*/
 
 /* BOF: MY BLOG BLOCK */
-.my-blog {
 
-}
 .my-blog .blog-title {
 	text-align: center;
 }
@@ -297,11 +292,14 @@
 	width: 180px;
 	height: auto;
 }
+
 /* EOF: MY BLOG BLOCK */
 
 /* EOF: ---- BLOG ---- */
 
+
 /* BOF: TRAINER INFO PAGE */
+
 .trainer-page .left-part {
 	float: left;
 	width: 230px;
@@ -350,12 +348,12 @@
 	color: #40AC1E;
 	font-weight: bold;
 }
-.trainer-page .right-part H2 {
 
-}
 /* EOF: TRAINER INFO PAGE */
 
+
 /* BOF: STADIUM INFO PAGE */
+
 .stadium-page .left-part {
 	float: left;
 	width: 230px;
@@ -405,16 +403,22 @@
 }
 /* EOF: STADIUM INFO PAGE */
 
+
 /* BOF: ARCHIVE */
+
 .node-archive-teaser {
 	margin: 0px 0px 30px 0px;
 }
+
 /* EOF: ARCHIVE */
+
 /* ------------ EOF: CONTENT ------------ */
+
 
 /* ------------ BOF: HOME PAGE ------------ */
 
 /* BOF: top news block {FRONT PAGE} */
+
 .front-page #content #block-custom_pages-0 {
 	background: none;
 	margin-bottom: 10px;
@@ -424,50 +428,39 @@
 	padding: 0px;
 	border: 0px;
 }
-#block-dhtml_menu-212 {
 
-}
+
 #block-dhtml_menu-212 .content {
 	padding: 0px;
 }
 #block-dhtml_menu-212 .content A {
 	cursor: pointer;
 }
+
+
 #block-dhtml_menu-1 .content {
 	padding: 0px 5px 0px 5px;
 	font-size: 10px;
 }
+
+
 #block-custom-1 .content {
 	padding: 0px;
 }
 #block-custom-1 .content IMG {
 	width: 195px;
 }
+
+
 #block-custom_pages-2 TABLE TH, #block-custom_pages-2 TABLE TD {
 	font-size: 10px;
 }
-/*#block-views-qrss_view_inoprosport_ru {padding-top: 10px;}
- #block-views-qrss_view_inoprosport_ru .content{
- margin-top: -10px;
- border: 1px solid #CCC;
- border-top: 0px;
- padding: 10px 0px 10px 0px;
- }
- #block-views-qrss_view_inoprosport_ru .item-list LI{
- list-style: none;
- margin: 0px;
- }
- #block-views-qrss_view_inoprosport_ru .item-list LI UL LI{
- margin: 0 0 0.25em 1.5em;
- padding: 0;
- list-style: disc;
- }*/
+
 /* EOF: top news block {FRONT PAGE} */
 
-/* BOF: CHATROOM CHAT PAGE */
-.chatroom-chat-page {
 
-}
+/* BOF: CHATROOM CHAT PAGE */
+
 .chatroom-chat-page #content {
 	float: left;
 	width: 750px;
@@ -476,92 +469,8 @@
 	width: 200px;
 	float: right;
 }
+
 /* EOF: CHATROOM CHAT PAGE */
-
-
-/* BOF: news list teser view */
-/*#latest-news-block .news-block-content {
- border: 1px solid #CCCCCC;
- border-top: 0px;
- margin-top: 5px;
- padding: 10px 10px 10px 10px;
- }
- #latest-news-block .news-block-content .teaser-content{
- font-size: 10px;
- }*/
-/* EOF: news list teser view */
-
-/* BOF: home page sidebae menus */
-/*bof: prev. match */
-#block-views-matches-last-match {
-	font-size: 10px;
-}
-/*#block-views-matches-prev-match .content, #block-views-matches-next-match .content {
-	background: #FFFFFF url(../img/block-bg1.png) repeat-x 0px bottom;
-	padding: 10px 0px 0px 0px;
-}
-#block-views-matches-next-match .view-empty-match-next, #block-views-matches-prev-match .view-empty-match-prev {
-	text-align: center;
-}
-#block-views-matches-next-match .online-link {
-	padding: 3px 0px 3px 0px;
-	 text-align: center;
-	 float:left;
-}
-#block-views-matches-next-match .online-link A {
-	font-weight: bold;
-	font-size: 11px;
-	color: #0000FF;
-}
-.match-block .players .team-block, .match-block .players .vs {
-	float: left;
-	font-size: 12px;
-}
-.match-block .players .team-block {
-	width: 80px;
-	padding: 0px 2px 5px 2px;
-}
-.match-block .players .vs {
-	padding: 20px 0px 0px 0px;
-}
-.match-block .emblems-line {
-	text-align: center;
-}
-.match-block .team-names-line {
-	text-align: center;
-	font-weight: bold;
-	color: #B9141A;
-	font-size: 12px;
-}
-.match-block .score {
-	text-align: center;
-	font-weight: bold;
-	font-size: 12px;
-	color: #B9141A;
-}
-.match-block .tournament-type {
-	text-align: center;
-	margin: 3px 5px 3px 5px;
-	padding: 3px 0px 3px 0px;
-	border: 1px solid #CCCCCC;
-	border-left: 0px;
-	border-right: 0px;
-}
-.match-block .date {
-	text-align: center;
-}
-.match-block .footer {
-	text-align: center;
-	border-top: 1px solid #CCCCCC;
-	margin: 3px 0px 0px 0px;
-	padding: 1px 0px 3px 0px;
-}
-.match-block .footer A {
-	color: #40AC1E;
-	font-size: 11px;
-	font-weight: bold;
-}*/
-/*eof: prev. match */
 
 #block-views-portal_friendship_block UL {
 	margin: 0px;
@@ -576,18 +485,16 @@
 	float: left;
 	display: block;
 }
-.front-page .side-menu .view-content H2 {
-	background: none;
-}
-.front-page .side-menu .view-content .submitted {
-	display: none;
-}
+
+
 .front-page .side-menu .block-custom_pages .promotion-block {
 	text-align: center;
 }
 .front-page .side-menu .block-custom_pages .promotion-block IMG {
 	max-width: 220px;
 }
+
+
 #block-views-poll_view #poll-cancel-form {
 	display: none;
 }
@@ -601,15 +508,21 @@
 #block-views-poll_view .content .content .poll .form-radios {
 	margin: 0px;
 }
-#block-views-poll_view .content .content .poll .form-radios LABEL.option, #block-views-poll_view .content .content .poll .text, #block-views-poll_view .content .content .poll .percent, #block-views-poll_view .content .content .poll .total, #block-views-poll_view .content .comment_forbidden {
+#block-views-poll_view .content .content .poll .form-radios LABEL.option,
+#block-views-poll_view .content .content .poll .text,
+#block-views-poll_view .content .content .poll .percent,
+#block-views-poll_view .content .content .poll .total,
+#block-views-poll_view .content .comment_forbidden {
 	font-size: 10px;
 }
 #block-views-poll_view .content .content .poll .form-radios INPUT.form-radio {
 	vertical-align: bottom;
 }
+
 /* EOF: home page sidebae menus */
 
 /* BOF: styling of promotion block */
+
 #block-custom_pages-5 {
 	background: none;
 }
@@ -619,9 +532,8 @@
 #block-custom_pages-5 .content {
 	border: 1px solid #CCCCCC;
 }
-#block-custom-2 {
 
-}
+
 #block-custom-2 H2 {
 	display: none;
 }
@@ -629,69 +541,46 @@
 	padding: 0px;
 	border: 0px;
 }
+
 /* EOF: styling of promotion block */
 
 /* BOF: STYLING BANNER BLOCK */
-#block-views-banner_block, #block-views-banner_block2, #block-views-banner_block2_2 {
+
+#block-views-banner_block,
+#block-views-banner_block2,
+#block-views-banner_block2_2 {
 	background: none;
 }
-#block-views-banner_block .content, #block-views-banner_block2 .content, #block-views-banner_block2_2 .content {
+#block-views-banner_block .content,
+#block-views-banner_block2 .content,
+ #block-views-banner_block2_2 .content {
 	text-align: center;
 	border: 0px;
 	padding: 0px;
 	margin: 0px;
 }
+
 /* BOF: STYLING BANNER BLOCK */
 
 /* ------------ EOF: HOME PAGE ------------ */
 
-/* BOF: TEASER NEWS */
-/*.teaser-node-news{
- position: relative;
- border-bottom: 1px solid #636363;
- margin-bottom: 15px;
- padding-bottom: 5px;
- }
- .teaser-node-news .news-image,
- .teaser-node-news .news-body{
- float: left;
- }
- .teaser-node-news .news-image{
- margin: 0px 10px 0px 0px;
- width: 100px;
- text-align: center;
- }
- .teaser-node-news .news-body{
- width: 360px;
- }
- .teaser-node-news .news-body H3{
- margin: 0px 0px 5px 0px;
- padding: 0px;
- }
- .teaser-node-news .news-footer{
- text-align: right;
- font-size: 10px;
- color: #888888;
- margin-top: 15px;
- }*/
-/* EOF: TEASER NEWS */
 
 /* BOF: TEASER2 NEWS */
+
 .teaser-node-news2 {
 	position: relative;
 	border-bottom: 1px solid #BFBFBF;
 	margin-bottom: 5px;
 	padding-bottom: 5px;
 }
-.teaser-node-news2 .news-image, .teaser-node-news2 .news-body {
+.teaser-node-news2 .news-image,
+.teaser-node-news2 .news-body {
 	float: left;
 }
 .teaser-node-news2 .news-image {
 	margin: 0px 10px 0px 0px;
 	width: 100px;
 	text-align: center;
-}
-.teaser-node-news2 .news-body {
 }
 .teaser-node-news2 .news-body H3 {
 	margin: 0px 0px 5px 0px;
@@ -702,9 +591,11 @@
 	font-size: 10px;
 	color: #888888;
 }
+
 /* EOF: TEASER2 NEWS */
 
 /* BOF: COMMENTS FROM */
+
 #comments {
 	width: 500px;
 	overflow: hidden;
@@ -715,13 +606,11 @@
 	padding: 0px 0px 5px 0px;
 	overflow: hidden;
 }
-#comments .comment .left-part, #comments .comment .right-part {
+#comments .comment .left-part,
+#comments .comment .right-part {
 	float: none;
 	margin: 10px 0 10px 0;
 }
-/*#comments .comment .left-part{
- width: 130px;
- }*/
 #comments .comment .right-part {
 	overflow: auto;
 	width: auto;
@@ -746,6 +635,7 @@
 	width: 400px;
 	margin: 10px 0 0px 0;
 }
+
 /* EOF: COMMENTS FROM */
 
 #content .view-content-trainers TABLE TD IMG.imagefield-field_trainer_photo {
@@ -756,9 +646,6 @@
 	width: 110px;
 	height: 140px;
 }
-#content .gallery-listing .item-list {
-
-}
 #content .gallery-listing .item-list LI {
 	float: left;
 	width: 220px;
@@ -766,77 +653,42 @@
 	list-style: none;
 	text-align: center;
 }
+
 /* ====================================== EOF: MAIN PART ====================================== */
 
-/* bof: content borders*/
-#container1.border-l {
-	background: #FFF url(../img/content-border.png) repeat-y left 0;
-	padding: 0px 0px 0px 4px;
-}
-#container1 .border-r {
-	background: url(../img/content-border.png) repeat-y right 0;
-	padding: 0px 4px 0px 0px;
-}
-/* eof: content borders*/
-
-/* BOF: BOTTOM CAP */
-#bottom-cap {
-	background: url(../img/caps.png) repeat-x 0px -54px;
-	height: 18px;
-	position: relative;
-}
-#bottom-cap .border-l {
-	width: 18px;
-	height: 18px;
-	background: url(../img/caps.png) no-repeat 0px -18px;
-	position: absolute;
-	left: 0px;
-}
-#bottom-cap .border-r {
-	width: 18px;
-	height: 18px;
-	background: url(../img/caps.png) no-repeat -18px -18px;
-	position: absolute;
-	right: 0px;
-}
-/* EOF: BOTTOM CAP */
-.hr1 {
-	background: url(../img/hr1.gif) repeat-x;
-	height: 7px;
-	line-height: 7px;
-	font-size: 1px;
-}
 .cf {
 	clear: both;
 	font-size: 1px;
 	line-height: 1px;
 	height: 1px;
 }
-.block ul {
-	/*margin: 0;
-	 padding: 0 0 0.25em 1em;*/
-}
+
+
 .views-exposed-form .views-exposed-widget .form-submit {
 	margin-top: -2px;
 }
+
+
 .banner_wrapper {
 	text-align: center;
 	width: 100%;
 	overflow: hidden;
 	margin-bottom: 10px;
 }
+
+
 .center-align {
 	text-align: center;
 }
-.block-margin {
-	margin-bottom: 10px;
-}
+
+
 .important-news-wrapper {
 	padding: 0px;
 	background: url(../img/block-header3.gif) no-repeat;
 	margin-bottom: 10px;
 }
-.important-news-wrapper H2, .important-news-wrapper H2 a {
+.important-news-wrapper H2,
+.important-news-wrapper H2 a {
 	font-family: Tahoma;
 	margin: 0px;
 	background: url(../img/block-header3.gif) no-repeat right -26px;
@@ -846,121 +698,15 @@
 	text-transform: uppercase;
 	text-decoration: none;
 }
-.squad-player {
-	/*margin-bottom: 6px;
-	 margin: 10px 10px 6px 10px;*/
-}
-/*.squad-player div {
-	padding: 3px 3px 3px 6px;
-}
-.squad-player-odd {
-	background-color: #FFF;
-}
-.squad-player-even {
-	background-color: #F5F5F5;
-}*/
-.view-display-id-first_squad .view-content, .view-display-id-trainers .view-content {
-	/*text-align: center;*/
-	width: 100%;
-}
-.view-display-id-first_squad table, .view-display-id-trainers table {
-	/*width: 600px !important;*/
-	/* border: 1px solid;*/
-}
-.view-display-id-first_squad td {
-	/*border: 1px solid #CCCCCC;
-	 border-left: 5px solid #CCCCCC;*/
-	padding-bottom: 10px;
-	width: 25%;
-}
-.view-display-id-trainers td {
-	padding-bottom: 10px;
-	width: 33%;
-}
-.squad-player-wrapper {
-	/*width: 95%;
-	height: 70px;
-	background-color: #F2F2F2;
-	border: 1px solid #CCCCCC;
-	border-left: 5px solid #CCCCCC;
-	vertical-align: middle;
-	border-collapse: collapse;
-	display: block;
-	position: relative;*/
-}
-/*.squad-player-wrapper a:hover {
-	text-decoration: none;
-}
-.squad-player-wrapper:hover {
-	border: 1px solid #AA0000;
-	border-left: 5px solid #AA0000;
-	background-color: #F2F2F2;
-}
-.squad-player-number {
-	width: 40px;
-	height: 68px;
-	float: left;
-	color: white !important;
-	margin: 1px;
-	background-color: #AA0000;
-}
-.squad-player-number div {
-	margin-top: 25px;
-	color: white !important;
-	font-weight: bold;
-	font-size: 14px;
-	text-align: center;
-}
-.squad-player-number a {
-	color: #FFF;
-}*/
-.squad-player-name-holder {
-	/*float: left;
-	height: 48px;
-	width: 100%;
-	position: absolute;
-	text-align: left;
-	padding-top: 20px;
-	vertical-align: middle;*/
-	/*padding-left: 150px;*/
-	/*left: 0px;*/
-}
-/*.squad-player-first-name {
-	color: #000 !important;
-	font-size: 11px;
-	margin-left: 110px;
-}
-.squad-trainer-first-name {
-	margin-left: 70px;
-}
-.squad-player-last-name {
-	color: #AA0000 !important;
-	font-size: 13px;
-	display: block;
-	font-weight: bold;
-	text-transform: uppercase;
-	margin-left: 110px;
-}
-.squad-trainer-last-name {
-	margin-left: 70px;
-}*/
-/*.view-display-id-first_squad h3, .view-display-id-trainers h3 {
 
-	background-color: #F2F2F2;
-	font-size: 14px;
-	border: 1px solid #CCCCCC;
-	padding: 5px;
-	text-align: center;
-}
-.view-display-id-first_squad .views-view-grid, .view-display-id-trainers .views-view-grid {
-	margin-bottom: 30px;
-}*/
+
 .login-links-wrapper {
 	color: #FFF;
 	padding-top: 15px;
 	padding-right: 15px;
 }
-.login-links-wrapper a, .login-links-wrapper a:visited {
+.login-links-wrapper a,
+.login-links-wrapper a:visited {
 	color: #FFF;
 	text-decoration: underline;
 }
@@ -968,4 +714,3 @@
 	color: #FFF;
 	text-decoration: none;
 }
-
