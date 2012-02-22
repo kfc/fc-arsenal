@@ -55,7 +55,7 @@
   </div>
 </div>
 <?else:?>
-<div class="block-margin" id="<?php print $block_html_id; ?>">   
+<div id="<?php print $block_html_id; ?>">   
 <div class="content"<?php print $content_attributes; ?>>
   <?php print $content ?>
 </div>

@@ -79,8 +79,8 @@ function fc_arsenal_theme_breadcrumb($variables) {
   if (!empty($breadcrumb)) {
     // Provide a navigational heading to give context for breadcrumb links to
     // screen-reader users. Make the heading invisible with .element-invisible.
-    $output = '<h2 class="element-invisible">' . t('You are here') . '</h2>';
-    $output .= '<div class="breadcrumb">' . implode('<span class="separator"></span>', $breadcrumb) . '</div>';
+    //$output = '<h2 class="element-invisible">' . t('You are here') . '</h2>';
+    $output = '<div class="breadcrumb">' . implode('<span class="separator"></span>', $breadcrumb) . '</div>';
     return $output;
   }
 }
@@ -89,7 +89,7 @@ function fc_arsenal_theme_breadcrumb($variables) {
 function fc_arsenal_theme_form_alter(&$form, &$form_state, $form_id) {
  if($form_id == 'user_login'){
   $form['forgot'] = array(
-    '#markup'=>'<div class="form-item forgot-password"><label>&nbsp;</label>'.l(t('forgot your password').'?','user/password').'</div>'
+    '#markup'=>'<div class="form-item forgot-password">'.l(t('forgot your password').'?','user/password').'</div>'
   );
   
   $form['#prefix'] = '<div class="login-title">'.t('Enter').'</div>';
