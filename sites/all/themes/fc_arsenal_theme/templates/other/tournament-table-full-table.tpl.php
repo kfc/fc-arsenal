@@ -20,9 +20,6 @@
 		<tr class="<?php print($i++ % 2 == 0 ? 'odd' : 'even');?><?php echo($entry -> team_id == variable_get('arsenal_team_id', 0) ? ' tournament-table-arsenal-row' : '');?>">
 			<td><?php echo $i;?></td>
 			<td class="team_name"><?php
-      if (user_access('administer content'))
-        echo l($entry -> team_name, 'node/' . $entry -> team_id . '/edit');
-      else
         echo $entry -> team_name;
 			?></td>
 			<td><?php echo $entry -> total_games;?></td>

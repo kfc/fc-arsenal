@@ -36,7 +36,7 @@
      if($secondary_menu || $page['left']):
       ?>
 		<aside id="left" class="side-menu">
-      <?php if($secondary_menu) echo theme('links__system_secondary_menu',array('links'=>$secondary_menu));?>
+      <?php if($secondary_menu && $variables['node']->type != "match") echo theme('links__system_secondary_menu',array('links'=>$secondary_menu));?>
       <?php if($page['left']) print render($page['left']); ?>
     </aside>
     <?php endif; ?>

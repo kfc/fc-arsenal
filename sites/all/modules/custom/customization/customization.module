@@ -167,7 +167,7 @@ function theme_customization_login_block(){
 }
 
 function customization_preprocess_page(&$vars){
-  //remove nodes from main page.
+  //remove nodes from main page. 
   if(drupal_is_front_page())
     unset($vars['page']['content']['system_main']);
   if(isset($vars['node'])){
@@ -176,7 +176,7 @@ function customization_preprocess_page(&$vars){
     if(!empty($node->field_person_number) && !empty($node->field_person_number[$node->language][0]['value']))
       $vars['title'] = $node->title. ' <span class="player-number">'.  $node->field_person_number[$node->language][0]['value'].'</span>';
       $vars['node']->title = $node->title. ' <span class="player-number">'.  $node->field_person_number[$node->language][0]['value'].'</span>';
-    }
+    }                           
   }
 }
 
