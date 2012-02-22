@@ -32,11 +32,10 @@ table {
 
 
 BODY {
-	background: #202227 url(../img/main_bg.jpg) no-repeat center top;
+	background: #202227;
 	font-family: Arial;
 	font-size: 13px;
 	color: #353535;
-	min-width: 1000px;
 }
 A {
 	color: #353535;
@@ -61,15 +60,14 @@ TABLE {
 
 .button,
 .form-submit {
-	background: #8d0909;
-	background: -webkit-linear-gradient(top, #e72929, #8d0909);
-	background: -moz-linear-gradient(top, #e72929, #8d0909);
-	background: -ms-linear-gradient(top, #e72929, #8d0909);
-	background: -o-linear-gradient(top, #e72929, #8d0909);
-	background: linear-gradient(top, #e72929, #8d0909);
-	border: 1px solid #ce1c1c;
+	background: #8f0606;
+	background: -webkit-linear-gradient(top, #e41515, #8f0606);
+	background: -moz-linear-gradient(top, #e41515, #8f0606);
+	background: -ms-linear-gradient(top, #e41515, #8f0606);
+	background: -o-linear-gradient(top, #e41515, #8f0606);
+	background: linear-gradient(top, #e41515, #8f0606);
+	border: 1px solid #b01212;
 	border-radius: 3px;
-	box-shadow: inset 0 0 5px rgba(255,255,255,0.5);
 	color: #fff;
 	display: inline-block;
 	line-height: 22px;
@@ -77,6 +75,17 @@ TABLE {
 }
 .button {
 	height: 22px;
+}
+.button:hover,
+.form-submit:hover {
+	background: #b60000;
+	background: -webkit-linear-gradient(top, #e20000, #b60000);
+	background: -moz-linear-gradient(top, #e20000, #b60000);
+	background: -ms-linear-gradient(top, #e20000, #b60000);
+	background: -o-linear-gradient(top, #e20000, #b60000);
+	background: linear-gradient(top, #e20000, #b60000);
+	border: 1px solid #ce1c1c;
+	border-radius: 3px;
 }
 .button:hover {
 	color: #fff;
@@ -196,6 +205,7 @@ TABLE {
 	color: #cb0000;
 }
 .teaser-node-news .news-body H3 {
+	font-weight: bold;
 	margin: 0 0 6px;
 }
 .teaser-node-news .news-footer {
@@ -205,6 +215,12 @@ TABLE {
 }
 
 /* ====================================== EOF: GLOBAL ====================================== */
+
+
+.main-bg {
+	background: url(../img/main_bg.jpg) no-repeat center top;
+	min-width: 1000px;
+}
 
 
 #container {
@@ -763,6 +779,9 @@ ul.nice-menu-down li.over {
 	background: -ms-linear-gradient(top, #30333b, #101113);
 	background: -o-linear-gradient(top, #30333b, #101113);
 	background: linear-gradient(top, #30333b, #101113);
+	overflow: hidden;
+	padding: 0 0 0 244px;
+	position: relative;
 	text-align: left;
 }
 #pre-footer h3 {
@@ -784,16 +803,12 @@ ul.nice-menu-down li.over {
 #pre-footer .col {
 	background: url(../img/pre_footer_separator.png) repeat-y left top;
 	float: left;
-	min-height: 250px;
+	margin: 0 0 -1000px;
+	padding: 0 0 1000px;
 	width: 252px;
 }
 
 #pre-footer .footer-logo {
-	background: none;
-	position: relative;
-	width: 244px;
-}
-#pre-footer .footer-logo a {
 	height: 54px;
 	margin: -27px 0 0 0;
 	position: absolute;
@@ -1033,10 +1048,9 @@ ul.nice-menu-down li.over {
 #front-page-top-news {
 	margin: 0 0 5px 0;
 }
-#front-page-top-news .news-image {
-	text-align: center;
-	width: 100%;
-	overflow: hidden;
+#front-page-top-news .news-image img {
+	max-width: 100%;
+	vertical-align: top;
 }
 #front-page-top-news .news-content {
 	background: #131518;
@@ -1106,7 +1120,9 @@ ul.nice-menu-down li.over {
 	background: #fff;
 }
 #block-views-qrss_view_inoprosport_ru .item-list LI {
+	background: none;
 	margin: 0 0 15px;
+	padding: 0;
 }
 #block-views-qrss_view_inoprosport_ru .item-list LI:last-child {
 	margin: 0;
@@ -1470,6 +1486,7 @@ ul.nice-menu-down li.over {
 	border: 1px solid #e3e3e3;
 	text-align: center; 
 	padding: 2px 6px;
+	width: 80px;
 }
 .player-page .season-stats td a {
 	text-decoration: none;
@@ -1480,7 +1497,7 @@ ul.nice-menu-down li.over {
 
 .player-page .season-stats .team_name {
 	text-align: left;
-	width: 100%;
+	width: auto;
 }
 
 /* EOF: PLAYER INFO PAGE */
@@ -1615,10 +1632,16 @@ ul.nice-menu-down li.over {
 	background: -ms-linear-gradient(top, #d70000, #820000);
 	background: -o-linear-gradient(top, #d70000, #820000);
 	background: linear-gradient(top, #d70000, #820000);
+}
+#node-match .team-block h2 span {
 	color: #ffffff;
+	display: block;
 	font-size: 15px;
 	line-height: 1;
 	padding: 8px 0 8px 20px;
+}
+#node-match .team-block-arsenal h2 span {
+	background: url(../img/team_block_arsenal_bg.png) no-repeat right center;
 }
 
 #node-match .team-block .squad-player {
@@ -1764,6 +1787,7 @@ ul.nice-menu-down li.over {
 }
 .node-type-match #block-system-main .views-row .views-field-title {
 	font-size: 17px;
+	font-weight: bold;
 	margin: 0 0 6px;
 }
 .node-type-match #block-system-main .views-row .views-field-title a {
@@ -1849,8 +1873,7 @@ ul.nice-menu-down li.over {
 
 .view-id-persons .players,
 .view-id-persons .trainers {
-	margin: 0 0 20px;
-	padding: 0 18px 10px 18px;
+	margin: 0 0 20px;	
 	text-align: center;
 }
 
@@ -1858,6 +1881,7 @@ ul.nice-menu-down li.over {
 .view-id-persons .trainers {
 	border: 1px solid #e3e3e3;
 	border-top: 0 none;
+	padding: 0 18px 10px 18px;
 }
 
 
@@ -1869,6 +1893,8 @@ ul.nice-menu-down li.over {
 .view-id-persons .players {
   background-position: left 3px;
   background-repeat: no-repeat;
+  overflow: hidden;
+  padding: 0 30px;
 }
 
 .view-id-persons .players .squad-player-number {
@@ -1880,7 +1906,7 @@ ul.nice-menu-down li.over {
 	padding: 0 21px 0 4px;
 	position: absolute;
 	top: 46px;
-	left: -2px;
+	left: 0;
 	text-align: center;
 	z-index: 1;
 	width: 20px;
@@ -1888,26 +1914,27 @@ ul.nice-menu-down li.over {
 
 .view-id-persons .player-position-goalkeeper {
   background-image: url(../img/goalkeeper_bg.jpg);
-  /*height: 175px;*/
+  height: 175px;
 }
 
 .view-id-persons .player-position-defender {
   background-image: url(../img/defender_bg.jpg);
-  /*height: 295px;*/
+  height: 295px;
 }
 
 .view-id-persons .player-position-midfielder {
   background-image: url(../img/midfielder_bg.jpg);
-  /*height: 414px;*/
+  height: 414px;
 }
 
 .view-id-persons .player-position-forward {
   background-image: url(../img/forward_bg.jpg);
-  /*height: 295px;*/
+  height: 295px;
 }
 
 .view-id-persons .player-position-loaned {
   background: #e3e3e3;
+  padding-bottom: 10px; 
 }
 
 /* EOF: PLAYERS & TRAINERS */

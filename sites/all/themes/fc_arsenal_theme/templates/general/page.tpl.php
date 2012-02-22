@@ -1,4 +1,4 @@
-<div id="container">
+<div class="main-bg"><div id="container">
 	
 	<!-- BOF: HEADER -->
 	<header id="header">
@@ -15,7 +15,7 @@
 		
     <div class="breadcrumb-links">
       <?php if($is_front) {
-        print '<span class="breadcrumb-front">Сайт представительства официального фан-клуба лондонского Арсенала</span>';
+        print '<span class="breadcrumb-front">Сайт представительства официального фан-клуба лондонского &laquo;Арсенала&raquo;</span>';
       } else {
         print $breadcrumb; 
       } ?>
@@ -62,9 +62,7 @@
 		<?php if($is_front) { ?>
 		<div id="pre-footer">
 			<?php //$block1 = custom_pages_block('view',7);  ?>
-			<div class="footer-logo col">
-				<a href="/"><img src="<?php print base_path() . path_to_theme() ?>/img/logo_footer.png"></a>
-			</div>
+			<a href="/" class="footer-logo"><img src="<?php print base_path() . path_to_theme() ?>/img/logo_footer.png"></a>
 			<div class="left-part col">
 				<?php print views_embed_view('random_article','fanclub_information');  ?>
 			</div>
@@ -151,4 +149,4 @@ if(11<js)d.write('--'+'>')//--></script><!--/COUNTER-->
 		</div><!-- /site-footer -->
 	</footer>
 	<!-- EOF: FOOTER -->
-</div>
+</div></div>
