@@ -457,7 +457,7 @@ function theme_custom_match_match_teaser($vars=array()){
       <div class="match-centre-match-result">'.$result.'</div> '.'
       <div class="match-centre-team">
         <div class="match-centre-team-name">'.t('Arsenal').'</div>
-        <div="match-centre-goals">'.theme('custom_match_match_goals',array($node,'arsenal')).'</div>
+        <div class="match-centre-goals">'.theme('custom_match_match_goals',array($node,'arsenal')).'</div>
       </div>
     </div>';
   } else {
@@ -471,7 +471,7 @@ function theme_custom_match_match_teaser($vars=array()){
       <div class="match-centre-match-result">'.$result.'</div> '.'
       <div class="match-centre-team">
         <div class="match-centre-team-name">'.$rival_node->title.'</div>
-        <div="match-centre-goals">'.theme('custom_match_match_goals',array($node,'opponent')).'</div>
+        <div class="match-centre-goals">'.theme('custom_match_match_goals',array($node,'opponent')).'</div>
       </div>
     </div>';
   }
