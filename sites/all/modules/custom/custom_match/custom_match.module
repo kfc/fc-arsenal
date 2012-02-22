@@ -657,7 +657,7 @@ function theme_custom_match_match_team_block($vars){
   
   $output = '
   <div class="team-block '.($team_name == t('Arsenal') ? 'team-block-arsenal' : '').'">
-    <h2>' . $team_name . '</h2>
+    <h2><span class="team-block-team-name '.($team_name == t('Arsenal') ? ' team-blockteam-name-arsenal' : '').'">' . $team_name . '</span></h2>
     <div class="team-players">' . $team_players_output . '</div>
   </div>';
   
