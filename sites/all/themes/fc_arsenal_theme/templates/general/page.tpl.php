@@ -26,31 +26,32 @@
 	
 	<!-- BOF: MAIN-PART -->
 	<div id="main-part">
-		<?php 
-		if($is_front) { include('front.tpl.php'); } 
-		//elseif($node->type == "news") { include('news.tpl.php'); } 
-		elseif(arg(0) == 'chatrooms' && arg(1) == 'chat' && is_numeric(arg(2))){
-			include('chatroom-chat.tpl.php'); 
-		} else {?>
-		<?php
-     if($secondary_menu || $page['left']):
-      ?>
-		<aside id="left" class="side-menu">
-      <?php if($secondary_menu && $variables['node']->type != "match") echo theme('links__system_secondary_menu',array('links'=>$secondary_menu));?>
-      <?php if($page['left']) print render($page['left']); ?>
-    </aside>
-    <?php endif; ?>
-		<section id="content">
-			<?php if ($messages): print $messages; endif; ?>
-			<?php if((isset($variables['node']->type) &&  $variables['node']->type != "news") || (isset($node) && $node->type != 'news') || (!isset($variables['node']) && !isset($node))):?>
-				<h1><?php print $title; ?></h1>
-			<?php endif;?> 
-			<?php if($tabs) : print '<div class="tabs">'.render($tabs).'</div>'; endif; ?>
-			<?php print render($tabs2); ?>
-			<?php print render($page['help']); ?>
-			<?php echo render($page['content']); ?>
-		</section>
-		<?php } ?>
+	  <div class="main-wrapper">
+  		<?php 
+  		if($is_front) { include('front.tpl.php'); } 
+  		//elseif($node->type == "news") { include('news.tpl.php'); } 
+  		elseif(arg(0) == 'chatrooms' && arg(1) == 'chat' && is_numeric(arg(2))){
+  			include('chatroom-chat.tpl.php'); 
+  		} else {?>
+  		<?php if($secondary_menu || $page['left']): ?>
+  		<aside id="left" class="side-menu">
+        <?php if($secondary_menu && $variables['node']->type != "match") echo theme('links__system_secondary_menu',array('links'=>$secondary_menu));?>
+        <?php if($page['left']) print render($page['left']); ?>
+      </aside>
+      <?php endif; ?>
+  		<section id="content">
+  			<?php if ($messages): print $messages; endif; ?>
+  			<?php if((isset($variables['node']->type) &&  $variables['node']->type != "news") || (isset($node) && $node->type != 'news') || (!isset($variables['node']) && !isset($node))):?>
+  				<h1><?php print $title; ?></h1>
+  			<?php endif;?> 
+  			<?php if($tabs) : print '<div class="tabs">'.render($tabs).'</div>'; endif; ?>
+  			<?php print render($tabs2); ?>
+  			<?php print render($page['help']); ?>
+  			<?php echo render($page['content']); ?>
+  		</section>
+  		<?php } ?>
+      <div class="cf">&nbsp;</div>
+    </div>
 	</div>
 	<!-- EOF: MAIN-PART -->
 	

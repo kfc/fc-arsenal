@@ -5,11 +5,6 @@
 
 /* ------------ BOF: CONTENT ------------ */
 
-#content LI.active {
-	border: 0px;
-}
-
-
 .table-block {
 	margin: 0px 0px 40px 0px;
 }
@@ -593,50 +588,6 @@
 }
 
 /* EOF: TEASER2 NEWS */
-
-/* BOF: COMMENTS FROM */
-
-#comments {
-	width: 500px;
-	overflow: hidden;
-}
-#comments .comment {
-	border-bottom: 2px solid #B9141A;
-	margin: 0px 10px 10px 0px;
-	padding: 0px 0px 5px 0px;
-	overflow: hidden;
-}
-#comments .comment .left-part,
-#comments .comment .right-part {
-	float: none;
-	margin: 10px 0 10px 0;
-}
-#comments .comment .right-part {
-	overflow: auto;
-	width: auto;
-	margin: 0px;
-}
-#comments .comment .comment-author {
-	font-weight: bold;
-	color: #B9141A;
-}
-.comment_user_picture {
-	width: 50px;
-	overflow: hidden;
-	float: left;
-	margin-right: 10px;
-}
-#comments .comment .comment-date {
-	font-size: 10px;
-	font-weight: bold;
-}
-#comments .comment .comment-link {
-	float: left;
-	width: 400px;
-	margin: 10px 0 0px 0;
-}
-
-/* EOF: COMMENTS FROM */
 
 #content .view-content-trainers TABLE TD IMG.imagefield-field_trainer_photo {
 	width: 110px;
