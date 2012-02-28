@@ -586,9 +586,9 @@ ul.nice-menu-down li.over {
 
 
 .breadcrumb-links {
-	position: absolute;
-	bottom: 10px;
-	left: 25px;
+	position: relative;
+	margin: -28px 0 0 0;
+	padding: 0 300px 10px 25px;
 }
 
 .breadcrumb-links .breadcrumb-front {
@@ -876,7 +876,9 @@ ul.nice-menu-down li.over {
 .front-page #content {
 	background: none;
 	float: left;
-	padding: 0;
+	padding-top: 0;
+	padding-right: 0;
+	padding-left: 0;
 	width: 500px;
 }
 
@@ -1151,6 +1153,12 @@ ul.nice-menu-down li.over {
 #block-views-qrss_view_inoprosport_ru .item-list LI:last-child {
 	margin: 0;
 }
+#block-views-qrss_view_inoprosport_ru .item-list a {
+	color: #353535;
+}
+#block-views-qrss_view_inoprosport_ru .item-list a:hover {
+	color: #CB0000;
+}  
 
 
 #block-block-1 {
