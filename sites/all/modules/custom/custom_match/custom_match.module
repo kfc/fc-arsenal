@@ -313,7 +313,7 @@ function custom_match_preprocess_views_view_fields(&$variables){
     
     $variables['additional_link'] = '';
     if(strtotime($view->result[0]->field_data_field_match_start_date_field_match_start_date_val) > time())
-      $variables['additional_link'] = l('<span class="livetv-link">'.t('Online').'</span>','http://www.liveresult.ru/football/txt/team/arsenal',array('html'=>true, 'attributes'=>array('target'=>'_blank','class'=>'Online'),'absolute'=>TRUE));
+      $variables['additional_link'] = l('<span class="liveresult-link">'.t('Online').'</span>','http://www.liveresult.ru/football/txt/team/arsenal',array('html'=>true, 'attributes'=>array('target'=>'_blank','class'=>'Online'),'absolute'=>TRUE));
     
     
     $livetv_arsenal_matches = _custom_match_get_livetv_arsenal_matches();  

@@ -8,6 +8,13 @@ function match_events_block_info(){
     'region'=>-1,
   );
   
+  $blocks['team_stats'] = array(
+    'info' => t('Team Stats'),
+    'status'=>TRUE,
+    'visibility'=>1,
+    'region'=>-1,
+  );
+  
   return $blocks;
   
 }
@@ -18,6 +25,10 @@ function match_events_block_view($delta){
       $block['content'] = season_stats();
       return $block;
       break;
+    case 'team_stats':
+      $block['content'] = season_team_stats();
+      return $block;
+      break;  
   }
 
 }
@@ -29,8 +40,6 @@ function match_events_form_alter(&$form, $form_state, $form_id){
 }
 
 function match_events_preprocess_node(&$vars){
- // dpm($vars);
- 
   if($vars['node']->type == 'person'){
     $stat_html = '';
     $player_matches  = match_events_get_player_matches($vars['nid']);
@@ -84,9 +93,6 @@ function match_events_preprocess_node(&$vars){
     }
     $vars['stat_html'] = $stat_html;
   }
-  
-  
-  //dpm($events);
 }
 
 function match_events_get_player_matches($player_nid=null){
@@ -156,6 +162,19 @@ function match_events_get_event_id_by_code($code, $events){
 
 function season_stats(){   
   return get_season_stats();
+}
+
+function season_team_stats(){
+  $cache = cache_get('stats:team_stats');
+  if(!empty($cache->data)) {
+    return $cache->data;  
+  }
+  else{
+    $stats_html = get_team_stats();
+    cache_set('stats:team_stats', $stats_html);
+    return $stats_html;
+  }
+
 }
 
 function get_season_stats(){
@@ -295,5 +314,118 @@ function get_season_stats(){
   return $table_html;
 }
 
+function get_team_stats(){
+  $tournaments_to_show = array(34, 37, 35, 36);
+  
+    $rows = db_query(
+      "SELECT 
+        node.title, 
+          tournament.`field_match_tournament_tid`, 
+          result.`field_match_result_value`, 
+          place.`field_match_place_value`,
+          CAST(SUBSTRING_INDEX(result.`field_match_result_value`,':',1) AS SIGNED) home_goals,
+          CAST(SUBSTRING_INDEX(result.`field_match_result_value`,':',-1) AS SIGNED) away_goals, 
+        (SELECT case place.`field_match_place_value` 
+            WHEN 'away' THEN  away_goals - home_goals 
+              ELSE home_goals - away_goals
+           END) as  goals_diff    
+      FROM node
+      INNER JOIN `field_data_field_match_tournament` tournament on tournament.`entity_id` = node.nid
+      INNER JOIN `field_data_field_match_season` season on season.`entity_id` = node.nid 
+      INNER JOIN `field_data_field_match_result` result on result.`entity_id` = node.nid
+      INNER JOIN `field_data_field_match_place` place on place.`entity_id` = node.nid 
+      where type = 'match' 
+      AND season.`field_match_season_tid` = :season
+      AND tournament.`field_match_tournament_tid` IN (:tournaments)
+      AND result.`field_match_result_value` != '' AND result.`field_match_result_value` IS NOT NULL
+      ORDER BY tournament.`field_match_tournament_tid`
+      "
+      ,array(':season'=>variable_get('tournament_table_default_season',0), ':tournaments'=>$tournaments_to_show)
+    )->fetchAll();
+   
+    $stats = array();
+    foreach($tournaments_to_show as $tournament){
+      $stats[$tournament]['home'] = array('win'=>0,'lose'=>0,'draw'=>0,'goals_for'=>0, 'goals_against'=>0, 'goal_diff'=>0);
+      $stats[$tournament]['away'] = array('win'=>0,'lose'=>0,'draw'=>0,'goals_for'=>0, 'goals_against'=>0, 'goal_diff'=>0);
+      $stats[$tournament]['neutral'] = array('win'=>0,'lose'=>0,'draw'=>0,'goals_for'=>0, 'goals_against'=>0, 'goal_diff'=>0);
+    
+    }
+   
+    foreach($rows as $row){
+      if($row->goals_diff > 0)
+        $stats[$row->field_match_tournament_tid][$row->field_match_place_value]['win']++;
+      elseif($row->goals_diff < 0)
+        $stats[$row->field_match_tournament_tid][$row->field_match_place_value]['lose']++;
+      elseif($row->goals_diff == 0)
+        $stats[$row->field_match_tournament_tid][$row->field_match_place_value]['draw']++;
+        
+      if($row->field_match_place_value == 'away'){
+        $stats[$row->field_match_tournament_tid][$row->field_match_place_value]['goals_for']+=$row->away_goals;
+        $stats[$row->field_match_tournament_tid][$row->field_match_place_value]['goals_against']+=$row->home_goals;
+        $stats[$row->field_match_tournament_tid][$row->field_match_place_value]['goal_diff']+=$row->goals_diff;
+      }
+      else
+        $stats[$row->field_match_tournament_tid][$row->field_match_place_value]['goals_for']+=$row->home_goals;        
+        $stats[$row->field_match_tournament_tid][$row->field_match_place_value]['goals_against']+=$row->away_goals;        
+        $stats[$row->field_match_tournament_tid][$row->field_match_place_value]['goal_diff']+=$row->goals_diff;        
+    }
+    
+    //Table header
+    $header = array(
+      'home' => array('data'=>t('team_stats_home'),'colspan'=>6),
+      'away' => array('data'=>t('team_stats_away'),'colspan'=>6),
+      'total' => array('data'=>t('team_stats_total'),'colspan'=>6),
+    );
+    $first_row = array();
+    foreach($header as $id=>$data){
+      $first_row[$id.'_games'] = t('team_stats_games');
+      $first_row[$id.'_win'] = t('team_stats_won');
+      $first_row[$id.'_lose'] = t('team_stats_lose');
+      $first_row[$id.'_draw'] = t('team_stats_draw');
+      $first_row[$id.'_goals_for'] = t('team_stats_goals_for');
+      $first_row[$id.'_goals_against'] = t('team_stats_goals_against');
+    }
+    
+    $render_array = array();
+    $season = taxonomy_term_load(variable_get('tournament_table_default_season',0)); 
+    foreach($tournaments_to_show as $tournament){
+      $stats[$tournament]['total'] = array();
+      foreach($stats[$tournament]['home'] as $k => $val){
+        $stats[$tournament]['home'][$k] = $val + $stats[$tournament]['neutral'][$k]; 
+        
+        $stats[$tournament]['total'][$k] = $stats[$tournament]['home'][$k] + $stats[$tournament]['away'][$k];  
+      }
+      
+      $stats[$tournament]['home']['games'] =  $stats[$tournament]['home']['win'] + $stats[$tournament]['home']['lose'] + $stats[$tournament]['home']['draw'];
+      $stats[$tournament]['away']['games'] =  $stats[$tournament]['away']['win'] + $stats[$tournament]['away']['lose'] + $stats[$tournament]['away']['draw'];
+      $stats[$tournament]['total']['games'] =  $stats[$tournament]['total']['win'] + $stats[$tournament]['total']['lose'] + $stats[$tournament]['total']['draw'];
+      
+      unset($stats[$tournament]['neutral']);
+      //format tables
+      $rows = array($first_row);
+      $row = array();
+      foreach($first_row as $id=>$data){
+        $place = substr($id, 0, strpos($id,'_'));
+        $type = substr($id, strpos($id, '_')+1);
+        $row[$id] = array('data'=>$stats[$tournament][$place][$type]);
+        if(in_array($type, array('win','lose','draw'))){
+          $row[$id]['data'] .= '<br />'.(!empty($stats[$tournament][$place]['games']) ? round(($stats[$tournament][$place][$type] / $stats[$tournament][$place]['games']) * 100) : 0 ).'%';
+        }
+      }
+      $rows[] = $row;
+      $tournament_info = taxonomy_term_load($tournament);
+      $table = array(
+        '#theme' => 'table',
+        '#header' => $header,
+        '#rows' => $rows,
+        '#attributes' => array('class'=>array('stats-table')) ,
+        '#caption' => t('team_stats_table_caption',array('!season'=>$season->name, '!tournament'=>$tournament_info->name))
+      );
+
+      $render_array[] = array('#markup'=>'<div style="height: 20px">&nbsp;</div>');      
+      $render_array[] = $table;
+    }
+    return render($render_array);
+}
 
 ?>
