@@ -34,3 +34,91 @@
 .bio-row-wrapper .bio-info h3{
   margin-top: 0px !important;
 }
+
+/* BOF: TOURNAMENT TABLE */
+
+.stats-table tr {
+  background: none;    
+}
+.stats-table tr:hover td {
+  background: #f6f6f6;
+}
+
+.stats-table caption {
+  background: #d70000;
+  background: -webkit-linear-gradient(top, #d70000, #820000);
+  background: -moz-linear-gradient(top, #d70000, #820000);
+  background: -ms-linear-gradient(top, #d70000, #820000);
+  background: -o-linear-gradient(top, #d70000, #820000);
+  background: linear-gradient(top, #d70000, #820000);
+  color: #ffffff;
+  padding: 8px 0 8px 20px;
+  font-size: 15px;
+  line-height: 1em;
+  text-align: left;
+}
+.stats-table th,
+.stats-table td {
+  border: 1px solid #e3e3e3;
+  text-align: center; 
+}
+.stats-table th {
+  background: #e3e3e3;
+  background: -webkit-linear-gradient(top, #fff, #e3e3e3);
+  background: -moz-linear-gradient(top, #fff, #e3e3e3);
+  background: -ms-linear-gradient(top, #fff, #e3e3e3);
+  background: -o-linear-gradient(top, #fff, #e3e3e3);
+  background: linear-gradient(top, #fff, #e3e3e3);
+  padding: 6px;
+}
+.stats-table td {
+  padding: 2px 6px;
+}
+
+.stats-table td a {
+  text-decoration: underline;
+}
+.stats-table td a:hover {
+  text-decoration: none;
+}
+
+.stats-table .player_name {
+  padding-left: 8px;
+  text-align: left;
+  width: 100%;
+}
+
+.stats-table .first-row {
+  background: #F6F6F6;  
+}
+
+
+.stats-table-spec th:nth-child(3),
+.stats-table-spec td:nth-child(3),
+.stats-table-spec th:nth-child(8),
+.stats-table-spec td:nth-child(8) {
+  border-left-color: #820000;
+  border-left-width: 2px;
+}
+.stats-table-spec th:nth-child(12),
+.stats-table-spec td:nth-child(12) {
+  border-right-color: #820000;
+  border-right-width: 2px;
+}
+.stats-table-spec .top td,
+.stats-table-spec .top:hover td {
+  background: #d70000;
+  background: -webkit-linear-gradient(top, #d70000, #820000);
+  background: -moz-linear-gradient(top, #d70000, #820000);
+  background: -ms-linear-gradient(top, #d70000, #820000);
+  background: -o-linear-gradient(top, #d70000, #820000);
+  background: linear-gradient(top, #d70000, #820000);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1em;
+  border: none;
+  padding: 6px;
+}
+
+/* EOF: TOURNAMENT TABLE */

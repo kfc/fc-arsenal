@@ -154,10 +154,145 @@ function match_events_get_event_id_by_code($code, $events){
   return false;
 }
 
+function season_stats(){   
+  return get_season_stats();
+}
 
-function season_stats(){
-  $matches = match_events_get_player_matches();
-  dpm($matches);
+function get_season_stats(){
+
+  $cache = cache_get('stats:players_stats');
+  if(!empty($cache->data)) {
+    $table_html = $cache->data;  
+  }
+  else{
+    //Tournaments to show
+    $tournaments_to_show = array(34, 37, 35, 36);
+  
+    $rows = db_query(
+      "SELECT player_node.nid, player_node.title, event_type_code.`field_match_event_type_code_value`, tournament.`field_match_tournament_tid`, COUNT(*) as event_count
+      FROM `field_data_field_match_events` evts
+      INNER JOIN `field_data_field_match_season` season on season.entity_id = evts.entity_id
+      INNER JOIN `field_data_field_match_event_player` player on evts.`field_match_events_value` = player.`entity_id`
+      INNER JOIN node player_node on player.`field_match_event_player_nid` = player_node.nid
+      INNER JOIN `field_data_field_match_event_event_type` evt_type on evt_type.`entity_id` = evts.`field_match_events_value` 
+      INNER JOIN `field_data_field_match_tournament` tournament on  tournament.`entity_id` = evts.`entity_id`
+      INNER JOIN `field_data_field_match_event_type_code` event_type_code on event_type_code.`entity_id` = evt_type.`field_match_event_event_type_tid`
+      WHERE season.field_match_season_tid = :season AND tournament.`field_match_tournament_tid` IN (:tournaments)
+      GROUP BY event_type_code.`field_match_event_type_code_value`, tournament.`field_match_tournament_tid`, player_node.title
+      ORDER BY player_node.title"
+      ,array(':season'=>variable_get('tournament_table_default_season',0), ':tournaments'=>$tournaments_to_show)
+    )->fetchAll();
+    
+    $players_stats = array();
+    $players_names = array();
+    foreach($rows as $row){
+      $players_stats[$row->nid][$row->field_match_tournament_tid][$row->field_match_event_type_code_value] = $row->event_count;
+      $name = (mb_substr_count($row->title, ' ') == 0 ? $row->title : mb_substr($row->title, mb_strpos($row->title,' ')+1));
+      $players_names[$row->nid] = mb_strtoupper(mb_substr($name,0,1)).mb_substr($name,1);
+    }
+     $games_rows = db_query(
+      "SELECT node.nid, node.title,  tournament.`field_match_tournament_tid`, count(squad.`field_match_arsenal_squad_nid`) as games_cnt
+      FROM `field_data_field_match_arsenal_squad` squad
+      INNER JOIN `node` node on node.nid = squad.field_match_arsenal_squad_nid
+      INNER JOIN `field_data_field_match_season` season on season.entity_id = squad.entity_id
+      INNER JOIN `field_data_field_match_tournament` tournament on  tournament.`entity_id` = squad.`entity_id`
+      WHERE field_match_season_tid = :season AND tournament.`field_match_tournament_tid` IN (:tournaments)
+      group BY tournament.`field_match_tournament_tid`, node.title"
+      ,array(':season'=>variable_get('tournament_table_default_season',0), ':tournaments'=>$tournaments_to_show)
+    )->fetchAll();
+   foreach($games_rows as $row){
+      $players_stats[$row->nid][$row->field_match_tournament_tid]['starts'] = $row->games_cnt;
+      $name = (mb_substr_count($row->title, ' ') == 0 ? $row->title : mb_substr($row->title, mb_strpos($row->title,' ')+1));
+      $players_names[$row->nid] = mb_strtoupper(mb_substr($name,0,1)).mb_substr($name,1);
+    } 
+    
+    $players_totals = array();
+    foreach($players_stats as $name => $player){
+      $players_stats[$name]['total'] = array('games'=>0, 'goal'=>0, 'yellow_card'=>0, 'red_card'=>0);
+      foreach($player as $tournament => $data){
+        $players_stats[$name][$tournament]['games'] = (int)(isset($players_stats[$name][$tournament]['starts']) ? $players_stats[$name][$tournament]['starts'] : 0) + (int)(isset($players_stats[$name][$tournament]['sub_in']) ? $players_stats[$name][$tournament]['sub_in'] : 0);
+        unset($players_stats[$name][$tournament]['starts']);  
+        unset($players_stats[$name][$tournament]['sub_in']);  
+        
+        $players_stats[$name]['total']['games'] += (int)(isset($players_stats[$name][$tournament]['games']) ? $players_stats[$name][$tournament]['games'] : 0);
+        $players_stats[$name]['total']['goal'] += (int)(isset($players_stats[$name][$tournament]['goal']) ? $players_stats[$name][$tournament]['goal'] : 0);
+        $players_stats[$name]['total']['yellow_card'] += (int)(isset($players_stats[$name][$tournament]['yellow_card']) ? $players_stats[$name][$tournament]['yellow_card'] : 0);
+        $players_stats[$name]['total']['red_card'] += (int)(isset($players_stats[$name][$tournament]['red_card']) ? $players_stats[$name][$tournament]['red_card'] : 0);
+        
+      }
+      $players_stats[$row->nid][$row->field_match_tournament_tid]['starts'] = $row->games_cnt;
+    }
+    
+    $tournament_voc = taxonomy_vocabulary_machine_name_load('tournament');
+    $t = taxonomy_get_tree($tournament_voc->vid);
+    $tournaments = array();
+    foreach($t as $tournament){
+      $tournaments[$tournament->tid] = $tournament->name;
+    }
+    
+    $event_voc = taxonomy_vocabulary_machine_name_load('match_event_type');
+    $evts = taxonomy_get_tree($event_voc->vid);
+    $events = array();
+    foreach($evts as $evt){
+      $events[$evt->tid] = $evt->name;
+    }
+  
+    //table header
+    $header = array(
+      'name'=>'',
+    );
+    $first_row = array('class'=>array('first-row'));
+    $first_row['data'] = array('name'=>t(''));
+    
+    foreach($tournaments_to_show as $tid){
+      $header[$tid] = array('data'=>$tournaments[$tid],'colspan'=>2);  
+      $first_row['data'][$tid.'_games'] = array('data'=>t('stats_games'));  
+      $first_row['data'][$tid.'_goals'] = array('data'=>t('stats_goals'));  
+      
+    }
+    $header['total'] = array('data'=>t('stats_total'),'colspan'=>2);
+    $first_row['data']['total_games'] = array('data'=>t('stats_games'));  
+    $first_row['data']['total_goals'] = array('data'=>t('stats_goals'));
+    
+    $header['yellow_card'] = array('data'=>t('stats_yellow_card')); 
+    $header['red_card'] = array('data'=>t('stats_red_card')); 
+    $first_row['data']['yellow_card'] = '';  
+    $first_row['data']['red_card'] = '';
+
+    $rows = array('_'=>$first_row);
+    
+    //$players = node_load_multiple(array_keys($players_stats));
+    foreach($players_stats as $nid => $data){
+      $row = array();
+      $row['name'] = array('data'=>l($players_names[$nid], 'node/'.$nid),'class'=>'player_name');
+      foreach($tournaments_to_show as $tid){
+        $row[$tid.'_games'] = array('data'=>(isset($data[$tid]['games']) ? $data[$tid]['games'] : 0));  
+        $row[$tid.'_goals'] = array('data'=>(isset($data[$tid]['goal']) ? $data[$tid]['goal'] : 0));  
+      }
+      
+      $row['total_games'] = array('data'=>(isset($data['total']['games']) ? $data['total']['games'] : 0));  
+      $row['total_goals'] = array('data'=>(isset($data['total']['goal']) ? $data['total']['goal'] : 0));  
+      $row['yellow_card'] = array('data'=>(isset($data['total']['yellow_card']) ? $data['total']['yellow_card'] : 0));  
+      $row['red_card'] = array('data'=>(isset($data['total']['red_card']) ? $data['total']['red_card'] : 0));  
+    
+      
+      $rows[$players_names[$nid]] = $row;
+    }
+    
+    ksort($rows);
+    $season = taxonomy_term_load(variable_get('tournament_table_default_season',0));
+    $table = array(
+      '#theme'=>'table',
+      '#attributes'=>array('class'=>array('stats-table')),
+      '#header'=>$header,
+      '#rows'=>$rows,
+      '#caption'=>t('players_stats_table_header',array('!season'=>$season->name)),
+    );
+    
+    $table_html = render($table);
+    cache_set('stats:players_stats',$table_html);
+  }
+  return $table_html;
 }
 
 

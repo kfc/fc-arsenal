@@ -785,4 +785,16 @@ function theme_custom_match_match_goals($vars){
   return $team_goals_html; 
 }
 
+function custom_match_node_update($node){
+  if($node->type == 'match')
+    cache_set('stats:players_stats','');
+}
+
+function custom_match_node_insert($node){
+  if($node->type == 'match')
+    cache_set('stats:players_stats','');
+
+}
+
+
 ?>

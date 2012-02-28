@@ -173,7 +173,7 @@ function customization_preprocess_page(&$vars){
   if(isset($vars['node'])){
     $node = $vars['node'];  
     if($node->type == 'person') {
-    if(!empty($node->field_person_number) && !empty($node->field_person_number[$node->language][0]['value']))
+    if(!empty($node->field_person_number) && isset($node->field_person_number[$node->language]) && !empty($node->field_person_number[$node->language][0]['value']))
       $vars['title'] = $node->title. ' <span class="player-number">'.  $node->field_person_number[$node->language][0]['value'].'</span>';
       $vars['node']->title = $node->title. ' <span class="player-number">'.  $node->field_person_number[$node->language][0]['value'].'</span>';
     }                           
