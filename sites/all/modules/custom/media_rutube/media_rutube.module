@@ -1,0 +1,57 @@
+<?php
+
+// Hooks and callbacks for integrating with File Entity module for display.
+include_once('media_rutube.formatters.inc');
+
+/**
+ * Implements hook_media_internet_providers().
+ */
+function media_rutube_media_internet_providers() {
+  return array(
+    'MediaInternetRutubeHandler' => array(
+      'title' => 'rutube',
+      'image' => drupal_get_path('module', 'media_rutube') . '/images/stream-rutube.png'
+    ),
+  );
+}
+
+/**
+ * Implements hook_stream_wrappers().
+ */
+function media_rutube_stream_wrappers() {
+  return array(
+    'rutube' => array(
+      'name' => t('Rutube video'),
+      'class' => 'MediaRutubeStreamWrapper',
+      'description' => t('Videos provided by RuTube.'),
+      'type' => STREAM_WRAPPERS_READ_VISIBLE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_theme().
+ */
+function media_rutube_theme($existing, $type, $theme, $path) {
+  return array(
+    'media_rutube_video' => array(
+      'variables' => array('uri' => NULL, 'width' => NULL, 'height' => NULL),
+      'file' => 'media_rutube.theme.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function media_rutube_ctools_plugin_api($owner, $api) {
+  static $api_versions = array(
+    'file_entity' => array(
+      'file_default_displays' => 1,
+    ),
+  );
+  if (isset($api_versions[$owner][$api])) {
+    return array('version' => $api_versions[$owner][$api]);
+  }
+}
+

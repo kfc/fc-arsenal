@@ -1,0 +1,9 @@
+name = Media: RuTube Video
+description = Provides RuTube Video support to the Media module.
+version = 7.x-1.x-dev
+core = 7.x
+package = "Media"
+dependencies[] = media_internet
+files[] = MediaInternetRutubeHandler.inc
+files[] = MediaRutubeStreamWrapper.inc
+
