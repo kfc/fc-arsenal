@@ -113,16 +113,19 @@ function match_events_get_player_matches($player_nid=null){
     
     UNION
     
-    (SELECT squad.entity_id as nid, node.title,  match_date.`field_match_start_date_value`, result.`field_match_result_value` 
-    FROM `field_data_field_match_arsenal_squad_subs` squad
-    INNER JOIN `node` node on node.nid = squad.entity_id
-    INNER JOIN `field_data_field_match_season` season on season.entity_id = squad.entity_id
-    INNER JOIN `field_data_field_match_start_date` match_date on match_date.entity_id = squad.entity_id
-    INNER JOIN `field_data_field_match_result` result on result.entity_id = squad.entity_id
-    WHERE 
-    ".(!empty($player_nid) ? 'field_match_arsenal_squad_subs_nid = :player_nid AND ' : '')."
-    field_match_season_tid = :season)) t
-    
+    (SELECT evts.entity_id as nid,node.title,  match_date.`field_match_start_date_value`, result.`field_match_result_value`
+      FROM `field_data_field_match_events` evts
+      INNER JOIN node on evts.`entity_id` = node.nid
+      INNER JOIN `field_data_field_match_season` season on season.entity_id = evts.entity_id
+      INNER JOIN `field_data_field_match_event_player` player on evts.`field_match_events_value` = player.`entity_id`
+      INNER JOIN `field_data_field_match_event_event_type` evt_type on evt_type.`entity_id` = evts.`field_match_events_value` 
+      INNER JOIN `field_data_field_match_event_type_code` event_type_code on event_type_code.`entity_id` = evt_type.`field_match_event_event_type_tid`
+      INNER JOIN `field_data_field_match_start_date` match_date on match_date.entity_id = evts.entity_id
+      INNER JOIN `field_data_field_match_result` result on result.entity_id = evts.entity_id
+      WHERE season.field_match_season_tid = :season 
+      AND player.field_match_event_player_nid = :player_nid 
+      AND event_type_code.field_match_event_type_code_value = 'sub_in'
+       )) t
     ORDER BY field_match_start_date_value
   ",array(':player_nid'=>$player_nid, ':season'=>variable_get('tournament_table_default_season',0)))->fetchAllAssoc('nid');
 
