@@ -55,5 +55,104 @@ function node_reference_extra_form_alter(&$form, &$form_state, $form_id) {
   
 }
 
+function node_reference_extra_menu() {
+  $items['news_settings/autocomplete'] = array(
+    'page callback' => 'node_reference_extra_autocomplete',
+    'page arguments' => array(2),
+    'access arguments' => array('administer nodes'),
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+}
+
+
+function node_reference_extra_autocomplete($string = '') {     
+  $options = array(
+    'string' => $string,
+    'limit' => 10,
+  );
+  $references = node_reference_extra_potential_references($options);
+
+  $matches = array();
+  foreach ($references as $id => $row) {
+    // Markup is fine in autocompletion results (might happen when rendered
+    // through Views) but we want to remove hyperlinks.
+    $suggestion = preg_replace('/<a href="([^<]*)">([^<]*)<\/a>/', '$2', $row['rendered']);
+    // Add a class wrapper for a few required CSS overrides.
+    $matches[$row['title'] . " [nid:$id]"] = '<div class="reference-autocomplete">' . $suggestion . '</div>';
+  }
+  drupal_json_output($matches);
+}
+
+function node_reference_extra_potential_references($options = array()) {
+  // Fill in default options.
+  $options += array(
+    'string' => '',
+    'match' => 'contains',
+    'ids' => array(),
+    'limit' => 0,
+  );
+
+  $results = &drupal_static(__FUNCTION__, array());
+
+  $references = _node_reference_extra_potential_references_standard( $options);
+
+  return $references;
+}
+/**
+ * Helper function for node_reference_potential_references().
+ *
+ * List of referenceable nodes defined by content types.
+ */
+function _node_reference_extra_potential_references_standard($options) {
+
+  $query = db_select('node', 'n');
+  $node_nid_alias   = $query->addField('n', 'nid');
+  $node_title_alias = $query->addField('n', 'title', 'node_title');
+  $node_type_alias  = $query->addField('n', 'type',  'node_type');
+  $query->addTag('node_access');
+  $query->condition('n.type', 'news');
+ 
+
+  if ($options['string'] !== '') {
+    switch ($options['match']) {
+      case 'contains':
+        $query->condition('n.title', '%' . $options['string'] . '%', 'LIKE');
+        break;
+
+      case 'starts_with':
+        $query->condition('n.title', $options['string'] . '%', 'LIKE');
+        break;
+
+      case 'equals':
+      default: // no match type or incorrect match type: use "="
+        $query->condition('n.title', $options['string']);
+        break;
+    }
+  }
+
+  if ($options['ids']) {
+    $query->condition('n.nid', $options['ids'], 'IN');
+  }
+
+  if ($options['limit']) {
+    $query->range(0, $options['limit']);
+  }
+
+  $query
+    ->orderBy($node_title_alias)
+    ->orderBy($node_type_alias);
+
+  $result = $query->execute()->fetchAll();
+  $references = array();
+  foreach ($result as $node) {
+    $references[$node->nid] = array(
+      'title'    => $node->node_title,
+      'rendered' => check_plain($node->node_title),
+    );
+  }
+  return $references;
+}
+
   
 ?>
