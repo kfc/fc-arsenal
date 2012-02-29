@@ -91,19 +91,23 @@ function custom_match_preprocess_node(&$vars){
     if(!empty($view->result)){
       $header = array(
         array('data'=>t('Match'),'style'=>'width: 600px;'),
-        array('data'=>t('Result'),'style'=>'width: 10px;'),
-        t('Date'),
         t('Tournament'),
-        t('Round'));
+        t('Round'),
+        t('Date'),
+        );
       
       foreach($view->result as $row){
         $fields = $row->field_field_archive_match[0]['rendered']['entity']['field_collection_item'][$row->field_data_field_archive_match_field_archive_match_value];
-        
-        $title = ($fields['field_archive_match_place']['#items'][0]['value'] == 'away' ? '{OPP} - {ARS}' : '{ARS} - {OPP}');
-        $title = str_replace(array('{ARS}','{OPP}'),array(t('Arsenal'),$fields['field_archive_match_opponent'][0]['#title']),$title);
+                                                                                              
+        $home_goals = trim(substr($fields['field_archive_match_result'][0]['#markup'],0,strpos($fields['field_archive_match_result'][0]['#markup'],':')));
+        $away_goals = trim(substr($fields['field_archive_match_result'][0]['#markup'],strpos($fields['field_archive_match_result'][0]['#markup'],':')+1));
+        $goals_diff =  $home_goals - $away_goals;
+        $result_class = ($goals_diff == 0 ? 'draw' :($fields['field_archive_match_place']['#items'][0]['value'] == 'away' ? ($home_goals-$away_goals < 0 ? 'win' : 'lost') : ($home_goals-$away_goals > 0 ? 'win' : 'lost')));
+        $title = ($fields['field_archive_match_place']['#items'][0]['value'] == 'away' ? '<span class="home_team">{OPP}</span> <span class="result result_'.$result_class.'">{RESULT}</span> <span class="away_team">{ARS}</span>' : '<span class="home_team">{ARS}</span> <span class="result result_'.$result_class.'">{RESULT}</span> <span class="away_team">{OPP}</span>');
+        $title = str_replace(array('{ARS}','{OPP}','{RESULT}'),array(t('Arsenal'),$fields['field_archive_match_opponent'][0]['#title'],$fields['field_archive_match_result'][0]['#markup']),$title);
         $rows[$row->field_data_field_archive_match_field_archive_match_value] = array(
           (!empty($fields['field_archive_match_squad_ars']) || !empty($fields['field_archive_match_squad_opp']) || !empty($fields['field_archive_match_events']) ?          
-            l($title,'',array('attributes'=>array('class'=>'archive-match-title','id'=>'archive-match-'.$row->field_data_field_archive_match_field_archive_match_value))).
+            l($title,'',array('html'=>true, 'attributes'=>array('class'=>'archive-match-title','id'=>'archive-match-'.$row->field_data_field_archive_match_field_archive_match_value))).
             '<div style="display: none;" class="archive-match-events" id="match-events-'.$row->field_data_field_archive_match_field_archive_match_value.'">'
             .(!empty($fields['field_archive_match_squad_ars']) ? '<b>'.t('Arsenal squad').'</b>: '.nl2br($fields['field_archive_match_squad_ars'][0]['#markup']).'<br />' : '')
             .(!empty($fields['field_archive_match_squad_opp']) ? '<b>'.t('Opponent squad').'</b>: '.nl2br($fields['field_archive_match_squad_opp'][0]['#markup']).'<br />' : '')
@@ -111,13 +115,12 @@ function custom_match_preprocess_node(&$vars){
             .'</div>'
           : $title)
           ,
-          $fields['field_archive_match_result'][0]['#markup'],
-          $fields['field_archive_match_date'][0]['#markup'],
           $fields['field_archive_match_tournament'][0]['#title'],
           $fields['field_archive_match_round'][0]['#markup'],
+          date('d.m.Y',strtotime($fields['field_archive_match_date']['#items'][0]['value'])),
         );
       }
-      $table = array('#theme'=>'table','#header'=>$header, '#rows'=>$rows); 
+      $table = array('#theme'=>'table','#header'=>$header, '#rows'=>$rows, '#caption'=>t('Season matches') ,'#attributes'=>array('class'=>array('view-display-id-calendar'))); 
       $vars['season_matches'] = render($table);
     }
     //$vars['season_matches'] = $view->render('season_matches');
