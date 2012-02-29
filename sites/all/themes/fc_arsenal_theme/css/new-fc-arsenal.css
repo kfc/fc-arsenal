@@ -190,6 +190,62 @@ TABLE {
 }
 
 
+.sticky-table {
+	margin: 0 0 1em;
+}
+.sticky-table caption {
+	background: #d70000;
+	background: -webkit-linear-gradient(top, #d70000, #820000);
+	background: -moz-linear-gradient(top, #d70000, #820000);
+	background: -ms-linear-gradient(top, #d70000, #820000);
+	background: -o-linear-gradient(top, #d70000, #820000);
+	background: linear-gradient(top, #d70000, #820000);
+	color: #ffffff;
+	font-size: 15px;
+	font-weight: normal;
+	line-height: 1em;
+	margin: 0;
+	padding: 8px 0 8px 20px;
+}
+.sticky-table tr {
+  background: none;    
+}
+.sticky-table tr:hover td {
+	background: #f6f6f6;
+}
+.sticky-table th,
+.sticky-table td {
+	border: 1px solid #e3e3e3;
+	text-align: center; 
+}
+.sticky-table th {
+	background: #e3e3e3;
+	background: -webkit-linear-gradient(top, #fff, #e3e3e3);
+	background: -moz-linear-gradient(top, #fff, #e3e3e3);
+	background: -ms-linear-gradient(top, #fff, #e3e3e3);
+	background: -o-linear-gradient(top, #fff, #e3e3e3);
+	background: linear-gradient(top, #fff, #e3e3e3);
+	padding: 6px;
+}
+.sticky-table td {
+	padding: 2px 6px;
+	width: 80px;
+}
+.sticky-table td a {
+	color: #353535;
+	text-decoration: none;
+}
+.sticky-table td a:hover {
+	color: #cb0000;
+	text-decoration: underline;
+}
+
+.sticky-table .team_name {
+	text-align: left;
+	width: auto;
+}
+
+
 .teaser-node-news {
 	background: #f1f1f1;
 	background: -webkit-linear-gradient(top, #f1f1f1, #fff);
@@ -979,6 +1035,7 @@ ul.nice-menu-down li.over {
 	background-image: url(../img/match_links_bg.jpg);
 	background-repeat: no-repeat;
 	display: inline-block;
+	vertical-align: top;
 }
 #block-views-matches-next-match .match-links a {
 	background-position: left top;
@@ -993,6 +1050,14 @@ ul.nice-menu-down li.over {
 }
 #block-views-matches-next-match .match-links a:hover {
 	text-decoration: none;
+}
+#block-views-matches-next-match .match-links .Online {
+	width: 78px;
+}
+#block-views-matches-next-match .match-links .Online span {
+	height: 31px;
+	line-height: 1em;
+	padding-top: 4px;
 }
 
 
@@ -1525,7 +1590,7 @@ ul.nice-menu-down li.over {
 .player-page .player-box-info {
 	float: right;
 	width: 202px;
-	margin: 0 0 0 15px;
+	margin: 0 0 1em 1.5em;
 }
 
 .player-page .player-box-info .photo {
@@ -1564,19 +1629,6 @@ ul.nice-menu-down li.over {
 
 .player-page .season-stats {
 	clear: both;
-	padding: 1em 0 0;
-}
-.player-page .season-stats h3 {
-	font-weight: bold;
-}
-.player-page .season-stats table {
-	margin: 0 0 1em;
-}
-.player-page .season-stats tr {
-  background: none;    
-}
-.player-page .season-stats tr:hover td {
-	background: #f6f6f6;
 }
 .player-page .season-stats h3 {
 	background: #d70000;
@@ -1592,22 +1644,11 @@ ul.nice-menu-down li.over {
 	margin: 0;
 	padding: 8px 0 8px 20px;
 }
-.player-page .season-stats td {
-	border: 1px solid #e3e3e3;
-	text-align: center; 
-	padding: 2px 6px;
-	width: 80px;
+.player-page .season-stats thead {
+	display: none;
 }
-.player-page .season-stats td a {
-	text-decoration: none;
-}
-.player-page .season-stats td a:hover {
-	text-decoration: underline;
-}
-
-.player-page .season-stats .team_name {
-	text-align: left;
-	width: auto;
+.player-page .season-stats td:last-child {
+	white-space: nowrap;
 }
 
 /* EOF: PLAYER INFO PAGE */
@@ -2496,6 +2537,16 @@ ul.nice-menu-down li.over {
 
 
 /* ====================================== EOF: PAGES ====================================== */
+
+
+.archive-matches-wrapper {
+	margin: 1em 0 0;
+}
+.archive-matches-wrapper th:first-child,
+.archive-matches-wrapper td:first-child {
+	text-align: left;
+}
+
 
 .view-id-historical_facts .views-row {
 	margin-bottom: 4px;
