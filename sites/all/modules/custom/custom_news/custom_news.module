@@ -247,7 +247,12 @@ function _custom_news_get_rss_data($rss_url){
   drupal_load('module','feeds');
   feeds_include_library('common_syndication_parser.inc','common_syndication_parser');
   feeds_include_library('http_request.inc','http_request');
-  $response = http_request_get($rss_url);
+  try{
+    $response = http_request_get($rss_url);
+  }
+  catch(Exception $exc){
+    watchdog('rssException',$exc->getMessage());
+  }
   if(!empty($response->data)){  
     $rss_data = common_syndication_parser_parse($response->data);
     return $rss_data;
