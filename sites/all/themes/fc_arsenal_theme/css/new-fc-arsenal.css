@@ -626,6 +626,8 @@ ul.nice-menu-down li.over {
 }
 #block-search-form form {
 	float: right;
+	position: relative;
+	z-index: 2;
 }
 #block-search-form .form-item,
 #block-search-form .form-actions {
@@ -642,9 +644,10 @@ ul.nice-menu-down li.over {
 
 
 .breadcrumb-links {
-	position: relative;
 	margin: -28px 0 0 0;
 	padding: 0 300px 10px 25px;
+	position: relative;
+	z-index: 1;
 }
 
 .breadcrumb-links .breadcrumb-front {
@@ -1075,6 +1078,15 @@ ul.nice-menu-down li.over {
 }
 
 
+#block-block-5 {
+	margin: 0 0 5px;
+	text-align: center;
+}
+#block-block-5 {
+	vertical-align: top;
+}
+
+
 .TournamentTable th,
 .TournamentTable td {
 	border-bottom: 1px solid #e3e3e3;
@@ -1124,6 +1136,22 @@ ul.nice-menu-down li.over {
 
 #block-views-image-gallery-latest-gallery .photo {
 	vertical-align: top;
+}
+
+
+#block-custom-news-important-news {
+	background: #d70000;
+	background: -webkit-linear-gradient(top, #d70000, #820000);
+	background: -moz-linear-gradient(top, #d70000, #820000);
+	background: -ms-linear-gradient(top, #d70000, #820000);
+	background: -o-linear-gradient(top, #d70000, #820000);
+	background: linear-gradient(top, #d70000, #820000);
+	margin: 0 0 5px;
+	padding: 8px 20px;
+}
+#block-custom-news-important-news a {
+	color: #fff;
+	font-size: 26px;
 }
 
 
@@ -1339,9 +1367,6 @@ ul.nice-menu-down li.over {
 	text-align: center;
 	width: 100%;
 }
-.view-display-id-calendar .views-field-nid span {
-	display: inline-block;
-}
 
 .view-display-id-calendar td.views-field-field-match-start-date {
 	background: none;
@@ -1351,6 +1376,7 @@ ul.nice-menu-down li.over {
 
 .view-display-id-calendar .home_team,
 .view-display-id-calendar .away_team {
+	display: inline-block;
 	width: 130px;
 }
 .view-display-id-calendar .home_team {
@@ -1361,8 +1387,10 @@ ul.nice-menu-down li.over {
 }
 
 .view-display-id-calendar .result {
+	display: inline-block;
 	margin: 0 8px;
-	width: 38px;
+	min-width: 30px;
+	padding: 0 4px;
 }
 .view-display-id-calendar .result_win {
 	background: #7db640;
@@ -1462,6 +1490,7 @@ ul.nice-menu-down li.over {
 
 #read-news-item .news-footer {
 	border-top: 1px solid #e3e3e3;
+	margin: 1em 0 0;
 	padding: 12px 0 20px; 
 }
 #read-news-item .news-footer .news-date {
@@ -2538,12 +2567,13 @@ ul.nice-menu-down li.over {
 
 /* ====================================== EOF: PAGES ====================================== */
 
-
-.archive-matches-wrapper {
-	margin: 1em 0 0;
-}
-.archive-matches-wrapper th:first-child,
 .archive-matches-wrapper td:first-child {
+	text-align: center;
+}
+.archive-matches-wrapper .archive-match-events {
+	border-top: 1px solid #e3e3e3;
+	margin: 8px 0 0;
+	padding: 8px 0 0;
 	text-align: left;
 }
 
@@ -2588,4 +2618,9 @@ ul.nice-menu-down li.over {
 .biography-list-column:hover {
 	background-color: #F1F1F1;
 	outline: 1px solid #D1D1D1;
+}
+
+
+.header1 {
+	color: #000;
 }
