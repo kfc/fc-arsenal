@@ -262,7 +262,10 @@ class DrupalDefaultEntityController implements DrupalEntityControllerInterface {
 
     // Add fields from the {entity} table.
     $entity_fields = $this->entityInfo['schema_fields_sql']['base table'];
-
+    if(empty($entity_fields)){
+      $schema = drupal_get_schema($this->entityInfo['base table']);
+      $entity_fields = array_keys($schema['fields']);
+    }
     if ($this->revisionKey) {
       // Add all fields from the {entity_revision} table.
       $entity_revision_fields = drupal_map_assoc($this->entityInfo['schema_fields_sql']['revision table']);
@@ -279,7 +282,6 @@ class DrupalDefaultEntityController implements DrupalEntityControllerInterface {
       }
       $query->fields('revision', $entity_revision_fields);
     }
-
     $query->fields('base', $entity_fields);
 
     if ($ids) {
