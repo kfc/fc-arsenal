@@ -703,9 +703,11 @@ ul.nice-menu-down li.over {
 
 #content {
 	background: #fff;
-	margin: 0 0 -9980px 0;
+	/*margin: 0 0 -9980px 0;*/
+	min-height: 488px;
 	overflow: hidden;
-	padding: 20px 20px 10000px 20px;
+	/*padding: 20px 20px 10000px 20px;*/
+	padding: 20px;
 	position: relative;
 }
 #content h1 {
@@ -907,6 +909,9 @@ ul.nice-menu-down li.over {
 
 #footer .banner-links {
 	padding: 5px 0px;
+}
+#footer .banner-links a {
+	color: #fff;
 }
 
 
@@ -1455,9 +1460,7 @@ ul.nice-menu-down li.over {
 
 .node-type-news #content {
 	background: none;
-	padding-top: 0;
-	padding-right: 0;
-	padding-left: 0;
+	padding: 0;
 }
 .node-type-news #content > h1 {
 	border: none;
@@ -1539,6 +1542,10 @@ ul.nice-menu-down li.over {
 #comments .comment-footer li {
 	background: none;
 	padding: 0;
+}
+
+#comments .pager {
+	margin: 1em 0;
 }
 
 
@@ -2428,6 +2435,7 @@ ul.nice-menu-down li.over {
 
 .page-user #content {
 	background: #fff url(../img/page_user_bg.png) no-repeat right bottom;
+	min-height: 100px;
 }
 .page-user #content > h1 {
 	display: none;
