@@ -5,7 +5,7 @@
 	<div class="comment-author"><?php print $author;?></div>
 	<div class="cf">&nbsp;</div>
 	<?php hide($content['links'])?>
-	<div class="comment-body"><?php print render($content);?></div>
+	<div class="comment-body"><?php print nl2br(render($content));?></div>
 	<div class="comment-footer">
 		<div class="comment-link">
 			<?php print render($content['links']);?>
