@@ -1516,7 +1516,7 @@ ul.nice-menu-down li.over {
 	padding: 1em 0 0;
 }
 
-#comments .comment_user_picture {
+#comments .user-picture {
 	width: 50px;
 	overflow: hidden;
 	float: left;
