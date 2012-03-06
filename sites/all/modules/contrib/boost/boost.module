@@ -577,7 +577,7 @@ function boost_set_cookie($uid, $expires = NULL) {
     setcookie(BOOST_COOKIE, strval($uid), $expires, ini_get('session.cookie_path'), ini_get('session.cookie_domain'), ini_get('session.cookie_secure') == '1');
   }
   else {
-    setcookie(BOOST_COOKIE, '0', $expires, ini_get('session.cookie_path'), ini_get('session.cookie_domain'), ini_get('session.cookie_secure') == '1');
+    setcookie(BOOST_COOKIE, '', $expires, ini_get('session.cookie_path'), ini_get('session.cookie_domain'), ini_get('session.cookie_secure') == '1');
   }
 }
 

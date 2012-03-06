@@ -2171,7 +2171,9 @@ function user_authenticate($name, $password) {
       if (user_check_password($password, $account)) {
         // Successful authentication.
         $uid = $account->uid;
-
+	if($uid && !isset($_COOKIE['DRUPAL_UID'])){
+	    setcookie('DRUPAL_UID', $uid, $_SERVER['REQUEST_TIME'] + ini_get('session.cookie_lifetime'),ini_get('session.cookie_path'), ini_get('session.cookie_domain'));
+	}
         // Update user to new password scheme if needed.
         if (user_needs_new_hash($account)) {
           user_save($account, array('pass' => $password));

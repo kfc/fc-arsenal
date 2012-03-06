@@ -20,7 +20,7 @@
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-<link rel="shortcut icon" href="fc_arsenal_theme_favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/sites/all/themes/fc_arsenal_theme/favicon.ico" type="image/x-icon">
 <link href="<?php print base_path() . path_to_theme();  ?>/css/new-fc-arsenal.css" rel="stylesheet">
 
 </head>
