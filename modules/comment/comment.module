@@ -720,7 +720,7 @@ function comment_node_page_additions($node) {
   // comments unconditionally if the user is an administrator.
   if (($node->comment_count && user_access('access comments')) || user_access('administer comments')) {
     $mode = variable_get('comment_default_mode_' . $node->type, COMMENT_MODE_THREADED);
-    $comments_per_page = 1;// variable_get('comment_default_per_page_' . $node->type, 50);
+    $comments_per_page = variable_get('comment_default_per_page_' . $node->type, 50);
     if ($cids = comment_get_thread($node, $mode, $comments_per_page)) {
       $comments = comment_load_multiple($cids);
       comment_prepare_thread($comments);
