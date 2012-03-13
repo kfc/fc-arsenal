@@ -2546,7 +2546,7 @@ function node_page_default() {
     $build = node_view_multiple($nodes);
 
     // 'rss.xml' is a path, not a file, registered in node_menu().
-    drupal_add_feed('rss.xml', variable_get('site_name', 'Drupal') . ' ' . t('RSS'));
+    //drupal_add_feed('rss.xml', variable_get('site_name', 'Drupal') . ' ' . t('RSS'));
     $build['pager'] = array(
       '#theme' => 'pager',
       '#weight' => 5,

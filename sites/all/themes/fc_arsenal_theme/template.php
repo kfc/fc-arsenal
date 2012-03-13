@@ -102,3 +102,8 @@ function fc_arsenal_theme_form_alter(&$form, &$form_state, $form_id) {
  
  }
 }
+
+ function fc_arsenal_theme_preprocess_page($variables) {
+  drupal_add_feed('rss',variable_get('site_name', 'Drupal') . ' ' . t('RSS'));
+}
+
