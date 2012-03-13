@@ -4,6 +4,6 @@
   </div>
   <div class="news-content">
     <h2><?php echo $fields['title']->content;?></h2>
-    <div class="news-footer"><?php echo $fields['created']->content;?> | <?php echo t('Comments count').' ('.$fields['comment_count']->content.')'?>,&nbsp;<?php echo t('Reads count').' ('.(int)$fields['totalcount']->raw.')'?></div>
+    <div class="news-footer"><?php echo $fields['created']->content;?> | <?php echo t('Comments count').': '.$fields['comment_count']->content.''?>,&nbsp;<?php echo t('Reads count').': '.(int)$fields['totalcount']->raw.''?></div>
   </div>
 </div>

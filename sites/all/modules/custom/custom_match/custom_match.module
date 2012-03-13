@@ -486,7 +486,7 @@ function theme_custom_match_match_teaser($vars=array()){
     $additional_info .= '
     <div class="info  match-date">
       <span class="label">'.t('Date').': </span>
-      <span class="value">'.format_date(strtotime($node->field_match_start_date[$node->language][0]['value']) + date('Z'),'custom','d.m.Y H:i').'</span>
+      <span class="value">'.format_date(strtotime($node->field_match_start_date[$node->language][0]['value']) + date('Z'),'custom','d.m.Y, H:i').' ('.t('moscow_time_short').')</span>
     </div>';
   }
   
