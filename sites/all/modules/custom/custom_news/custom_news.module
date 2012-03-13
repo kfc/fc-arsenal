@@ -48,7 +48,8 @@ function custom_news_theme(){
 
 function custom_news_node_view($node, $view_mode, $language){
   //$node = $vars['node'];
-  if($node->type == 'news'){
+  
+  if($node->type == 'news' && $node->content['body']['#view_mode'] != 'rss'){
     $node->content['news_block'] = views_embed_view('news','block_3');
     if(!empty($node->field_news_tags)){
       $node->content['field_news_tags'] = taxonomy_field_formatter_view('node',$node,'field_news_tags',null,'',$node->field_news_tags[$node->language],array('type'=>'taxonomy_term_reference_link'));
