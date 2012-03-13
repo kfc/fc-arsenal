@@ -17,7 +17,7 @@
 					<!--div class="comments"><?php echo t('Comments count')?>(<?php echo $comment_count;?>)</div-->
 					<div class="news-author"><b><?php echo t('Author')?>:</b> <span class="info-value"><?php echo $author;?></span></div>
           <?php if(isset($content['field_news_tags'])):?>
-          <div class="news-tags"><img src="/<?php echo drupal_get_path('theme', 'fc_arsenal_theme');?>/img/icons/tag16.png"><?php echo render($content['field_news_tags']);?></div>
+          <div class="news-tags"><b><?php echo t('Tags')?>:</b> <?php echo render($content['field_news_tags']);?></div>
           <?php endif;?>
 					<div class="news-date">
 					  <span class="date"><?php echo $posted_date;?></span> <?php print render($content['custom_social_share'])?>
