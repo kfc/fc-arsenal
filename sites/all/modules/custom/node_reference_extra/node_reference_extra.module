@@ -111,7 +111,7 @@ function _node_reference_extra_potential_references_standard($options) {
   $node_title_alias = $query->addField('n', 'title', 'node_title');
   $node_type_alias  = $query->addField('n', 'type',  'node_type');
   $query->addTag('node_access');
-  $query->condition('n.type', 'news');
+  $query->condition('n.type', array('news','page','article','poll','biography','gallery','match','matches_archive','person'),'IN');
  
 
   if ($options['string'] !== '') {
