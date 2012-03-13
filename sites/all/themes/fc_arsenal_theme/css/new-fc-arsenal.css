@@ -716,9 +716,17 @@ ul.nice-menu-down li.over {
 	font-size: 26px;
 	margin: 0 0 18px;
 	padding: 0 0 8px;
+	text-align: left;
 }
 
 
+.region-content {
+	text-align: justify;
+}
+.region-content h2,
+.region-content h3 {
+	text-align: left;
+}
 .region-content h2 {
 	color: #353535;
 	font-size: 21px;
@@ -811,13 +819,13 @@ ul.nice-menu-down li.over {
 .side-menu .links a:hover {
 	text-decoration: none;	
 }
-.side-menu .links li.active {
+.side-menu .links li.active-trail {
 	background: #fff;
 	font-weight: bold;
 	margin: 0 -6px 0 0;
 	position: relative;
 }
-.side-menu .links li.active a {
+.side-menu .links li.active-trail a {
 	background-image: url(../img/marker_4.gif);
 }
 
@@ -1510,15 +1518,19 @@ ul.nice-menu-down li.over {
 	padding: 20px 20px 0 20px;
 }
 
+#comments .indented .indented .indented .indented {
+	margin: 0;
+} 
+
 #comments .comment {
 	border-top: 1px dotted #353535;
 	margin: 1em 0 0;
 	padding: 1em 0 0;
 }
 
-#comments .user-picture {
-	width: 50px;
-	overflow: hidden;
+#comments .comment_user_picture {
+	/*width: 50px;
+	overflow: hidden;*/
 	float: left;
 	margin-right: 10px;
 }
@@ -1539,9 +1551,12 @@ ul.nice-menu-down li.over {
 	margin: 0.5em 0 0;
 }
 
+#comments .comment-footer {
+	padding: 1em 0 0;
+}
 #comments .comment-footer li {
 	background: none;
-	padding: 0;
+	padding: 0 0.5em 0 0;
 }
 
 #comments .pager {
@@ -2152,6 +2167,7 @@ ul.nice-menu-down li.over {
 .view-id-persons .player-position-defender {
   background-image: url(../img/defender_bg.jpg);
   height: 295px;
+  padding: 0 28px;
 }
 
 .view-id-persons .player-position-midfielder {
@@ -2166,7 +2182,7 @@ ul.nice-menu-down li.over {
 
 .view-id-persons .player-position-loaned {
   background: #e3e3e3;
-  padding-bottom: 10px; 
+  padding: 0 28px 10px 28px;
 }
 
 /* EOF: PLAYERS & TRAINERS */
@@ -2630,5 +2646,5 @@ ul.nice-menu-down li.over {
 
 
 .header1 {
-	color: #000;
+	color: red;
 }
