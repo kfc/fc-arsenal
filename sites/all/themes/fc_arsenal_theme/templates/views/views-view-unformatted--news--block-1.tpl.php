@@ -13,7 +13,16 @@
       if($index == $variables['news_teaser_count']):
     ?>
     <!-- Hardcoded in view template views-view-unformatted--news--block-1.tpl.php  -->
-    <div id="flashContent" style="margin-top: 10px; text-align: center;"><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="500x100" width="500" align="middle" height="100"><param name="movie" value="500x100.swf"><param name="quality" value="high"><param name="bgcolor" value="#ffffff"><param name="play" value="true"><param name="loop" value="true"><param name="wmode" value="window"><param name="scale" value="showall"><param name="menu" value="true"><param name="devicefont" value="false"><param name="salign" value=""><param name="allowScriptAccess" value="sameDomain"><!--[if !IE]>--><object data="http://www.soccermart.ru/promo/arsenal/500x100.swf" type="application/x-shockwave-flash" width="500" height="100"><param name="movie" value="500x100.swf"><param name="quality" value="high"><param name="bgcolor" value="#ffffff"><param name="play" value="true"><param name="loop" value="true"><param name="wmode" value="window"><param name="scale" value="showall"><param name="menu" value="true"><param name="devicefont" value="false"><param name="salign" value=""><param name="allowScriptAccess" value="sameDomain"><!--<![endif]--><a href="http://www.adobe.com/go/getflash"> <img alt="Get Adobe Flash player" src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif"> </a> <!--[if !IE]>--></object><!--<![endif]--></object></div>
+    <script type="text/javascript" src="/sites/all/themes/fc_arsenal_theme/js/swfobject.js"></script>
+    <div id="soccermart"></div>
+    <script type="text/javascript">
+     var params = {bgcolor:"#сс0000",  allowScriptAccess:"always", wmode:"opaque"};
+     swfobject.embedSWF("/sites/default/files/arsenal_shirts.swf", "soccermart", "500", "100",
+    "9.0.0", false,
+    {link:"http://www.soccermart.ru/arsenal/?f=fc-arsenal.com"}, params,
+    {});
+    </script>
+
     <!-- End of hardcoded banner -->
     <div class="item-list">                                           
       <ul>
