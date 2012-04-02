@@ -14,7 +14,7 @@
     ?>
     <!-- Hardcoded in view template views-view-unformatted--news--block-1.tpl.php  -->
     <script type="text/javascript" src="/sites/all/themes/fc_arsenal_theme/js/swfobject.js"></script>
-    <div id="soccermart"></div>
+    <div id="soccermart" style="margin-top: 10px;"></div>
     <script type="text/javascript">
      var params = {bgcolor:"#сс0000",  allowScriptAccess:"always", wmode:"opaque"};
      swfobject.embedSWF("/sites/default/files/arsenal_shirts.swf", "soccermart", "500", "100",
