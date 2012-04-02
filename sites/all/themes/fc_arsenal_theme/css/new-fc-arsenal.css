@@ -1549,6 +1549,7 @@ ul.nice-menu-down li.over {
 
 #comments .comment-body {
 	margin: 0.5em 0 0;
+	word-wrap: break-word;
 }
 
 #comments .comment-footer {
