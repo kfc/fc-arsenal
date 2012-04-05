@@ -178,6 +178,10 @@ function customization_preprocess_page(&$vars){
       $vars['node']->title = $node->title. ' <span class="player-number">'.  $node->field_person_number[$node->language][0]['value'].'</span>';
     }                           
   }
+  if($_GET['q'] == 'node/add'){
+    array_unshift($vars['page']['content'],array('#markup'=>'<div style="padding: 20px 0px;">' . l(t('Newsmaker guide'),'gid-nyuzmeykera',array('attributes'=>array('target'=>'_blank'))) . ' <br /> '.l(t('Badword filter'),'admin/config/content/wordfilter/list',array('attributes'=>array('target'=>'_blank'))).' </div>'));
+  }
+  
 }
 
 function _play_video($nid){
