@@ -132,7 +132,7 @@ function customization_block_view($delta){
         {node} node
         LEFT JOIN {field_data_field_historical_fact_date} field_data_field_historical_fact_date ON node.nid = field_data_field_historical_fact_date.entity_id AND (field_data_field_historical_fact_date.entity_type = 'node' AND field_data_field_historical_fact_date.deleted = 0)
         WHERE (( (node.status = '1') AND (node.type IN  ('historical_fact')) AND (node.promote <> '0') 
-        AND (DATE_FORMAT(DATE_ADD(FROM_UNIXTIME(0), INTERVAL field_data_field_historical_fact_date.field_historical_fact_date_value SECOND),'%m-%d') = :date) ))
+        AND (DATE_FORMAT(DATE_ADD(FROM_UNIXTIME(12*60*60), INTERVAL field_data_field_historical_fact_date.field_historical_fact_date_value SECOND),'%m-%d') = :date) ))
         ORDER BY RAND() DESC
         LIMIT 1 OFFSET 0
       ",array(':date'=>date('m-d')))->fetchAssoc();
