@@ -1,0 +1,53 @@
+<?php
+function mobile_version_menu(){
+  $items = array();
+  
+  $items['mobile/get_news_list']=array(
+    'type'=>MENU_CALLBACK,
+    'page callback' => 'mobile_version_get_news_list',
+    'access callback' => TRUE
+  );
+  
+  $items['mobile/get_news_item/%']=array(
+    'type'=>MENU_CALLBACK,
+    'page callback' => 'mobile_version_get_news_item',
+    'page arguments' => array(2),
+    'access callback' => TRUE
+  );
+  
+  return $items;
+  
+}
+
+
+function mobile_version_get_news_list(){
+  $view = views_get_view('news');
+  $view->set_display('news_by_category');
+  $view->execute('news_by_category');
+  $news = array();
+  foreach($view->result as $news_item){
+    $news[] = array(
+      'nid'=>$news_item->nid,
+      'title'=>$news_item->node_title,
+      'summary'=>strip_tags($news_item->field_body[0]['rendered']['#markup']),
+    );
+  }
+  drupal_json_output($news);
+}
+
+function mobile_version_get_news_item($nid = null){
+  if(empty($nid)) 
+    die();
+  
+  $node = node_load($nid);
+  if(empty($node)) 
+    die();
+
+  $info = array(
+    'title' => $node->title,
+    'body' => check_markup($node->body[$node->language][0]['safe_value'],'full_html')
+  );
+  drupal_json_output($info);
+  
+}
+?>

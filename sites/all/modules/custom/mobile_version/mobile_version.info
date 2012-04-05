@@ -1,0 +1,7 @@
+name = Site mobile version
+version = 7.x-1.0
+core = 7.x
+package = Custom
+files[] = mobile_version.module
+
+
