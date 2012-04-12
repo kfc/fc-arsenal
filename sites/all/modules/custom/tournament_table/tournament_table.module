@@ -110,7 +110,7 @@ function tournament_table_block_view($delta){
       
 }
 
-function _get_tournament_table($type='full', $season_id=null, $tournament_id=null){
+function _get_tournament_table($type='full', $season_id=null, $tournament_id=null, $teams_visible = null){
   if($season_id == null)
     $season_id = variable_get('tournament_table_default_season',null);
   if($tournament_id == null)
@@ -174,7 +174,8 @@ function _get_tournament_table($type='full', $season_id=null, $tournament_id=nul
   if($type == 'full')
     return theme('tournament_table_full_table', array('data' =>$result,'tournament'=>$tournament,'season'=>$season));
   else{
-    $teams_visible = 10;
+    if(empty($teams_visible))
+      $teams_visible = 10; 
     $teams_total = count($result);
     $arsenal_index = array_search(variable_get('arsenal_team_id',0),array_keys($result)) + 1; 
     if($arsenal_index > $teams_visible){

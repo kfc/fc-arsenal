@@ -15,6 +15,12 @@ function mobile_version_menu(){
     'access callback' => TRUE
   );
   
+  $items['mobile/get_calendar']=array(
+    'type'=>MENU_CALLBACK,
+    'page callback' => 'mobile_version_get_calendar',
+    'access callback' => TRUE
+  );
+  
   return $items;
   
 }
@@ -46,8 +52,87 @@ function mobile_version_get_news_item($nid = null){
   $info = array(
     'title' => $node->title,
     'body' => check_markup($node->body[$node->language][0]['safe_value'],'full_html')
+              .'<br /><br /><a href="/" title="Вернуться к списку новостей">Вернуться к списку новостей</a>'
   );
   drupal_json_output($info);
   
+}
+
+function mobile_version_get_calendar(){
+
+  $view = views_get_view('matches');
+  $view->set_display('next_match');
+  $view->execute('next_match');
+  $next_match_html = '';
+  if(!empty($view->result)){
+    $next_match_info = $view->result[0];
+
+    $month_names_genitive = variable_get('month_names_genitive',array());
+    $match_timestamp = strtotime($next_match_info->field_field_match_start_date[0]['raw']['value']) + date('Z');
+    $month = date('m',$match_timestamp);
+    $match_start_date = format_date($match_timestamp,'custom','l, j ').(isset($month_names_genitive[$month]) ? $month_names_genitive[$month]  : date('F',$match_timestamp)).date(' H:i',$match_timestamp);
+    
+    $next_match_html = '<b>'.t('Next match').'</b>: '.
+                                                 l(($next_match_info->field_field_match_place[0]['raw']['value'] == 'away'  
+                                                 ? $next_match_info->field_field_match_opponent[0]['rendered']['#markup'].' - '.t('Arsenal')
+                                                 : t('Arsenal').' - '.$next_match_info->field_field_match_opponent[0]['rendered']['#markup']
+                                                 ),
+                                                'node/'.$next_match_info->nid,
+                                                array('absolute'=>true)
+                                                )
+                      .', '.$match_start_date.' '.t('moscow_time_short');
+  }
+ // print_r($next_match_info);
+ // die();
+  
+  
+  $view = views_get_view('matches');
+  $view->set_display('prev_match');
+  $view->execute('prev_match');
+  $prev_match_html = '';
+  if(!empty($view->result)){
+    $prev_match_info = $view->result[0];
+    
+    $month_names_genitive = variable_get('month_names_genitive',array());
+    $match_timestamp = strtotime($prev_match_info->field_field_match_start_date[0]['raw']['value']) + date('Z');
+    $month = date('m',$match_timestamp);
+    $match_start_date = format_date($match_timestamp,'custom','l, j ').(isset($month_names_genitive[$month]) ? $month_names_genitive[$month]  : date('F',$match_timestamp)).date(' H:i',$match_timestamp);
+   
+    $prev_match_html = '<b>'.t('Previous match').'</b>: '.
+                                                 l(($prev_match_info->field_field_match_place[0]['raw']['value'] == 'away'  
+                                                    ? $prev_match_info->field_field_match_opponent[0]['rendered']['#markup'].' '.$prev_match_info->field_field_match_result[0]['rendered']['#markup'].' '.t('Arsenal')
+                                                    : t('Arsenal').' '.$prev_match_info->field_field_match_result[0]['rendered']['#markup'].' '.$prev_match_info->field_field_match_opponent[0]['rendered']['#markup']
+                                                    ),
+                                                'node/'.$prev_match_info->nid,
+                                                array('absolute'=>true)
+                                                )
+                       .', '.$match_start_date.' '.t('moscow_time_short');                             
+                                                  
+  }
+  
+  $tournament_table_html = '<div class="tournament_table_wrapper">';
+  
+  $tournament_table_html .= _get_tournament_table('short', null, null, 20).'</div>';
+  //print_r($tournament_table);
+  //die();
+  /*$news = array();
+  foreach($view->result as $news_item){
+    $news[] = array(
+      'nid'=>$news_item->nid,
+      'title'=>$news_item->node_title,
+      'summary'=>strip_tags($news_item->field_body[0]['rendered']['#markup']),
+    );
+  }
+  drupal_json_output($news);*/
+  $return = array(
+    'prev_match_html' => $prev_match_html,
+    'next_match_html' => $next_match_html,
+    'tournament_table_html' => $tournament_table_html,
+  );
+  //print_r($return);
+  drupal_json_output($return);
+  die();
+
+
 }
 ?>
