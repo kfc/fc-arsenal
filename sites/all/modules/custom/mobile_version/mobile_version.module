@@ -61,26 +61,29 @@ function mobile_version_get_news_item($nid = null){
 function mobile_version_get_calendar(){
 
   $view = views_get_view('matches');
-  $view->set_display('next_match');
-  $view->execute('next_match');
-  $next_match_html = '';
+  $view->set_display('next_5_matches');
+  $view->execute('next_5_matches');
+ 
+  
+  
+  $next_match_html = '<b>'.t('Next 5 matches').'</b>:<br /> ';
   if(!empty($view->result)){
-    $next_match_info = $view->result[0];
+    foreach($view->result as $res){
+    //$next_match_info = $res[0];
 
     $month_names_genitive = variable_get('month_names_genitive',array());
-    $match_timestamp = strtotime($next_match_info->field_field_match_start_date[0]['raw']['value']) + date('Z');
+    $match_timestamp = strtotime($res->field_data_field_match_start_date_field_match_start_date_val) + date('Z');
     $month = date('m',$match_timestamp);
     $match_start_date = format_date($match_timestamp,'custom','l, j ').(isset($month_names_genitive[$month]) ? $month_names_genitive[$month]  : date('F',$match_timestamp)).date(' H:i',$match_timestamp);
     
-    $next_match_html = '<b>'.t('Next match').'</b>: '.
-                                                 l(($next_match_info->field_field_match_place[0]['raw']['value'] == 'away'  
-                                                 ? $next_match_info->field_field_match_opponent[0]['rendered']['#markup'].' - '.t('Arsenal')
-                                                 : t('Arsenal').' - '.$next_match_info->field_field_match_opponent[0]['rendered']['#markup']
-                                                 ),
-                                                'node/'.$next_match_info->nid,
-                                                array('absolute'=>true)
-                                                )
-                      .', '.$match_start_date.' '.t('moscow_time_short');
+    $next_match_html .= l($res->node_title,
+                          'node/'.$res->nid,
+                          array('absolute'=>true)
+                          )
+                      .', '.$match_start_date.' '.t('moscow_time_short')
+                      .'<br />';
+                      ;
+    }
   }
  // print_r($next_match_info);
  // die();
@@ -110,9 +113,9 @@ function mobile_version_get_calendar(){
                                                   
   }
   
-  $tournament_table_html = '<div class="tournament_table_wrapper">';
+  $tournament_table_html = '<b>'.t('Tournament table').'</b>:<br /><div class="tournament_table_wrapper">';
   
-  $tournament_table_html .= _get_tournament_table('short', null, null, 20).'</div>';
+  $tournament_table_html .= _get_tournament_table('short', null, null, 10).'</div>';
   //print_r($tournament_table);
   //die();
   /*$news = array();
