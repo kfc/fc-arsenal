@@ -2587,6 +2587,10 @@ ul.nice-menu-down li.over {
 	text-align: center;
 }
 
+#user-register-form .captcha img {
+	margin-left: 179px;
+}
+
 /* EOF: REGISTER */
 
 
