@@ -12,6 +12,7 @@
     <?php else:
       if($index == $variables['news_teaser_count']):
     ?>
+    <?php /*
     <!-- Hardcoded in view template views-view-unformatted--news--block-1.tpl.php  -->
     <script type="text/javascript" src="/sites/all/themes/fc_arsenal_theme/js/swfobject.js"></script>
     <div style="height: 10px;">&nbsp;</div>
@@ -25,6 +26,7 @@
     </script>
 
     <!-- End of hardcoded banner -->
+    <?php */?>
     <div class="item-list">                                           
       <ul>
      <?endif;?> 
