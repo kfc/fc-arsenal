@@ -182,14 +182,14 @@ function custom_social_share_block_view($delta = '') {
   $block = array();
   
   if($delta == 'social_share_links'){
-    $block['content'] = '<ul class="header-social-links">';
+    $block['content'] = '<noindex><ul class="header-social-links">';
     $block['content'] .= '<li class="header-social-link-item header-vk-link">'.theme('custom_social_share_vk_header_link').'</li>';  
     $block['content'] .= '<li class="header-social-link-item header-twitter-link">'.theme('custom_social_share_twitter_header_link').'</li>';  
     $block['content'] .= '<li class="header-social-link-item header-fb-link">'.theme('custom_social_share_facebook_header_link').'</li>';  
     $block['content'] .= '<li class="header-social-link-item header-mail-link">'.theme('custom_social_share_email_link').'</li>';  
     $block['content'] .= '<li class="header-social-link-item"> '.theme('custom_social_share_mobile_link').'</li>';
     
-    $block['content'] .= '</ul>'; 
+    $block['content'] .= '</ul></noindex>'; 
   }
   
   if (user_access('access content') && variable_get('custom_social_share_block', 0)) {
