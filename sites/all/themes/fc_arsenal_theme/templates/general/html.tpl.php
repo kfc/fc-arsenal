@@ -3,9 +3,6 @@
 <head>
 <meta charset="utf-8">
 <title><?php print $head_title ?></title>
-<meta name="Keywords" content="Арсенал, Лондон, футбол, ARSSC, Arsenal Russian Speaking Supporters Club, фан-клуб, Хайбери, Арсен Венгер, Анри, Бергкамп, Фабрегас, Адебайор, Ван Перси, Victoria Concordia Crescit, Арсенал в России, Арсенал в СНГ, канониры, гунеры, gunners, gooners, Эмирейтс, Emirates Stadium, Англия, Премьер Лига, Кубок Англии, болельщики, фанаты">
-<meta name="Description" content="Официальный сайт Арсенала, Первый официальный фан-сайт, ARSSC, Arsenal Russian Speaking Supporters Club">
-
 <?php print $head ?>
 <?php print $styles ?>
 <?php print $scripts ?>
