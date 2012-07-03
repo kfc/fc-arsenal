@@ -45,7 +45,7 @@
 </div>
 </div>
 
-<?php if(!empty($variables['rss_items_html'])):?>
+<?php /* if(!empty($variables['rss_items_html'])):?>
   <div class="block block-views" id="block-views-qrss_view_inoprosport_ru">
     <div class="content">
       <div class="view view-qrss-view-inoprosport-ru">
@@ -67,7 +67,7 @@
       </div>
     </div>
   </div>
-<?php endif;?>
+<?php endif; */?>
 <div class="all-news">
   <a href="/news-all/date" class="button"><?php echo t('All news')?></a>
 </div>
