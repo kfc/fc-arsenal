@@ -32,4 +32,5 @@
 	</div>
 	<div class="cf">&nbsp;</div>
 </div>
+<?php unset($content['links']);?>
 <?php print render($content);?>
