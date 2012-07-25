@@ -97,6 +97,8 @@
 				<?php print l(t('Partners news'), 'lastnews'); ?>
 				&nbsp;|&nbsp;
 				<?php print l(t('Partners articles'), 'stati-partnerov'); ?>
+        &nbsp;|&nbsp;
+        <?php print l(t('Good to know'), 'polza/index.php'); ?>
 			</div>
 			
 			<div class="counter">
