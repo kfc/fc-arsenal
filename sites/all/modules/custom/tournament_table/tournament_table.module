@@ -134,8 +134,8 @@ function _get_tournament_table($type='full', $season_id=null, $tournament_id=nul
       SELECT results.home_team as team_id,
       sum(home_points) as points, sum(home_score) as scored,  sum(away_score) as missed,
       count(home_team) as games,
-      (SELECT COUNT(*) from {tournament_table_results} where winner = results.home_team) as wins,
-      (SELECT COUNT(*) from {tournament_table_results} where winner = 0 and home_team = results.home_team) as draws
+      (SELECT COUNT(*) from {tournament_table_results} where winner = results.home_team AND season=:season_id AND tournament = :tournament_id) as wins,
+      (SELECT COUNT(*) from {tournament_table_results} where winner = 0 and home_team = results.home_team AND season=:season_id AND tournament = :tournament_id) as draws
       from  {tournament_table_results} results 
       WHERE season=:season_id AND tournament = :tournament_id
       group by home_team
@@ -145,8 +145,8 @@ function _get_tournament_table($type='full', $season_id=null, $tournament_id=nul
       SELECT results.away_team as team_id,
       sum(away_points) as points, sum(away_score) as scored,  sum(home_score) as missed,
       count(away_team) as games,
-      (SELECT COUNT(*) from {tournament_table_results} where winner = results.away_team) as wins,
-      (SELECT COUNT(*) from {tournament_table_results} where winner = 0 and away_team = results.away_team) as draws
+      (SELECT COUNT(*) from {tournament_table_results} where winner = results.away_team AND season=:season_id AND tournament = :tournament_id) as wins,
+      (SELECT COUNT(*) from {tournament_table_results} where winner = 0 and away_team = results.away_team AND season=:season_id AND tournament = :tournament_id) as draws
       from {tournament_table_results} results 
       WHERE season=:season_id AND tournament = :tournament_id
       group by away_team
@@ -168,7 +168,8 @@ function _get_tournament_table($type='full', $season_id=null, $tournament_id=nul
     ';  
   $result = db_query($query,array(':season_id' => $season_id, ':tournament_id'=> $tournament_id,':team_ids'=>implode(',',$teams)))
             ->fetchAllAssoc('team_id');
-            
+    dpm($season_id);        
+    dpm($tournament_id);        
   $season = taxonomy_term_load($season_id);
   $tournament = taxonomy_term_load($tournament_id);
   if($type == 'full')
