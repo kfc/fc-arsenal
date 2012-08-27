@@ -123,7 +123,7 @@ function custom_match_preprocess_node(&$vars){
           date('d.m.Y',strtotime($fields['field_archive_match_date']['#items'][0]['value'])),
         );
       }
-      $table = array('#theme'=>'table','#header'=>$header, '#rows'=>$rows, '#caption'=>$node->title ,'#attributes'=>array('class'=>array('view-display-id-calendar'))); 
+      $table = array('#theme'=>'table','#header'=>$header, '#rows'=>$rows, '#caption'=>t('Season').' '.str_replace('/',' / '.(substr($node->field_archive_season[$node->language][0]['value'],2,2) != 99 ? substr($node->field_archive_season[$node->language][0]['value'],0,2) : (int)(substr($node->field_archive_season[$node->language][0]['value'],0,2)+1)),$node->field_archive_season[$node->language][0]['value']),'#attributes'=>array('class'=>array('view-display-id-calendar'))); 
       $vars['season_matches'] = render($table);
     }
     //$vars['season_matches'] = $view->render('season_matches');
