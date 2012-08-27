@@ -86,8 +86,8 @@ function custom_match_preprocess_node(&$vars){
     drupal_add_js(drupal_get_path('module', 'custom_match') . '/misc/archive_matches.js'); 
     $view = views_get_view('matches');
     $view->set_display('season_matches');
-    if(isset($_GET['field_match_season_tid']) && !empty($_GET['field_match_season_tid']))
-      $view->set_arguments(array($_GET['field_match_season_tid']));
+    if(isset($_GET['season_id']) && !empty($_GET['season_id']))
+      $view->set_arguments(array($_GET['season_id']));
     else
       $view->set_arguments(array(arg(1)));    
     $view->execute('season_matches');
@@ -137,7 +137,7 @@ function custom_match_form_alter(&$form, $form_state, $form_id){
     drupal_add_css(drupal_get_path('module', 'custom_match') . '/misc/styles.css');
   }
   if($form['#id'] == 'views-exposed-form-matches-calendar'){
-    $form['field_match_season_tid']['#after_build'] = array('_add_archive_seasons');
+    $form['season_id']['#after_build'] = array('_add_archive_seasons');
   }
 }
 
@@ -719,7 +719,7 @@ function custom_match_views_post_render(&$view, &$output) {
     if(empty($view->result)){
       //If empty - try to load archive matches
       $filter = $view->get_exposed_input();
-      $season = $filter['field_match_season_tid'];
+      $season = $filter['season_id'];
       $node = node_load($season);
       if(!empty($node)){
         $type = node_type_get_type($node);
