@@ -86,7 +86,10 @@ function custom_match_preprocess_node(&$vars){
     drupal_add_js(drupal_get_path('module', 'custom_match') . '/misc/archive_matches.js'); 
     $view = views_get_view('matches');
     $view->set_display('season_matches');
-    $view->set_arguments(array(arg(1)));
+    if(isset($_GET['field_match_season_tid']) && !empty($_GET['field_match_season_tid']))
+      $view->set_arguments(array($_GET['field_match_season_tid']));
+    else
+      $view->set_arguments(array(arg(1)));    
     $view->execute('season_matches');
     if(!empty($view->result)){
       $header = array(
@@ -120,7 +123,7 @@ function custom_match_preprocess_node(&$vars){
           date('d.m.Y',strtotime($fields['field_archive_match_date']['#items'][0]['value'])),
         );
       }
-      $table = array('#theme'=>'table','#header'=>$header, '#rows'=>$rows, '#caption'=>t('Season matches') ,'#attributes'=>array('class'=>array('view-display-id-calendar'))); 
+      $table = array('#theme'=>'table','#header'=>$header, '#rows'=>$rows, '#caption'=>$node->title ,'#attributes'=>array('class'=>array('view-display-id-calendar'))); 
       $vars['season_matches'] = render($table);
     }
     //$vars['season_matches'] = $view->render('season_matches');
@@ -133,6 +136,31 @@ function custom_match_form_alter(&$form, $form_state, $form_id){
     drupal_add_js(drupal_get_path('module', 'custom_match') . '/misc/arsenal_squad.js');
     drupal_add_css(drupal_get_path('module', 'custom_match') . '/misc/styles.css');
   }
+  if($form['#id'] == 'views-exposed-form-matches-calendar'){
+    $form['field_match_season_tid']['#after_build'] = array('_add_archive_seasons');
+  }
+}
+
+function _add_archive_seasons($element, &$form_state){
+  static $archive_seasons;
+  if(empty($archive_seasons)){
+    $result = db_query("SELECT node.nid AS nid, node.title AS node_title, field_data_field_archive_season.field_archive_season_value AS field_archive_season
+                        FROM 
+                        {node} node
+                        LEFT JOIN {field_data_field_archive_season} field_data_field_archive_season ON node.nid = field_data_field_archive_season.entity_id AND (field_data_field_archive_season.entity_type = 'node')
+                        WHERE (( (node.status = '1') AND (node.type IN  ('matches_archive')) ))
+                        ORDER BY field_data_field_archive_season.field_archive_season_value ASC"
+    );
+    foreach($result as $row){
+      if(strlen(substr($row->field_archive_season,strpos($row->field_archive_season,'/')+1)) == 2){
+        $archive_seasons[$row->nid] = str_replace('/',' / '.(substr($row->field_archive_season,2,2) != 99 ? substr($row->field_archive_season,0,2) : (int)(substr($row->field_archive_season,0,2)+1)),$row->field_archive_season);  
+      }
+      else
+        $archive_seasons[$row->nid] = str_replace('/',' / ',$row->field_archive_season);
+    }
+  }
+  $element['#options'] = $archive_seasons + $element['#options'];
+  return $element;
 }
 
 function _sort_events($a, $b) 
@@ -688,8 +716,35 @@ function _custom_match_get_livetv_arsenal_matches(){
 
 function custom_match_views_post_render(&$view, &$output) {
   if($view->name == 'matches' && $view->current_display == 'calendar'){
-   
-    //dpm($view); 
+    if(empty($view->result)){
+      //If empty - try to load archive matches
+      $filter = $view->get_exposed_input();
+      $season = $filter['field_match_season_tid'];
+      $node = node_load($season);
+      if(!empty($node)){
+        $type = node_type_get_type($node);
+        if(!empty($type) && $type->type == 'matches_archive'){
+          $output = node_view($node);  
+        }
+        //dpm($type);
+      }
+    
+       
+      /* $vocab = taxonomy_vocabulary_machine_name_load('season');
+       $seasons = taxonomy_get_tree($vocab->vid);
+       $found = FALSE;
+       foreach($seasons as $_season)
+        if($_season->tid == $season){
+          $found = TRUE;
+          break;
+        }
+       if(!$found){
+        //$view = views_get_view('matches');
+        $view->set_display('season_matches');  
+        $view->set_exposed_input(array('nid'=>$season));
+       }  
+       dpm($view);     */
+    }
   }
     
 

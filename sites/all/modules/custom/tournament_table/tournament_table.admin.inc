@@ -434,7 +434,7 @@ function _get_previous_results(){
 function _tournament_item_delete($pid) {
   if(empty($pid))
     drupal_goto('admin/content/tournament-table-item');
-  
+
   db_delete('tournament_table_results')->condition('pid',$pid)->execute();
   drupal_set_message(t('The match was deleted.'));
   drupal_goto('admin/content/tournament-table-item');
