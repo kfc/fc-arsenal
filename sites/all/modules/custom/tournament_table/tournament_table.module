@@ -20,7 +20,7 @@ function tournament_table_menu(){
     'type' => MENU_LOCAL_TASK,
     'file' => 'tournament_table.admin.inc',
   );
-  /*
+  
   $items['admin/content/tournament-table-item/delete/%'] = array(
    'title' => t('Tournament matches'),
     'page callback' => '_tournament_item_delete',
@@ -28,7 +28,7 @@ function tournament_table_menu(){
     'access arguments' => array('tournament table edit'),
     'type' => MENU_LOCAL_TASK,
     'file' => 'tournament_table.admin.inc',
-  );  */
+  );  
   
    $items['admin/content/tournament_table_settings'] = array(
    'title' => t('Tournament teams'),
