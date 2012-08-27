@@ -135,7 +135,8 @@ function _get_tournament_table($type='full', $season_id=null, $tournament_id=nul
       sum(home_points) as points, sum(home_score) as scored,  sum(away_score) as missed,
       count(home_team) as games,
       (SELECT COUNT(*) from {tournament_table_results} where winner = results.home_team AND season=:season_id AND tournament = :tournament_id) as wins,
-      (SELECT COUNT(*) from {tournament_table_results} where winner = 0 and home_team = results.home_team AND season=:season_id AND tournament = :tournament_id) as draws
+      (SELECT COUNT(*) from {tournament_table_results} where winner = 0 and home_team = results.home_team AND season=:season_id AND tournament = :tournament_id) as draws,
+      pid
       from  {tournament_table_results} results 
       WHERE season=:season_id AND tournament = :tournament_id
       group by home_team
@@ -146,14 +147,15 @@ function _get_tournament_table($type='full', $season_id=null, $tournament_id=nul
       sum(away_points) as points, sum(away_score) as scored,  sum(home_score) as missed,
       count(away_team) as games,
       (SELECT COUNT(*) from {tournament_table_results} where winner = results.away_team AND season=:season_id AND tournament = :tournament_id) as wins,
-      (SELECT COUNT(*) from {tournament_table_results} where winner = 0 and away_team = results.away_team AND season=:season_id AND tournament = :tournament_id) as draws
+      (SELECT COUNT(*) from {tournament_table_results} where winner = 0 and away_team = results.away_team AND season=:season_id AND tournament = :tournament_id) as draws,
+      pid
       from {tournament_table_results} results 
       WHERE season=:season_id AND tournament = :tournament_id
       group by away_team
       
       UNION
 
-      SELECT nid,0,0,0,0,0,0
+      SELECT nid,0,0,0,0,0,0,0
       from node where type=\'team\' and 
       nid NOT in (select distinct home_team from tournament_table_results WHERE season=:season_id AND tournament = :tournament_id 
             UNION select distinct away_team from tournament_table_results WHERE season=:season_id AND tournament = :tournament_id) 
