@@ -1009,7 +1009,8 @@ function get_history_stats($team_nid){
   $output .= t('Loses').': '.$data['total']['lost'].'<br />';
   $goal_diff = (int)((int)$data['total']['arsenal_goals'] - (int)$data['total']['opponent_goals']);
   $output .= t('Goals difference').': '.$data['total']['arsenal_goals'].' - '.$data['total']['opponent_goals'].' ('.$data['total']['goals_diff'].')<br /><br />';
-  $output .= l(t('View details'),'head-to-head',array('query'=>array('opponent'=>$team_nid)));
+  if(user_access('administer nodes'))
+    $output .= l(t('View details'),'head-to-head',array('query'=>array('opponent'=>$team_nid)));
   $output .= '</div>';
   return $output;
 }
