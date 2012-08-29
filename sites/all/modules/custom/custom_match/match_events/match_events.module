@@ -81,11 +81,10 @@ function match_events_preprocess_node(&$vars){
           '#theme'=>'table',
           '#header'=>$header,
           '#rows'=>$rows);
-      
       //$penalty_goals = $summary[match_events_get_event_id_by_code('penalty_goal', $events)];    
       $table['summary'] = array(
         '#markup' => 
-          '<b>'.t('Total goals').'</b>: '.$summary[match_events_get_event_id_by_code('goal', $events)].' ('.t('penalty goals').': '.$summary[match_events_get_event_id_by_code('penalty_goal', $events)].')<br />'.
+          '<b>'.t('Total goals').'</b>: '.(int)($summary[match_events_get_event_id_by_code('goal', $events)] + $summary[match_events_get_event_id_by_code('penalty_goal', $events)]) .' ('.t('penalty goals').': '.$summary[match_events_get_event_id_by_code('penalty_goal', $events)].')<br />'.
           '<b>'.t('Games played').'</b>: '.count($player_matches).' ('.t('starting').': '.(count($player_matches) - $summary[match_events_get_event_id_by_code('sub_in', $events)]).')<br />'
         );    
           
