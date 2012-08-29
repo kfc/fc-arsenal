@@ -896,13 +896,16 @@ function _head_to_head($team_id=null, $only_data = false){
     $view->set_display('head_to_head');
     $view->set_arguments(array($team_id));
     $view->execute();
-    $matches_res += $view->result;
-    
+    $matches_res = $view->result;
+       
     $arc_view = views_get_view('matches');
     $arc_view->set_display('head_to_head_archive');
     $arc_view->set_arguments(array($team_id));
     $arc_view->execute();
-    $matches_res += $arc_view->result;
+    foreach($arc_view->result as $res){
+      $matches_res[] = $res;
+    }
+    //$matches_res += $arc_view->result;
     if(!empty($matches_res)){
       $header = array(
           array('data'=>t('Match'),'style'=>'width: 600px;'),
@@ -913,7 +916,7 @@ function _head_to_head($team_id=null, $only_data = false){
         
         foreach($matches_res as $_match){
           if(isset($_match->nid) && !empty($_match->nid)){
-            $key = strtotime($_match->field_field_match_start_date[0]['raw']['value']);
+            $key = date('Y-m-d', strtotime($_match->field_field_match_start_date[0]['raw']['value']));
             $matches[$key]['result'] = $_match->field_field_match_result[0]['rendered']['#markup'];
             $matches[$key]['round'] = $_match->field_field_match_round[0]['rendered']['#markup'];
             $matches[$key]['tournament'] = $_match->field_field_match_tournament[0]['rendered']['#markup'];
@@ -922,7 +925,7 @@ function _head_to_head($team_id=null, $only_data = false){
             $matches[$key]['link'] = 'node/'.$_match->nid;
           }
           else{
-            $key = strtotime($_match->field_field_archive_match_date[0]['raw']['value']);
+            $key = substr($_match->field_field_archive_match_date[0]['raw']['value'],0,strpos($_match->field_field_archive_match_date[0]['raw']['value'],'T'));
             $matches[$key]['result'] = $_match->field_field_archive_match_result[0]['rendered']['#markup'];
             $matches[$key]['round'] = $_match->field_field_archive_match_round[0]['rendered']['#markup'];
             $matches[$key]['tournament'] = $_match->field_field_archive_match_tournament[0]['rendered']['#markup'];
