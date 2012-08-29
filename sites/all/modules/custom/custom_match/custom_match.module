@@ -961,14 +961,17 @@ function _head_to_head($team_id=null, $only_data = false){
             );
           }
         }
+        
+        $goal_diff = (int)((int)$total['arsenal_goals'] - (int)$total['opponent_goals']);
+        if($goal_diff > 0) 
+          $goal_diff = '+'.$goal_diff;
+        $output['total'] = array('#markup'=>'<div style="font-weight: bold; margin: 10px 0 10px 0; font-size: 125%">'.t('Total').': '.t('games').': '.$total['matches'].', '.t('wins').': '.$total['win'].', '.t('draws').': '.$total['draw'].', '.t('loses').': '.$total['lost'].'. '.t('Goals difference').': '.$total['arsenal_goals'].' - '.$total['opponent_goals'].' ('.$goal_diff.')'.'</div>');
+        $total['goals_diff'] = $goal_diff;
+        
         if(!$only_data){
           $table = array('#theme'=>'table','#header'=>$header, '#rows'=>$rows, '#caption'=>t('Matches'),'#attributes'=>array('class'=>array('view-display-id-calendar archive-matches-wrapper'))); 
           $output['season_matches'] = $table;
         }
-        $goal_diff = (int)((int)$total['arsenal_goals'] - (int)$total['opponent_goals']);
-        if($goal_diff > 0) $goal_diff = '+'.$goal_diff;
-        $output['total'] = array('#markup'=>t('Total').': '.$total['matches'].' '.t('games').', '.$total['win'].' '.t('wins').', '.$total['draw'].' '.t('draws').', '.$total['lost'].' '.t('loses').'. '.t('Goals difference').': '.$total['arsenal_goals'].' - '.$total['opponent_goals'].' ('.$goal_diff.')');
-        $total['goals_diff'] = $goal_diff;
     }
   }
   
