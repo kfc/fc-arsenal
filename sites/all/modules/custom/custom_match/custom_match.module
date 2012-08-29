@@ -928,7 +928,7 @@ function _head_to_head($team_id=null){
           
           }
         }
-        ksort($matches);
+        krsort($matches);
         foreach($matches as $ts => $match){ 
           $total['matches']++;                                                                                     
           $home_goals = trim(substr($match['result'],0,strpos($match['result'],':')));
