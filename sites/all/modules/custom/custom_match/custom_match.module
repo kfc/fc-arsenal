@@ -961,7 +961,7 @@ function _head_to_head($team_id=null){
         
         $goal_diff = (int)((int)$total['arsenal_goals'] - (int)$total['opponent_goals']);
         if($goal_diff > 0) $goal_diff = '+'.$goal_diff;
-        $output['total'] = array('#markup'=>t('Total:').' '.$total['matches'].' '.t('games').', '.$total['win'].' '.t('wins').', '.$total['draw'].' '.t('draws').', '.$total['lost'].' '.t('loses').'. '.t('Goal difference').': '.$total['arsenal_goals'].' - '.$total['opponent_goals'].' ('.$goal_diff.')');
+        $output['total'] = array('#markup'=>t('Total:').' '.$total['matches'].' '.t('games').', '.$total['win'].' '.t('wins').', '.$total['draw'].' '.t('draws').', '.$total['lost'].' '.t('loses').'. '.t('Goals difference').': '.$total['arsenal_goals'].' - '.$total['opponent_goals'].' ('.$goal_diff.')');
     }
 
     //dpm($matches);
