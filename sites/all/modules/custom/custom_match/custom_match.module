@@ -17,6 +17,19 @@ function custom_match_menu(){
     'access callback' => TRUE
   );
   
+/*  $items['history/head-to-head']= array(
+    'title' => t('Head to head'),
+    'type'=>MENU_NORMAL_ITEM,
+    'page callback'=>'_head_to_head',
+    'access callback' => TRUE
+  );                             
+   $items['history/head-to-head/%']= array(
+    'type'=>MENU_NORMAL_ITEM,
+    'page callback'=>'_head_to_head',
+    'page arguments'=>array(1),
+    'access callback' => TRUE
+  );   */
+  
   return $items;
 }
 
@@ -750,13 +763,25 @@ function custom_match_views_post_render(&$view, &$output) {
 
 }
 
-/*function custom_match_block_view_alter(&$data, $block){
-  if($block->module == 'views' && $block->delta == 'matches-next_match')
-  {
-    //$img_path = drupal_get_path('theme',variable_get('theme_default','fc_arsenal_theme'));
-    //$data['subject'] = '<span class="next-prev-wrapper"><a href="#" id="prev-match-link" class="Prev">&nbsp;</a>&nbsp;</span>'.$data['subject'].'<span class="next-prev-wrapper"><a href="#" id="next-match-link" class="Next">&nbsp;</a></span>';
+function custom_match_block_info(){
+  $blocks['head_to_head'] =  array(
+      'info' => t('Head to head'),
+      'cache' => DRUPAL_NO_CACHE,
+  );
+  return $blocks;
+}
+
+function custom_match_block_view($delta){
+  $block = array();
+  switch($delta){
+    case 'head_to_head':
+      $team_id = (isset($_GET['opponent']) && !empty($_GET['opponent']) ? (int)$_GET['opponent'] : null);
+      $block['content'] = _head_to_head($team_id);
+      break;
   }
-} */
+  return $block;
+
+} 
 
 function theme_custom_match_match_goals($vars){  
   $node = array_shift($vars);
@@ -852,6 +877,104 @@ function custom_match_node_insert($node){
   if($node->type == 'match')
     cache_set('stats:players_stats','');
 
+}
+
+
+
+function _head_to_head($team_id=null){
+  $output = array();
+  $output['h2h_form'] = drupal_get_form('head_to_head_form');
+  if(!empty($team_id)){
+  
+    $opponent = node_load($team_id);
+    $matches = $matches_res = array();
+  
+    $view = views_get_view('matches');
+    $view->set_display('head_to_head');
+    $view->set_arguments(array($team_id));
+    $view->execute();
+    $matches_res += $view->result;
+    
+    $arc_view = views_get_view('matches');
+    $arc_view->set_display('head_to_head_archive');
+    $arc_view->set_arguments(array($team_id));
+    $arc_view->execute();
+    $matches_res += $arc_view->result;
+    if(!empty($matches_res)){
+      $header = array(
+          array('data'=>t('Match'),'style'=>'width: 600px;'),
+          t('Tournament'),
+          t('Round'),
+          t('Date'),
+          );
+        
+        foreach($matches_res as $_match){
+          if(isset($_match->nid) && !empty($_match->nid)){
+            $key = strtotime($_match->field_field_match_start_date[0]['raw']['value']);
+            $matches[$key]['result'] = $_match->field_field_match_result[0]['rendered']['#markup'];
+            $matches[$key]['round'] = $_match->field_field_match_round[0]['rendered']['#markup'];
+            $matches[$key]['tournament'] = $_match->field_field_match_tournament[0]['rendered']['#markup'];
+            $matches[$key]['place'] = $_match->field_field_match_place[0]['rendered']['#markup'];
+            $matches[$key]['date'] = $_match->field_field_match_start_date[0]['rendered']['#markup'];
+            $matches[$key]['link'] = 'node/'.$_match->nid;
+          }
+          else{
+            $key = strtotime($_match->field_field_archive_match_date[0]['raw']['value']);
+            $matches[$key]['result'] = $_match->field_field_archive_match_result[0]['rendered']['#markup'];
+            $matches[$key]['round'] = $_match->field_field_archive_match_round[0]['rendered']['#markup'];
+            $matches[$key]['tournament'] = $_match->field_field_archive_match_tournament[0]['rendered']['#markup'];
+            $matches[$key]['place'] = $_match->field_field_archive_match_place[0]['rendered']['#markup'];
+            $matches[$key]['date'] = $_match->field_field_archive_match_date[0]['rendered']['#markup'];
+          
+          }
+        }
+        ksort($matches);
+        foreach($matches as $ts => $match){ 
+                                                                                                
+          $home_goals = trim(substr($match['result'],0,strpos($match['result'],':')));
+          $away_goals = trim(substr($match['result'],strpos($match['result'],':')+1));
+          $goals_diff =  $home_goals - $away_goals;
+          $result_class = ($goals_diff == 0 ? 'draw' :($match['place'] == 'away' ? ($home_goals-$away_goals < 0 ? 'win' : 'lost') : ($home_goals-$away_goals > 0 ? 'win' : 'lost')));
+          $title = ($match['place'] == 'away' ? '<span class="home_team">{OPP}</span> <span class="result result_'.$result_class.'">{RESULT}</span> <span class="away_team">{ARS}</span>' : '<span class="home_team">{ARS}</span> <span class="result result_'.$result_class.'">{RESULT}</span> <span class="away_team">{OPP}</span>');
+          $title = str_replace(array('{ARS}','{OPP}','{RESULT}'),array(t('Arsenal'),$opponent->title,$match['result']),$title);
+          $rows[$ts] = array(
+            (!empty($match['link']) ?          
+              l($title,$match['link'],array('html'=>true, 'attributes'=>array('class'=>'archive-match-title','id'=>'h2h-match-'.$ts)))
+            : $title)
+            ,
+            $match['tournament'],
+            $match['round'],
+            $match['date'],
+          );
+        }
+        $table = array('#theme'=>'table','#header'=>$header, '#rows'=>$rows, '#caption'=>t('Matches'),'#attributes'=>array('class'=>array('view-display-id-calendar archive-matches-wrapper'))); 
+        $output['season_matches'] = $table;
+    }
+    //dpm($matches);
+    //$output .= '';
+  }
+  return render($output);
+}
+
+function head_to_head_form(){ 
+  $form = array();
+  $form['#method'] = 'GET';
+  $teams = db_select('node','n')->condition('type','team')->condition('nid',variable_get('arsenal_team_id'),'!=')->orderBy('title');
+  $teams->addExpression('DISTINCT title');
+  $teams->addExpression('MAX(nid)');
+  $teams->groupBy('title');
+  $teams = $teams->execute()->fetchAllKeyed(1,0);
+  $form['opponent'] = array(
+    '#type' => 'select',
+    //'#title' => t('Opponent'),
+    //'#description' => t('Choose opponent to see matches history'),
+    '#options' => array(''=>'-- '.t('Select opponent team').' --') + $teams,
+    '#prefix' => '<label style="padding-top:4px; padding-right:5px; float: left;">'.t('Choose opponent').' '.'</label>',
+  );
+  if(isset($_GET['opponent']) && !empty($_GET['opponent']))
+    $form['opponent']['#default_value'] = $_GET['opponent'];
+  return $form;
+  
 }
 
 

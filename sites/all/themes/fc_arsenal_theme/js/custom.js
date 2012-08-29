@@ -69,13 +69,11 @@
             $("#prev-match-link").css('visibility','visible');  
         }
       }
-    };
+    }; 
   
-  $('#news-node-form').children('#edit-menu-parent option')[0].each(function(){
-    console.log($(this));
-  
-  });  
-    
+  $('#edit-opponent').change(function(){
+    window.location.href = '?opponent='+$(this).val();
+  });
     
   });
 })(jQuery);
