@@ -82,6 +82,9 @@ function custom_match_preprocess_node(&$vars){
       $vars['node']->opponent_events = $opponent_events;  
       //$vars['connected_news'] = views_embed_view('news','match_news');
     }
+    
+    $vars['history_stats'] = get_history_stats($node->field_match_opponent[$node->language][0]['nid']);
+    
     $news_view = views_get_view('news');
     $news_view->set_display('match_news');
     $news_view->set_arguments(array(arg(1)));
@@ -881,14 +884,14 @@ function custom_match_node_insert($node){
 
 
 
-function _head_to_head($team_id=null){
+function _head_to_head($team_id=null, $only_data = false){
   $output = array();
   $output['h2h_form'] = drupal_get_form('head_to_head_form');
+  $matches = $matches_res = array();
+  $total = array('matches'=>0, 'win'=>0, 'draw'=>0, 'lost'=>0,'opponent_goals'=>0,'arsenal_goals'=>0);
   if(!empty($team_id)){
   
     $opponent = node_load($team_id);
-    $matches = $matches_res = array();
-    $total = array('matches'=>0, 'win'=>0, 'draw'=>0, 'lost'=>0,'opponent_goals'=>0,'arsenal_goals'=>0);
     $view = views_get_view('matches');
     $view->set_display('head_to_head');
     $view->set_arguments(array($team_id));
@@ -944,30 +947,35 @@ function _head_to_head($team_id=null){
             $total['opponent_goals'] += $away_goals;
             $total['arsenal_goals'] += $home_goals;  
           }
-          $title = ($match['place'] == 'away' ? '<span class="home_team">{OPP}</span> <span class="result result_'.$result_class.'">{RESULT}</span> <span class="away_team">{ARS}</span>' : '<span class="home_team">{ARS}</span> <span class="result result_'.$result_class.'">{RESULT}</span> <span class="away_team">{OPP}</span>');
-          $title = str_replace(array('{ARS}','{OPP}','{RESULT}'),array(t('Arsenal'),$opponent->title,$match['result']),$title);
-          $rows[$ts] = array(
-            (!empty($match['link']) ?          
-              l($title,$match['link'],array('html'=>true, 'attributes'=>array('class'=>'archive-match-title','id'=>'h2h-match-'.$ts)))
-            : $title)
-            ,
-            $match['tournament'],
-            $match['round'],
-            $match['date'],
-          );
+          if(!$only_data){
+            $title = ($match['place'] == 'away' ? '<span class="home_team">{OPP}</span> <span class="result result_'.$result_class.'">{RESULT}</span> <span class="away_team">{ARS}</span>' : '<span class="home_team">{ARS}</span> <span class="result result_'.$result_class.'">{RESULT}</span> <span class="away_team">{OPP}</span>');
+            $title = str_replace(array('{ARS}','{OPP}','{RESULT}'),array(t('Arsenal'),$opponent->title,$match['result']),$title);
+            $rows[$ts] = array(
+              (!empty($match['link']) ?          
+                l($title,$match['link'],array('html'=>true, 'attributes'=>array('class'=>'archive-match-title','id'=>'h2h-match-'.$ts)))
+              : $title)
+              ,
+              $match['tournament'],
+              $match['round'],
+              $match['date'],
+            );
+          }
         }
-        $table = array('#theme'=>'table','#header'=>$header, '#rows'=>$rows, '#caption'=>t('Matches'),'#attributes'=>array('class'=>array('view-display-id-calendar archive-matches-wrapper'))); 
-        $output['season_matches'] = $table;
-        
+        if(!$only_data){
+          $table = array('#theme'=>'table','#header'=>$header, '#rows'=>$rows, '#caption'=>t('Matches'),'#attributes'=>array('class'=>array('view-display-id-calendar archive-matches-wrapper'))); 
+          $output['season_matches'] = $table;
+        }
         $goal_diff = (int)((int)$total['arsenal_goals'] - (int)$total['opponent_goals']);
         if($goal_diff > 0) $goal_diff = '+'.$goal_diff;
         $output['total'] = array('#markup'=>t('Total').': '.$total['matches'].' '.t('games').', '.$total['win'].' '.t('wins').', '.$total['draw'].' '.t('draws').', '.$total['lost'].' '.t('loses').'. '.t('Goals difference').': '.$total['arsenal_goals'].' - '.$total['opponent_goals'].' ('.$goal_diff.')');
+        $total['goals_diff'] = $goal_diff;
     }
-
-    //dpm($matches);
-    //$output .= '';
   }
-  return render($output);
+  
+  if(!$only_data)
+    return render($output);
+  else 
+    return array('matches'=>$matches, 'total' => $total);  
 }
 
 function head_to_head_form(){ 
@@ -988,7 +996,22 @@ function head_to_head_form(){
   if(isset($_GET['opponent']) && !empty($_GET['opponent']))
     $form['opponent']['#default_value'] = $_GET['opponent'];
   return $form;
-  
+}
+
+
+function get_history_stats($team_nid){
+  $data = _head_to_head($team_nid, true);
+  $output = '<h3>'.t('Matches history').'</h3>';
+  $output .= '<div class="views-row">';
+  $output .= t('Games').': '.$data['total']['matches'].'<br />';
+  $output .= t('Wins').': '.$data['total']['win'].'<br />';
+  $output .= t('Draws').': '.$data['total']['draw'].'<br />';
+  $output .= t('Loses').': '.$data['total']['lost'].'<br />';
+  $goal_diff = (int)((int)$data['total']['arsenal_goals'] - (int)$data['total']['opponent_goals']);
+  $output .= t('Goals difference').': '.$data['total']['arsenal_goals'].' - '.$data['total']['opponent_goals'].' ('.$data['total']['goals_diff'].')<br /><br />';
+  $output .= l(t('View details'),'head-to-head',array('query'=>array('opponent'=>$team_nid)));
+  $output .= '</div>';
+  return $output;
 }
 
 
