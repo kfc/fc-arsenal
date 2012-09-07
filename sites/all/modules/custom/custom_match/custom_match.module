@@ -190,8 +190,8 @@ function _sort_events($a, $b)
 function _get_next_match_nid($current_id){
   
   if((int)$current_id > 0)
-  {
-    $current_node = node_load($current_id);
+  {     
+    $current_node = node_load($current_id); 
     $next_ids = db_query("
       SELECT sd.entity_id as next_match_id,
             (SELECT sd.entity_id
@@ -202,7 +202,7 @@ function _get_next_match_nid($current_id){
       WHERE sd.field_match_start_date_value > :start_date 
       ORDER BY sd.field_match_start_date_value
       LIMIT 1 
-    ",array(':start_date'=>$current_node->field_match_start_date[$current_node->language][0]['value']))->fetchAssoc();
+    ",array(':start_date'=>$current_node->field_match_start_date[$current_node->language][0]['value'] + date('Z')))->fetchAssoc();
     if(!empty($next_ids['next_match_id']) && (int)$next_ids['next_match_id'] > 0){
       return $next_ids['next_match_id'];
     }
@@ -359,7 +359,7 @@ function custom_match_preprocess_views_view_fields(&$variables){
     }
     
     $variables['additional_link'] = '';
-    if(($match_timestamp + (60 * 60 * 3)) > time())
+    if(($match_timestamp + (60 * 60 * 4)) > time())
       $variables['additional_link'] = l('<span class="liveresult-link">'.t('Online').'</span>','http://www.liveresult.ru/football/txt/team/arsenal',array('html'=>true, 'attributes'=>array('target'=>'_blank','class'=>'Online'),'absolute'=>TRUE));
     
     
