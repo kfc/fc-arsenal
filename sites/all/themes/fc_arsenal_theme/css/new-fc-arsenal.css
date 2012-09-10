@@ -2653,3 +2653,35 @@ ul.nice-menu-down li.over {
 .header1 {
 	color: red;
 }
+
+.header-vk-link{
+  position: relative;
+}
+
+.vk_links{
+  background: #4A4E5A;
+  background: -webkit-linear-gradient(top, #4A4E5A, black);
+  background: -moz-linear-gradient(top, #4A4E5A, black);
+  background: -ms-linear-gradient(top, #4A4E5A, black);
+  background: -o-linear-gradient(top, #4A4E5A, black);
+  background: linear-gradient(top, #4A4E5A, black);
+  border-color: #9098B0;
+  border-style: none solid solid solid;
+  border-width: 0px 1px 1px 1px;
+  padding: 5px;
+  position: absolute;
+  left: -45px;
+  top: 36px;
+  width: 100px;
+  color: #FFF;  
+  text-align: center;
+  display: none;
+}
+
+.vk_link_popup {
+ background: none !important;
+ display: inline;
+ height: auto !important;
+ width: auto !important;
+ color: #FFF !important;
+}

@@ -10,6 +10,22 @@
       $('div.tabs .content #'+number+'content').addClass("tab-active");
     });
     
+    $("#vk_link").click(function(){ 
+      if($(".vk_links").hasClass('opened')) { 
+        $(".vk_links").hide('fast');
+          $(".vk_links").removeClass('opened'); 
+      }
+      else{
+        $(".vk_links").show('fast'); 
+        $(".vk_links").addClass('opened');  
+      }
+      return false; 
+    });
+    
+    $(".vk_link_popup").click(function(){
+      $(".vk_links").removeClass('opened');
+      $(".vk_links").hide();  
+    });
     
     $("#next-match-link").click(function(){
       var block = $('div[rel="block-match"]');

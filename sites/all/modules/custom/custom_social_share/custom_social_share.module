@@ -241,7 +241,12 @@ function theme_custom_social_share_facebook_link($variables){
 }
 
 function theme_custom_social_share_vk_header_link($variables){
-  return theme_link(array('path'=>'http://vk.com/arssc','text'=>theme_image(array('path'=>drupal_get_path('theme',variable_get('theme_default','fc_arsenal_theme')).'/img/vk.gif','attributes'=>array())), 'options'=>array('html'=>true,'attributes'=>array('target'=>'_blank'))));
+  return 
+  
+  theme_link(array('path'=>'http://vk.com/arssc','text'=>theme_image(array('path'=>drupal_get_path('theme',variable_get('theme_default','fc_arsenal_theme')).'/img/vk.gif','attributes'=>array())), 'options'=>array('html'=>true,'attributes'=>array('target'=>'_blank', 'id'=>'vk_link'))))
+  .'<div class="vk_links">
+    '.l(t('Our VK group'),'http://vk.com/arssc',array('external'=>'true','attributes'=>array('target'=>'_blank','class'=>'vk_link_popup'))).'<br />
+    '.l(t('Our VK public'),'http://vk.com/arsscnews',array('external'=>'true','attributes'=>array('target'=>'_blank', 'class'=>'vk_link_popup'))).'</div>';
 }
 
 function theme_custom_social_share_twitter_header_link($variables){
