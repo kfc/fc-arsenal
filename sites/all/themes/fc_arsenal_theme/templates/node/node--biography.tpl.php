@@ -40,4 +40,3 @@
 	<div class="cf">&nbsp;</div>
 
 </div>
-<?php print render($content);?>
