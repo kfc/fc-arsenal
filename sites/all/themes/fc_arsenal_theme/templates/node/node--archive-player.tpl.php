@@ -8,7 +8,6 @@
   }
   $position_field = field_info_field('field_ap_position');
   $positions = $position_field['settings']['allowed_values'];
-  dpm($position_field);
 ?>
 <div class="player-page">
 
