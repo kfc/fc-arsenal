@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file vkxp.install
+ * Requirements and uninstall functions for the vkxp module.
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function vkxp_requirements($phase) {
+  $requirements = array();
+
+  // Ensure translations don't break at install time.
+  $t = get_t();
+  
+  if ($phase == 'runtime') {    
+    // Check for presence of curl support.
+    if (!function_exists('curl_init')) {
+      $requirements['vkxp_curl'] = array(
+        'title' => $t('cURL Support for VKontakte CrossPoster'),
+        'value' => $t('VKontakte CrossPoster requires <a href="http://php.net/manual/en/book.curl.php">cURL support in PHP</a> to function fully.  Without this, contents will not be posted to vkontakte.'),
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
+    else {
+      $requirements['vkxp_curl'] = array(
+        'title' => $t('cURL Support for VKontakte CrossPoster'),
+        'value' => $t('cURL enabled'),
+        'severity' => REQUIREMENT_OK,
+      );
+    }
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function vkxp_uninstall() {
+
+  // Delete variables from database.
+  db_delete('variable')
+    ->condition('name', db_like('vkxp_') . '%', 'LIKE')
+    ->execute();
+
+  // Flush bootstrap cache.
+  cache_clear_all('variables', 'cache_bootstrap');
+}
