@@ -191,7 +191,8 @@ function _get_next_match_nid($current_id){
   
   if((int)$current_id > 0)
   {     
-    $current_node = node_load($current_id); 
+    $current_node = node_load($current_id);
+    $next_match_ts = strtotime($current_node->field_match_start_date[$current_node->language][0]['value']) + date('Z');
     $next_ids = db_query("
       SELECT sd.entity_id as next_match_id,
             (SELECT sd.entity_id
@@ -202,7 +203,7 @@ function _get_next_match_nid($current_id){
       WHERE sd.field_match_start_date_value > :start_date 
       ORDER BY sd.field_match_start_date_value
       LIMIT 1 
-    ",array(':start_date'=>$current_node->field_match_start_date[$current_node->language][0]['value'] + date('Z')))->fetchAssoc();
+    ",array(':start_date'=>date('c',$next_match_ts)))->fetchAssoc();
     if(!empty($next_ids['next_match_id']) && (int)$next_ids['next_match_id'] > 0){
       return $next_ids['next_match_id'];
     }
@@ -581,7 +582,7 @@ function theme_custom_match_match_teaser($vars=array()){
  /* if($node->field_goal_authors[0]['value']){
     $additional_info .= '
     <div class="info">
-      <span class="label">Авторы голов: </span>
+      <span class="label">пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: </span>
       <span class="value">'.$node->field_goal_authors[0]['view'].'</span>
     </div>';
   }
@@ -589,7 +590,7 @@ function theme_custom_match_match_teaser($vars=array()){
   if($node->field_additional_information_0[0]['value']){
     $additional_info .= '
     <div class="info">
-      <span class="label">Дополнительная информация: </span>
+      <span class="label">пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: </span>
       <span class="value">'.$node->field_additional_information_0[0]['view'].'</span>
     </div>';
   }
@@ -720,7 +721,7 @@ function _custom_match_get_livetv_arsenal_matches(){
     $rss_data = _custom_news_get_rss_data('http://img.livetv.ru/rss/upcoming_ru.xml'); 
     $arsenal_matches = array();
     foreach($rss_data['items'] as $_item){
-      if(strpos($_item['guid'],'arsenal') !== false && strpos($_item['title'],iconv('CP1251','UTF-8','Арсенал Л')) !== false ){
+      if(strpos($_item['guid'],'arsenal') !== false && strpos($_item['title'],iconv('CP1251','UTF-8','пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ')) !== false ){
         $arsenal_matches[$_item['timestamp']] = $_item;
       }
     }
