@@ -296,7 +296,7 @@ TABLE {
 }
 #header .logo {
 	position: absolute;
-	top: 47px;
+	top: 40px;
 	left: 0;
 }
 
@@ -2667,6 +2667,7 @@ ul.nice-menu-down li.over {
   background: linear-gradient(top, #4A4E5A, black);
   border-color: #9098B0;
   border-style: none solid solid solid;
+
   border-width: 0px 1px 1px 1px;
   padding: 5px;
   position: absolute;
@@ -2684,4 +2685,10 @@ ul.nice-menu-down li.over {
  height: auto !important;
  width: auto !important;
  color: #FFF !important;
+}
+.block-aggregator ul li {
+  padding: 0 0 14px;
+}
+.block-aggregator .more-link{
+  display:none;
 }
