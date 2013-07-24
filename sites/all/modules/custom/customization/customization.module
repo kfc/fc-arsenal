@@ -26,6 +26,13 @@ function customization_menu(){
     'access callback' => TRUE
     
   );
+
+   $items['rss_full']=array(
+    'type'=>MENU_CALLBACK,
+    'page callback' => 'customization_rss_full',
+    'access callback' => TRUE
+  );
+
   
   $items['node/add/edit_galleries']=array(
     'title' => t('Edit galleries'),
@@ -318,5 +325,14 @@ function customization_preprocess_node(&$vars){
   
   
 }
+
+function customization_rss_full(){
+header('Content-Type: application/rss+xml');
+echo views_embed_view('news','full_rss');
+die();
+
+
+}
+
 
 ?>
